@@ -1,0 +1,53 @@
+{
+	"version": 1.1,
+	"atDirectives": [
+		{
+			"name": "@apply",
+			"description": "Apply a custom utility class in Tailwind CSS v4"
+		},
+		{
+			"name": "@utility",
+			"description": "Define a custom utility class in Tailwind CSS v4"
+		},
+		{
+			"name": "@reference",
+			"description": "Reference a CSS file in Tailwind CSS v4"
+		},
+		{
+			"name": "@variant",
+			"description": "Define a custom variant in Tailwind CSS v4"
+		},
+		{
+			"name": "@custom-variant",
+			"description": "Define a custom variant with custom selector logic in Tailwind CSS v4"
+		},
+		{
+			"name": "@theme",
+			"description": "Define theme configuration in Tailwind CSS v4"
+		},
+		{
+			"name": "@plugin",
+			"description": "Load a Tailwind CSS plugin in v4"
+		},
+		{
+			"name": "@source",
+			"description": "Define source paths for Tailwind CSS v4"
+		},
+		{
+			"name": "@config",
+			"description": "Reference a configuration file in Tailwind CSS v4"
+		},
+		{
+			"name": "@keyframes",
+			"description": "Define a custom keyframes in Tailwind CSS v4"
+		},
+		{
+			"name": "@keyframes",
+			"description": "Define a custom keyframes in Tailwind CSS v4"
+		},
+		{
+			"name": "@animation",
+			"description": "Define a custom animation in Tailwind CSS v4"
+		}
+	]
+}
