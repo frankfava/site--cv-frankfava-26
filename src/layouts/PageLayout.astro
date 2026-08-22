@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+// import MainHeader, { type Props as HeaderProps } from "@/components/partials/MainHeader.astro";
+// import MainFooter, { type Props as FooterProps } from "@/components/partials/MainFooter.astro";
+// import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
+// import type { MetaData } from "@/types";
+
+export interface Props {
+	// metadata?: MetaData;
+	// header?: HeaderProps;
+	// footer?: FooterProps;
+}
+
+// const { metadata, header, footer } = Astro.props;
+---
+
+<Layout>
+	<slot name="header">
+		Header
+		<!-- <MainHeader {...{ ...header }}>
+			<slot name="beforeMenu" slot="beforeMenu" />
+			<slot name="afterMenu" slot="afterMenu" />
+			<slot name="beforeActions" slot="beforeActions" />
+			<slot name="afterActions" slot="afterActions" />
+		</MainHeader> -->
+	</slot>
+	<div id="wrapper">
+		<main class="flex flex-col">
+			<slot />
+		</main>
+		<slot name="footer">
+			<!-- <MainFooter {...footer} /> -->
+		</slot>
+	</div>
+	<!-- <ScrollTop /> -->
+	<slot name="afterFooter" />
+</Layout>

@@ -1,0 +1,42 @@
+---
+import "@/assets/css/main.css";
+
+import { I18N } from "site:config";
+
+// import Favicons from "@/components/includes/Favicons.astro";
+// import CustomStyles from "@/components/includes/CustomStyles.astro";
+// import MetaTags from "@/components/includes/MetaTags.astro";
+// import JsApplyColorMode from "@/components/includes/JsApplyColorMode.astro";
+// import JsApplySidebarState from "@/components/includes/JsApplySidebarState.astro";
+// import GoogleSiteVerification from "@/components/includes/GoogleSiteVerification.astro";
+// import GoogleAnalytics from "@/components/includes/GoogleAnalytics.astro";
+// import Fonts from "@/components/includes/Fonts.astro";
+
+// import type { MetaData } from "@/types";
+
+export interface Props {
+	// metadata?: MetaData;
+}
+
+// const { metadata = {} } = Astro.props;
+const { language, textDirection } = I18N;
+---
+
+<!doctype html>
+<html lang={language} dir={textDirection}>
+	<head>
+		<!-- <Favicons />
+		<MetaTags {...metadata} />
+		<GoogleAnalytics />
+		<Fonts />
+		<JsApplyColorMode />
+		<JsApplySidebarState />
+		<GoogleSiteVerification />
+		<CustomStyles /> -->
+	</head>
+	<body id="top" class="bg-page text-base text-page antialiased tracking-tight">
+		<slot />
+
+		<script src="../assets/js/main.js"></script>
+	</body>
+</html>
