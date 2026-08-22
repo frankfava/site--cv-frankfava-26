@@ -11,6 +11,7 @@ import compress from "astro-compress";
 import sitemap from "@astrojs/sitemap";
 
 import { astroBuilderHelper } from "./integrations/astroBuilderHelper";
+import { astroSiteConfigHelper } from "./integrations/astroSiteConfigHelper";
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -31,6 +32,8 @@ export default defineConfig({
 	},
 	integrations: [
 		alpine({ entrypoint: "/src/alpine/entrypoint.js" }),
+		// Config
+		astroSiteConfigHelper(),
 		// Build Sitemap
 		sitemap(),
 		// Compress HTML, CSS, and JS
