@@ -8,6 +8,9 @@ import tailwindcss from "@tailwindcss/vite";
 import netlify from "@astrojs/netlify";
 import alpine from "@astrojs/alpinejs";
 import compress from "astro-compress";
+import sitemap from "@astrojs/sitemap";
+
+import { astroBuilderHelper } from "./integrations/astroBuilderHelper";
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -28,6 +31,8 @@ export default defineConfig({
 	},
 	integrations: [
 		alpine({ entrypoint: "/src/alpine/entrypoint.js" }),
+		// Build Sitemap
+		sitemap(),
 		// Compress HTML, CSS, and JS
 		...(isDev
 			? []
@@ -48,5 +53,7 @@ export default defineConfig({
 						Logger: 1,
 					}),
 				]),
+		// Update `robots.txt` with `sitemap-index.xml
+		astroBuilderHelper(),
 	],
 });
