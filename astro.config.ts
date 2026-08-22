@@ -1,5 +1,9 @@
-import { defineConfig } from "astro/config";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import netlify from "@astrojs/netlify";
 import alpine from "@astrojs/alpinejs";
@@ -15,10 +19,9 @@ export default defineConfig({
 		resolve: {
 			alias: {
 				alpinejs: "@alpinejs/csp",
+				"@": path.resolve(__dirname, "./src"),
 			},
 		},
 	},
-	integrations: [
-		alpine({ entrypoint: "/src/alpine/entrypoint.js" }),
-	]
+	integrations: [alpine({ entrypoint: "/src/alpine/entrypoint.js" })],
 });
