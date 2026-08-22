@@ -18,6 +18,24 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 				faviconSvg: undefined,
 			},
 		},
+		metadata: {
+			title: {
+				default: undefined,
+				template: "%s",
+			},
+			author: null,
+			description: "",
+			robots: {
+				index: false,
+				follow: true,
+			},
+			openGraph: {
+				site_name: "",
+				images: [],
+				type: "website",
+			},
+			manifestPublic: undefined,
+		},
 		i18n: {
 			language: "en",
 			textDirection: "ltr",

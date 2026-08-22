@@ -36,6 +36,91 @@
 			"required": ["name"],
 			"additionalProperties": false
 		},
+		"metadata": {
+			"type": "object",
+			"properties": {
+				"title": {
+					"type": "object",
+					"properties": {
+						"default": {
+							"type": ["string", "null"]
+						},
+						"template": {
+							"type": ["string", "null"]
+						}
+					}
+				},
+				"author": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"robots": {
+					"type": "object",
+					"properties": {
+						"index": {
+							"type": "boolean"
+						},
+						"follow": {
+							"type": "boolean"
+						}
+					}
+				},
+				"openGraph": {
+					"type": "object",
+					"properties": {
+						"site_name": {
+							"type": "string"
+						},
+						"images": {
+							"type": "array",
+							"items": [
+								{
+									"type": "object",
+									"properties": {
+										"url": {
+											"type": "string"
+										},
+										"width": {
+											"type": "integer"
+										},
+										"height": {
+											"type": "integer"
+										}
+									},
+									"required": ["url", "width", "height"]
+								}
+							]
+						},
+						"type": {
+							"type": "string"
+						}
+					},
+					"required": []
+				},
+				"twitter": {
+					"type": "object",
+					"properties": {
+						"handle": {
+							"type": "string"
+						},
+						"site": {
+							"type": "string"
+						},
+						"cardType": {
+							"type": "string"
+						}
+					},
+					"required": ["handle", "site", "cardType"]
+				},
+				"manifestPublic": {
+					"type": ["string", "null"]
+				}
+			},
+			"required": ["description"],
+			"additionalProperties": false
+		},
 		"i18n": {
 			"type": "object",
 			"properties": {

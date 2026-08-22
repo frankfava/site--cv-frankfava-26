@@ -19,6 +19,9 @@ export function addUtils(config: Config.Complete) {
 		},
 	};
 
+	// Metadata
+	const metadata: Config.Final["metadata"] = config.metadata;
+
 	// i18N
 	const i18n: Config.Final["i18n"] = config.i18n;
 

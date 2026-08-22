@@ -12,13 +12,13 @@ import { I18N } from "site:config";
 // import GoogleAnalytics from "@/components/includes/GoogleAnalytics.astro";
 // import Fonts from "@/components/includes/Fonts.astro";
 
-// import type { MetaData } from "@/types";
+import type { MetaData } from "@/types";
 
 export interface Props {
-	// metadata?: MetaData;
+	metadata?: MetaData;
 }
 
-// const { metadata = {} } = Astro.props;
+const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 

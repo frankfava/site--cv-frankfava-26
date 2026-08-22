@@ -3,18 +3,19 @@ import Layout from "@/layouts/BaseLayout.astro";
 // import MainHeader, { type Props as HeaderProps } from "@/components/partials/MainHeader.astro";
 // import MainFooter, { type Props as FooterProps } from "@/components/partials/MainFooter.astro";
 // import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
-// import type { MetaData } from "@/types";
+import type { MetaData } from "@/types";
 
 export interface Props {
-	// metadata?: MetaData;
+	metadata?: MetaData;
 	// header?: HeaderProps;
 	// footer?: FooterProps;
 }
 
 // const { metadata, header, footer } = Astro.props;
+const { metadata } = Astro.props;
 ---
 
-<Layout>
+<Layout metadata={metadata}>
 	<slot name="header">
 		Header
 		<!-- <MainHeader {...{ ...header }}>

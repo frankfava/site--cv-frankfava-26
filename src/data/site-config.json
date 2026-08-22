@@ -4,5 +4,26 @@
 		"logos": {
 			"favicon": "/images/favicon.jpg"
 		}
+	},
+	"metadata": {
+		"title": {
+			"default": "Frank Fava CV",
+			"template": "%s | Frank Fava CV"
+		},
+		"robots": {
+			"follow": true,
+			"index": true
+		},
+		"author": "Frank Fava",
+		"description": "Frank Fava - Desc",
+		"openGraph": {
+			"images": [
+				{
+					"url": "/images/profile/bw.jpeg",
+					"width": 400,
+					"height": 400
+				}
+			]
+		}
 	}
 }

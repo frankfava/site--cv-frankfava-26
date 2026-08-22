@@ -1,16 +1,20 @@
 ---
-import "@/assets/css/main.css";
+import PageLayout from "@/layouts/PageLayout.astro";
+
+import CONFIG from "site:config";
+
+const metadata = {};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<PageLayout metadata={metadata}>
+	<div class="flex flex-col h-screen">
+		<div class="flex grow overflow-y-auto">
+			<aside class="h-full w-50 sticky top-0 bg-primary-50 border-r">
+				<div class="space-y-10 overflow-y-auto h-full p-4"></div>
+			</aside>
+			<main class"grow pb-10">
+				<pre class="whitespace-pre-wrap text-sm p-5">{ JSON.stringify(CONFIG,null,4)}</pre>
+			</main>
+		</div>
+	</div>
+</PageLayout>
