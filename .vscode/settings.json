@@ -1,5 +1,15 @@
 {
-	"css.customData": [".vscode/tailwind.json"],
+	"json.schemas": [
+		{
+			"fileMatch": [
+				"/src/data/site-config.json"
+			],
+			"url": "./.vscode/schema/config-schema.json"
+		}
+	],
+	"css.customData": [
+		".vscode/tailwind.json"
+	],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode",

@@ -27,6 +27,7 @@
 		"astro": "^7.2.4",
 		"astro-compress": "^2.4.3",
 		"clsx": "^2.1.1",
+		"defu": "^6.1.7",
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"
@@ -38,6 +39,7 @@
 		"prettier-plugin-astro": "^0.14.1"
 	},
 	"overrides": {
+		"deepmerge-ts": "^8.0.2",
 		"sharp": "^0.35.3"
 	}
 }

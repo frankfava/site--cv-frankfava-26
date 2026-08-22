@@ -1,0 +1,54 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"site": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"site": {
+					"type": "string",
+					"format": "uri"
+				},
+				"base": {
+					"type": "string"
+				},
+				"trailingSlash": {
+					"type": ["boolean", "null"]
+				},
+				"logos": {
+					"type": "object",
+					"properties": {
+						"favicon": {
+							"type": "string"
+						},
+						"faviconSvg": {
+							"type": "string"
+						},
+						"appleTouchIcon": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"required": ["name"],
+			"additionalProperties": false
+		},
+		"i18n": {
+			"type": "object",
+			"properties": {
+				"language": {
+					"type": "string"
+				},
+				"textDirection": {
+					"type": "string"
+				}
+			},
+			"required": ["language", "textDirection"],
+			"additionalProperties": false
+		}
+	},
+	"required": ["site"]
+}

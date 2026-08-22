@@ -26,6 +26,7 @@ export default defineConfig({
 		resolve: {
 			alias: {
 				alpinejs: "@alpinejs/csp",
+				"site:config": path.resolve(__dirname, "./src/siteConfig.ts"),
 				"@": path.resolve(__dirname, "./src"),
 			},
 		},
