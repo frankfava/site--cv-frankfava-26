@@ -7,6 +7,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import netlify from "@astrojs/netlify";
 import alpine from "@astrojs/alpinejs";
+import compress from "astro-compress";
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -25,5 +26,27 @@ export default defineConfig({
 			},
 		},
 	},
-	integrations: [alpine({ entrypoint: "/src/alpine/entrypoint.js" })],
+	integrations: [
+		alpine({ entrypoint: "/src/alpine/entrypoint.js" }),
+		// Compress HTML, CSS, and JS
+		...(isDev
+			? []
+			: [
+					compress({
+						CSS: true,
+						HTML: {
+							"html-minifier-terser": {
+								removeAttributeQuotes: false,
+								minifyCSS: true,
+								minifyJS: true,
+								removeComments: true,
+							},
+						},
+						Image: true,
+						JavaScript: true,
+						SVG: false,
+						Logger: 1,
+					}),
+				]),
+	],
 });
