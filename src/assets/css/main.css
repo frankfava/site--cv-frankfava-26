@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import "./_theme.generated.css";
 
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
+
+@source "../../**/*.astro";
+
+@custom-variant dark (&:where(.dark, .dark *));

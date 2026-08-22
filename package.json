@@ -4,12 +4,12 @@
 	"version": "0.0.1",
 	"scripts": {
 		"prepare": "git config core.hooksPath .githooks",
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "npm run check:astro && astro build",
+		"dev": "npm run gen:theme && astro dev",
+		"build": "npm run check:astro && npm run gen:theme && astro build",
 		"netlify": "SITE_URL=http://localhost:8888 netlify dev --port 8888",
 		"preview": "astro preview",
 		"astro": "astro",
+		"gen:theme": "node integrations/tailwind/generateThemeCss.mjs",
 		"check": "npm run check:astro",
 		"check:astro": "astro check",
 		"format": "prettier --write ./src"
