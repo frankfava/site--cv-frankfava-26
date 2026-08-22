@@ -1,0 +1,18 @@
+{
+	"name": "frankfavacv",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "npm run start",
+		"start": "astro dev --port=4333",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"astro": "^7.2.4"
+	},
+	"overrides": {
+		"vite": "^7"
+	}
+}
