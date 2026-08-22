@@ -10,10 +10,15 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.9.10",
 		"@astrojs/netlify": "^8.2.3",
-		"astro": "^7.2.4"
+		"astro": "^7.2.4",
+		"typescript": "^5.9.3"
+	},
+	"devDependencies": {
+		"@types/node": "^26.2.0"
 	},
 	"overrides": {
-		"vite": "^7"
+		"sharp": "^0.35.3"
 	}
 }
