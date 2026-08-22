@@ -4,8 +4,8 @@
 	"version": "0.0.1",
 	"scripts": {
 		"prepare": "git config core.hooksPath .githooks",
-		"dev": "npm run start",
-		"start": "astro dev --port=4333",
+		"dev": "astro dev",
+		"start": "astro dev",
 		"build": "npm run check:astro && astro build",
 		"netlify": "SITE_URL=http://localhost:8888 netlify dev --port 8888",
 		"preview": "astro preview",

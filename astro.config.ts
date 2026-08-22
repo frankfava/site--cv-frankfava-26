@@ -13,7 +13,9 @@ const isDev = process.env.NODE_ENV == "development";
 // https://astro.build/config
 export default defineConfig({
 	adapter: isDev ? undefined : netlify(),
-
+	server: {
+		port: 4555,
+	},
 	vite: {
 		plugins: [tailwindcss()],
 		resolve: {
