@@ -12,7 +12,11 @@
 	"dependencies": {
 		"@astrojs/check": "^0.9.10",
 		"@astrojs/netlify": "^8.2.3",
+		"@tailwindcss/vite": "^4.3.3",
 		"astro": "^7.2.4",
+		"clsx": "^2.1.1",
+		"tailwind-merge": "^3.6.0",
+		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"
 	},
 	"devDependencies": {
