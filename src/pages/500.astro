@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+const title = `Server error 500`;
+---
+
+<Layout metadata={{ title }}>
+	<section class="flex items-center p-16 h-full">
+		<div class="flex flex-col justify-center items-center mx-auto my-8 px-5 container">
+			<div class="max-w-md text-center">
+				<h2 class="mb-8 font-bold text-9xl">
+					<span class="sr-only">Server Error</span>
+					<span class="text-primary">500</span>
+				</h2>
+				<p class="font-semibold text-3xl md:text-3xl">Something went wrong.</p>
+			</div>
+		</div>
+	</section>
+</Layout>
