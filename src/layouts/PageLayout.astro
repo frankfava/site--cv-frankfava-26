@@ -1,22 +1,24 @@
 ---
 import Layout from "@/layouts/BaseLayout.astro";
-import MainFooter from "@/components/partials/MainFooter.astro";
 import MainHeader, { type Props as HeaderProps } from "@/components/partials/MainHeader.astro";
-// import MainFooter, { type Props as FooterProps } from "@/components/partials/MainFooter.astro";
+import MainFooter, { type Props as FooterProps } from "@/components/partials/MainFooter.astro";
 import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
 import type { MetaData } from "@/types";
 
 export interface Props {
 	metadata?: MetaData;
 	header?: HeaderProps;
-	// footer?: FooterProps;
+	footer?: FooterProps;
 }
 
-// const { metadata, header, footer } = Astro.props;
 const {
 	metadata,
 	header = {
 		showToggleTheme: true,
+	},
+	footer = {
+		showSocialLinks: true,
+		footNote: `Thank you for the consideration.`,
 	},
 } = Astro.props;
 ---
@@ -35,7 +37,7 @@ const {
 			<slot />
 		</main>
 		<slot name="footer">
-			<MainFooter {...{}} />
+			<MainFooter {...footer} />
 		</slot>
 	</div>
 	<ScrollTop />

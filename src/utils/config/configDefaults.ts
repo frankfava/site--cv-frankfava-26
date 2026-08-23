@@ -41,10 +41,11 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			textDirection: "ltr",
 		},
 		analytics: {
-			vendor: undefined
+			vendor: undefined,
 		},
 		ui: {
 			theme: "system",
+			layout: "narrow",
 			colors: {
 				primary: "#434E5E",
 				secondary: "#479FC8",

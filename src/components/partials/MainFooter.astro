@@ -1,0 +1,90 @@
+---
+import { SOCIALS, THEME } from "site:config";
+
+import Logo from "@/components/Logo.astro";
+import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
+import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
+import type { _CallToAction, Socials, Link } from "@/types";
+
+import { getCurrentPath, getHomePermalink } from "@/utils/permalinks";
+
+export interface Props {
+	id?: string;
+	links?: Array<Link>;
+	actions?: Array<_CallToAction>;
+	isDark?: boolean;
+	// isFullWidth?: boolean;
+	socialLinks?: boolean | Socials.Links;
+	footNote?: string;
+}
+
+const { id = "footer", links = [], actions = [], isDark = false, socialLinks = true, footNote = "" } = Astro.props;
+
+const currentPath = getCurrentPath(Astro.url);
+---
+
+<footer {...id ? { id } : {}} class:list={[{ dark: isDark }, "print:hidden relative border-t border-gray-200 dark:border-slate-800 not-prose"]}>
+	<div class="relative mx-auto px-4 sm:px-6 max-w-screen-2xl dark:text-slate-300">
+		<div class="gap-4 gap-y-2 grid grid-cols-1 lg:grid-cols-3 my-auto py-8 lg:py-12 lg:pb-16 w-full text-center" class:list={{ "lg:text-start": THEME.layout == "narrow" }}>
+			<div class:list={THEME.layout == "wide" ? "col-span-3" : "col-span-1"}>
+				<a class="inline-flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
+					<Logo class="site-logo" />
+				</a>
+			</div>
+			<div
+				class="inline-flex flex-col flex-wrap col-span-3"
+				class:list={{
+					"lg:col-span-2 lg:flex-row": THEME.layout == "narrow",
+				}}
+			>
+				<div class="inline-flex flex-col items-center lg:mr-4" class:list={{ "lg:items-start": THEME.layout == "narrow" }}>
+					{
+						socialLinks && (
+							<SocialLinks
+								socialLinks={Array.isArray(socialLinks) ? socialLinks : SOCIALS.toArray()}
+								showText={false}
+								class="gap-2"
+								linkClass="bg-white rounded-md p-2"
+								iconClass="w-8 h-8"
+							/>
+						)
+					}
+					{
+						links.map(({ text, href }, index) => (
+							<div
+								class="inline-flex gap-1 mt-2 text-md"
+								class:list={{
+									"lg:px-2": THEME.layout == "narrow",
+								}}
+							>
+								{index !== 0 ? " · " : ""}
+								<a class="text-accent hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out" href={href} set:html={text} />
+							</div>
+						))
+					}
+				</div>
+				<div
+					class="mt-4"
+					class:list={{
+						"lg:mt-0 lg:ml-auto": THEME.layout == "narrow",
+					}}
+				>
+					<ButtonGroup actions={actions} class="inline-flex" btnClass="py-2.5 px-5.5 md:px-6" />
+					{
+						footNote && (
+							<div
+								class="text-gray-600 text-sm"
+								class:list={{
+									"lg:mt-2 lg:text-right": THEME.layout == "narrow",
+									"mt-4": !!actions.length,
+								}}
+							>
+								<Fragment set:html={footNote} />
+							</div>
+						)
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

@@ -137,6 +137,7 @@ export namespace App {
 
 	export type UIConfig = {
 		theme: "system" | "light" | "dark" | "light:only" | "dark:only";
+		layout: "narrow" | "wide";
 		colors?: {
 			primary?: string;
 			secondary?: string;
