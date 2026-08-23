@@ -2,7 +2,7 @@
 import Layout from "@/layouts/BaseLayout.astro";
 // import MainHeader, { type Props as HeaderProps } from "@/components/partials/MainHeader.astro";
 // import MainFooter, { type Props as FooterProps } from "@/components/partials/MainFooter.astro";
-// import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
+import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
 import type { MetaData } from "@/types";
 
 export interface Props {
@@ -33,6 +33,6 @@ const { metadata } = Astro.props;
 			<!-- <MainFooter {...footer} /> -->
 		</slot>
 	</div>
-	<!-- <ScrollTop /> -->
+	<ScrollTop />
 	<slot name="afterFooter" />
 </Layout>

@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<a id="scroll-to-top" href="#" class="flex justify-center items-center border-0 print:hidden will-change-[box-shadow] p-3 btn btn-primary">
+	<Icon name="ph:arrow-fat-up" class="w-5 h-5" />
+</a>
+
+<script>
+	function initScrollTop() {
+		const scrollToTop = document.getElementById("scroll-to-top") as HTMLElement;
+
+		scrollToTop.addEventListener("click", () => {
+			window.scrollTo(0, 0);
+		});
+
+		function onWindowScroll() {
+			if (window.scrollY > 150) {
+				scrollToTop.classList.add("active");
+			} else {
+				scrollToTop.classList.remove("active");
+			}
+		}
+		window.addEventListener("scroll", onWindowScroll);
+		onWindowScroll();
+	}
+
+	document.addEventListener("astro:after-swap", initScrollTop);
+	initScrollTop();
+</script>
+
+<style>
+	@reference "../../../assets/css/main.css";
+
+	@keyframes scrollPulse {
+		0% {
+			box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.4);
+		}
+		70% {
+			box-shadow: 0 0 0 10px rgba(var(--color-primary-rgb), 0);
+		}
+		100% {
+			box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0);
+		}
+	}
+
+	#scroll-to-top {
+		@apply right-[15px] bottom-0 z-10! fixed opacity-0 shadow-[0_0_0_0_rgba(var(--color-primary-rgb),0.3)] rounded-md transition-all animate-[scrollPulse_2s_forwards_infinite] duration-[0.25s] ease-linear invisible border border-primary-100 bg-white;
+
+		&.active {
+			@apply bottom-[15px] opacity-100 visible;
+		}
+
+		&:hover {
+			@apply animate-none text-white bg-primary border-primary-700;
+		}
+	}
+</style>
