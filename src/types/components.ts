@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from "astro/types";
 import type { App } from "site:config";
 
 /** Used for Passing Meta to Layout for meta tags/SEO */
@@ -18,4 +19,20 @@ export interface MetaData {
 	twitter?: App.MetaData.Twitter;
 	/** Author */
 	author?: string;
+}
+
+export interface Link extends Omit<HTMLAttributes<"a">, "slot"> {
+	text?: string;
+	ariaLabel?: string;
+	icon?: string;
+	showOn?: string | string[];
+}
+
+/** CTA */
+export interface _CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
+	variant?: "primary" | "primaryOutline" | "secondary" | "secondaryOutline" | "accent" | "accentOutline" | "tertiary" | "link";
+	text?: string;
+	icon?: string;
+	classes?: Record<string, string>;
+	type?: "button" | "submit" | "reset";
 }

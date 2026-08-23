@@ -1,0 +1,132 @@
+---
+import { SOCIALS } from "site:config";
+
+import Logo from "@/components/Logo.astro";
+import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
+import type { Link, _CallToAction } from "@/types";
+
+import { getCurrentPath, getHomePermalink } from "@/utils/permalinks";
+import MenuItems from "../ui/menu/MenuItems.astro";
+
+export interface Props {
+	id?: string;
+	links?: Array<Link>;
+	actions?: Array<_CallToAction>;
+	beforeMenu?: string;
+	afterMenu?: string;
+	beforeActions?: string;
+	afterActions?: string;
+	isSticky?: boolean;
+	isDark?: boolean;
+	addShadow?: boolean;
+	isFullWidth?: boolean;
+	showSocialLinks?: boolean;
+	showToggleTheme?: boolean;
+	showLinkIcons?: boolean;
+	showScrollProgress?: boolean;
+	animateScrollProgress?: boolean;
+	showBookmarks?: boolean;
+	shrinkHeader?: boolean;
+	position?: "left" | "right" | "center";
+}
+
+const {
+	id = "header",
+	links = [],
+	actions = [],
+	beforeMenu = await Astro.slots.render("beforeMenu"),
+	afterMenu = await Astro.slots.render("afterMenu"),
+	beforeActions = await Astro.slots.render("beforeActions"),
+	afterActions = await Astro.slots.render("afterActions"),
+	isSticky = true,
+	isDark = true,
+	addShadow = true,
+	isFullWidth = true,
+	showToggleTheme = false,
+	showSocialLinks = true,
+	showScrollProgress = true,
+	animateScrollProgress = true,
+	showBookmarks = false,
+	shrinkHeader = false,
+	showLinkIcons,
+	position = "center",
+} = Astro.props;
+
+// Sidebar visibility comes from the active entry's layout config - Defaults to true
+const showSidebar = true; //Astro.locals.blueprint?.config?.layout?.showSidebar ?? true;
+
+const currentPath = getCurrentPath(Astro.url);
+---
+
+<>
+	<header
+		class:list={[
+			{
+				fixed: isSticky,
+				relative: !isSticky,
+				dark: isDark,
+				"shadow-[0_5px_10px_0_rgba(0,0,0,0.3)]": addShadow,
+			},
+			"top-0 !z-[50] w-full font-primary bg-header text-page flex flex-col print:hidden",
+		]}
+		{...isSticky ? { "data-sticky-header": true } : {}}
+		{...shrinkHeader ? { "data-shrink-header": true } : {}}
+		{...showScrollProgress
+			? {
+					'data-scroll-progress="animate"': animateScrollProgress,
+					'data-scroll-progress="show"': !animateScrollProgress,
+				}
+			: {}}
+		{...id ? { id } : {}}
+	>
+		<div
+			id="header-inner"
+			class:list={[
+				"relative h-20 text-default px-3 md:px-6 mx-auto w-full gap-5 lg:grow",
+				{
+					"md:flex md:justify-between items-center": position !== "center",
+					"flex w-full items-center": position === "center",
+					"max-w-screen-2xl": !isFullWidth,
+				},
+			]}
+		>
+			<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" }, "flex items-center gap-2 md:gap-5"]}>
+				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
+					<Logo class="site-logo" />
+				</a>
+			</div>
+			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" ? <Fragment set:html={beforeMenu} /> : ""}
+			<div
+				class="flex"
+				class:list={{
+					"mx-auto": position === "center",
+					"mr-auto": position === "left",
+					"ml-auto": position === "right",
+				}}
+			>
+				{
+					!!links.length && (
+						<nav id="header-nav" class="flex justify-self-center items-center w-auto text-default md:overflow-x-auto xl:overflow-x-hidden" aria-label="Main navigation">
+							<ul class="flex flex-row justify-center gap-2 py-0 w-full font-semibold text-[0.8rem] self-center">
+								<MenuItems links={links} showLinkIcons={showLinkIcons} />
+							</ul>
+						</nav>
+					)
+				}
+			</div>
+			{Astro.slots.has("afterMenu") && typeof afterMenu == "string" ? <Fragment set:html={afterMenu} /> : ""}
+			<div
+				class:list={[
+					{ "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
+					" hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end",
+				]}
+			>
+				<div class="flex justify-between items-center gap-3 lg:gap-2 w-full md:w-auto">
+					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" ? <Fragment set:html={beforeActions} /> : ""}
+					<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
+					{Astro.slots.has("afterActions") && typeof afterActions == "string" ? <Fragment set:html={afterActions} /> : ""}
+				</div>
+			</div>
+		</div>
+	</header>
+</>

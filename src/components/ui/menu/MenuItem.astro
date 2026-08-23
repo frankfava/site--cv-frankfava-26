@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Link } from "@/types";
+import { trimSlash } from "@/utils/permalinks";
+import { twMerge } from "tailwind-merge";
+
+export interface Props extends Link {
+	currentPath?: string;
+	showLinkIcon?: boolean;
+	linkClass?: string;
+	iconClass?: string;
+}
+
+const { text, href, icon, showLinkIcon = true, currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`, class: className = "", linkClass = "", iconClass = "" } = Astro.props;
+---
+
+<li class:list={[className]}>
+	<a
+		class:list={[
+			twMerge("border border-transparent hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass),
+			{
+				"aw-link-active bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800": href === currentPath,
+			},
+		]}
+		href={href}
+	>
+		{showLinkIcon && icon && <Icon name={icon} class={twMerge("w-5 h-5 mr-3", iconClass)} />}
+		<span class="flex-grow">{text}</span>
+	</a>
+	<slot />
+</li>
