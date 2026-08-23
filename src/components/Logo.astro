@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-// import { ABOUT } from "site:config";
+import { ABOUT } from "site:config";
 
 export interface Props {
 	class?: string;
@@ -9,14 +9,10 @@ export interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<div class="flex items-center gap-3 min-h-[45px] whitespace-nowrap self-center" class:list={[className]}>
-	<!-- {!!ABOUT.getImage("bw") && <Image src={ABOUT.getImage("bw") as string} width={90} height={90} alt={`${ABOUT.name} Face`} class="rounded-full w-auto max-h-[45px]" />}
+<div class="flex items-center gap-3 min-h-12 whitespace-nowrap self-center" class:list={[className]}>
+	{!!ABOUT.getImage("bw") && <Image src={ABOUT.getImage("bw") as string} width={90} height={90} alt={`${ABOUT.name} Face`} class="rounded-full w-auto max-h-12" />}
 	<span class="font-bold font-primary text-xl md:text-2xl"
 		>{ABOUT.firstName}
-		<span class="font-normal">{ABOUT.lastName}</span></span
-	> -->
-	<span class="font-bold font-primary text-xl md:text-2xl"
-		>Frank
-		<span class="font-normal ml-2">Fava</span></span
+		<span class="font-normal ml-2">{ABOUT.lastName}</span></span
 	>
 </div>
