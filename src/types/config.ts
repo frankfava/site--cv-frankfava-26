@@ -7,6 +7,7 @@ export namespace Config {
 		site: App.SiteConfig;
 		metadata?: App.MetaData.Base;
 		i18n?: App.I18NConfig;
+		analytics?: App.Analytics.Config;
 		ui?: App.UIConfig;
 		socials?: Socials.Links;
 	};
@@ -16,6 +17,7 @@ export namespace Config {
 		site: App.SiteConfig;
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
+		analytics: App.Analytics.Config;
 		ui: App.UIConfig;
 		socials: Socials.Links;
 	};
@@ -27,6 +29,7 @@ export namespace Config {
 		};
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
+		analytics: App.Analytics.Resolved;
 		theme: Omit<App.UIConfig, "colors" | "fonts" | "theme"> & {
 			default: App.UIConfig["theme"];
 			lightModeAllowed: boolean;
@@ -48,12 +51,6 @@ export namespace App {
 			favicon?: string;
 			faviconSvg?: string;
 		};
-	};
-
-	export type I18NConfig = {
-		language: string;
-		textDirection: string;
-		dateFormatter?: Intl.DateTimeFormat;
 	};
 
 	export namespace MetaData {
@@ -94,6 +91,48 @@ export namespace App {
 			site?: string;
 			cardType?: string;
 		}
+	}
+
+	export type I18NConfig = {
+		language: string;
+		textDirection: string;
+		dateFormatter?: Intl.DateTimeFormat;
+	};
+
+	export namespace Analytics {
+		export type Config = {
+			vendor?: "fathom" | "googleAnalytics" | "metrical" | "plausible" | "simpleAnalytics" | "umami" | "amplitude" | "matomo" | "minimalAnalytics" | "none";
+		};
+
+		export type Resolved = Config & {
+			googleSiteVerificationId?: string;
+			fathom?: {
+				siteId?: string;
+				scriptUrl?: string;
+			};
+			/** Shared by the `googleAnalytics` and `minimalAnalytics` vendors. */
+			googleAnalytics?: {
+				id?: string;
+			};
+			metrical?: {
+				appId?: string;
+			};
+			plausible?: {
+				domain?: string;
+				scriptUrl?: string;
+			};
+			umami?: {
+				id?: string;
+				scriptUrl?: string;
+			};
+			amplitude?: {
+				apiKey?: string;
+			};
+			matomo?: {
+				id?: string;
+				origin?: string;
+			};
+		};
 	}
 
 	export type UIConfig = {

@@ -134,6 +134,16 @@
 			"required": ["language", "textDirection"],
 			"additionalProperties": false
 		},
+		"analytics": {
+			"type": "object",
+			"properties": {
+				"vendor": {
+					"type": "string",
+					"enum": ["fathom", "googleAnalytics", "metrical", "plausible", "simpleAnalytics", "umami", "amplitude", "matomo", "minimalAnalytics", "none"]
+				}
+			},
+			"additionalProperties": false
+		},
 		"ui": {
 			"type": "object",
 			"properties": {
@@ -248,7 +258,8 @@
 					"type": "string"
 				}
 			},
-			"required": ["text", "href"]
+			"required": ["text", "href"],
+			"additionalProperties": false
 		}
 	}
 }

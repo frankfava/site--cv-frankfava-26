@@ -9,6 +9,33 @@ interface ImportMetaEnv {
 	ROOT_DIR: string;
 	/** Public Directory */
 	PUBLIC_DIR: string;
+
+	// === Analytic Vendors ===
+
+	/** Google Site Verification ID */
+	readonly GOOGLE_SITE_VERIFICATION_ID: string | undefined;
+	/** Fathom Site ID */
+	readonly FATHOM_SITE_ID: string | undefined;
+	/** Fathom Script URL */
+	readonly FATHOM_SCRIPT_URL: string | undefined;
+	/** Google Analytics ID, used by both the googleAnalytics and minimalAnalytics vendors */
+	readonly GOOGLE_ANALYTICS_ID: string | undefined;
+	/** Metrical App ID */
+	readonly METRICAL_APP_ID: string | undefined;
+	/** Plausible Domain */
+	readonly PLAUSIBLE_DOMAIN: string | undefined;
+	/** Plausible Script URL */
+	readonly PLAUSIBLE_SCRIPT_URL: string | undefined;
+	/** Umami ID */
+	readonly UMAMI_ID: string | undefined;
+	/** Umami Script URL */
+	readonly UMAMI_SCRIPT_URL: string | undefined;
+	/** Amplitude API Key */
+	readonly AMPLITUDE_API_KEY: string | undefined;
+	/** Matomo ID */
+	readonly MATOMO_ID: string | undefined;
+	/** Matomo Script URL */
+	readonly MATOMO_ORIGIN: string | undefined;
 }
 
 interface ImportMeta {

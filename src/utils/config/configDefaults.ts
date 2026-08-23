@@ -40,6 +40,9 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			language: "en",
 			textDirection: "ltr",
 		},
+		analytics: {
+			vendor: undefined
+		},
 		ui: {
 			theme: "system",
 			colors: {

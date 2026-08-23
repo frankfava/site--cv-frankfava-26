@@ -1,0 +1,34 @@
+---
+import { ANALYTICS } from "site:config";
+
+import { Fathom, GoogleAnalytics, MinimalAnalytics, Metrical, Plausible, SimpleAnalytics, Umami, Amplitude, Matomo } from "astro-analytics";
+import { getCanonical } from "@/utils/permalinks";
+
+const { vendor } = ANALYTICS;
+---
+
+{
+	import.meta.env.PROD && (
+		<>
+			{ANALYTICS?.googleSiteVerificationId && <meta name="google-site-verification" content={ANALYTICS?.googleSiteVerificationId} />}
+
+			{vendor === "fathom" && ANALYTICS.fathom?.siteId && <Fathom site={ANALYTICS.fathom.siteId} src={ANALYTICS.fathom.scriptUrl} />}
+
+			{vendor === "googleAnalytics" && ANALYTICS.googleAnalytics?.id && <GoogleAnalytics id={ANALYTICS.googleAnalytics.id} />}
+
+			{vendor === "minimalAnalytics" && ANALYTICS.googleAnalytics?.id && <MinimalAnalytics id={ANALYTICS.googleAnalytics.id} />}
+
+			{vendor === "metrical" && ANALYTICS.metrical?.appId && <Metrical app={ANALYTICS.metrical.appId} />}
+
+			{vendor === "plausible" && ANALYTICS.plausible?.domain && <Plausible domain={ANALYTICS.plausible.domain} src={ANALYTICS.plausible.scriptUrl} />}
+
+			{vendor === "simpleAnalytics" && <SimpleAnalytics />}
+
+			{vendor === "umami" && ANALYTICS.umami?.id && ANALYTICS.umami?.scriptUrl && <Umami site={ANALYTICS.umami.scriptUrl} host="" dataId={ANALYTICS.umami.id} />}
+
+			{vendor === "amplitude" && ANALYTICS.amplitude?.apiKey && <Amplitude apiKey={ANALYTICS.amplitude.apiKey} />}
+
+			{vendor === "matomo" && ANALYTICS.matomo?.id && <Matomo {...{ id: ANALYTICS.matomo.id, url: String(ANALYTICS.matomo.origin || getCanonical()) }} />}
+		</>
+	)
+}

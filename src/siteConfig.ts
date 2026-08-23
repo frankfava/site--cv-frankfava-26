@@ -18,7 +18,7 @@ const parsed = addUtils(applyConfigDefaults(config));
 export const SITE = parsed.site;
 export const METADATA = parsed.metadata;
 export const I18N = parsed.i18n;
-// export const ANALYTICS = parsed.analytics;
+export const ANALYTICS = parsed.analytics;
 export const THEME = parsed.theme;
 export const COLORS = parsed.colors;
 export const FONTS = parsed.fonts;
@@ -32,7 +32,7 @@ export default {
 	SITE,
 	METADATA,
 	I18N,
-	// ANALYTICS,
+	ANALYTICS,
 	THEME,
 	COLORS,
 	FONTS,

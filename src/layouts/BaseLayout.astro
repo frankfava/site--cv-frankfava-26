@@ -8,8 +8,7 @@ import Favicons from "@/components/includes/Favicons.astro";
 import MetaTags from "@/components/includes/MetaTags.astro";
 import JsApplyColorMode from "@/components/includes/JsApplyColorMode.astro";
 // import JsApplySidebarState from "@/components/includes/JsApplySidebarState.astro";
-// import GoogleSiteVerification from "@/components/includes/GoogleSiteVerification.astro";
-// import GoogleAnalytics from "@/components/includes/GoogleAnalytics.astro";
+import Analytics from "@/components/includes/Analytics.astro";
 import Fonts from "@/components/includes/Fonts.astro";
 
 import type { MetaData } from "@/types";
@@ -29,9 +28,8 @@ const { language, textDirection } = I18N;
 		<MetaTags {...metadata} />
 		<Fonts />
 		<JsApplyColorMode />
-		<!-- <GoogleAnalytics />
-		<JsApplySidebarState />
-		<GoogleSiteVerification />
+		<Analytics />
+		<!-- <JsApplySidebarState />
 		<CustomStyles /> -->
 	</head>
 	<body id="top" class="bg-page text-base text-page antialiased tracking-tight">
