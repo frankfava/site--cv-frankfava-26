@@ -35,6 +35,52 @@
 			"accent": "#05505C"
 		}
 	},
+	"about": {
+		"name": "Frank Fava",
+		"jobTitles": ["AI Solutions Architect", "Solutions Architect", "Forward Deployed Engineer", "Senior Full-Stack Engineer", "AI Engineer", "Engineering Manager"],
+		"dob": "1990-07-31T21:28:00.000+09:00",
+		"summary": "Senior full-stack engineer and AI/agentic builder. 18+ years shipping software, now building and deploying LLM and agent systems - including a self-hosted MCP server and custom Claude Code agents I run in production - with a track record of selling technical solutions. Targeting AI Solutions Architect, Forward Deployed Engineer and senior engineering roles.",
+		"location": {
+			"city": "Stockholm",
+			"countryCode": "SE",
+			"region": "Sweden"
+		},
+		"nationality": [
+			{
+				"label": "Australian",
+				"flagIcon": "twemoji:flag-australia"
+			},
+			{
+				"label": "EU",
+				"flagIcon": "twemoji:flag-italy"
+			}
+		],
+		"linguistics": {
+			"summary": "I understand a lot of Swedish but can't speak it fluently yet. English is the most effective way to communicate with me. This hasn't been a friction point in Stockholm's tech scene so far, but I'm actively improving.",
+			"languages": [
+				{
+					"language": "English",
+					"fluency": "Native",
+					"description": "The most effective way to communicate with me."
+				},
+				{
+					"language": "Swedish",
+					"fluency": "Elementary",
+					"description": "I'm actively improving."
+				}
+			]
+		},
+		"profileImages": [
+			{
+				"name": "bw",
+				"url": "/images/profile/bw.jpeg"
+			},
+			{
+				"name": "avatar",
+				"url": "/images/profile/me.jpg"
+			}
+		]
+	},
 	"socials": {
 		"email": {
 			"text": "frank.fava@gmail.com",

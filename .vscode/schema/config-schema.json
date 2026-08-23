@@ -210,6 +210,99 @@
 			"required": ["theme"],
 			"additionalProperties": false
 		},
+		"about": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"jobTitles": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"dob": {
+					"type": "string"
+				},
+				"summary": {
+					"type": "string"
+				},
+				"location": {
+					"type": "object",
+					"properties": {
+						"city": {
+							"type": "string"
+						},
+						"countryCode": {
+							"type": "string"
+						},
+						"region": {
+							"type": "string"
+						}
+					},
+					"required": ["city", "countryCode", "region"]
+				},
+				"nationality": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"label": {
+								"type": "string"
+							},
+							"flagIcon": {
+								"type": "string"
+							}
+						},
+						"required": ["label", "flagIcon"]
+					}
+				},
+				"linguistics": {
+					"type": "object",
+					"properties": {
+						"summary": {
+							"type": "string"
+						},
+						"languages": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"language": {
+										"type": "string"
+									},
+									"fluency": {
+										"type": "string",
+										"enum": ["Native", "Fluent", "Conversational", "Elementary", "Beginner"]
+									},
+									"description": {
+										"type": "string"
+									}
+								},
+								"required": ["language", "fluency"]
+							}
+						}
+					}
+				},
+				"profileImages": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							}
+						},
+						"required": ["name", "url"]
+					}
+				}
+			},
+			"required": ["name", "jobTitles", "dob", "summary", "location"]
+		},
 		"socials": {
 			"type": "object",
 			"properties": {

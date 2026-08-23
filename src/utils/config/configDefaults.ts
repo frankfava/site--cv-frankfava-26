@@ -64,6 +64,19 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 				},
 			},
 		},
+		about: {
+			name: "",
+			jobTitles: [],
+			summary: "",
+			dob: "",
+			location: undefined,
+			nationality: undefined,
+			linguistics: {
+				summary: undefined,
+				languages: [],
+			},
+			profileImages: [],
+		},
 		socials: {},
 	};
 

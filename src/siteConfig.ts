@@ -22,10 +22,10 @@ export const ANALYTICS = parsed.analytics;
 export const THEME = parsed.theme;
 export const COLORS = parsed.colors;
 export const FONTS = parsed.fonts;
-// export const FEATURES = parsed.features;
+export const FEATURES = parsed.features;
 
 // Content
-// export const ABOUT = parsed.about;
+export const ABOUT = parsed.about;
 export const SOCIALS = parsed.socials;
 
 export default {
@@ -36,7 +36,7 @@ export default {
 	THEME,
 	COLORS,
 	FONTS,
-	// FEATURES,
-	// ABOUT,
+	FEATURES,
+	ABOUT,
 	SOCIALS,
 };

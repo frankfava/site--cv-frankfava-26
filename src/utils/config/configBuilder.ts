@@ -100,6 +100,48 @@ export function addUtils(config: Config.Complete) {
 	// Fonts
 	const fonts: Config.Final["fonts"] = config.ui?.fonts;
 
+	// About
+	const [firstName, lastName] = config.about.name.split(/(?<=^\S+)\s/);
+	const about: Config.Final["about"] = {
+		...config.about,
+		firstName,
+		lastName,
+		jobTitles: (Array.isArray(config.about.jobTitles) ? config.about.jobTitles : [config.about.jobTitles]).filter(Boolean) as Config.Final["about"]["jobTitles"],
+		linguistics: {
+			...config.about.linguistics,
+			languages: (Array.isArray(config.about.linguistics?.languages) ? config.about.linguistics?.languages : [config.about.linguistics?.languages]).filter(
+				Boolean,
+			) as Config.Final["about"]["linguistics"]["languages"],
+		},
+		nationality: (Array.isArray(config.about.nationality) ? config.about.nationality : [config.about.nationality]).filter(Boolean) as Config.Final["about"]["nationality"],
+		// Age
+		age: ((): number => {
+			const dob: Date = config.about.dob instanceof Date ? config.about.dob : new Date(config.about?.dob || "");
+			const age: number = Math.abs(Math.round((new Date().getTime() - dob.getTime()) / 1000 / (60 * 60 * 24) / 365.25));
+			return age;
+		})(),
+		// Location String
+		locationFull: ((): string => {
+			const { city, region, countryCode } = config.about.location || {};
+			return `${[city, region].filter(Boolean).join(" ")}${countryCode ? ", " + countryCode : ""}`;
+		})(),
+		// Get Profile Image
+		getImage: (name: string): string | undefined => {
+			const image = about.profileImages?.find((img) => img.name === name);
+			if (!image) {
+				return undefined;
+			}
+
+			if (image.url instanceof URL) {
+				return image.url?.toString();
+			}
+			return image.url;
+		},
+	};
+
+	// Features
+	const features: Config.Final["features"] = {};
+
 	// Socials
 	const socials: Config.Final["socials"] = createSocialsManager(config.socials);
 
@@ -111,6 +153,8 @@ export function addUtils(config: Config.Complete) {
 		theme,
 		colors,
 		fonts,
+		about,
+		features,
 		socials,
 	};
 }

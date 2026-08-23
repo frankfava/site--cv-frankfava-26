@@ -9,6 +9,7 @@ export namespace Config {
 		i18n?: App.I18NConfig;
 		analytics?: App.Analytics.Config;
 		ui?: App.UIConfig;
+		about?: About.Base;
 		socials?: Socials.Links;
 	};
 
@@ -19,6 +20,7 @@ export namespace Config {
 		i18n: App.I18NConfig;
 		analytics: App.Analytics.Config;
 		ui: App.UIConfig;
+		about: About.Base;
 		socials: Socials.Links;
 	};
 
@@ -37,6 +39,19 @@ export namespace Config {
 		};
 		colors: App.UIConfig["colors"];
 		fonts: App.UIConfig["fonts"];
+		about: Omit<About.Base, "nationality" | "linguistics" | "jobTitles"> & {
+			firstName: string;
+			lastName: string;
+			age: number;
+			jobTitles: string[];
+			locationFull: string;
+			getImage: (name: string) => string | undefined;
+			nationality: About.Nationality[];
+			linguistics: Omit<About.Linguistics, "languages"> & {
+				languages: About.Language[];
+			};
+		};
+		features: {};
 		socials: SocialsManager & Record<Socials.LinkKey, Socials.Link> & ReturnType<SocialsManager["get"]>;
 	};
 }
@@ -156,6 +171,46 @@ export namespace App {
 			};
 		};
 	};
+}
+
+export namespace About {
+	export type Base = {
+		name: string;
+		jobTitles: string | string[];
+		summary?: string;
+		dob?: Date | string;
+		location?: Location | undefined;
+		nationality?: Nationality | Nationality[];
+		linguistics?: Linguistics;
+		profileImages: Images;
+	};
+
+	export type Location = {
+		city: string;
+		countryCode: string;
+		region: string;
+	};
+
+	export type Nationality = {
+		label: string;
+		flagIcon: string;
+	};
+
+	export type Linguistics = {
+		summary?: string;
+		languages?: Language | Language[];
+	};
+
+	export type Language = {
+		language: string;
+		description: string;
+		fluency: "Native" | "Fluent" | "Conversational" | "Elementary" | "Beginner";
+	};
+
+	export type Images = {
+		name: string;
+		url: string | URL;
+	}[];
 }
 
 export namespace Socials {
