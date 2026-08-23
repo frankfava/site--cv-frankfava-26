@@ -84,7 +84,6 @@ export function addUtils(config: Config.Complete) {
 				}
 			: {}),
 	};
-	
 
 	// Theme
 	const { theme: defaultTheme, ...rest } = config.ui;
