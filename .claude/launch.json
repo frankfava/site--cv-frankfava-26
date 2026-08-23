@@ -8,7 +8,7 @@
         "-c",
         "npm run dev"
       ],
-      "port": 4333
+      "port": 4555
     }
   ]
 }
