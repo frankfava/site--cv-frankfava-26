@@ -9,6 +9,7 @@ import netlify from "@astrojs/netlify";
 import alpine from "@astrojs/alpinejs";
 import compress from "astro-compress";
 import sitemap from "@astrojs/sitemap";
+import icon from "astro-icon";
 
 import { astroBuilderHelper } from "./integrations/astroBuilderHelper";
 import { astroSiteConfigHelper } from "./integrations/astroSiteConfigHelper";
@@ -57,6 +58,14 @@ export default defineConfig({
 						Logger: 1,
 					}),
 				]),
+		// Icon
+		icon({
+			iconDir: "src/assets/icons",
+			include: {
+				devicon: ["*"],
+				phosphor: ["*"],
+			},
+		}),
 		// Update `robots.txt` with `sitemap-index.xml
 		astroBuilderHelper(),
 	],
