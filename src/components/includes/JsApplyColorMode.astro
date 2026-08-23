@@ -44,13 +44,6 @@ import { THEME } from "site:config";
 					this.savePreference(theme);
 					this.updateAttribute(this.lightOrDark());
 				}
-				setThemeFromConfig() {
-					if (defaultTheme && defaultTheme.endsWith(":only")) {
-						this.setTheme(defaultTheme.replace(":only", ""));
-					} else {
-						this.setTheme(defaultTheme)
-					}
-				}
 				updateAttribute(preference) {
 					if (preference == "dark") {
 						document.documentElement.classList.add("dark");
@@ -65,8 +58,20 @@ import { THEME } from "site:config";
 							this.setTheme();
 						});
 				}
-			});
-			colorSchemeSwitcher.setThemeFromConfig();
+				init() {
+					if (this.savedInStorage()) {
+						this.setTheme(this.getPreference());
+						return;
+					}
+
+					if (defaultTheme && defaultTheme.endsWith(":only")) {
+						this.setTheme(defaultTheme.replace(":only", ""));
+					} else {
+						this.setTheme(defaultTheme)
+					}
+				}
+			});			
+			colorSchemeSwitcher.init();
 		</script>
 	)
 }

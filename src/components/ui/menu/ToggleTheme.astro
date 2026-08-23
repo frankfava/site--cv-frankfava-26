@@ -1,0 +1,77 @@
+---
+import { THEME } from "site:config";
+import { Icon } from "astro-icon/components";
+import { twMerge } from "tailwind-merge";
+
+export interface Props {
+	label?: string;
+	class?: string;
+	iconClass?: string;
+	lightIcon?: string;
+	darkIcon?: string;
+	systemIcon?: string;
+}
+
+const { label = "Toggle between Dark and Light mode", class: className = "", iconClass = "", lightIcon = "ph:sun", darkIcon = "ph:moon-stars", systemIcon = "ph:desktop" } = Astro.props;
+
+const icons = [
+	{ key: "light", icon: lightIcon, label: "Light" },
+	{ key: "dark", icon: darkIcon, label: "Dark" },
+	{ key: "system", icon: systemIcon, label: "System" },
+];
+
+//TODO: https://github.com/alpinejs/alpine/discussions/3232
+---
+
+{
+	!(THEME.default && THEME.default.endsWith(":only")) && (
+		<div x-data="themeToggle" data-theme={THEME.default} class="relative flex">
+			<button
+				type="button"
+				@click="toggle()"
+				class={twMerge(
+					"inline-flex items-center dark:border-gray-600 hover:bg-gray-600 dark:hover:bg-gray-400 dark:hover:bg-primary-700 dark:bg-gray-800 p-2.5 border rounded-lg focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 text-gray-600 text-sm hover:text-white dark:text-white transition-colors duration-200 focus:outline-none",
+					className,
+				)}
+				aria-label={label}
+				aria-haspopup="true"
+				:class="isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"
+				:aria-expanded="isOpen"
+			>
+				{
+					icons.map((i) => (
+						<>
+							<Icon x-show={"isActive('" + i.key + "')"} name={i.icon} class="toggle-icon" class:list={[i.key, twMerge("w-6 h-6", iconClass)]} />
+						</>
+					))
+				}
+			</button>
+			<div
+				x-cloak
+				x-show="isOpen"
+				x-transition
+				@click.outside="close()"
+				@keydown.down.prevent="$focus.wrap().next()"
+				@keydown.up.prevent="$focus.wrap().previous()"
+				class="top-14 right-0 !z-10 absolute bg-white dark:bg-gray-700 shadow-xl py-1 rounded-lg divide-y divide-gray-100 ring-1 ring-gray-100 dark:ring-gray-600 w-30 font-semibold text-primary-700 text-sm dark:text-primary-300 overflow-hidden"
+				role="menu"
+			>
+				<ul class="py-2 text-gray-700 text-sm dark:text-gray-200" aria-labelledby="dropdownDefaultButton" role="listbox" tabindex="0" aria-orientation="vertical">
+					{
+						icons.map((i) => (
+							<li
+								@click={"select('" + i.key + "')"}
+								class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 px-4 py-2 dark:hover:text-white cursor-pointer active"
+								role="option"
+								tabindex="-1"
+							>
+								<Icon name={i.icon} class="mr-3 w-6 h-6 dark:fill-white" />
+								<span>{i.label}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	)
+}

@@ -13,7 +13,12 @@ export interface Props {
 }
 
 // const { metadata, header, footer } = Astro.props;
-const { metadata, header } = Astro.props;
+const {
+	metadata,
+	header = {
+		showToggleTheme: true,
+	},
+} = Astro.props;
 ---
 
 <Layout metadata={metadata}>

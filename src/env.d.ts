@@ -52,6 +52,8 @@ declare var SITE_URL: string;
 declare var BASE_URL: string;
 /** Trialing Slash */
 declare var TRAILING_SLASH: "always" | "never" | "ignore";
+/** Color Scheme Switcher - Defined in JsApplyColorMode.astro */
+declare var colorSchemeSwitcher;
 
 /** Remove the optional modifier and strip undefined from the value types (also strips undefined from T itself) */
 type FullyDefined<T> = T extends object ? { [K in keyof T]-?: NonNullable<T[K]> } : NonNullable<T>;
