@@ -1,3 +1,6 @@
+import type { HTMLAttributes } from "astro/types";
+import type { SocialsManager } from "../lib/socials";
+
 export namespace Config {
 	/** Initial Config */
 	export type Initial = {
@@ -5,6 +8,7 @@ export namespace Config {
 		metadata?: App.MetaData.Base;
 		i18n?: App.I18NConfig;
 		ui?: App.UIConfig;
+		socials?: Socials.Links;
 	};
 
 	/** Merged Config before Utitlies are added  */
@@ -13,6 +17,7 @@ export namespace Config {
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
 		ui: App.UIConfig;
+		socials: Socials.Links;
 	};
 
 	/** Merged Config after Utitlies are added */
@@ -29,6 +34,7 @@ export namespace Config {
 		};
 		colors: App.UIConfig["colors"];
 		fonts: App.UIConfig["fonts"];
+		socials: SocialsManager & Record<Socials.LinkKey, Socials.Link> & ReturnType<SocialsManager["get"]>;
 	};
 }
 
@@ -110,4 +116,18 @@ export namespace App {
 			};
 		};
 	};
+}
+
+export namespace Socials {
+	export type LinkKey = "email" | "phone" | "github" | "linkedin" | "facebook" | "x" | "youtube" | "codepen" | "whatsapp" | "vcard";
+
+	export type Link = Omit<HTMLAttributes<"a">, "slot"> & {
+		label?: string;
+		icon?: string;
+		text: string;
+		href: string;
+		suffixIcon?: string;
+	};
+
+	export type Links = Record<string, Link>;
 }

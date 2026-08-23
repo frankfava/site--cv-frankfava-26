@@ -60,6 +60,7 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 				},
 			},
 		},
+		socials: {},
 	};
 
 	const merged = defu(config ?? {}, _defaults) as Config.Complete;

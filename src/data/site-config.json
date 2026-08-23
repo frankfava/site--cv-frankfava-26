@@ -33,5 +33,23 @@
 			"secondary": "#479FC8",
 			"accent": "#05505C"
 		}
+	},
+	"socials": {
+		"email": {
+			"text": "frank.fava@gmail.com",
+			"href": "mailto:frank.fava@gmail.com"
+		},
+		"github": {
+			"text": "github.com/frankfava",
+			"href": "https://github.com/frankfava"
+		},
+		"linkedin": {
+			"text": "linkedin.com/in/frankfava",
+			"href": "https://www.linkedin.com/in/frankfava"
+		},
+		"phone": {
+			"text": "0729 183 764",
+			"href": "tel:+460729183764"
+		}
 	}
 }

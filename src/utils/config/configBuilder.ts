@@ -2,6 +2,7 @@
  * Config Utility
  */
 import type { Config } from "@/types/config";
+import { createSocialsManager } from "@/lib/socials";
 
 /** Modify config to add utility */
 export function addUtils(config: Config.Complete) {
@@ -40,6 +41,9 @@ export function addUtils(config: Config.Complete) {
 	// Fonts
 	const fonts: Config.Final["fonts"] = config.ui?.fonts;
 
+	// Socials
+	const socials: Config.Final["socials"] = createSocialsManager(config.socials);
+
 	return {
 		site,
 		i18n,
@@ -47,5 +51,6 @@ export function addUtils(config: Config.Complete) {
 		theme,
 		colors,
 		fonts,
+		socials,
 	};
 }

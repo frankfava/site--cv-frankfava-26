@@ -195,7 +195,60 @@
 			},
 			"required": ["theme"],
 			"additionalProperties": false
+		},
+		"socials": {
+			"type": "object",
+			"properties": {
+				"email": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"phone": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"github": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"linkedin": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"facebook": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"x": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"youtube": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"codepen": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"whatsapp": {
+					"$ref": "#/definitions/socialLink"
+				},
+				"vcard": {
+					"$ref": "#/definitions/socialLink"
+				}
+			},
+			"required": []
 		}
 	},
-	"required": ["site"]
+	"required": ["site"],
+	"definitions": {
+		"socialLink": {
+			"type": "object",
+			"properties": {
+				"text": {
+					"type": "string"
+				},
+				"href": {
+					"type": "string"
+				},
+				"suffixIcon": {
+					"type": "string"
+				}
+			},
+			"required": ["text", "href"]
+		}
+	}
 }

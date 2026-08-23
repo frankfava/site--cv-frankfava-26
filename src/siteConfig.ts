@@ -26,7 +26,7 @@ export const FONTS = parsed.fonts;
 
 // Content
 // export const ABOUT = parsed.about;
-// export const SOCIALS = parsed.socials;
+export const SOCIALS = parsed.socials;
 
 export default {
 	SITE,
@@ -38,5 +38,5 @@ export default {
 	FONTS,
 	// FEATURES,
 	// ABOUT,
-	// SOCIALS,
+	SOCIALS,
 };
