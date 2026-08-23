@@ -137,6 +137,10 @@
 		"ui": {
 			"type": "object",
 			"properties": {
+				"theme": {
+					"type": "string",
+					"enum": ["system", "light", "dark", "light:only", "dark:only"]
+				},
 				"colors": {
 					"type": "object",
 					"properties": {

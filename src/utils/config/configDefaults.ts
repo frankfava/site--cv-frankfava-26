@@ -41,6 +41,7 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			textDirection: "ltr",
 		},
 		ui: {
+			theme: "system",
 			colors: {
 				primary: "#434E5E",
 				secondary: "#479FC8",

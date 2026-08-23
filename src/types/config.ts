@@ -22,6 +22,11 @@ export namespace Config {
 		};
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
+		theme: Omit<App.UIConfig, "colors" | "fonts" | "theme"> & {
+			default: App.UIConfig["theme"];
+			lightModeAllowed: boolean;
+			darkModeAllowed: boolean;
+		};
 		colors: App.UIConfig["colors"];
 		fonts: App.UIConfig["fonts"];
 	};
@@ -86,6 +91,7 @@ export namespace App {
 	}
 
 	export type UIConfig = {
+		theme: "system" | "light" | "dark" | "light:only" | "dark:only";
 		colors?: {
 			primary?: string;
 			secondary?: string;

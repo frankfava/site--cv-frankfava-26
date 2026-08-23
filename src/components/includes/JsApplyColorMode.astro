@@ -1,0 +1,72 @@
+---
+import { THEME } from "site:config";
+---
+
+{
+	!(THEME.default && THEME.default.endsWith(":only")) && (
+		<script is:inline define:vars={{ defaultTheme: THEME.default || "system" }}>
+			window.colorSchemeSwitcher = new (class {
+				localStorageKey = "darkColorScheme";
+				constructor() {
+					this.setListeners();
+				}
+				getFromMedia() {
+					return window.matchMedia("(prefers-color-scheme: dark)").matches
+						? "dark"
+						: "light";
+				}
+				savedInStorage() {
+					return (this.localStorageKey in localStorage);
+				}
+				darkModeEnabled() {
+					return localStorage.getItem(this.localStorageKey) == "true";
+				}
+				getPreference() {
+					return !this.savedInStorage()
+						? "system"
+						: this.darkModeEnabled()
+							? "dark"
+							: "light";
+				}
+				savePreference(theme) {
+					if ((!theme && theme !== undefined) || theme == "system") {
+						localStorage.removeItem(this.localStorageKey);
+					} else if (!!theme) {
+						localStorage.setItem(this.localStorageKey, theme == "dark");
+					}
+				}
+				lightOrDark() {
+					return !this.savedInStorage()
+						? this.getFromMedia()
+						: this.getPreference();
+				}
+				setTheme(theme) {
+					this.savePreference(theme);
+					this.updateAttribute(this.lightOrDark());
+				}
+				setThemeFromConfig() {
+					if (defaultTheme && defaultTheme.endsWith(":only")) {
+						this.setTheme(defaultTheme.replace(":only", ""));
+					} else {
+						this.setTheme(defaultTheme)
+					}
+				}
+				updateAttribute(preference) {
+					if (preference == "dark") {
+						document.documentElement.classList.add("dark");
+					} else {
+						document.documentElement.classList.remove("dark");
+					}
+				}
+				setListeners() {
+					window
+						.matchMedia("(prefers-color-scheme: dark)")
+						.addEventListener("change", () => {
+							this.setTheme();
+						});
+				}
+			});
+			colorSchemeSwitcher.setThemeFromConfig();
+		</script>
+	)
+}
