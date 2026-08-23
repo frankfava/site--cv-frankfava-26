@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from "astro/types";
 import type { App } from "site:config";
+import type { _ModuleWrapper } from "../components/modules/ModuleWrapper.astro";
 
 /** Used for Passing Meta to Layout for meta tags/SEO */
 export interface MetaData {
@@ -26,6 +27,28 @@ export interface Link extends Omit<HTMLAttributes<"a">, "slot"> {
 	ariaLabel?: string;
 	icon?: string;
 	showOn?: string | string[];
+}
+
+// ==== Components
+
+/** Base Module */
+export interface _Module {
+	id?: string;
+	// Falls back to the page's `layout.contentWidth`
+	contentWidth?: string;
+	isDark?: boolean;
+	bg?: string;
+	classes?: Record<PropertyKey, string | Record<PropertyKey, string>>;
+}
+
+/** Module Header */
+export interface _ModuleHeader {
+	title?: string;
+	subtitle?: string;
+	classes?: Record<string, string>;
+	headerAlign?: "left" | "center" | "right";
+	stacked?: boolean;
+	cta?: _CallToAction;
 }
 
 /** CTA */
