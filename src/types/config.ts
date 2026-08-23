@@ -23,6 +23,7 @@ export namespace Config {
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
 		colors: App.UIConfig["colors"];
+		fonts: App.UIConfig["fonts"];
 	};
 }
 
@@ -90,4 +91,17 @@ export namespace App {
 			secondary?: string;
 			accent?: string;
 		};
+		fonts?: {
+			family: {
+				primary?: string;
+				primary_type?: "sans-serif" | "serif" | "monospace";
+				secondary?: string;
+				secondary_type?: "sans-serif" | "serif" | "monospace";
+			};
+			font_size: {
+				basePx?: number;
+				scale?: number;
+			};
+		};
+	};
 }

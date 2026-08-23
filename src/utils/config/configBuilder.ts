@@ -27,10 +27,15 @@ export function addUtils(config: Config.Complete) {
 
 	// Colors
 	const colors: Config.Final["colors"] = config.ui?.colors;
+
+	// Fonts
+	const fonts: Config.Final["fonts"] = config.ui?.fonts;
+
 	return {
 		site,
 		i18n,
 		metadata,
 		colors,
+		fonts,
 	};
 }

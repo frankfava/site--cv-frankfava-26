@@ -46,6 +46,18 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 				secondary: "#479FC8",
 				accent: "#05505C",
 			},
+			fonts: {
+				family: {
+					primary: "Poppins:wght@400;600;700",
+					primary_type: "sans-serif",
+					secondary: "",
+					secondary_type: "sans-serif",
+				},
+				font_size: {
+					basePx: 16,
+					scale: 0.25,
+				},
+			},
 		},
 	};
 

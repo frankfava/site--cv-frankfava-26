@@ -150,6 +150,43 @@
 							"type": "string"
 						}
 					}
+				},
+				"fonts": {
+					"type": "object",
+					"properties": {
+						"family": {
+							"type": "object",
+							"properties": {
+								"primary": {
+									"type": "string"
+								},
+								"primary_type": {
+									"type": "string",
+									"enum": ["sans-serif", "serif", "monospace"]
+								},
+								"secondary": {
+									"type": "string"
+								},
+								"secondary_type": {
+									"type": "string",
+									"enum": ["sans-serif", "serif", "monospace"]
+								}
+							}
+						},
+						"font_size": {
+							"type": "object",
+							"properties": {
+								"basePx": {
+									"type": "integer"
+								},
+								"scale": {
+									"type": "number",
+									"maximum": 1,
+									"minimum": 0
+								}
+							}
+						}
+					}
 				}
 			},
 			"required": ["theme"],
