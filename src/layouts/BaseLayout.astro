@@ -4,7 +4,7 @@ import "@/assets/css/main.css";
 import { I18N } from "site:config";
 
 import Favicons from "@/components/includes/Favicons.astro";
-// import CustomStyles from "@/components/includes/CustomStyles.astro";
+import CustomStyles from "@/components/includes/CustomStyles.astro";
 import MetaTags from "@/components/includes/MetaTags.astro";
 import JsApplyColorMode from "@/components/includes/JsApplyColorMode.astro";
 // import JsApplySidebarState from "@/components/includes/JsApplySidebarState.astro";
@@ -29,8 +29,8 @@ const { language, textDirection } = I18N;
 		<Fonts />
 		<JsApplyColorMode />
 		<Analytics />
-		<!-- <JsApplySidebarState />
-		<CustomStyles /> -->
+		<!-- <JsApplySidebarState /> -->
+		<CustomStyles />
 	</head>
 	<body id="top" class="bg-page text-base text-page antialiased tracking-tight">
 		<slot />
