@@ -4,6 +4,7 @@ export namespace Config {
 		site: App.SiteConfig;
 		metadata?: App.MetaData.Base;
 		i18n?: App.I18NConfig;
+		ui?: App.UIConfig;
 	};
 
 	/** Merged Config before Utitlies are added  */
@@ -11,6 +12,7 @@ export namespace Config {
 		site: App.SiteConfig;
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
+		ui: App.UIConfig;
 	};
 
 	/** Merged Config after Utitlies are added */
@@ -20,6 +22,7 @@ export namespace Config {
 		};
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
+		colors: App.UIConfig["colors"];
 	};
 }
 
@@ -80,4 +83,11 @@ export namespace App {
 			cardType?: string;
 		}
 	}
+
+	export type UIConfig = {
+		colors?: {
+			primary?: string;
+			secondary?: string;
+			accent?: string;
+		};
 }

@@ -20,6 +20,7 @@
 		"@astrojs/check": "^0.9.10",
 		"@astrojs/netlify": "^8.2.3",
 		"@astrojs/sitemap": "^3.7.3",
+		"@astrolib/seo": "^1.0.0-beta.8",
 		"@iconify-json/devicon": "^1.2.62",
 		"@iconify-json/ph": "^1.2.2",
 		"@tailwindcss/forms": "^0.5.11",
@@ -28,9 +29,11 @@
 		"alpinejs": "^3.16.2",
 		"astro": "^7.2.4",
 		"astro-compress": "^2.4.3",
+		"astro-font": "^1.2.0",
 		"astro-icon": "^1.2.0",
 		"clsx": "^2.1.1",
 		"defu": "^6.1.7",
+		"limax": "^4.2.3",
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"
@@ -43,6 +46,9 @@
 	},
 	"overrides": {
 		"deepmerge-ts": "^8.0.2",
-		"sharp": "^0.35.3"
+		"sharp": "^0.35.3",
+		"@astrolib/seo": {
+			"astro": "$astro"
+		}
 	}
 }

@@ -25,8 +25,12 @@ export function addUtils(config: Config.Complete) {
 	// i18N
 	const i18n: Config.Final["i18n"] = config.i18n;
 
+	// Colors
+	const colors: Config.Final["colors"] = config.ui?.colors;
 	return {
 		site,
 		i18n,
+		metadata,
+		colors,
 	};
 }

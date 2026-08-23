@@ -1,0 +1,137 @@
+---
+import { defu } from "defu";
+import { existsSync } from "fs";
+
+import { AstroSeo } from "@astrolib/seo";
+
+import type { Props as AstroSeoProps } from "@astrolib/seo";
+
+import { SITE, METADATA, I18N, COLORS } from "site:config";
+
+import type { OpenGraph } from "@astrolib/seo";
+import type { MetaData } from "@/types";
+
+import { getCanonical, getAsset } from "@/utils/permalinks";
+import { getProjectRootDir } from "@/utils/directories";
+
+const sitemapExists = existsSync(getProjectRootDir() + "dist/sitemap-index.xml") && import.meta.env.MODE === "production";
+
+export interface Props extends MetaData {
+	dontUseTitleTemplate?: boolean;
+}
+
+const { title, ignoreTitleTemplate = false, canonical = String(getCanonical(String(Astro.url.pathname))), robots = {}, description, openGraph = {}, twitter = {} } = Astro.props;
+
+const baseSeoProps: AstroSeoProps = {
+	title: "",
+	titleTemplate: "%s",
+	canonical: canonical,
+	noindex: true,
+	nofollow: true,
+	description: undefined,
+	openGraph: {
+		url: canonical,
+		site_name: SITE?.name,
+		images: [],
+		locale: I18N?.language || "en",
+		type: "website",
+	},
+	twitter: {
+		cardType: openGraph?.images?.length ? "summary_large_image" : "summary",
+	},
+};
+
+const metadataSeoProps: AstroSeoProps = {
+	title: METADATA?.title?.default ? METADATA?.title?.default.replace("%site_name", SITE.name) : undefined,
+	titleTemplate: METADATA?.title?.template && title ? METADATA?.title?.template.replace("%site_name", SITE.name) : undefined,
+	noindex: typeof METADATA?.robots?.index !== "undefined" ? !METADATA.robots.index : undefined,
+	nofollow: typeof METADATA?.robots?.follow !== "undefined" ? !METADATA.robots.follow : undefined,
+	description: METADATA?.description,
+	openGraph: METADATA?.openGraph,
+	twitter: METADATA?.twitter,
+	additionalMetaTags: [
+		{
+			name: "viewport",
+			content: "width=device-width, initial-scale=1.0",
+		},
+		{
+			name: "apple-mobile-web-app-title",
+			content: SITE.name,
+		},
+		{
+			property: "og:site_name",
+			content: SITE.name,
+		},
+		...(METADATA?.author
+			? [
+					{
+						name: "author",
+						content: METADATA.author,
+					},
+				]
+			: []),
+		...(COLORS?.primary
+			? [
+					{
+						name: "msapplication-TileColor",
+						content: COLORS.primary,
+					},
+					{
+						name: "theme-color",
+						content: COLORS.primary,
+					},
+				]
+			: []),
+	].filter(Boolean),
+	additionalLinkTags: [
+		...(sitemapExists
+			? [
+					{
+						rel: "sitemap",
+						href: getAsset("/sitemap-index.xml"),
+					},
+				]
+			: []),
+		...(METADATA?.manifestPublic
+			? [
+					{
+						rel: "manifest",
+						href: METADATA.manifestPublic,
+					},
+				]
+			: []),
+	].filter(Boolean),
+};
+
+const pageSeoProps: AstroSeoProps = {
+	title: title,
+	titleTemplate: ignoreTitleTemplate ? "%s" : undefined,
+	canonical: canonical,
+	noindex: typeof robots?.index !== "undefined" ? !robots.index : undefined,
+	nofollow: typeof robots?.follow !== "undefined" ? !robots.follow : undefined,
+	description: description,
+	openGraph: {
+		url: canonical,
+		...openGraph,
+	},
+	twitter: twitter,
+};
+
+const seoProps: AstroSeoProps = defu(pageSeoProps, metadataSeoProps, baseSeoProps);
+
+function adaptOpenGraphImages(openGraph: OpenGraph = {}) {
+	let images = (openGraph?.images || []).map((f) => ({
+		...f,
+		url: getCanonical(f.url) as string,
+	}));
+	return { ...openGraph, ...(images ? { images } : {}) };
+}
+---
+
+<meta charset="UTF-8" />
+<AstroSeo
+	{...{
+		...seoProps,
+		openGraph: adaptOpenGraphImages(seoProps?.openGraph),
+	}}
+/>

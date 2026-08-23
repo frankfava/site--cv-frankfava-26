@@ -1,0 +1,92 @@
+---
+import { FONTS } from "site:config";
+import { AstroFont } from "astro-font";
+
+type fontDefinition = {
+	full: string;
+	name: string;
+	weights: Array<number>;
+	itals: Array<number>;
+};
+type fontDefinitionWithUrl = fontDefinition & { url: string };
+
+/** eg. Poppins:wght@400;500;600;700 */
+function parseFontString(fonstString: string): fontDefinition {
+	const regex = /^([^:]+)(?::(\w+)@([\d;]+))?(?::(\w+)@([\d;]+))?$/;
+	const [full, name, _weightKey, weights, _italKey, itals] = regex.exec(fonstString) || ["", "", "", ""];
+	return {
+		full: full as string,
+		name,
+		weights: (weights ?? "")
+			.split(";")
+			.filter(Boolean)
+			.map((e: string) => Number.parseInt(e.trim())) as number[],
+		itals: (itals ?? "")
+			.split(";")
+			.filter(Boolean)
+			.map((e: string) => Number.parseInt(e.trim())),
+	};
+}
+
+/**  */
+function setupFont(fontString: string, loader: "bunny" | "google" = "bunny"): fontDefinitionWithUrl | undefined {
+	if (!fontString) {
+		return;
+	}
+	const definition = parseFontString(fontString);
+
+	let url: string;
+
+	switch (loader) {
+		case "bunny": {
+			const fontName = definition.name.toLowerCase();
+			const keys: string[] = [];
+
+			(definition.weights || []).forEach((w) => {
+				keys.push(`${w}`);
+			});
+			(definition.itals || []).forEach((w) => {
+				keys.push(`${w}i`);
+			});
+			url = `https://fonts.bunny.net/css?family=${fontName}:${keys.join(",")}`;
+			break;
+		}
+		case "google":
+			url = `https://fonts.googleapis.com/css2?family=${definition.full}&display=swap`;
+			break;
+	}
+
+	return { ...definition, url };
+}
+
+function createAstroFontConfig(fonts: Record<string, fontDefinitionWithUrl | undefined>) {
+	return Object.entries(fonts)
+		.filter(([_k, font]) => !!font)
+		.map(([k, font]) => {
+			font = font as fontDefinitionWithUrl;
+			return {
+				src: [],
+				preload: true,
+				display: "swap",
+				name: font.name!,
+				fallback: "sans-serif",
+				cssVariable: `font-${k}`,
+				googleFontsURL: font.url,
+			};
+		}) as [];
+}
+
+let fontPrimary: fontDefinitionWithUrl | undefined;
+let fontSecondary: fontDefinitionWithUrl | undefined;
+if (FONTS) {
+	fontPrimary = setupFont(FONTS.family?.primary ? FONTS.family.primary : "") as fontDefinitionWithUrl | undefined;
+	fontSecondary = setupFont(FONTS.family?.secondary ? FONTS.family.secondary : "") as fontDefinitionWithUrl | undefined;
+}
+---
+
+<AstroFont
+	config={createAstroFontConfig({
+		primary: fontPrimary,
+		secondary: fontSecondary,
+	})}
+/>

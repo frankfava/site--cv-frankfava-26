@@ -7,8 +7,8 @@
 	},
 	"metadata": {
 		"title": {
-			"default": "Frank Fava CV",
-			"template": "%s | Frank Fava CV"
+			"default": "%site_name",
+			"template": "%s | %site_name"
 		},
 		"robots": {
 			"follow": true,
@@ -24,6 +24,13 @@
 					"height": 400
 				}
 			]
+		}
+	},
+	"ui": {
+		"colors": {
+			"primary": "#434E5E",
+			"secondary": "#479FC8",
+			"accent": "#05505C"
 		}
 	}
 }

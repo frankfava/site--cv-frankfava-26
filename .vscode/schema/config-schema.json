@@ -133,6 +133,27 @@
 			},
 			"required": ["language", "textDirection"],
 			"additionalProperties": false
+		},
+		"ui": {
+			"type": "object",
+			"properties": {
+				"colors": {
+					"type": "object",
+					"properties": {
+						"primary": {
+							"type": "string"
+						},
+						"secondary": {
+							"type": "string"
+						},
+						"accent": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"required": ["theme"],
+			"additionalProperties": false
 		}
 	},
 	"required": ["site"]

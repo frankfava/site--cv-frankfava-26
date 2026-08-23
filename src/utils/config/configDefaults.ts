@@ -40,9 +40,22 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			language: "en",
 			textDirection: "ltr",
 		},
+		ui: {
+			colors: {
+				primary: "#434E5E",
+				secondary: "#479FC8",
+				accent: "#05505C",
+			},
+		},
 	};
 
 	const merged = defu(config ?? {}, _defaults) as Config.Complete;
+
+	// Default Title
+	merged.metadata.title = {
+		...merged.metadata.title,
+		default: merged.metadata?.title?.default || merged.site.name,
+	};
 
 	return merged;
 }
