@@ -1,0 +1,30 @@
+---
+import { SITE, COLORS } from "site:config";
+
+import { getCanonical } from "@/utils/permalinks";
+
+let favicon: undefined | string = undefined;
+let faviconSvg: undefined | string = undefined;
+
+try {
+	if (SITE?.logos) {
+		if (SITE.logos.favicon) {
+			favicon = getCanonical(SITE.logos.favicon) as string;
+		}
+		if (SITE.logos.faviconSvg) {
+			faviconSvg = getCanonical(SITE.logos.faviconSvg) as string;
+		}
+	}
+} finally {
+}
+---
+
+{favicon && <link rel="shortcut icon" href={favicon} />}
+{
+	faviconSvg && (
+		<>
+			<link rel="icon" type="image/svg+xml" href={faviconSvg} />
+			<link rel="mask-icon" href={faviconSvg} {...(COLORS?.primary ? { color: COLORS.primary } : {})} />
+		</>
+	)
+}

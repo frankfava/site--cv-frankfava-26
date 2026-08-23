@@ -3,7 +3,7 @@ import "@/assets/css/main.css";
 
 import { I18N } from "site:config";
 
-// import Favicons from "@/components/includes/Favicons.astro";
+import Favicons from "@/components/includes/Favicons.astro";
 // import CustomStyles from "@/components/includes/CustomStyles.astro";
 // import JsApplyColorMode from "@/components/includes/JsApplyColorMode.astro";
 import MetaTags from "@/components/includes/MetaTags.astro";
@@ -25,8 +25,8 @@ const { language, textDirection } = I18N;
 <!doctype html>
 <html lang={language} dir={textDirection}>
 	<head>
+		<Favicons />
 		<MetaTags {...metadata} />
-		<GoogleAnalytics />
 		<Fonts />
 		<JsApplyColorMode />
 		<!-- <GoogleAnalytics />
