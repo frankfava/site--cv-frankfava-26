@@ -2,7 +2,7 @@ import slugify from "limax";
 
 import { SITE } from "site:config";
 
-import { trim } from "@/utils";
+import { trim } from "@/utils/str";
 
 const BASE_PATHNAME = SITE.base || "/";
 
