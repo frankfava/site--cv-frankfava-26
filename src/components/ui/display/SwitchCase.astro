@@ -1,0 +1,17 @@
+---
+export interface Props {
+	value?: string;
+}
+
+const { value } = Astro.props;
+
+let html: string = "";
+
+if (Astro.slots.has(value ?? "")) {
+	html = await Astro.slots.render(value ?? "");
+} else if (Astro.slots.has("default")) {
+	html = await Astro.slots.render("default");
+}
+---
+
+<Fragment set:html={html} />

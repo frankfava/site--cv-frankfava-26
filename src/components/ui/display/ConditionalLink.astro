@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends Omit<HTMLAttributes<"a">, "slot"> {}
+
+const { class: className, href, ...rest } = Astro.props;
+---
+
+{
+	href ? (
+		<a {...{ ...rest, class: className, href }}>
+			<slot />
+		</a>
+	) : (
+		<span {...{ ...rest, class: className }}>
+			<slot />
+		</span>
+	)
+}

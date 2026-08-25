@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+	icon?: string;
+	subtitle?: string;
+	title: string;
+	class?: string;
+	iconClass?: string;
+}
+
+const { icon, subtitle = "You may be wondering...", title, class: className, iconClass } = Astro.props;
+---
+
+<div class="flex bg-gray-50 p-5 border border-gray-200 rounded" class:list={className}>
+	{icon && <Icon name={icon} class="inline-block mt-1 min-w-7 max-w-7 min-h-7 max-h-7 me-2" class:list={iconClass} />}
+	<div class="flex-grow">
+		<div class="italic">{subtitle}</div>
+		<h3 class="mb-3 text-lg">
+			<span>{title}</span>
+		</h3>
+		<slot />
+	</div>
+</div>
