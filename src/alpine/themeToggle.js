@@ -1,8 +1,6 @@
 /**
  * Light and dark theme toggle.
  */
-const KEY = "darkColorScheme";
-
 export function themeToggle() {
 	return {
 		isOpen: false,

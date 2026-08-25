@@ -9,6 +9,7 @@ export interface Props {
 	metadata?: MetaData;
 	header?: HeaderProps;
 	footer?: FooterProps;
+	showScrollTop?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
 		showSocialLinks: true,
 		footNote: `Thank you for the consideration.`,
 	},
+	showScrollTop = true,
 } = Astro.props;
 ---
 
@@ -40,6 +42,6 @@ const {
 			<MainFooter {...footer} />
 		</slot>
 	</div>
-	<ScrollTop />
+	{showScrollTop && <ScrollTop />}
 	<slot name="afterFooter" />
 </Layout>
