@@ -1,0 +1,21 @@
+{
+	"name": "Frank Fava CV",
+	"short_name": "FrankFavaCV",
+	"description": "Interactive CV and portfolio for Frank Fava.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#ffffff",
+	"theme_color": "#434E5E",
+	"icons": [
+		{
+			"src": "/images/favicon.jpg",
+			"sizes": "192x192",
+			"type": "image/jpeg"
+		},
+		{
+			"src": "/images/favicon.jpg",
+			"sizes": "512x512",
+			"type": "image/jpeg"
+		}
+	]
+}

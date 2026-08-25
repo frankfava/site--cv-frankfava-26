@@ -6,6 +6,7 @@
 		}
 	},
 	"metadata": {
+		"manifestPublic": "/manifest.webmanifest",
 		"title": {
 			"default": "%site_name",
 			"template": "%s | %site_name"
