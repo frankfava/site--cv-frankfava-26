@@ -95,6 +95,7 @@ const currentPath = getCurrentPath(Astro.url);
 				}
 			: {}}
 		{...id ? { id } : {}}
+		data-main-header
 	>
 		<div
 			id="header-inner"
@@ -108,20 +109,22 @@ const currentPath = getCurrentPath(Astro.url);
 			]}
 		>
 			<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" }, "flex items-center gap-2 md:gap-5"]}>
-				{hasSidebar && <ToggleMenu class="mobile-toggle" />}
-				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
-					{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
-				</a>
+				{hasSidebar && <ToggleMenu class="mobile-toggle lg:hidden" />}
 				{
 					hasSidebar &&
 						(Astro.slots.has("sidebarToggle") && typeof sidebarToggle == "string" && !!sidebarToggle ? (
-							<Fragment set:html={sidebarToggle} />
+							<span class="sidebar-toggle">
+								<Fragment set:html={sidebarToggle} />
+							</span>
 						) : (
 							<ToggleMenu class="sidebar-toggle">
 								<Icon name="ph:sidebar-duotone" class="w-8 h-8" />
 							</ToggleMenu>
 						))
 				}
+				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
+					{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
+				</a>
 			</div>
 			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" && !!beforeMenu ? <Fragment set:html={beforeMenu} /> : ""}
 			<div
@@ -153,7 +156,7 @@ const currentPath = getCurrentPath(Astro.url);
 					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" && !!beforeActions ? <Fragment set:html={beforeActions} /> : ""}
 					<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
 					{showSocialLinks && <SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
-					{showToggleTheme && <ToggleTheme class="p-2 rounded-md text-ink-2 hover:text-accent border-line hover:border-accent" iconClass="w-6 h-6" />}
+					{showToggleTheme && <ToggleTheme variant="single" class="p-2 rounded-md text-ink-2 hover:text-accent border-line hover:border-accent" iconClass="w-6 h-6" />}
 					{Astro.slots.has("afterActions") && typeof afterActions == "string" && !!afterActions ? <Fragment set:html={afterActions} /> : ""}
 				</div>
 			</div>
