@@ -18,6 +18,7 @@ export interface Props {
 	id?: string;
 	links?: Array<Link>;
 	actions?: Array<_CallToAction>;
+	logo?: string;
 	beforeMenu?: string;
 	afterMenu?: string;
 	beforeActions?: string;
@@ -41,6 +42,7 @@ const {
 	id = "header",
 	links = [],
 	actions = [],
+	logo = await Astro.slots.render("logo"),
 	beforeMenu = await Astro.slots.render("beforeMenu"),
 	afterMenu = await Astro.slots.render("afterMenu"),
 	beforeActions = await Astro.slots.render("beforeActions"),
@@ -101,7 +103,7 @@ const currentPath = getCurrentPath(Astro.url);
 			<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" }, "flex items-center gap-2 md:gap-5"]}>
 				{(!!links.length || (blueprint && showSidebar)) && <ToggleMenu class="mobile-toggle" />}
 				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
-					<Logo class="site-logo" />
+					{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
 				</a>
 				{
 					(!!links.length || (blueprint && showSidebar)) && (
@@ -111,7 +113,7 @@ const currentPath = getCurrentPath(Astro.url);
 					)
 				}
 			</div>
-			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" ? <Fragment set:html={beforeMenu} /> : ""}
+			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" && !!beforeMenu ? <Fragment set:html={beforeMenu} /> : ""}
 			<div
 				class="flex"
 				class:list={{
@@ -130,19 +132,19 @@ const currentPath = getCurrentPath(Astro.url);
 					)
 				}
 			</div>
-			{Astro.slots.has("afterMenu") && typeof afterMenu == "string" ? <Fragment set:html={afterMenu} /> : ""}
+			{Astro.slots.has("afterMenu") && typeof afterMenu == "string" && !!afterMenu ? <Fragment set:html={afterMenu} /> : ""}
 			<div
 				class:list={[
 					{ "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
 					" hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end",
 				]}
 			>
-				<div class="flex justify-between items-center gap-3 lg:gap-2 w-full md:w-auto">
-					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" ? <Fragment set:html={beforeActions} /> : ""}
+				<div class="flex justify-between sm:justify-normal items-center gap-3 lg:gap-2 w-full sm:w-auto ml-0">
+					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" && !!beforeActions ? <Fragment set:html={beforeActions} /> : ""}
 					<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
 					{showSocialLinks && <SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
 					{showToggleTheme && <ToggleTheme class="p-2 rounded-md" iconClass="w-6 h-6" />}
-					{Astro.slots.has("afterActions") && typeof afterActions == "string" ? <Fragment set:html={afterActions} /> : ""}
+					{Astro.slots.has("afterActions") && typeof afterActions == "string" && !!afterActions ? <Fragment set:html={afterActions} /> : ""}
 				</div>
 			</div>
 		</div>

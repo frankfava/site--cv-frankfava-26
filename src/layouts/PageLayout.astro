@@ -28,6 +28,7 @@ const {
 <Layout metadata={metadata}>
 	<slot name="header">
 		<MainHeader {...header}>
+			<slot name="logo" slot="logo" />
 			<slot name="beforeMenu" slot="beforeMenu" />
 			<slot name="afterMenu" slot="afterMenu" />
 			<slot name="beforeActions" slot="beforeActions" />
