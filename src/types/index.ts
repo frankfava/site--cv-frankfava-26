@@ -9,3 +9,6 @@ export * from "./components";
 
 //Re-export all config Types
 export * from "./config";
+
+//Re-export all collection manager types
+export { type Skills } from "@/lib/collections/skills";

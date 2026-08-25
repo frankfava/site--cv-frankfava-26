@@ -1,0 +1,1444 @@
+[
+	{
+		"id": "JS",
+		"label": "JavaScript",
+		"icon": "devicon:javascript",
+		"proficiency": "expert",
+		"yrsExperience": 20,
+		"keywords": [
+			"Frontend Development"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "PHP",
+		"label": "PHP",
+		"icon": "devicon:php",
+		"proficiency": "expert",
+		"yrsExperience": 18,
+		"keywords": [
+			"PHP",
+			"Backend Development",
+			"Server"
+		],
+		"note": "Main language I've used",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "PYTHON",
+		"label": "Python",
+		"icon": "devicon:python",
+		"proficiency": "proficient",
+		"yrsExperience": 4,
+		"keywords": [
+			"Backend Development",
+			"Server"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "NODE",
+		"label": "Node.js",
+		"icon": "devicon:nodejs",
+		"proficiency": "senior",
+		"yrsExperience": 8,
+		"keywords": [
+			"Backend Development",
+			"JavaScript",
+			"Server"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "GITHUB",
+		"label": "GitHub",
+		"icon": "devicon:github",
+		"proficiency": "senior",
+		"yrsExperience": 11,
+		"keywords": [
+			"Version Control",
+			"Collaboration"
+		],
+		"usedForCv": true,
+		"note": "CI/CD for deployments",
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "GIT",
+		"label": "Git",
+		"icon": "devicon:git",
+		"proficiency": "senior",
+		"yrsExperience": 13,
+		"keywords": [
+			"Version Control",
+			"Collaboration"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "SCSS",
+		"label": "SASS/SCSS",
+		"icon": "devicon:sass",
+		"proficiency": "expert",
+		"yrsExperience": 10,
+		"keywords": [
+			"Frontend Development",
+			"Responsive Design",
+			"Build Tools",
+			"CSS Processing",
+			"UI"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "POSTCSS",
+		"label": "PostCSS",
+		"icon": "devicon:postcss",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Frontend Development",
+			"Responsive Design",
+			"Build Tools",
+			"CSS Processing"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "TAILWIND",
+		"label": "Tailwind",
+		"icon": "devicon:tailwindcss",
+		"proficiency": "senior",
+		"yrsExperience": 6,
+		"keywords": [
+			"Frontend Development",
+			"Framework/Library",
+			"Responsive Design",
+			"TALL Stack",
+			"UI"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"active_stack",
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "FLOWBITE",
+		"label": "Flowbite",
+		"icon": "framework/flowbite",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Frontend Development",
+			"Framework/Library",
+			"UI",
+			"JavaScript"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "BOOTSTRAP",
+		"label": "Bootstrap",
+		"icon": "devicon:bootstrap",
+		"proficiency": "expert",
+		"yrsExperience": 8,
+		"keywords": [
+			"Frontend Development",
+			"Framework/Library",
+			"Responsive Design",
+			"UI"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "REACT",
+		"label": "React/JSX",
+		"icon": "devicon:react",
+		"proficiency": "proficient",
+		"yrsExperience": 5,
+		"keywords": [
+			"Frontend Development",
+			"Framework/Library",
+			"UI",
+			"DOM Manipulation",
+			"JavaScript",
+			"TypeScript"
+		],
+		"relevance": [
+			"active_stack"
+		]
+	},
+	{
+		"id": "VUEJS",
+		"label": "VueJS",
+		"icon": "devicon:vuejs",
+		"featured": true,
+		"proficiency": "expert",
+		"yrsExperience": 7,
+		"keywords": [
+			"Frontend Development",
+			"Framework/Library",
+			"UI",
+			"DOM Manipulation",
+			"JavaScript",
+			"TypeScript"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "ALPINEJS",
+		"label": "Alpine.js",
+		"icon": "devicon:alpinejs",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Frontend Development",
+			"JavaScript",
+			"TALL Stack",
+			"Framework/Library",
+			"DOM Manipulation"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "TYPESCRIPT",
+		"label": "TypeScript",
+		"icon": "devicon:typescript",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Frontend Development",
+			"Backend Development",
+			"JavaScript"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "ASTRO",
+		"label": "AstroJS",
+		"icon": "devicon:astro",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Frontend Development",
+			"SSR",
+			"Static Sites",
+			"Framework/Library",
+			"Performance",
+			"TypeScript",
+			"Headless CMS"
+		],
+		"usedForCv": true,
+		"note": "Go-to choice for static sites",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "LARAVEL",
+		"label": "Laravel",
+		"icon": "devicon:laravel",
+		"featured": true,
+		"proficiency": "expert",
+		"yrsExperience": 9,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Backend Development",
+			"TALL Stack",
+			"Framework/Library"
+		],
+		"note": "Today's go-to choice for backend development",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "PINT",
+		"label": "Laravel Pint",
+		"icon": "laravel/pint",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Linting"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "CASHIER",
+		"label": "Laravel Cashier",
+		"icon": "laravel/cashier",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Payment Gateways"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "ECHO",
+		"label": "Laravel Echo",
+		"icon": "laravel/echo",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Web Sockets"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "FORGE",
+		"label": "Laravel Forge",
+		"icon": "laravel/forge",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Server",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "INERTIA",
+		"label": "Laravel Inertia",
+		"icon": "laravel/inertia",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"UI"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "NOVA",
+		"label": "Laravel Nova",
+		"icon": "laravel/nova",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Headless CMS",
+			"Admin Panel"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SANCTUM",
+		"label": "Laravel Sanctum",
+		"icon": "laravel/sanctum",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"REST API"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SCOUT",
+		"label": "Laravel Scout",
+		"icon": "laravel/scout",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Search Engine"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SOCIALITE",
+		"label": "Laravel Socialite",
+		"icon": "laravel/socialite",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"OAUTH"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SPARK",
+		"label": "Laravel Spark",
+		"icon": "laravel/spark",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"Payment Gateways"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "FILAMENTPHP",
+		"label": "FilamentPHP",
+		"icon": "devicon:filamentphp",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"PHP",
+			"Backend Development",
+			"Laravel",
+			"TALL Stack",
+			"Framework/Library",
+			"Admin Panel",
+			"Headless CMS",
+			"CMS"
+		],
+		"note": "Go-to choice for admin panels",
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "LIVEWIRE",
+		"label": "Livewire",
+		"icon": "laravel/livewire",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"PHP",
+			"Laravel",
+			"TALL Stack",
+			"Frontend Development",
+			"UI"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "REVERB",
+		"label": "Laravel Reverb",
+		"icon": "devicon:laravel",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Web Sockets",
+			"Push Notifications",
+			"Laravel"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "WORDPRESS",
+		"label": "WordPress",
+		"icon": "devicon:wordpress",
+		"featured": true,
+		"proficiency": "expert",
+		"yrsExperience": 18,
+		"keywords": [
+			"PHP",
+			"Backend Development",
+			"Headless CMS",
+			"CMS"
+		],
+		"note": "For years, I lived and breathed WordPress.",
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "WOOCOMMERCE",
+		"label": "WooCommerce",
+		"icon": "devicon:woocommerce",
+		"proficiency": "senior",
+		"yrsExperience": 9,
+		"keywords": [
+			"PHP",
+			"Backend Development",
+			"Payment Gateways"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "PUSHER",
+		"label": "Pusher",
+		"icon": "framework/pusher",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Web Sockets",
+			"Push Notifications",
+			"Laravel"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "MYSQL",
+		"label": "MySQL",
+		"icon": "devicon:mysql",
+		"proficiency": "senior",
+		"yrsExperience": 11,
+		"keywords": [
+			"Databases",
+			"Backend Development",
+			"SQL"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "POSTGRESQL",
+		"label": "PostgreSQL",
+		"icon": "devicon:postgresql",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Databases",
+			"Backend Development",
+			"SQL"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SNOWFLAKE",
+		"label": "Snowflake",
+		"icon": "platform/snowflake",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Databases",
+			"Data Warehouse",
+			"SQL"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "CAPACITOR",
+		"label": "Capacitor",
+		"icon": "devicon:capacitor",
+		"proficiency": "proficient",
+		"yrsExperience": 1,
+		"keywords": [
+			"Mobile Development",
+			"Cross-platform",
+			"Native Apps"
+		],
+		"relevance": [
+			"peripheral"
+		]
+	},
+	{
+		"id": "REDIS",
+		"label": "Redis",
+		"icon": "devicon:redis",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Databases",
+			"Caching",
+			"Backend Development",
+			"Performance"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "WEBPACK",
+		"label": "Webpack",
+		"icon": "devicon:webpack",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Build Tools",
+			"Frontend Development",
+			"Development Tools",
+			"Node.js"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "VITEJS",
+		"label": "Vite.js",
+		"icon": "devicon:vitejs",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Build Tools",
+			"Frontend Development",
+			"Development Tools",
+			"Node.js"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "GA",
+		"label": "Google Analytics",
+		"icon": "google/analytics",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Analytics/Tracking",
+			"Performance"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "GTM",
+		"label": "Google Tag Manager",
+		"icon": "google/tag-manager",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Analytics/Tracking",
+			"Performance"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "VULTR",
+		"label": "Vultr",
+		"icon": "platform/vultr",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Server",
+			"Hosting",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "AWS",
+		"label": "AWS",
+		"icon": "aws/logo",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"AWS",
+			"Server",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "EC2",
+		"label": "AWS EC2 + ECS",
+		"icon": "aws/ec2",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"AWS",
+			"Server",
+			"Hosting",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "S3",
+		"label": "AWS S3",
+		"icon": "aws/s3",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"AWS",
+			"Server",
+			"REST API",
+			"File Storage"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "RDS",
+		"label": "AWS RDS",
+		"icon": "aws/rds",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"AWS",
+			"REST API",
+			"Databases"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "UBUNTU",
+		"label": "Ubuntu",
+		"icon": "devicon:ubuntu",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Server",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SSH",
+		"label": "SSH",
+		"icon": "devicon:ssh",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Server",
+			"DevOps"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "NGINX",
+		"label": "NGINX",
+		"icon": "devicon:nginx",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Server"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "API",
+		"label": "REST API",
+		"icon": "rest-api",
+		"featured": true,
+		"proficiency": "expert",
+		"yrsExperience": 12,
+		"keywords": [
+			"API Development",
+			"Backend Development"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "WEBHOOKS",
+		"label": "Webhooks",
+		"icon": "ph:webhooks-logo-duotone",
+		"proficiency": "expert",
+		"yrsExperience": 8,
+		"keywords": [
+			"API Development",
+			"Backend Development"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "SWAGGER",
+		"label": "Swagger",
+		"icon": "devicon:swagger",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"REST API",
+			"API Development",
+			"Backend Development"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "INSOMNIA",
+		"label": "Insomnia",
+		"icon": "platform/kong",
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"REST API",
+			"API Development",
+			"Backend Development"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "POSTMAN",
+		"label": "Postman",
+		"icon": "devicon:postman",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"REST API",
+			"API Development",
+			"Backend Development"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "NETLIFY",
+		"label": "Netlify",
+		"icon": "devicon:netlify",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Hosting",
+			"Static Sites",
+			"SSR",
+			"JAMstack"
+		],
+		"usedForCv": true,
+		"note": "Deployments for static and SSR sites",
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "FIREBASE",
+		"label": "Firebase",
+		"icon": "devicon:firebase",
+		"proficiency": "proficient",
+		"yrsExperience": 2,
+		"keywords": [
+			"Databases",
+			"Backend Development",
+			"Serverless Functions",
+			"Hosting"
+		],
+		"relevance": [
+			"peripheral"
+		]
+	},
+	{
+		"id": "SHOPIFY",
+		"label": "Shopify",
+		"icon": "platform/shopify",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"CMS",
+			"Frontend Development",
+			"Serverless Functions"
+		],
+		"note": "Custom themes and API integrations",
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "STRIPE",
+		"label": "Stripe",
+		"icon": "platform/stripe",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"REST API",
+			"Payment Gateways"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "HUBSPOT",
+		"label": "HubSpot CMS",
+		"icon": "platform/hubspot",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"CMS",
+			"CRM",
+			"Marketing Automation",
+			"REST API",
+			"Frontend Development",
+			"Serverless Functions"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "ACTIVECAMPAIGN",
+		"label": "ActiveCampaign",
+		"icon": "platform/activecampaign",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"CRM",
+			"Marketing Automation",
+			"REST API"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "MAILCHIMP",
+		"label": "MailChimp",
+		"icon": "platform/mailchimp",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"CRM",
+			"Marketing Automation",
+			"REST API"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "PIPEDRIVE",
+		"label": "PipeDrive",
+		"icon": "platform/pipedrive",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"CRM",
+			"Marketing Automation",
+			"REST API"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "TERRAFORM",
+		"label": "Terraform",
+		"icon": "devicon:terraform",
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"DevOps",
+			"Infrastructure as Code"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "ANSIBLE",
+		"label": "Ansible",
+		"icon": "devicon:ansible",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"DevOps",
+			"Provisioning",
+			"Infrastructure as Code"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "ALGOLIA",
+		"label": "Algolia",
+		"icon": "devicon:algolia",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Search Engine",
+			"Backend Development"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "PRETTIER",
+		"label": "Prettier",
+		"icon": "platform/prettier",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"JavaScript",
+			"Code Formatter"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "ASANA",
+		"label": "Asana",
+		"icon": "platform/asana",
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"Agile",
+			"Collaboration",
+			"Project Management"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "JIRA",
+		"label": "Jira",
+		"icon": "devicon:jira",
+		"proficiency": "senior",
+		"yrsExperience": 3,
+		"keywords": [
+			"Agile",
+			"Collaboration",
+			"Issue Tracking"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "CLICKUP",
+		"label": "ClickUp + API",
+		"icon": "platform/clickup",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Agile",
+			"Collaboration",
+			"Issue Tracking"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "LINEAR",
+		"label": "Linear",
+		"icon": "platform/linear",
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"Agile",
+			"Collaboration",
+			"Issue Tracking",
+			"Project Management"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "SENTRY",
+		"label": "Sentry",
+		"icon": "devicon:sentry",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Issue Tracking",
+			"Performance"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "SLACKAPI",
+		"label": "Slack API",
+		"icon": "devicon:slack",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Collaboration",
+			"REST API"
+		],
+		"note": "Custom slash commands, API integration",
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "ZAPIER",
+		"label": "Zapier + API",
+		"icon": "platform/zapier",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"Automation",
+			"REST API"
+		],
+		"note": "Creating a custom plugin",
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "DOCKER",
+		"label": "Docker",
+		"icon": "devicon:docker",
+		"proficiency": "senior",
+		"yrsExperience": 4,
+		"keywords": [
+			"Containerization",
+			"DevOps"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "CLAUDE",
+		"label": "Claude",
+		"icon": "platform/claude",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"LLM",
+			"AI Agent",
+			"Agentic Systems",
+			"MCP"
+		],
+		"note": "Daily driver - Claude Code CLI, the API, and custom agent skills I build and run in production.",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "GPT",
+		"label": "OpenAI GPT",
+		"icon": "platform/chatgpt",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"LLM",
+			"AI Agent"
+		],
+		"relevance": [
+			"peripheral"
+		]
+	},
+	{
+		"id": "LOVABLE",
+		"label": "Lovable",
+		"icon": "platform/lovable",
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"AI Agent"
+		],
+		"relevance": [
+			"shipped"
+		]
+	},
+	{
+		"id": "MCP",
+		"label": "MCP (Model Context Protocol)",
+		"icon": "platform/claude",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 1,
+		"keywords": [
+			"AI Agent",
+			"Agentic Systems",
+			"API Development"
+		],
+		"note": "Self-hosted an MCP server so agents can read and act on a live knowledge base remotely.",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "AGENTIC",
+		"label": "AI Agents / Agentic Systems",
+		"icon": "ph:robot-duotone",
+		"featured": true,
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"AI Agent",
+			"LLM",
+			"Agentic Systems"
+		],
+		"note": "Design and operate autonomous agents in production - orchestration, tool use, guardrails, evals.",
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "PROMPTENG",
+		"label": "Prompt & Context Engineering",
+		"icon": "ph:sparkle-duotone",
+		"proficiency": "senior",
+		"yrsExperience": 2,
+		"keywords": [
+			"AI Agent",
+			"LLM"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "HTML",
+		"label": "HTML",
+		"icon": "devicon:html5",
+		"proficiency": "expert",
+		"yrsExperience": 20,
+		"keywords": [
+			"Frontend Development",
+			"DOM Manipulation"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "CSS",
+		"label": "CSS",
+		"icon": "devicon:css3",
+		"proficiency": "expert",
+		"yrsExperience": 20,
+		"keywords": [
+			"Frontend Development",
+			"CSS Processing"
+		],
+		"usedForCv": true,
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	},
+	{
+		"id": "NPM",
+		"label": "npm",
+		"icon": "devicon:npm",
+		"proficiency": "senior",
+		"yrsExperience": 13,
+		"keywords": [
+			"Build Tools",
+			"Development Tools"
+		],
+		"relevance": [
+			"active_stack",
+			"peripheral"
+		]
+	},
+	{
+		"id": "JSON",
+		"label": "JSON",
+		"icon": "devicon:json",
+		"proficiency": "expert",
+		"yrsExperience": 18,
+		"keywords": [
+			"API Development",
+			"Development Tools"
+		],
+		"relevance": [
+			"active_stack",
+			"peripheral"
+		]
+	},
+	{
+		"id": "MARKDOWN",
+		"label": "Markdown",
+		"icon": "devicon:markdown",
+		"proficiency": "expert",
+		"yrsExperience": 13,
+		"keywords": [
+			"CMS",
+			"Development Tools"
+		],
+		"relevance": [
+			"active_stack",
+			"peripheral"
+		]
+	},
+	{
+		"id": "VSCODE",
+		"label": "VS Code",
+		"icon": "devicon:vscode",
+		"proficiency": "expert",
+		"yrsExperience": 10,
+		"keywords": [
+			"Development Tools"
+		],
+		"relevance": [
+			"active_stack",
+			"peripheral"
+		]
+	},
+	{
+		"id": "SQLITE",
+		"label": "SQLite",
+		"icon": "devicon:sqlite",
+		"proficiency": "proficient",
+		"yrsExperience": 8,
+		"keywords": [
+			"Databases"
+		],
+		"relevance": [
+			"shipped",
+			"peripheral"
+		]
+	},
+	{
+		"id": "BIOME",
+		"label": "Biome",
+		"icon": "devicon:biome",
+		"proficiency": "proficient",
+		"yrsExperience": 2,
+		"keywords": [
+			"Code Formatter",
+			"Development Tools"
+		],
+		"relevance": [
+			"active_stack",
+			"peripheral"
+		]
+	},
+	{
+		"id": "JAMSTACK",
+		"label": "Jamstack",
+		"icon": "devicon:jamstack",
+		"proficiency": "senior",
+		"yrsExperience": 5,
+		"keywords": [
+			"Static Sites",
+			"Frontend Development"
+		],
+		"relevance": [
+			"active_stack",
+			"shipped"
+		]
+	}
+]

@@ -72,6 +72,10 @@ export default defineConfig({
 		generateCollectionTypes({
 			outputPath: ".astro/content.unique.d.ts",
 			map: {
+				"src/data/skills.json": {
+					SkillId: "id",
+					SkillKeyword: { key: "keywords", isArray: true },
+				},
 			},
 		}),
 		// Update `robots.txt` with `sitemap-index.xml
