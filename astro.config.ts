@@ -13,6 +13,7 @@ import icon from "astro-icon";
 
 import { astroBuilderHelper } from "./integrations/astroBuilderHelper";
 import { astroSiteConfigHelper } from "./integrations/astroSiteConfigHelper";
+import { generateCollectionTypes } from "./integrations/generateCollectionTypes";
 import { astroBlueprintBuilder } from "./integrations/astroBlueprintBuilder";
 
 const isDev = process.env.NODE_ENV == "development";
@@ -67,9 +68,18 @@ export default defineConfig({
 				phosphor: ["*"],
 			},
 		}),
+		// Generate Enums for Collections
+		generateCollectionTypes({
+			outputPath: ".astro/content.unique.d.ts",
+			map: {
+			},
+		}),
 		// Update `robots.txt` with `sitemap-index.xml
 		astroBuilderHelper(),
 		// Watch Blueprints for HMR
 		astroBlueprintBuilder(),
 	],
+	image: {
+		domains: ["astro.build"],
+	},
 });

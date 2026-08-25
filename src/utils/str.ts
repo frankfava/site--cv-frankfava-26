@@ -1,5 +1,3 @@
-import { I18N } from "site:config";
-
 import limax from "limax";
 
 export const slugify = limax;

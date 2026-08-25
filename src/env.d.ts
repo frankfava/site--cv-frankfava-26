@@ -1,3 +1,5 @@
+/// <reference path="../.astro/content.unique.d.ts" />
+
 interface ImportMetaEnv {
 	/** Site URL */
 	readonly SITE_URL: string;
