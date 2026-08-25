@@ -19,6 +19,7 @@ export interface Props {
 	links?: Array<Link>;
 	actions?: Array<_CallToAction>;
 	logo?: string;
+	sidebarToggle?: string;
 	beforeMenu?: string;
 	afterMenu?: string;
 	beforeActions?: string;
@@ -43,6 +44,7 @@ const {
 	links = [],
 	actions = [],
 	logo = await Astro.slots.render("logo"),
+	sidebarToggle = await Astro.slots.render("sidebarToggle"),
 	beforeMenu = await Astro.slots.render("beforeMenu"),
 	afterMenu = await Astro.slots.render("afterMenu"),
 	beforeActions = await Astro.slots.render("beforeActions"),
@@ -64,6 +66,11 @@ const {
 
 // Sidebar visibility comes from the active entry's layout config - Defaults to true
 const showSidebar = Astro.locals.blueprint?.config?.layout?.showSidebar ?? true;
+
+// A shell can drive the sidebar without giving the header a menu: the indexed
+//  layout keeps its links in the bay, so `links` is empty here while both
+//  toggles are still wanted. Supplying the slot is the explicit signal.
+const hasSidebar = !!links.length || (blueprint && showSidebar) || Astro.slots.has("sidebarToggle");
 
 const currentPath = getCurrentPath(Astro.url);
 ---
@@ -101,16 +108,19 @@ const currentPath = getCurrentPath(Astro.url);
 			]}
 		>
 			<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" }, "flex items-center gap-2 md:gap-5"]}>
-				{(!!links.length || (blueprint && showSidebar)) && <ToggleMenu class="mobile-toggle" />}
+				{hasSidebar && <ToggleMenu class="mobile-toggle" />}
 				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
 					{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
 				</a>
 				{
-					(!!links.length || (blueprint && showSidebar)) && (
-						<ToggleMenu class="sidebar-toggle">
-							<Icon name="ph:sidebar-duotone" class="w-8 h-8" />
-						</ToggleMenu>
-					)
+					hasSidebar &&
+						(Astro.slots.has("sidebarToggle") && typeof sidebarToggle == "string" && !!sidebarToggle ? (
+							<Fragment set:html={sidebarToggle} />
+						) : (
+							<ToggleMenu class="sidebar-toggle">
+								<Icon name="ph:sidebar-duotone" class="w-8 h-8" />
+							</ToggleMenu>
+						))
 				}
 			</div>
 			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" && !!beforeMenu ? <Fragment set:html={beforeMenu} /> : ""}
@@ -149,5 +159,5 @@ const currentPath = getCurrentPath(Astro.url);
 			</div>
 		</div>
 	</header>
-	{(!!links.length || (blueprint && showSidebar)) && <NavSidebar links={links} blueprint={blueprint} />}
+	<!-- {hasSidebar && <NavSidebar links={links} blueprint={blueprint} />} -->
 </>
