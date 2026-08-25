@@ -1,0 +1,133 @@
+---
+import ModuleWrapper from "@/components/ui/modules/ModuleWrapper.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { dateFormatter, formatDuration } from "@/utils/datetime";
+import { Icon } from "astro-icon/components";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects");
+	// Only show published projects with a body
+	return projects
+		.filter((project) => !project.data.draft && !!project.body)
+		.map((project) => ({
+			params: { id: project.id },
+			props: { project },
+		}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const { title, type, summary, duration, startDate, skills, highlights, demoUrl, repoUrl } = project.data;
+
+const formatDate = dateFormatter().monthAndYear();
+
+const projectSkills = await getCollection("skills", (skill: CollectionEntry<"skills">) => (skills || []).map((s) => s.id).includes(skill.id));
+
+const metadata = {
+	title: `Projects${title ? " - " + title : ""}`,
+};
+---
+
+<PageLayout metadata={metadata}>
+	<ModuleWrapper
+		{...{
+			bg: "bg-gray-50 dark:bg-gray-800",
+			forceLayout: "wide",
+			contentClass: "gap-3",
+			header: {
+				headerAlign: "center",
+				title,
+				subtitle: summary,
+			},
+		}}
+	>
+		<div class="flex flex-wrap justify-center gap-3">
+			<div><strong>Start Date:</strong> {formatDate(startDate)}</div>
+			<div><strong>Type:</strong> {type}</div>
+			{
+				duration && (
+					<div>
+						<strong>Duration:</strong> {formatDuration(duration)}
+					</div>
+				)
+			}
+		</div>
+		{
+			(demoUrl || repoUrl) && (
+				<div class="flex flex-wrap justify-center gap-3 mt-2">
+					{demoUrl && (
+						<div>
+							<a href={demoUrl} target="_blank">
+								Demo
+							</a>
+						</div>
+					)}
+					{repoUrl && (
+						<div>
+							<a href={repoUrl} target="_blank">
+								Source
+							</a>
+						</div>
+					)}
+				</div>
+			)
+		}
+	</ModuleWrapper>
+	<ModuleWrapper
+		{...{
+			forceLayout: "wide",
+			showHeader: false,
+			class: "max-w-screen-xl",
+		}}
+	>
+		<div class="flex xl:flex-row flex-col xl:justify-center gap-6">
+			{
+				!!(highlights || []).length && (
+					<div class="xl:border-gray-200 xl:pr-6 xl:border-r w-full xl:w-1/4">
+						<div class="gap-4 grid">
+							<div class="border-gray-100 shadow-md p-4 border rounded-md">
+								<div class="mb-2 text-lg">
+									<span class="font-semibold">Highlights</span>
+								</div>
+								{!!(highlights || []).length && (
+									<div class="text-gray-600">
+										<ul class="space-y-2 ml-6 list-disc list-outside">
+											{(highlights || []).map((r) => (
+												<li set:html={r} />
+											))}
+										</ul>
+									</div>
+								)}
+							</div>
+						</div>
+					</div>
+				)
+			}
+			<div class="w-full xl:w-3/4 lg:overflow-y-auto">
+				<div class="mb-2">
+					<a href="/" class="inline-flex items-center gap-2">
+						<Icon name="ph:arrow-fat-line-left-duotone" class="w-5 h-5" />
+						Back
+					</a>
+				</div>
+				<Content />
+				{
+					!!projectSkills.length && (
+						<div class="mt-10">
+							<ul class="flex flex-wrap gap-2 mt-2 text-gray-600 text-sm">
+								{projectSkills.map(({ data }) => (
+									<li class="inline-flex items-center gap-1 mr-2 px-2 py-1 border border-gray-200 rounded">
+										<Icon name={data.icon} class="w-5 h-5" />
+										<span>{data.label}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</ModuleWrapper>
+</PageLayout>
