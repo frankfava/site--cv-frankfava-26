@@ -97,6 +97,10 @@
 		"phone": {
 			"text": "0729 183 764",
 			"href": "tel:+460729183764"
+		},
+		"vcard": {
+			"text": "vCard",
+			"href": "/vcard"
 		}
 	}
 }
