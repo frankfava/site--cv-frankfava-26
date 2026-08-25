@@ -70,7 +70,7 @@ const showSidebar = Astro.locals.blueprint?.config?.layout?.showSidebar ?? true;
 // A shell can drive the sidebar without giving the header a menu: the indexed
 //  layout keeps its links in the bay, so `links` is empty here while both
 //  toggles are still wanted. Supplying the slot is the explicit signal.
-const hasSidebar = !!links.length || (blueprint && showSidebar) || Astro.slots.has("sidebarToggle");
+const hasSidebar = !!links.length || (blueprint && showSidebar) || (Astro.slots.has("sidebarToggle") && !!sidebarToggle);
 
 const currentPath = getCurrentPath(Astro.url);
 ---
@@ -84,7 +84,7 @@ const currentPath = getCurrentPath(Astro.url);
 				dark: isDark,
 				"shadow-[0_5px_10px_0_rgba(0,0,0,0.3)]": addShadow,
 			},
-			"top-0 !z-[50] w-full font-primary bg-header text-page flex flex-col print:hidden",
+			"top-0 z-70! w-full font-secondary bg-header text-page border-b border-line flex flex-col print:hidden",
 		]}
 		{...isSticky ? { "data-sticky-header": true } : {}}
 		{...shrinkHeader ? { "data-shrink-header": true } : {}}
@@ -99,7 +99,7 @@ const currentPath = getCurrentPath(Astro.url);
 		<div
 			id="header-inner"
 			class:list={[
-				"relative h-20 text-default px-3 md:px-6 mx-auto w-full gap-5 lg:grow",
+				"relative text-default mx-auto w-full lg:grow flex flex-wrap sm:flex-nowrap items-center gap-[9px] sm:gap-[16px] px-[20px] sm:px-[24px] py-[11px] sm:py-0",
 				{
 					"md:flex md:justify-between items-center": position !== "center",
 					"flex w-full items-center": position === "center",
