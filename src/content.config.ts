@@ -25,3 +25,25 @@ const skills = defineCollection({
 			.default([]),
 	}),
 });
+
+/** Certificates */
+const certifications = defineCollection({
+	loader: file("src/data/certifications.json"),
+	schema: z.object({
+		certificate: z.string(),
+		issuer: z.string(),
+		issueDate: z
+			.string()
+			.or(z.date())
+			.transform((val) => new Date(val)),
+		ranking: z.string().optional(),
+		expiryDate: z
+			.string()
+			.or(z.date())
+			.transform((val) => new Date(val))
+			.optional(),
+		credentialId: z.string().optional(),
+		credentialLink: z.url().optional(),
+		icon: z.string().optional(),
+	}),
+});

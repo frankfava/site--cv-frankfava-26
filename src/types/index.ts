@@ -12,3 +12,4 @@ export * from "./config";
 
 //Re-export all collection manager types
 export { type Skills } from "@/lib/collections/skills";
+export { type Certifications } from "@/lib/collections/certifications";

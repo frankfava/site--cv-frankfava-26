@@ -1,0 +1,158 @@
+[
+	{
+		"id": "testdome-laravel",
+		"certificate": "Laravel",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "a2a32390665c4f4fa770a9058668119b",
+		"credentialLink": "https://www.testdome.com/certificates/a2a32390665c4f4fa770a9058668119b",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-vue",
+		"certificate": "Vue.js",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "9bf2c16f810f43fb96f4f19652cfd9b8",
+		"credentialLink": "https://www.testdome.com/certificates/9bf2c16f810f43fb96f4f19652cfd9b8",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-rest-api",
+		"certificate": "REST API",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "6a33bc8b1a0e41d8afa6372f43b9952a",
+		"credentialLink": "https://www.testdome.com/certificates/6a33bc8b1a0e41d8afa6372f43b9952a",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-git",
+		"certificate": "Git",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "42311dfc596845bba0c3f17cbe0f69bc",
+		"credentialLink": "https://www.testdome.com/certificates/42311dfc596845bba0c3f17cbe0f69bc",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-leadership",
+		"certificate": "Leadership",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "31507c95fccf49efa9a7e47577847526",
+		"credentialLink": "https://www.testdome.com/certificates/31507c95fccf49efa9a7e47577847526",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-people",
+		"certificate": "People Management",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "fc9ecb9d89b44f90b272c289eec97c0f",
+		"credentialLink": "https://www.testdome.com/certificates/fc9ecb9d89b44f90b272c289eec97c0f",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-logical",
+		"certificate": "Logical Reasoning",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "d8a6d95f9bd043faa75f465e59126d33",
+		"credentialLink": "https://www.testdome.com/certificates/d8a6d95f9bd043faa75f465e59126d33",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-abstract",
+		"certificate": "Abstract Reasoning",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "a32b6a02365b425a9c39cc081137b83a",
+		"credentialLink": "https://www.testdome.com/certificates/a32b6a02365b425a9c39cc081137b83a",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-numerical",
+		"certificate": "Numerical Reasoning",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "53aec7c35b8a4a77b73e2872f4c2297e",
+		"credentialLink": "https://www.testdome.com/certificates/53aec7c35b8a4a77b73e2872f4c2297e",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "testdome-ai",
+		"certificate": "AI Literacy",
+		"issuer": "TestDome",
+		"ranking": "Top 10%",
+		"issueDate": "20 Nov 2024",
+		"expiryDate": "20 Nov 2025",
+		"credentialId": "0096f42893764bee8f227970aa88c5de",
+		"credentialLink": "https://www.testdome.com/certificates/0096f42893764bee8f227970aa88c5de",
+		"icon": "/images/certifications/testdome_logo.jpeg"
+	},
+	{
+		"id": "ll-python-oop",
+		"certificate": "Python Object-Oriented Programming",
+		"issuer": "LinkedIn Learning",
+		"issueDate": "13 Jan 2025",
+		"credentialLink": "https://www.linkedin.com/learning/certificates/1826624b303265a75de0252e84abcb5dcecce8a7b72b9e3d6e5b59af43dac389",
+		"credentialId": "1826624b303265a75de0252e84abcb5dcecce8a7b72b9e3d6e5b59af43dac389",
+		"icon": "/images/certifications/linkedin_logo.jpeg"
+	},
+	{
+		"id": "ll-python-essential",
+		"certificate": "Python Essential Training",
+		"issuer": "LinkedIn Learning",
+		"issueDate": "08 Jan 2025",
+		"credentialLink": "https://www.linkedin.com/learning/certificates/d5cbb9d62cbf1fd09675c64d63f6e0473726ce90ba0e9395d6f5680466ed182a",
+		"credentialId": "d5cbb9d62cbf1fd09675c64d63f6e0473726ce90ba0e9395d6f5680466ed182a",
+		"icon": "/images/certifications/linkedin_logo.jpeg"
+	},
+	{
+		"id": "ici-cert-business",
+		"certificate": "Certificate IV in Business",
+		"issuer": "The International Coaching Institute (ICI)",
+		"icon": "/images/certifications/coaching_institute_logo.jpeg",
+		"issueDate": "Dec 2010"
+	},
+	{
+		"id": "ici-cert-coaching",
+		"certificate": "Certificate IV in Life Coaching",
+		"issuer": "The International Coaching Institute (ICI)",
+		"icon": "/images/certifications/coaching_institute_logo.jpeg",
+		"issueDate": "Dec 2010"
+	},
+	{
+		"id": "ici-cert-leadership",
+		"certificate": "Advanced Practitioner of Executive and Leadership Coaching",
+		"issuer": "The International Coaching Institute (ICI)",
+		"icon": "/images/certifications/coaching_institute_logo.jpeg",
+		"issueDate": "Oct 2011"
+	},
+	{
+		"id": "ici-cert-nlp",
+		"certificate": "Practitioner of Neuro-Linguistic Programming",
+		"issuer": "The International Coaching Institute (ICI)",
+		"icon": "/images/certifications/coaching_institute_logo.jpeg",
+		"issueDate": "Oct 2011"
+	}
+]

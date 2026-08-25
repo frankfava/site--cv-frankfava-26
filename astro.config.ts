@@ -76,6 +76,9 @@ export default defineConfig({
 					SkillId: "id",
 					SkillKeyword: { key: "keywords", isArray: true },
 				},
+				"src/data/certifications.json": {
+					CertificationId: "id",
+				},
 			},
 		}),
 		// Update `robots.txt` with `sitemap-index.xml
