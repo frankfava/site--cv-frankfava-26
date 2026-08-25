@@ -31,11 +31,11 @@
 
 /* custom, reusable component classes */
 @utility btn {
-	@apply inline-flex justify-center items-center border-gray-400 hover:border-gray-600 dark:hover:border-slate-800 dark:border-slate-500 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 px-6 md:px-8 py-3 border rounded-[5px] focus:ring-blue-500 focus:ring-2 focus:ring-offset-blue-200 focus:ring-offset-2 font-semibold text-base text-center text-page dark:text-slate-300 leading-snug transition duration-200 cursor-pointer ease-in;
+	@apply inline-flex justify-center items-center border-gray-400 hover:border-gray-600 dark:hover:border-slate-800 dark:border-slate-500 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 px-[16px] py-[9px] md:px-8 border rounded-[5px] focus:ring-blue-500 focus:ring-2 focus:ring-offset-blue-200 focus:ring-offset-2 font-normal text-base text-center text-page dark:text-slate-300 leading-snug transition duration-200 cursor-pointer ease-in text-[15.64px] whitespace-nowrap;
 }
 
 @utility btn-primary {
-	@apply btn border-primary hover:border-primary-700 dark:hover:border-primary-700 dark:border-primary bg-primary hover:bg-primary-700 dark:hover:bg-primary-700 dark:bg-primary font-semibold text-white hover:text-white dark:text-white;
+	@apply btn border-primary hover:border-primary-700 dark:hover:border-primary-700 dark:border-primary bg-primary hover:bg-primary-700 dark:hover:bg-primary-700 dark:bg-primary font-normal text-white;
 }
 
 @utility btn-outline-primary {
@@ -43,7 +43,7 @@
 }
 
 @utility btn-secondary {
-	@apply btn border-secondary hover:border-secondary-700 dark:hover:border-secondary-700 dark:border-secondary bg-secondary hover:bg-secondary-700 dark:hover:bg-secondary-700 dark:bg-secondary font-semibold text-white hover:text-white dark:text-white;
+	@apply btn border-secondary hover:border-secondary-700 dark:hover:border-secondary-700 dark:border-secondary bg-secondary hover:bg-secondary-700 dark:hover:bg-secondary-700 dark:bg-secondary font-normal text-white;
 }
 
 @utility btn-outline-secondary {
@@ -51,7 +51,7 @@
 }
 
 @utility btn-accent {
-	@apply btn border-accent hover:border-accent-700 dark:hover:border-accent-700 dark:border-accent bg-accent hover:bg-accent-700 dark:hover:bg-accent-700 dark:bg-accent font-semibold text-white hover:text-white dark:text-white;
+	@apply btn border-accent hover:border-accent-700 dark:hover:border-accent-700 dark:border-accent bg-accent hover:brightness-108 dark:bg-accent text-white;
 }
 
 @utility btn-outline-accent {
