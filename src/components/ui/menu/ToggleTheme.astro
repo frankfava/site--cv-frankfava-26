@@ -28,7 +28,7 @@ const icons = [
 		<div x-data="themeToggle" data-theme={THEME.default} class="relative flex">
 			<button
 				type="button"
-				@click="toggle()"
+				@click="toggleOpen()"
 				class={twMerge(
 					"inline-flex items-center dark:border-gray-600 hover:bg-gray-600 dark:hover:bg-gray-400 dark:hover:bg-primary-700 dark:bg-gray-800 p-2.5 border rounded-lg focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 text-gray-600 text-sm hover:text-white dark:text-white transition-colors duration-200 focus:outline-none",
 					className,
