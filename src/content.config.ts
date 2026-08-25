@@ -26,6 +26,50 @@ const skills = defineCollection({
 	}),
 });
 
+/** Projects */
+const projects = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/data/projects" }),
+	schema: z.object({
+		draft: z.boolean().optional().default(false),
+		featured: z.boolean().optional().default(false),
+		order: z.number().optional(),
+		title: z.string(),
+		icon: z.string().optional(),
+		role: z.string().optional(),
+		type: z.enum(["Customer Project", "Personal Project"]).default("Customer Project"),
+		summary: z.string().optional(),
+		startDate: z
+			.string()
+			.or(z.date())
+			.transform((val) => new Date(val)),
+		// Either a number of months (e.g. 4) or an ISO 8601 duration string
+		// for finer-grained units (e.g. "P2W", "P10D", "P1M2W"). Use null to
+		// indicate the project is still ongoing.
+		duration: z
+			.union([z.number().min(0), z.string().regex(/^P(?:\d+Y)?(?:\d+M)?(?:\d+W)?(?:\d+D)?(?:T(?:\d+H)?(?:\d+M)?(?:\d+S)?)?$/, "Must be an ISO 8601 duration like P2W, P10D, or PT8H")])
+			.nullable()
+			.optional(),
+		highlights: z.array(z.string()).optional(),
+		demoUrl: z.string().optional(),
+		repoUrl: z.string().optional(),
+		skills: z.array(reference("skills")).optional(),
+		// A project earns a "case study" treatment by carrying this block.
+		// Same underlying entity as the project - just the richer
+		// problem → solution → build → outcome framing for role pages,
+		// resume.json, etc. Curation per role lives on
+		// `RoleDefinition.featuredCaseStudies` (refs project IDs).
+		caseStudy: z
+			.object({
+				audience: z.enum(["customer", "employer", "open-source", "personal"]).optional(),
+				problem: z.string(),
+				solution: z.string(),
+				build: z.string(),
+				outcome: z.string(),
+			})
+			.optional(),
+	}),
+});
+
 /** Certificates */
 const certifications = defineCollection({
 	loader: file("src/data/certifications.json"),
@@ -84,6 +128,7 @@ const workHistory = defineCollection({
 
 export const collections = {
 	skills,
+	projects,
 	certifications,
 	workHistory,
 };
