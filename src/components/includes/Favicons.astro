@@ -24,7 +24,7 @@ try {
 	faviconSvg && (
 		<>
 			<link rel="icon" type="image/svg+xml" href={faviconSvg} />
-			<link rel="mask-icon" href={faviconSvg} {...(COLORS?.primary ? { color: COLORS.primary } : {})} />
+			<link rel="mask-icon" href={faviconSvg} {...(COLORS?.light?.primary ? { color: COLORS.light.primary } : {})} />
 		</>
 	)
 }

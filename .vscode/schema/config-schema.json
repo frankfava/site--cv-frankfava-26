@@ -16,7 +16,10 @@
 					"type": "string"
 				},
 				"trailingSlash": {
-					"type": ["boolean", "null"]
+					"type": [
+						"boolean",
+						"null"
+					]
 				},
 				"logos": {
 					"type": "object",
@@ -33,7 +36,9 @@
 					}
 				}
 			},
-			"required": ["name"],
+			"required": [
+				"name"
+			],
 			"additionalProperties": false
 		},
 		"metadata": {
@@ -43,10 +48,16 @@
 					"type": "object",
 					"properties": {
 						"default": {
-							"type": ["string", "null"]
+							"type": [
+								"string",
+								"null"
+							]
 						},
 						"template": {
-							"type": ["string", "null"]
+							"type": [
+								"string",
+								"null"
+							]
 						}
 					}
 				},
@@ -89,7 +100,11 @@
 											"type": "integer"
 										}
 									},
-									"required": ["url", "width", "height"]
+									"required": [
+										"url",
+										"width",
+										"height"
+									]
 								}
 							]
 						},
@@ -112,13 +127,22 @@
 							"type": "string"
 						}
 					},
-					"required": ["handle", "site", "cardType"]
+					"required": [
+						"handle",
+						"site",
+						"cardType"
+					]
 				},
 				"manifestPublic": {
-					"type": ["string", "null"]
+					"type": [
+						"string",
+						"null"
+					]
 				}
 			},
-			"required": ["description"],
+			"required": [
+				"description"
+			],
 			"additionalProperties": false
 		},
 		"i18n": {
@@ -131,7 +155,10 @@
 					"type": "string"
 				}
 			},
-			"required": ["language", "textDirection"],
+			"required": [
+				"language",
+				"textDirection"
+			],
 			"additionalProperties": false
 		},
 		"analytics": {
@@ -139,7 +166,18 @@
 			"properties": {
 				"vendor": {
 					"type": "string",
-					"enum": ["fathom", "googleAnalytics", "metrical", "plausible", "simpleAnalytics", "umami", "amplitude", "matomo", "minimalAnalytics", "none"]
+					"enum": [
+						"fathom",
+						"googleAnalytics",
+						"metrical",
+						"plausible",
+						"simpleAnalytics",
+						"umami",
+						"amplitude",
+						"matomo",
+						"minimalAnalytics",
+						"none"
+					]
 				}
 			},
 			"additionalProperties": false
@@ -149,46 +187,67 @@
 			"properties": {
 				"theme": {
 					"type": "string",
-					"enum": ["system", "light", "dark", "light:only", "dark:only"]
+					"enum": [
+						"system",
+						"light",
+						"dark",
+						"light:only",
+						"dark:only"
+					]
 				},
 				"layout": {
 					"type": "string",
-					"enum": ["narrow", "wide"]
+					"enum": [
+						"narrow",
+						"wide"
+					]
 				},
-				"colors": {
+				"light": {
 					"type": "object",
+					"description": "One colour mode. Every colour here is ramped 50-900; light lands on :root and dark on .dark, so one class retints the site. Both modes should declare the same keys.",
 					"properties": {
-						"primary": {
-							"type": "string"
+						"colors": {
+							"type": "object",
+							"description": "Any key becomes --color-<name> plus a 50-900 ramp and an rgb companion.",
+							"additionalProperties": {
+								"type": "string",
+								"pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+							}
 						},
-						"secondary": {
-							"type": "string"
-						},
-						"accent": {
-							"type": "string"
+						"shadow": {
+							"type": "string",
+							"description": "Box-shadow for this mode, exposed as --c-shadow."
 						}
-					}
+					},
+					"additionalProperties": false
+				},
+				"dark": {
+					"type": "object",
+					"description": "One colour mode. Every colour here is ramped 50-900; light lands on :root and dark on .dark, so one class retints the site. Both modes should declare the same keys.",
+					"properties": {
+						"colors": {
+							"type": "object",
+							"description": "Any key becomes --color-<name> plus a 50-900 ramp and an rgb companion.",
+							"additionalProperties": {
+								"type": "string",
+								"pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
+							}
+						},
+						"shadow": {
+							"type": "string",
+							"description": "Box-shadow for this mode, exposed as --c-shadow."
+						}
+					},
+					"additionalProperties": false
 				},
 				"fonts": {
 					"type": "object",
 					"properties": {
 						"family": {
 							"type": "object",
-							"properties": {
-								"primary": {
-									"type": "string"
-								},
-								"primary_type": {
-									"type": "string",
-									"enum": ["sans-serif", "serif", "monospace"]
-								},
-								"secondary": {
-									"type": "string"
-								},
-								"secondary_type": {
-									"type": "string",
-									"enum": ["sans-serif", "serif", "monospace"]
-								}
+							"description": "Any number of families. Each key becomes a --font-<key> variable via astro-font; add a matching <key>_type for the fallback stack.",
+							"additionalProperties": {
+								"type": "string"
 							}
 						},
 						"font_size": {
@@ -207,7 +266,9 @@
 					}
 				}
 			},
-			"required": ["theme"],
+			"required": [
+				"theme"
+			],
 			"additionalProperties": false
 		},
 		"about": {
@@ -241,7 +302,11 @@
 							"type": "string"
 						}
 					},
-					"required": ["city", "countryCode", "region"]
+					"required": [
+						"city",
+						"countryCode",
+						"region"
+					]
 				},
 				"nationality": {
 					"type": "array",
@@ -255,7 +320,10 @@
 								"type": "string"
 							}
 						},
-						"required": ["label", "flagIcon"]
+						"required": [
+							"label",
+							"flagIcon"
+						]
 					}
 				},
 				"linguistics": {
@@ -274,13 +342,22 @@
 									},
 									"fluency": {
 										"type": "string",
-										"enum": ["Native", "Fluent", "Conversational", "Elementary", "Beginner"]
+										"enum": [
+											"Native",
+											"Fluent",
+											"Conversational",
+											"Elementary",
+											"Beginner"
+										]
 									},
 									"description": {
 										"type": "string"
 									}
 								},
-								"required": ["language", "fluency"]
+								"required": [
+									"language",
+									"fluency"
+								]
 							}
 						}
 					}
@@ -297,11 +374,20 @@
 								"type": "string"
 							}
 						},
-						"required": ["name", "url"]
+						"required": [
+							"name",
+							"url"
+						]
 					}
 				}
 			},
-			"required": ["name", "jobTitles", "dob", "summary", "location"]
+			"required": [
+				"name",
+				"jobTitles",
+				"dob",
+				"summary",
+				"location"
+			]
 		},
 		"socials": {
 			"type": "object",
@@ -340,7 +426,9 @@
 			"required": []
 		}
 	},
-	"required": ["site"],
+	"required": [
+		"site"
+	],
 	"definitions": {
 		"socialLink": {
 			"type": "object",
@@ -355,7 +443,10 @@
 					"type": "string"
 				}
 			},
-			"required": ["text", "href"],
+			"required": [
+				"text",
+				"href"
+			],
 			"additionalProperties": false
 		}
 	}

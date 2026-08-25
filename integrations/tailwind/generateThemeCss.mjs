@@ -8,47 +8,42 @@ const repoRoot = resolve(__dirname, "../..");
 
 const siteConfigPath = join(repoRoot, "src/data/site-config.json");
 
-if(!existsSync(siteConfigPath)) {
+if (!existsSync(siteConfigPath)) {
 	console.error(`Site config file not found at ${siteConfigPath}`);
 	process.exit(1);
 }
 
 const siteConfig = JSON.parse(readFileSync(siteConfigPath, "utf8"));
 
-const colors = siteConfig?.ui?.colors ?? {};
-const fonts = siteConfig?.ui?.fonts ?? {};
+const ui = siteConfig?.ui ?? {};
+const fonts = ui.fonts ?? {};
 const fontSize = fonts.font_size ?? { basePx: 16, scale: 0.25 };
 const fontFamily = fonts.family ?? {};
 
-const PRIMARY = colors.primary || "#434E5E";
-const SECONDARY = colors.secondary || "#479FC8";
-const ACCENT = colors.accent || "#05505C";
+/**
+ * Colour is a function of mode, so mode is the outer axis: every colour is
+ * authored under `ui.light` / `ui.dark` and ramped in both. Light lands on
+ * `:root` and dark on `.dark`, so the existing class toggle retints the whole
+ * site by swapping one class.
+ */
+const MODES = ["light", "dark"];
+const colorsFor = (mode) => ui[mode]?.colors ?? {};
+const names = Object.keys(colorsFor("light"));
 
-const palettes = {
-	primary: shadesOf(PRIMARY),
-	secondary: shadesOf(SECONDARY),
-	accent: shadesOf(ACCENT),
-};
+/** `warn` has always been the same value as `amber`. Aliased rather than
+ *  authored twice, so the two cannot drift. */
+const ALIASES = { warn: "amber" };
+
+const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 const fontBase = Number(fontSize.basePx);
 const fontScale = Number(fontSize.scale);
 const headingSize = (mult) => Number(1 + fontScale * mult).toPrecision(2);
 
+/* ---------------------------------------------------------------- @theme -- */
+/* Only what does not vary by mode. */
+
 const themeLines = [];
-const rootLines = [];
-
-for (const [name, palette] of Object.entries(palettes)) {
-	for (const [shade, hex] of Object.entries(palette)) {
-		const value = stripVarFallback(hex);
-		const key = shade === "DEFAULT" ? `--color-${name}` : `--color-${name}-${shade}`;
-		themeLines.push(`\t${key}: ${value};`);
-		const rgb = hexToRgb(value).toArray().join(", ");
-		const rgbKey = shade === "DEFAULT" ? `--color-${name}-rgb` : `--color-${name}-${shade}-rgb`;
-		rootLines.push(`\t${rgbKey}: ${rgb};`);
-	}
-}
-
-themeLines.push("");
 themeLines.push(`\t--font-size-base: ${fontBase}px;`);
 themeLines.push(`\t--text-h1: ${headingSize(8)}rem;`);
 themeLines.push(`\t--text-h2: ${headingSize(5)}rem;`);
@@ -58,10 +53,20 @@ themeLines.push(`\t--text-h5: ${headingSize(2)}rem;`);
 themeLines.push(`\t--text-h6: 1rem;`);
 themeLines.push("");
 
-const primaryFamily = fontFamily.primary ? `var(--font-primary), ${fontFamily.primary_type || "sans-serif"}` : "var(--font-primary)";
-const secondaryFamily = fontFamily.secondary ? `var(--font-secondary, var(--font-primary)), ${fontFamily.secondary_type || "sans-serif"}` : "var(--font-secondary, var(--font-primary))";
-themeLines.push(`\t--font-primary: ${primaryFamily};`);
-themeLines.push(`\t--font-secondary: ${secondaryFamily};`);
+/**
+ * The font stack, declared once and owned here.
+ *
+ * `Fonts.astro` emits the `@font-face` rules and the preloads but publishes no
+ * variable, so the family is named in exactly one place. The config value is
+ * the Google Fonts query - `Public+Sans:wght@300;400` - so the family is
+ * everything before the axis list, with the URL encoding undone.
+ */
+const familyName = (value) => value.split(":")[0].replace(/\+/g, " ");
+
+for (const key of Object.keys(fontFamily).filter((k) => !k.endsWith("_type"))) {
+	const type = fontFamily[`${key}_type`] || "sans-serif";
+	themeLines.push(`\t--font-${key}: "${familyName(fontFamily[key])}", ${type};`);
+}
 themeLines.push("");
 
 themeLines.push(`\t--breakpoint-sm: 540px;`);
@@ -70,9 +75,42 @@ themeLines.push(`\t--breakpoint-lg: 1024px;`);
 themeLines.push(`\t--breakpoint-xl: 1280px;`);
 themeLines.push(`\t--breakpoint-2xl: 1536px;`);
 
-rootLines.push("");
-rootLines.push(`\t--color-gray-500-rgb: 107, 114, 128;`);
-rootLines.push(`\t--color-white-rgb: 255, 255, 255;`);
+/* --------------------------------------------------------- @theme inline -- */
+/* Point Tailwind's colour namespace at the properties rather than copying
+   their values, so `bg-surface` follows the toggle instead of freezing at
+   whichever mode generated it. */
+
+const inlineLines = [];
+for (const name of [...names, ...Object.keys(ALIASES)]) {
+	inlineLines.push(`\t--color-${name}: var(--c-${name});`);
+	inlineLines.push(`\t--color-${name}-rgb: var(--c-${name}-rgb);`);
+	if (ALIASES[name]) continue;
+	for (const shade of SHADES) inlineLines.push(`\t--color-${name}-${shade}: var(--c-${name}-${shade});`);
+}
+
+/* ------------------------------------------------------------- per mode -- */
+
+function modeVars(mode) {
+	const colors = colorsFor(mode);
+	const lines = [];
+	for (const name of names) {
+		const value = stripVarFallback(colors[name]);
+		const ramp = shadesOf(value);
+		for (const [shade, hex] of Object.entries(ramp)) {
+			lines.push(`\t--c-${name}${shade === "DEFAULT" ? "" : `-${shade}`}: ${hex};`);
+		}
+		// Only the base gets an rgb companion: the ramp is for colour, and
+		// `rgba(var(--x-rgb), a)` is only ever wanted on the base.
+		lines.push(`\t--c-${name}-rgb: ${hexToRgb(value).toArray().join(", ")};`);
+	}
+	for (const [alias, target] of Object.entries(ALIASES)) {
+		lines.push(`\t--c-${alias}: var(--c-${target});`);
+		lines.push(`\t--c-${alias}-rgb: var(--c-${target}-rgb);`);
+	}
+	const shadow = ui[mode]?.shadow;
+	if (shadow) lines.push(`\t--c-shadow: ${shadow};`);
+	return lines.join("\n");
+}
 
 const out = `/* AUTO-GENERATED by integrations/tailwind/generateThemeCss.mjs - do not edit by hand. */
 
@@ -80,13 +118,21 @@ const out = `/* AUTO-GENERATED by integrations/tailwind/generateThemeCss.mjs - d
 ${themeLines.join("\n")}
 }
 
+@theme inline {
+${inlineLines.join("\n")}
+}
+
 :root {
-${rootLines.join("\n")}
+${modeVars("light")}
+}
+
+.dark {
+${modeVars("dark")}
 }
 `;
 
 writeFileSync(resolve(repoRoot, "src/assets/css/_theme.generated.css"), out, "utf8");
-console.log("[generateThemeCss] wrote src/assets/css/_theme.generated.css");
+console.log(`[generateThemeCss] wrote src/assets/css/_theme.generated.css (${names.length} colours x ${MODES.length} modes)`);
 
 function stripVarFallback(value) {
 	if (typeof value !== "string") return value;

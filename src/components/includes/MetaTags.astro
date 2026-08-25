@@ -70,15 +70,15 @@ const metadataSeoProps: AstroSeoProps = {
 					},
 				]
 			: []),
-		...(COLORS?.primary
+		...(COLORS?.light?.primary
 			? [
 					{
 						name: "msapplication-TileColor",
-						content: COLORS.primary,
+						content: COLORS.light.primary,
 					},
 					{
 						name: "theme-color",
-						content: COLORS.primary,
+						content: COLORS.light.primary,
 					},
 				]
 			: []),

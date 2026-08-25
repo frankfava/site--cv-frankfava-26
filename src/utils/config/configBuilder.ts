@@ -94,8 +94,11 @@ export function addUtils(config: Config.Complete) {
 		darkModeAllowed: !defaultTheme.includes("light:only"),
 	};
 
-	// Colors
-	const colors: Config.Final["colors"] = config.ui?.colors;
+	// Colors - authored per mode
+	const colors: Config.Final["colors"] = {
+		light: config.ui?.light?.colors,
+		dark: config.ui?.dark?.colors,
+	};
 
 	// Fonts
 	const fonts: Config.Final["fonts"] = config.ui?.fonts;

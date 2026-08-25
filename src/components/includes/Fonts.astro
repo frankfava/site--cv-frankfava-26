@@ -35,7 +35,7 @@ function parseFontString(fontString: string, type: string = "sans-serif"): fontD
 
 	return {
 		full,
-		name,
+		name: name.replace(/\+/g, " "),
 		weights: valuesFor("wght"),
 		widths: valuesFor("wdth"),
 		opticalSizes: valuesFor("opsz"),
@@ -69,7 +69,6 @@ function createAstroFontConfig(fonts: Record<string, fontDefinitionWithUrl | und
 				display: "swap",
 				name: font.name!,
 				fallback: font.type! || "sans-serif",
-				cssVariable: `font-${k}`,
 				googleFontsURL: font.url,
 			};
 		}) as [];

@@ -30,10 +30,47 @@
 	"ui": {
 		"theme": "system",
 		"layout": "narrow",
-		"colors": {
-			"primary": "#434E5E",
-			"secondary": "#479FC8",
-			"accent": "#05505C"
+		"light": {
+			"colors": {
+				"primary": "#434E5E",
+				"secondary": "#479FC8",
+				"ground": "#f4f6f8",
+				"surface": "#ffffff",
+				"sunk": "#eaeef2",
+				"line": "#d7dee5",
+				"line-2": "#e6ebf0",
+				"ink": "#0f1720",
+				"ink-2": "#465563",
+				"ink-3": "#7d8b99",
+				"accent": "#1153c4",
+				"accent-soft": "#e6eefb",
+				"cyan": "#0e7490",
+				"amber": "#a6620b",
+				"good": "#0d7a52",
+				"bad": "#b32b3f"
+			},
+			"shadow": "0 1px 0 rgba(15,23,32,.04), 0 20px 44px -36px rgba(15,23,32,.6)"
+		},
+		"dark": {
+			"colors": {
+				"primary": "#434E5E",
+				"secondary": "#479FC8",
+				"ground": "#0b1016",
+				"surface": "#121a22",
+				"sunk": "#0e151c",
+				"line": "#22303c",
+				"line-2": "#182430",
+				"ink": "#e8eef4",
+				"ink-2": "#9fb0be",
+				"ink-3": "#71838f",
+				"accent": "#69a1ff",
+				"accent-soft": "#12233d",
+				"cyan": "#3cc7df",
+				"amber": "#e6a54a",
+				"good": "#43cf95",
+				"bad": "#ff7d90"
+			},
+			"shadow": "0 1px 0 rgba(0,0,0,.5), 0 20px 44px -36px #000"
 		},
 		"fonts": {
 			"family": {
@@ -41,14 +78,21 @@
 				"primary_type": "sans-serif",
 				"secondary": "Public+Sans:wght@300;400;500;600",
 				"secondary_type": "sans-serif",
-				"mono" : "IBM+Plex+Mono:wght@400;500",
+				"mono": "IBM+Plex+Mono:wght@400;500",
 				"mono_type": "monospace"
 			}
 		}
 	},
 	"about": {
 		"name": "Frank Fava",
-		"jobTitles": ["AI Solutions Architect", "Solutions Architect", "Forward Deployed Engineer", "Senior Full-Stack Engineer", "AI Engineer", "Engineering Manager"],
+		"jobTitles": [
+			"AI Solutions Architect",
+			"Solutions Architect",
+			"Forward Deployed Engineer",
+			"Senior Full-Stack Engineer",
+			"AI Engineer",
+			"Engineering Manager"
+		],
 		"dob": "1990-07-31T21:28:00.000+09:00",
 		"summary": "Senior full-stack engineer and AI/agentic builder. 18+ years shipping software, now building and deploying LLM and agent systems - including a self-hosted MCP server and custom Claude Code agents I run in production - with a track record of selling technical solutions. Targeting AI Solutions Architect, Forward Deployed Engineer and senior engineering roles.",
 		"location": {

@@ -32,12 +32,12 @@ export namespace Config {
 		metadata: App.MetaData.Base;
 		i18n: App.I18NConfig;
 		analytics: App.Analytics.Resolved;
-		theme: Omit<App.UIConfig, "colors" | "fonts" | "theme"> & {
+		theme: Omit<App.UIConfig, "fonts" | "theme"> & {
 			default: App.UIConfig["theme"];
 			lightModeAllowed: boolean;
 			darkModeAllowed: boolean;
 		};
-		colors: App.UIConfig["colors"];
+		colors: { light: App.ModeConfig["colors"]; dark: App.ModeConfig["colors"] };
 		fonts: App.UIConfig["fonts"];
 		about: Omit<About.Base, "nationality" | "linguistics" | "jobTitles"> & {
 			firstName: string;
@@ -150,14 +150,21 @@ export namespace App {
 		};
 	}
 
+	/** One colour mode's authored values. */
+	export type ModeConfig = {
+		colors?: Record<string, string>;
+		shadow?: string;
+	};
+
 	export type UIConfig = {
 		theme: "system" | "light" | "dark" | "light:only" | "dark:only";
 		layout: "narrow" | "wide";
-		colors?: {
-			primary?: string;
-			secondary?: string;
-			accent?: string;
-		};
+		/** Colour is a function of mode, so mode is the outer axis. Every colour
+		 *  lives under both blocks and is ramped in both; light lands on `:root`
+		 *  and dark on `.dark`, so one class retints the site. Both modes should
+		 *  declare the same keys. */
+		light?: ModeConfig;
+		dark?: ModeConfig;
 		fonts?: {
 			family: {
 				primary?: string;
