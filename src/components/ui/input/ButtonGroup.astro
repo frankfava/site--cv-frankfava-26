@@ -16,13 +16,7 @@ const { actions = [], class: className = "", btnClass } = Astro.props;
 	actions.length ? (
 		<div class:list={twMerge("flex gap-2", className)}>
 			{actions.filter(Boolean).map((btnProps) => (
-				<Button
-					{...btnProps}
-					class={twMerge(
-						"font-semibold shadow-none text-sm w-auto",
-						btnClass,
-					)}
-				/>
+				<Button {...btnProps} class={twMerge("w-auto", btnClass)} />
 			))}
 		</div>
 	) : (

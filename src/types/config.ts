@@ -242,7 +242,7 @@ export namespace Display {
 	export type Footer = {
 		lead: {
 			title: string;
-			description: string;
+			description?: string;
 		};
 	};
 }

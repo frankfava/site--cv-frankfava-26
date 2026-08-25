@@ -33,7 +33,7 @@ const { label, icon, href, text, showText = true, class: className, linkClass, i
 		) : (
 			<>
 				{icon && <Icon name={icon} class={twMerge("w-5 h-5", iconClass)} />}
-				{showText && <Fragment set:html={text ?? label} />}
+				{showText && <Fragment set:html={label ?? text} />}
 			</>
 		)
 	}

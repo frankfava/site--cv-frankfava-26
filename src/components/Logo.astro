@@ -1,19 +1,19 @@
 ---
 import { Image } from "astro:assets";
-import { ABOUT } from "site:config";
+import { ABOUT, DISPLAY } from "site:config";
 
 export interface Props {
 	class?: string;
 	showImage?: boolean;
 }
 
-const { class: className = "", showImage = false } = Astro.props;
+const { class: className = "", showImage = DISPLAY.showAvatar ?? false } = Astro.props;
 ---
 
 <div class="flex items-center gap-3 min-h-12 whitespace-nowrap self-center" class:list={[className]}>
 	{showImage && !!ABOUT.getImage("bw") && <Image src={ABOUT.getImage("bw") as string} width={90} height={90} alt={`${ABOUT.name} Face`} class="rounded-full w-auto max-h-12" />}
 	<span class="font-primary uppercase font-extrabold! text-ink! hover:text-accent! [font-variation-settings:'wdth'_88] whitespace-nowrap text-lg md:text-xl"
 		>{ABOUT.firstName}
-		<span class="ml-2">{ABOUT.lastName}</span></span
+		<span class="font-normal ml-1">{ABOUT.lastName}</span></span
 	>
 </div>

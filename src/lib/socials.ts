@@ -45,7 +45,7 @@ export class SocialsManager {
 				d = d(socials[k]) as Partial<Socials.Link>;
 			}
 			if (socials[k as Socials.LinkKey] !== undefined) {
-				platforms[k as Socials.LinkKey] = defu(socials[k] ?? {}, d ?? {}) as Socials.Link;
+				platforms[k as Socials.LinkKey] = defu(d ?? {},socials[k] ?? {}) as Socials.Link;
 			}
 		});
 		return platforms;
@@ -93,7 +93,8 @@ const availableSocials: Record<Socials.LinkKey, Partial<Socials.Link> | ((value:
 		icon: "ph:whatsapp-logo",
 	},
 	vcard: {
-		label: "Download vCard (vcf)",
+		label: "vCard",
+		text: "Download vCard (vcf)",
 		icon: "ph:identification-card",
 	},
 };

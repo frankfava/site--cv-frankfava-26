@@ -6,12 +6,13 @@ import SocialLinkButton from "./SocialLinkButton.astro";
 export interface Props {
 	socialLinks: Socials.Link[];
 	showText?: boolean;
+	showIcon?: boolean;
 	class?: string;
 	linkClass?: string;
 	iconClass?: string;
 }
 
-const { socialLinks = [], showText = true, class: className, linkClass, iconClass } = Astro.props;
+const { socialLinks = [], showText = true, showIcon = true, class: className, linkClass, iconClass } = Astro.props;
 ---
 
 <>
@@ -20,7 +21,7 @@ const { socialLinks = [], showText = true, class: className, linkClass, iconClas
 			<ul class={twMerge("inline-flex flex-wrap items-center", className)}>
 				{socialLinks.map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
 					<li class="flex">
-						<SocialLinkButton {...{ href, icon, label, text, class: className ?? "", linkClass, iconClass, showText, ...rest }} />
+						<SocialLinkButton {...{ href, icon: showIcon ? icon : undefined, label, text, class: className ?? "", linkClass, iconClass, showText, ...rest }} />
 					</li>
 				))}
 			</ul>
