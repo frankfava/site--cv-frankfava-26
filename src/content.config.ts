@@ -47,3 +47,43 @@ const certifications = defineCollection({
 		icon: z.string().optional(),
 	}),
 });
+
+/** Work History */
+const workHistory = defineCollection({
+	loader: file("src/data/workHistory.json"),
+	schema: z.object({
+		company: z.string(),
+		role: z.string(),
+		startDate: z
+			.string()
+			.or(z.date())
+			.transform((val) => new Date(val)),
+		endDate: z
+			.string()
+			.or(z.date())
+			.optional()
+			.transform((str) => (str ? new Date(str) : undefined)),
+		summary: z.string().optional(),
+		location: z.string().optional(),
+		locationType: z.enum(["On-Site", "Hybrid", "Office-First", "Remote"]).optional(),
+		responsibilities: z.array(z.string()).optional(),
+		achievements: z.array(z.string()).optional(),
+		featuredAchievements: z.array(z.number().int().min(1)).optional(),
+		skills: z.array(z.string()).optional(),
+		transferableSkills: z.array(z.string()).optional(),
+		isFreelancing: z.boolean().optional(),
+		employmentType: z.string().optional(),
+		highlight: z
+			.object({
+				show: z.boolean(),
+				label: z.string(),
+			})
+			.optional(),
+	}),
+});
+
+export const collections = {
+	skills,
+	certifications,
+	workHistory,
+};

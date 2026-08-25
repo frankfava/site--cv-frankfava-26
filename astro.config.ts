@@ -79,6 +79,9 @@ export default defineConfig({
 				"src/data/certifications.json": {
 					CertificationId: "id",
 				},
+				"src/data/workHistory.json": {
+					WorkHistoryId: "id",
+				},
 			},
 		}),
 		// Update `robots.txt` with `sitemap-index.xml

@@ -1,0 +1,246 @@
+[
+	{
+		"id": "acdm",
+		"employmentType": "Part-Time - 80%",
+		"role": "Web Developer",
+		"company": "Academedia AB",
+		"location": "Stockholm, Sweden",
+		"locationType": "Office-First",
+		"startDate": "2026-04-13T00:00:00.000-02:00",
+		"summary": "Working as a Web Developer, as part of the in-house support team for the Academedia brand's websites.",
+		"transferableSkills": ["team-player", "project-management", "languages"],
+		"highlight": {
+			"show": true,
+			"label": "Currently working as a Web Developer at Academedia, building websites for the Academedia brand."
+		}
+	},
+	{
+		"id": "savr",
+		"featuredAchievements": [2, 4],
+		"transferableSkills": ["team-player", "project-management", "coaching-skills"],
+		"employmentType": "Full-Time",
+		"role": "Senior Software Engineer",
+		"company": "SAVR AB",
+		"location": "Stockholm, Sweden",
+		"locationType": "Office-First",
+		"startDate": "2025-02-05T00:00:00.000-02:00",
+		"endDate": "2026-03-27T00:00:00.000-02:00",
+		"summary": "Part of one of the product teams, working on the backend of an investment platform.",
+		"highlight": {
+			"show": true,
+			"label": "Build complex new features in Laravel for a Stockholm based investment platform."
+		},
+		"responsibilities": [
+			"Build complex new features in Laravel, maintaining and improving the API that is used by the frontend and mobile apps.",
+			"Ensure the code is clean, maintainable and follows best practices.",
+			"Work with the product team to understand the business requirements and implement solutions.",
+			"Use AI to help with the development process, such as generating code, writing documentation, and answering questions.",
+			"Perform code reviews and provide feedback to the team.",
+			"Work both solo and as part of a team, when creating new features."
+		],
+		"achievements": [
+			"Within my first month at SAVR, started the creation of an Admin Panel for the platform's data service - began as a paired exploration with a co-worker and continued across my entire time at the company.",
+			"Spear-headed three production admin panels at SAVR - two FilamentPHP (data service + customer service) plus a Streamlit data-analysis tool for the analyst team.",
+			"Primary backend developer on the integration that enabled cryptocurrency trading on the SAVR platform.",
+			"Designed and built a delta-based ingestion system at SAVR as the closing project - replaced full-source pulls and significantly improved pipeline performance."
+		]
+	},
+	{
+		"id": "nas",
+		"featuredAchievements": [1],
+		"transferableSkills": ["ability-to-lead", "project-management", "customer-service", "sales-and-business-development"],
+		"employmentType": "Sub-contracting",
+		"role": "Product Owner and part-time CTO",
+		"company": "National Auto Service",
+		"location": "Melbourne, Australia",
+		"locationType": "Remote",
+		"highlight": {
+			"show": true,
+			"label": "Product owner and part-time CTO for an vehicle asset management company"
+		},
+		"isFreelancing": true,
+		"startDate": "01 Sep 2022",
+		"summary": "In charge of development of medium-scale internal system.",
+		"responsibilities": [
+			"UX, Development, deployment, and improvement of a new internal system and its accompanying applications.",
+			"Currently acting as their CTO, in charge of security, integrity, development and strategy for the app.",
+			"Fixing bugs, and implementing new features during monthly sprints.",
+			"Identifying and prioritising business critical functions and creating solutions of the internal team.",
+			"Provide consulting on strategy on the company's tech stack and implementation.",
+			"Deliver support to the whole team.",
+			"Manage and train team of temporary developers that I brought in to assist with completing larger tasks.",
+			"Deliver training on how use systems for team members.",
+			"Handle relationships for long-term customers.",
+			"Managed product backlogs and prioritized features based on client and user feedback."
+		],
+		"achievements": [
+			"Built and launched the asset-management platform at National Auto Service across nearly 4 years as part-time CTO - internal tool plus customer and contractor portals, now covering ~90% of Australia.",
+			"Drastically reshaped the previous workflow to improve cashflow.",
+			"Drove product development from idea to finished solution, including design, development, custom requirements and backlog management."
+		]
+	},
+	{
+		"id": "cool-company",
+		"featuredAchievements": [1],
+		"transferableSkills": ["ability-to-lead", "sales-and-business-development", "customer-service", "project-management"],
+		"employmentType": "Self-Employed",
+		"role": "Full-stack Developer",
+		"company": "Freelancer via Cool Company AB",
+		"location": "Stockholm, Sweden",
+		"locationType": "Remote",
+		"isFreelancing": true,
+		"startDate": "01 Jul 2022",
+		"summary": "Developing and maintaining web applications using Laravel and VueJS. Collaborating with the team to implement new features and fix bugs.",
+		"responsibilities": [
+			"Delivering and deploying web applications for customers, optimizing for performance and scalability.",
+			"Creating websites, using WordPress, HubSpot CMS, and AstroJS with Laravel as the backend (via Headless CMS)",
+			"Developed and maintained backend services using PHP and Laravel.",
+			"Designed and implemented frontend user interfaces using modern JavaScript frameworks, such as VueJS and React to integrate with server-side logic.",
+			"Manage and train team of temporary developers that I brought in to assist with completing larger projects.",
+			"Deeply understand customers to identify pain points, define relevant solutions, and uncover business opportunities.",
+			"Market my services and close new sales."
+		],
+		"achievements": [
+			"Billed over 1.1 Million SEK as a freelancer via Cool Company AB - over 800,000 SEK from a single customer.",
+			"<a href=\"https://coolcompany.com/se/blog/frilansare-kunder-utomlands/\" target=\"_blank\">Featured on Cool Company blog</a> in an article about me working with clients in Australia whilst living in Sweden.<br/> <strong>\"Frilansaren med kunderna i Australien\"</strong> (in Swedish)"
+		]
+	},
+	{
+		"id": "igomoon",
+		"featuredAchievements": [1],
+		"transferableSkills": ["ability-to-lead", "project-management", "team-player", "customer-service", "coaching-skills"],
+		"employmentType": "Full-Time",
+		"role": "Lead Full-stack and HubSpot Developer",
+		"company": "iGoMoon AB",
+		"location": "Stockholm, Sweden",
+		"locationType": "Office-First",
+		"highlight": {
+			"show": true,
+			"label": "Lead Developer at Digital Agency in Stockholm"
+		},
+		"startDate": "2020-05-10T00:00:00.000-02:00",
+		"endDate": "2022-06-30T00:00:00.000-02:00",
+		"summary": "Assisting in the development and websites using HubSpot CMS and WordPress on Bedrock. Collaborating with cross-functional teams to ensure quality and timely delivery of software solutions.",
+		"responsibilities": [
+			"Lead and train team of junior developers.",
+			"Develop mobile friendly and WCAG compliant sites",
+			"Interact with customers and provide technical updates.",
+			"Assist CTO with and lead on more complex projects.",
+			"Integrate websites with 3rd Party Services such as Algolia, using Laravel as a backend for microservices.",
+			"Work on tight deadlines and deliver quality work with budget guidelines.",
+			"Ran code reviews, retrospectives, facilitated workshops and contributed to improving coding standards within the team.",
+			"Create training processes for the company knowledge based and help standardise practices.",
+			"Interact with customers, upselling and cross-selling on new ideas",
+			"Sit in with the CTO when hiring new developers."
+		],
+		"achievements": [
+			"Co-created an open-source dev tool, HubSpot FieldsJS, at iGoMoon - <a href=\"https://developers.hubspot.com/docs/guides/cms/content/fields/write-fields-using-javascript#overview:~:text=%40iGoMoon/hubspot%2Dfields%2Djs\" target=\"_blank\">adopted by the HubSpot core team</a> into their official documentation.",
+			"Ascended to Lead Developer with 6 months of starting and quickly became the primary developer for more complex projects.",
+			"Created the <a href=\"https://github.com/iGoMoon/developer-coding-task\" target=\"_blank\">Developer Coding Task</a> that developer candidates completed as part of the hiring process.",
+			"Brought in multiple customers from my previous business (FLIC Sites) that wanted to continue to work with me.",
+			"Ran trainings with team members to update them on the latest practices so the development team collaborated better.",
+			"Created an in-house application that all team members and team leaders could use to track their perfomance KPIs, working with the CFO to make sure everything was accurate.",
+			"Once my employment ended, I was kept on as a contractor to help with projects that required specific knowledge.",
+			"Organised After Works (AW) for team members on a regular basis."
+		]
+	},
+	{
+		"id": "focused-results",
+		"transferableSkills": ["ability-to-lead", "project-management", "customer-service"],
+		"employmentType": "Sub-contracting",
+		"role": "Lead Full-stack Developer",
+		"company": "Focused Results",
+		"location": "Brisbane, Australia",
+		"locationType": "Remote",
+		"isFreelancing": true,
+		"highlight": {
+			"show": true,
+			"label": "Sub-contracting for a digital agency startup as their Lead developer."
+		},
+		"startDate": "2016-10-01T00:00:00.000-02:00",
+		"endDate": "2017-07-30T00:00:00.000-02:00",
+		"responsibilities": [
+			"Lead development on websites to be delivered to customer",
+			"Work closely with the design and copy writing team.",
+			"Develop the main product of a \"Coaching Website in a box\" in a replicable way that required no coding experience from the non-'tech savy' end user."
+		],
+		"achievements": [
+			"A little while after I chose to terminate my contract, Focused Results was shut down and any customer that needed work were referred to me by the owner. Many of these became repeat customers for me at FLIC Sites."
+		]
+	},
+	{
+		"id": "flic-sites",
+		"featuredAchievements": [1],
+		"transferableSkills": ["ability-to-lead", "sales-and-business-development", "customer-service", "project-management"],
+		"employmentType": "Self-Employed",
+		"role": "Owner",
+		"company": "FLIC Sites",
+		"location": "Sydney, Australia",
+		"locationType": "Remote",
+		"isFreelancing": true,
+		"highlight": {
+			"show": true,
+			"label": "Digital Agency and Business Development consulting (\"FLIC Sites\")"
+		},
+		"startDate": "2014-08-01T00:00:00.000-02:00",
+		"endDate": "2020-04-30T00:00:00.000-02:00",
+		"responsibilities": [
+			"Create Websites and build digital solutions using WordPress.",
+			"Develop custom plugins and themes depending on the customers needs.",
+			"Hands-on PM experience delivering top-notch end user experiences in B2B context.",
+			"Manage team of temporary developers that I brought in to assist with completing larger projects.",
+			"Handle all aspects of relationship for long-term customers.",
+			"Market my services and close new sales."
+		],
+		"achievements": [
+			"Completed 160+ projects across 5 years running FLIC Sites (digital agency).",
+			"Product owner for multiple projects, managing projects from start to deployment. Leading agile digital projects on larger web projects.",
+			"Created a replicable foundation for creating website for my customers, that I could easily extend and customise according to their needs and project requirements.",
+			"Developed WordPress plugins that I could implement for all customers, adding functionality via shortcodes, gutenberg blocks, and extensions for 3rd-party plugins.",
+			"Complete a wide array of projects: Landing Pages, Micro Sites, Full websites, E-commerce sites, Memberhsip sites and Learning Management systems for online courses."
+		]
+	},
+	{
+		"id": "relationships-revealed",
+		"transferableSkills": ["coaching-skills", "sales-and-business-development", "customer-service"],
+		"employmentType": "Self-Employed",
+		"role": "Personal Relationship Coach",
+		"company": "Relationships Revealed",
+		"location": "Sydney, Australia",
+		"locationType": "Hybrid",
+		"highlight": {
+			"show": true,
+			"label": "Human Behaviour and Personal Coaching"
+		},
+		"startDate": "2010-02-01T00:00:00.000-02:00",
+		"endDate": "2015-01-30T00:00:00.000-02:00",
+		"responsibilities": [
+			"Performing 1-on-1 coaching sessions with clients.",
+			"Deliver trainings/seminars, write blog posts, create video content to add value.",
+			"Creating rapport to create a safe environment to deal with personal relationship issues with empathy.",
+			"Market my services and close new sales."
+		],
+		"achievements": [
+			"Delivered in-person seminars, online webinars and facilitated workshops to multiple attendees at once.",
+			"Created a 10-week course, delivered partially through self-learning and through 1-on-1 coaching.",
+			"Built an client management system for my own use using FileMaker to track client progress and sessions."
+		]
+	},
+	{
+		"id": "patrician-brothers",
+		"transferableSkills": ["customer-service", "team-player"],
+		"employmentType": "Full-Time",
+		"role": "Network Administrator",
+		"company": "Patrician Brothers Blacktown High School",
+		"location": "Sydney, Australia",
+		"locationType": "On-Site",
+		"startDate": "2008-01-01T00:00:00.000-02:00",
+		"endDate": "2008-12-01T00:00:00.000-02:00",
+		"summary": "12 Month Traineeship completing Certificate III in Information Technology.",
+		"responsibilities": [
+			"Administered the school network, both hardware and software.",
+			"Support staff and teachers on technical issues.",
+			"Managing over 200 cross-platform desktops and laptops connected to the school network."
+		]
+	}
+]
