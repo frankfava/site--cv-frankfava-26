@@ -34,6 +34,16 @@
 			"primary": "#434E5E",
 			"secondary": "#479FC8",
 			"accent": "#05505C"
+		},
+		"fonts": {
+			"family": {
+				"primary": "Archivo:wdth,wght@85..112,400..800",
+				"primary_type": "sans-serif",
+				"secondary": "Public+Sans:wght@300;400;500;600",
+				"secondary_type": "sans-serif",
+				"mono" : "IBM+Plex+Mono:wght@400;500",
+				"mono_type": "monospace"
+			}
 		}
 	},
 	"about": {

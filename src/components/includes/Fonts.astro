@@ -5,56 +5,55 @@ import { AstroFont } from "astro-font";
 type fontDefinition = {
 	full: string;
 	name: string;
-	weights: Array<number>;
-	itals: Array<number>;
+	weights: Array<string | number>;
+	widths: Array<string | number>;
+	opticalSizes: Array<string | number>;
+	slants: Array<string | number>;
+	itals: boolean;
+	type?: string;
 };
 type fontDefinitionWithUrl = fontDefinition & { url: string };
 
+type axisValue = { value: string | number; min: number; max: number };
+
 /** eg. Poppins:wght@400;500;600;700 */
-function parseFontString(fonstString: string): fontDefinition {
-	const regex = /^([^:]+)(?::(\w+)@([\d;]+))?(?::(\w+)@([\d;]+))?$/;
-	const [full, name, _weightKey, weights, _italKey, itals] = regex.exec(fonstString) || ["", "", "", ""];
+function parseFontString(fontString: string, type: string = "sans-serif"): fontDefinition {
+	const regex = /^([^:@]+)(?::([a-zA-Z,]+)@([-\d.,;]+))?$/;
+
+	const [full = "", name = "", _axisKey = "", values = ""] = regex.exec(fontString) ?? [];
+
+	function parseAxisValue(raw: string): axisValue {
+		const [min, max] = raw.split("..").map(Number);
+		return max === undefined ? { value: min, min, max: min } : { value: raw, min, max };
+	}
+
+	const axes = _axisKey ? _axisKey.split(",") : [];
+
+	const tuples: Array<Record<string, axisValue>> = !values ? [] : values.split(";").map((tuple) => Object.fromEntries(tuple.split(",").map((v, i) => [axes[i], parseAxisValue(v)])));
+
+	const valuesFor = (axis: string) => [...new Set(tuples.map((t) => t[axis]?.value).filter((v) => v !== undefined))];
+
 	return {
-		full: full as string,
+		full,
 		name,
-		weights: (weights ?? "")
-			.split(";")
-			.filter(Boolean)
-			.map((e: string) => Number.parseInt(e.trim())) as number[],
-		itals: (itals ?? "")
-			.split(";")
-			.filter(Boolean)
-			.map((e: string) => Number.parseInt(e.trim())),
+		weights: valuesFor("wght"),
+		widths: valuesFor("wdth"),
+		opticalSizes: valuesFor("opsz"),
+		slants: valuesFor("slnt"),
+		itals: tuples.some((t) => t.ital?.value === 1),
+		type,
 	};
 }
 
 /**  */
-function setupFont(fontString: string, loader: "bunny" | "google" = "bunny"): fontDefinitionWithUrl | undefined {
-	if (!fontString) {
-		return;
-	}
-	const definition = parseFontString(fontString);
+function setupFont(fontString: string, type: string = "sans-serif", loader: "bunny" | "google" = "bunny"): fontDefinitionWithUrl | undefined {
+	if (!fontString) return;
 
-	let url: string;
+	const definition = parseFontString(fontString, type);
 
-	switch (loader) {
-		case "bunny": {
-			const fontName = definition.name.toLowerCase();
-			const keys: string[] = [];
-
-			(definition.weights || []).forEach((w) => {
-				keys.push(`${w}`);
-			});
-			(definition.itals || []).forEach((w) => {
-				keys.push(`${w}i`);
-			});
-			url = `https://fonts.bunny.net/css?family=${fontName}:${keys.join(",")}`;
-			break;
-		}
-		case "google":
-			url = `https://fonts.googleapis.com/css2?family=${definition.full}&display=swap`;
-			break;
-	}
+	const host = loader === "bunny" ? "https://fonts.bunny.net" : "https://fonts.googleapis.com";
+	const family = definition.full.replace(/ /g, "+");
+	const url = `${host}/css2?family=${family}&display=swap`;
 
 	return { ...definition, url };
 }
@@ -69,24 +68,24 @@ function createAstroFontConfig(fonts: Record<string, fontDefinitionWithUrl | und
 				preload: true,
 				display: "swap",
 				name: font.name!,
-				fallback: "sans-serif",
+				fallback: font.type! || "sans-serif",
 				cssVariable: `font-${k}`,
 				googleFontsURL: font.url,
 			};
 		}) as [];
 }
 
-let fontPrimary: fontDefinitionWithUrl | undefined;
-let fontSecondary: fontDefinitionWithUrl | undefined;
+const { family: families } = FONTS ?? { family: {} };
+
+const keys = Object.keys(families ?? {}).filter((k) => !k.endsWith("_type")) as string[];
+
+const final = Object.fromEntries(keys.map((k) => [k, undefined])) as Record<string, fontDefinitionWithUrl | undefined>;
+
 if (FONTS) {
-	fontPrimary = setupFont(FONTS.family?.primary ? FONTS.family.primary : "") as fontDefinitionWithUrl | undefined;
-	fontSecondary = setupFont(FONTS.family?.secondary ? FONTS.family.secondary : "") as fontDefinitionWithUrl | undefined;
+	for (const k of keys) {
+		final[k] = setupFont(families[k as keyof typeof families] ?? "", families[`${k}_type` as keyof typeof families] ?? "sans-serif");
+	}
 }
 ---
 
-<AstroFont
-	config={createAstroFontConfig({
-		primary: fontPrimary,
-		secondary: fontSecondary,
-	})}
-/>
+<AstroFont config={createAstroFontConfig(final)} />
