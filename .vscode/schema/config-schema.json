@@ -283,10 +283,27 @@
 						"type": "string"
 					}
 				},
-				"dob": {
-					"type": "string"
+				"availability": {
+					"type": "object",
+					"properties": {
+						"status": {
+							"type": "string",
+							"description": "The status of the availability."
+						},
+						"text": {
+							"type": "string",
+							"description": "The text to display for the availability status."
+						},
+						"noticeRequired": {
+							"type": "string",
+							"description": "The notice required for the availability status."
+						}
+					},
+					"required": [
+						"status"
+					]
 				},
-				"summary": {
+				"dob": {
 					"type": "string"
 				},
 				"location": {
@@ -307,6 +324,10 @@
 						"countryCode",
 						"region"
 					]
+				},
+				"workRights": {
+					"type": "string",
+					"description": "Work rights and sponsorship requirements."
 				},
 				"nationality": {
 					"type": "array",
@@ -385,9 +406,46 @@
 				"name",
 				"jobTitles",
 				"dob",
-				"summary",
 				"location"
 			]
+		},
+		"display": {
+			"type": "object",
+			"properties": {
+				"tagline": {
+					"type": "string",
+					"description": "The tagline to display."
+				},
+				"showAvailability": {
+					"type": "boolean",
+					"description": "Whether to show the availability status.",
+					"default": true
+				},
+				"showAvatar": {
+					"type": "boolean",
+					"description": "Whether to show the avatar in the logo.",
+					"default": true
+				},
+				"footer": {
+					"type": "object",
+					"properties": {
+						"lead": {
+							"type": "object",
+							"properties": {
+								"title": {
+									"type": "string"
+								},
+								"description": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"required": [
+						"lead"
+					]
+				}
+			}
 		},
 		"socials": {
 			"type": "object",

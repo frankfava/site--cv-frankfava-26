@@ -23,6 +23,7 @@ export const THEME = parsed.theme;
 export const COLORS = parsed.colors;
 export const FONTS = parsed.fonts;
 export const FEATURES = parsed.features;
+export const DISPLAY = parsed.display;
 
 // Content
 export const ABOUT = parsed.about;
@@ -38,5 +39,6 @@ export default {
 	FONTS,
 	FEATURES,
 	ABOUT,
+	DISPLAY,
 	SOCIALS,
 };

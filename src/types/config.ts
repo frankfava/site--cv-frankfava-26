@@ -10,6 +10,7 @@ export namespace Config {
 		analytics?: App.Analytics.Config;
 		ui?: App.UIConfig;
 		about?: About.Base;
+		display?: Display.Base;
 		socials?: Socials.Links;
 	};
 
@@ -21,6 +22,7 @@ export namespace Config {
 		analytics: App.Analytics.Config;
 		ui: App.UIConfig;
 		about: About.Base;
+		display: Display.Base;
 		socials: Socials.Links;
 	};
 
@@ -51,6 +53,7 @@ export namespace Config {
 				languages: About.Language[];
 			};
 		};
+		display: Display.Base;
 		features: {};
 		socials: SocialsManager & Record<Socials.LinkKey, Socials.Link> & ReturnType<SocialsManager["get"]>;
 	};
@@ -184,12 +187,19 @@ export namespace About {
 	export type Base = {
 		name: string;
 		jobTitles: string | string[];
-		summary?: string;
+		availability?: Availability;
 		dob?: Date | string;
 		location?: Location | undefined;
+		workRights?: string;
 		nationality?: Nationality | Nationality[];
 		linguistics?: Linguistics;
 		profileImages: Images;
+	};
+
+	export type Availability = {
+		status: "available" | "unavailable" | "notice_required";
+		text: string;
+		noticeRequired: "Minimal" | "Standard" | "Extended" | "None" | string;
 	};
 
 	export type Location = {
@@ -218,6 +228,23 @@ export namespace About {
 		name: string;
 		url: string | URL;
 	}[];
+}
+
+export namespace Display {
+
+	export type Base = {
+		tagline: string;
+		showAvailability: boolean;
+		showAvatar: boolean;
+		footer: Footer;
+	};
+	
+	export type Footer = {
+		lead: {
+			title: string;
+			description: string;
+		};
+	};
 }
 
 export namespace Socials {

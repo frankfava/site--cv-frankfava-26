@@ -142,6 +142,9 @@ export function addUtils(config: Config.Complete) {
 		},
 	};
 
+	// Display
+	const display: Config.Final["display"] = config.display;
+
 	// Features
 	const features: Config.Final["features"] = {};
 
@@ -157,6 +160,7 @@ export function addUtils(config: Config.Complete) {
 		colors,
 		fonts,
 		about,
+		display,
 		features,
 		socials,
 	};
