@@ -153,7 +153,7 @@ const currentPath = getCurrentPath(Astro.url);
 					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" && !!beforeActions ? <Fragment set:html={beforeActions} /> : ""}
 					<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
 					{showSocialLinks && <SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
-					{showToggleTheme && <ToggleTheme class="p-2 rounded-md" iconClass="w-6 h-6" />}
+					{showToggleTheme && <ToggleTheme class="p-2 rounded-md text-ink-2 hover:text-accent border-line hover:border-accent" iconClass="w-6 h-6" />}
 					{Astro.slots.has("afterActions") && typeof afterActions == "string" && !!afterActions ? <Fragment set:html={afterActions} /> : ""}
 				</div>
 			</div>
