@@ -1,0 +1,49 @@
+---
+import ModuleWrapper from "@/components/ui/modules/ModuleWrapper.astro";
+import type { AssembledSection } from "@/lib/blueprints";
+import type { AstroInstance, MarkdownInstance } from "astro";
+
+export interface Props {
+	section: AssembledSection;
+}
+
+const { section } = Astro.props;
+
+let output: AstroInstance | MarkdownInstance<Record<string, any>> | undefined = undefined;
+const isAsync = (fn: unknown): fn is (...args: unknown[]) => Promise<unknown> => typeof fn === "function" && fn.constructor?.name === "AsyncFunction";
+
+if (isAsync(section.content)) {
+	// Import the md or astro
+	const module = (await section.content()) as AstroInstance | MarkdownInstance<Record<string, any>>;
+
+	output = module;
+
+	if (Object.hasOwn(module, "compiledContent")) {
+		section.content = await (module as MarkdownInstance<Record<string, any>>).compiledContent();
+	}
+}
+---
+
+<>
+	{
+		output && output.file.includes(".astro") && output ? (
+			<output.default
+				{...{
+					...section,
+					id: section.id,
+					header: section.header ?? {},
+				}}
+			/>
+		) : (
+			<ModuleWrapper
+				{...{
+					...section,
+					id: section.id,
+					header: section.header ?? {},
+				}}
+			>
+				{typeof section.content == "string" && <Fragment set:html={section.content} />}
+			</ModuleWrapper>
+		)
+	}
+</>

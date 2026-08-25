@@ -1,0 +1,60 @@
+---
+import ModuleWrapper from "@/components/ui/modules/ModuleWrapper.astro";
+import BlueprintSectionDisplay from "./BlueprintSectionDisplay.astro";
+import type { AssembledSection } from "@/lib/blueprints";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+	section: AssembledSection;
+}
+
+const { section } = Astro.props;
+
+// Component-driven visibility: a section's component module may export a named
+// `resolve(locals)` function. It may return a boolean OR the renderable data
+// itself (e.g. an array the body will iterate). Empty array → hide;
+// non-empty / truthy → show. Keeps the rule next to the renderer.
+// NOTE: Any helper functions must be exported so Astro hoists it to module scope alongside `resolve` - without `export`, frontmatter declarations stay scoped to the component render function.
+const isAsyncLoader = (fn: unknown): fn is () => Promise<unknown> => typeof fn === "function" && fn.constructor?.name === "AsyncFunction";
+
+async function checkResolve(content: AssembledSection["content"]): Promise<boolean> {
+	if (!isAsyncLoader(content)) return true;
+	const mod = (await content()) as { resolve?: (locals: unknown) => unknown };
+	if (typeof mod.resolve !== "function") return true;
+	const result = await mod.resolve(Astro.locals.blueprint);
+	if (Array.isArray(result)) return result.length > 0;
+	return !!result;
+}
+
+const isHidden = section.hidden || !(await checkResolve(section.content));
+---
+
+<>
+	{
+		Array.isArray(section.sections) && !!section.sections.length ? (
+			<>
+				{!isHidden && (
+					<ModuleWrapper
+						{...{
+							...section,
+							id: section.id,
+							bg: "bg-gray-50 dark:bg-gray-800",
+							forceLayout: "wide",
+							header: {
+								headerAlign: "center",
+								...(section.header ?? {}),
+							},
+						}}
+					>
+						{section.icon && <Icon slot="beforeHeader" name={section.icon} class="w-10 h-10 leading-4 inline-block mb-3" />}
+					</ModuleWrapper>
+				)}
+				{section.sections.map((f) => (
+					<>{!f.hidden && <BlueprintSectionDisplay section={f} />}</>
+				))}
+			</>
+		) : (
+			<>{!isHidden && <BlueprintSectionDisplay section={section} />}</>
+		)
+	}
+</>

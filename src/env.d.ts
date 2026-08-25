@@ -46,6 +46,13 @@ interface Window {
 	Alpine: import("alpinejs").Alpine;
 }
 
+declare namespace App {
+	interface Locals {
+		/** The active page's blueprint entry. */
+		blueprint?: import("@/lib/blueprints").BlueprintEntry;
+	}
+}
+
 /** Site URL */
 declare var SITE_URL: string;
 /** Base URL */

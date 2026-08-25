@@ -1,0 +1,12 @@
+---
+import BlueprintSectionBuild from "./BlueprintSectionBuild.astro";
+import type { AssembledBlueprint } from "@/lib/blueprints";
+
+export interface Props {
+	blueprint: AssembledBlueprint;
+}
+
+const { blueprint } = Astro.props;
+---
+
+{blueprint.map((section) => <BlueprintSectionBuild section={section} />)}

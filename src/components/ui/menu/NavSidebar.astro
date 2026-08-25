@@ -1,0 +1,98 @@
+---
+import { SOCIALS } from "site:config";
+import MenuItems from "@/components/ui/menu/MenuItems.astro";
+import MenuItem from "@/components/ui/menu/MenuItem.astro";
+import { twMerge } from "tailwind-merge";
+
+import type { Link } from "@/types";
+import type { BlueprintBuilder, BlueprintSchema } from "@/lib/blueprints";
+import SocialLinks from "./SocialLinks.astro";
+
+export interface Props {
+	class?: string;
+	links?: Array<Link>;
+	blueprint?: BlueprintBuilder<BlueprintSchema>;
+}
+
+const { links = [], blueprint, class: className = "" } = Astro.props;
+
+const sidebarSections = blueprint ? blueprint?.getSidebarSections() : undefined;
+---
+
+{
+	(!!links.length || !!sidebarSections) && (
+		<aside id="sidebar" class={twMerge("bottom-0 left-0 z-30 fixed border-gray-300 bg-gray-100 sm:shadow-md border-r h-full overflow-y-auto", className)}>
+			<div class="flex flex-col h-full">
+				<div
+					id="sidebar-social"
+					class="p-4 text-center"
+					class:list={{
+						"border-b border-gray-200": !!links.length,
+					}}
+				>
+					<SocialLinks
+						socialLinks={SOCIALS.toArray()}
+						showText={false}
+						class="flex justify-center gap-3"
+						linkClass="rounded-none p-0 hover:bg-transparent hover:text-accent"
+						iconClass="w-7 h-7"
+					/>
+				</div>
+				{!!links.length && (
+					<div
+						id="sidebar-nav"
+						class="py-6 p-4"
+						class:list={{
+							"border-b border-gray-200": sidebarSections,
+						}}
+					>
+						<ul class="flex flex-col gap-1 text-[0.8rem]">
+							<MenuItems
+								{...{
+									links,
+									showLinkIcons: true,
+									linkClass: "!px-0",
+								}}
+							/>
+						</ul>
+					</div>
+				)}
+				{sidebarSections && (
+					<nav id="blueprint-nav" class="py-6 p-4">
+						<ul class="flex flex-col gap-2 text-[0.8rem]">
+							{sidebarSections.map((section) => (
+								<>
+									{(!section?.hidden || !!(section?.sections || []).length) && (
+										<MenuItem
+											{...{
+												...section.convertToMenuLink(),
+												href: (section.hidden ? (!!(section?.sections || []).length ? (section?.sections || [])[0] : section) : section).convertToMenuLink()?.href,
+												linkClass: "lg:px-0 py-1.5 !font-semibold leading-4",
+												iconClass: "bg-primary rounded-full text-white p-2 h-8 w-8",
+											}}
+										>
+											{!!(section?.sections || []).length && (
+												<ul class="flex flex-col text-[0.8rem]">
+													{(section?.sections || []).map((section) => (
+														<MenuItem
+															{...{
+																...section.convertToMenuLink(),
+																class: "ps-6",
+																showLinkIcon: false,
+																linkClass: "lg:px-1 py-1 leading-4 border-0 border-l-2 border-gray-300 hover:border-primary-500 !pl-3",
+															}}
+														/>
+													))}
+												</ul>
+											)}
+										</MenuItem>
+									)}
+								</>
+							))}
+						</ul>
+					</nav>
+				)}
+			</div>
+		</aside>
+	)
+}

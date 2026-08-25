@@ -13,6 +13,7 @@ import icon from "astro-icon";
 
 import { astroBuilderHelper } from "./integrations/astroBuilderHelper";
 import { astroSiteConfigHelper } from "./integrations/astroSiteConfigHelper";
+import { astroBlueprintBuilder } from "./integrations/astroBlueprintBuilder";
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -68,5 +69,7 @@ export default defineConfig({
 		}),
 		// Update `robots.txt` with `sitemap-index.xml
 		astroBuilderHelper(),
+		// Watch Blueprints for HMR
+		astroBlueprintBuilder(),
 	],
 });

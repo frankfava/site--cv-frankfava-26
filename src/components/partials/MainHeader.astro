@@ -4,11 +4,15 @@ import { SOCIALS } from "site:config";
 import Logo from "@/components/Logo.astro";
 import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
 import ToggleTheme from "@/components/ui/menu/ToggleTheme.astro";
+import ToggleMenu from "@/components/ui/menu/ToggleMenu.astro";
 import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
-import type { Link, _CallToAction } from "@/types";
+import MenuItems from "@/components/ui/menu/MenuItems.astro";
+import NavSidebar from "@/components/ui/menu/NavSidebar.astro";
+import { Icon } from "astro-icon/components";
 
+import type { Link, _CallToAction } from "@/types";
 import { getCurrentPath, getHomePermalink } from "@/utils/permalinks";
-import MenuItems from "../ui/menu/MenuItems.astro";
+import type { BlueprintBuilder, BlueprintSchema } from "@/lib/blueprints";
 
 export interface Props {
 	id?: string;
@@ -30,6 +34,7 @@ export interface Props {
 	showBookmarks?: boolean;
 	shrinkHeader?: boolean;
 	position?: "left" | "right" | "center";
+	blueprint?: BlueprintBuilder<BlueprintSchema>;
 }
 
 const {
@@ -52,10 +57,11 @@ const {
 	shrinkHeader = false,
 	showLinkIcons,
 	position = "center",
+	blueprint,
 } = Astro.props;
 
 // Sidebar visibility comes from the active entry's layout config - Defaults to true
-const showSidebar = true; //Astro.locals.blueprint?.config?.layout?.showSidebar ?? true;
+const showSidebar = Astro.locals.blueprint?.config?.layout?.showSidebar ?? true;
 
 const currentPath = getCurrentPath(Astro.url);
 ---
@@ -93,9 +99,17 @@ const currentPath = getCurrentPath(Astro.url);
 			]}
 		>
 			<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" }, "flex items-center gap-2 md:gap-5"]}>
+				{(!!links.length || (blueprint && showSidebar)) && <ToggleMenu class="mobile-toggle" />}
 				<a class="flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
 					<Logo class="site-logo" />
 				</a>
+				{
+					(!!links.length || (blueprint && showSidebar)) && (
+						<ToggleMenu class="sidebar-toggle">
+							<Icon name="ph:sidebar-duotone" class="w-8 h-8" />
+						</ToggleMenu>
+					)
+				}
 			</div>
 			{Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" ? <Fragment set:html={beforeMenu} /> : ""}
 			<div
@@ -133,4 +147,5 @@ const currentPath = getCurrentPath(Astro.url);
 			</div>
 		</div>
 	</header>
+	{(!!links.length || (blueprint && showSidebar)) && <NavSidebar links={links} blueprint={blueprint} />}
 </>
