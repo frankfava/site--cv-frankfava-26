@@ -2,7 +2,11 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<a id="scroll-to-top" href="#" class="flex justify-center items-center border-0 print:hidden will-change-[box-shadow] p-3 btn btn-primary">
+<a
+	id="scroll-to-top"
+	href="#"
+	class="right-[15px] bottom-0 z-10! fixed flex justify-center items-center bg-surface hover:bg-accent shadow-(--c-shadow) p-3 border border-line hover:border-accent rounded-md text-ink-2 hover:text-white transition-all duration-250 ease-linear invisible hover:animate-none opacity-0 print:hidden [&.active]:bottom-[15px] [&.active]:opacity-100 [&.active]:visible"
+>
 	<Icon name="ph:arrow-fat-up" class="w-5 h-5" />
 </a>
 
@@ -30,29 +34,21 @@ import { Icon } from "astro-icon/components";
 </script>
 
 <style>
-	@reference "../../../assets/css/main.css";
-
+	/* Keyframes are the one thing here a utility cannot express. The ring is the
+	   accent at low alpha, so it reads in both colour modes. */
 	@keyframes scrollPulse {
 		0% {
-			box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0.4);
+			box-shadow: 0 0 0 0 rgba(var(--c-accent-rgb), 0.4);
 		}
 		70% {
-			box-shadow: 0 0 0 10px rgba(var(--color-primary-rgb), 0);
+			box-shadow: 0 0 0 10px rgba(var(--c-accent-rgb), 0);
 		}
 		100% {
-			box-shadow: 0 0 0 0 rgba(var(--color-primary-rgb), 0);
+			box-shadow: 0 0 0 0 rgba(var(--c-accent-rgb), 0);
 		}
 	}
 
-	#scroll-to-top {
-		@apply right-[15px] bottom-0 z-10! fixed opacity-0 shadow-[0_0_0_0_rgba(var(--color-primary-rgb),0.3)] rounded-md transition-all animate-[scrollPulse_2s_forwards_infinite] duration-[0.25s] ease-linear invisible border border-primary-100 bg-white;
-
-		&.active {
-			@apply bottom-[15px] opacity-100 visible;
-		}
-
-		&:hover {
-			@apply animate-none text-white bg-primary border-primary-700;
-		}
+	#scroll-to-top.active {
+		animation: scrollPulse 2s forwards infinite;
 	}
 </style>

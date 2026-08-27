@@ -12,8 +12,8 @@ const { class: className = "", showImage = DISPLAY.showAvatar ?? false } = Astro
 
 <div class="flex items-center gap-3 min-h-12 whitespace-nowrap self-center" class:list={[className]}>
 	{showImage && !!ABOUT.getImage("bw") && <Image src={ABOUT.getImage("bw") as string} width={90} height={90} alt={`${ABOUT.name} Face`} class="rounded-full w-auto max-h-12" />}
-	<span class="font-primary uppercase font-extrabold! text-ink! hover:text-accent! [font-variation-settings:'wdth'_88] whitespace-nowrap text-lg md:text-xl"
+	<span class="font-primary uppercase font-extrabold! text-ink! hover:text-accent! [font-variation-settings:'wdth'_88] whitespace-nowrap text-lg"
 		>{ABOUT.firstName}
-		<span class="font-normal ml-1">{ABOUT.lastName}</span></span
+		<span class="ml-1">{ABOUT.lastName}</span></span
 	>
 </div>

@@ -1,21 +1,21 @@
 <style is:inline>
 	:root {
-		--color-text-heading: var(--color-primary-600);
-		--color-text-default: var(--color-primary-900);
-		--color-text-muted: rgba(var(--color-gray-500-rgb), 0.7);
+		--color-text-heading: var(--c-ink);
+		--color-text-default: var(--c-ink);
+		--color-text-muted: var(--c-ink-2);
 
-		--color-bg-page: rgb(255 255 255);
-		--color-bg-page-dark: var(--color-primary-600);
-		--color-bg-header: var(--color-bg-page);
+		--color-bg-page: var(--c-ground);
+		--color-bg-page-dark: var(--c-sunk);
+		--color-bg-header: var(--c-surface);
 
 		--swiper-navigation-color: var(--color-accent);
 		--swiper-pagination-color: var(--color-accent);
 		--swiper-pagination-bullet-inactive-color: var(--color-gray-800);
 
-		--scroll-progress-bg: var(--color-primary-600);
-		--scroll-progress-bar-bg: var(--color-green-400);
+		--scroll-progress-bg: var(--c-line);
+		--scroll-progress-bar-bg: var(--c-accent);
 		--scroll-progress-height: 0.25rem;
-		--header-height: 5rem;
+		--header-height: 4rem;
 		--sidebar-width: 250px;
 
 		::selection {
@@ -23,13 +23,6 @@
 		}
 	}
 	.dark {
-		--color-text-heading: var(--color-gray-100);
-		--color-text-default: var(--color-gray-200);
-		--color-text-muted: rgba(var(--color-white-rgb), 0.5);
-
-		--color-bg-page: var(--color-primary, var(--color-bg-page-dark));
-		--color-bg-header: var(--color-primary-700, var(--color-bg-page));
-
 		::selection {
 			background-color: black;
 			color: snow;

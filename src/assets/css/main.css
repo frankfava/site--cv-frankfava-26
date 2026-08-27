@@ -29,6 +29,32 @@
 	color: var(--color-text-muted);
 }
 
+@utility eyebrow {
+	font-family: var(--font-mono);
+	font-size: 12.58px;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+/** Figures that need to line up column-wise. */
+@utility tab {
+	font-variant-numeric: tabular-nums;
+}
+
+/** The display treatment for headings inside the indexed shell. Applied by the
+ *  component that owns the heading rather than inherited from a page wrapper. */
+@utility heading-display {
+	margin: 0;
+	color: var(--c-ink);
+	font-family: var(--font-primary);
+	font-weight: 700;
+	line-height: 1.08;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+	font-variation-settings: "wdth" 96;
+}
+
 /* custom, reusable component classes */
 @utility btn {
 	@apply inline-flex justify-center items-center border-gray-400 hover:border-gray-600 dark:hover:border-slate-800 dark:border-slate-500 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 px-[16px] py-[9px] md:px-8 border rounded-[5px] focus:ring-blue-500 focus:ring-2 focus:ring-offset-blue-200 focus:ring-offset-2 font-normal text-base text-center text-page dark:text-slate-300 leading-snug transition duration-200 cursor-pointer ease-in text-[15.64px] whitespace-nowrap;
@@ -51,7 +77,7 @@
 }
 
 @utility btn-accent {
-	@apply btn border-accent hover:border-accent-700 dark:hover:border-accent-700 dark:border-accent bg-accent hover:brightness-108 dark:bg-accent text-white;
+	@apply btn border-accent hover:border-accent-700 dark:hover:border-accent-700 dark:border-accent bg-accent hover:bg-accent-800 dark:bg-accent text-white;
 }
 
 @utility btn-outline-accent {
@@ -154,7 +180,7 @@
 #header {
 	#header-inner {
 		transition-property: height;
-		@apply h-(--header-height) duration-200 ease-linear;
+		@apply h-(--header-height) border-b border-line duration-200 ease-linear;
 	}
 
 	#header-nav {
@@ -177,5 +203,220 @@
 
 	&[data-sticky-header][data-scroll-progress="show"] ~ #wrapper {
 		@apply pt-[calc(var(--header-height)+var(--scroll-progress-height))];
+	}
+}
+
+html {
+	font-size: 17px;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+[data-cv-shell] {
+	--bay: 344px;
+	/* Overridden per page from the blueprint's `layout.contentWidth`. */
+	--content-width: 1120px;
+	/* Re-measured by `initCvBay` in main.js: the nav wraps to two rows
+	   on a narrow screen, and a hardcoded height puts the off-canvas panel and every
+	   anchor jump underneath it. */
+	--nav-height: 56px;
+}
+
+@layer base {
+	[data-cv-shell] p {
+		margin: 0;
+	}
+
+	[data-cv-shell] a {
+		color: var(--c-accent);
+		font-weight: inherit;
+		text-decoration: none;
+	}
+
+	[data-cv-shell] .font-semibold a,
+	[data-cv-shell] a.font-semibold {
+		text-decoration: none;
+	}
+
+	[data-cv-shell] :focus-visible {
+		outline: 2px solid var(--c-accent);
+		outline-offset: 3px;
+		border-radius: 3px;
+	}
+
+	[data-cv-shell] svg text {
+		font-family: var(--font-mono);
+	}
+}
+
+/* ---------- scrollbars, themed ---------- */
+
+* ,
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--c-line) transparent;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--c-line);
+	border-radius: 99px;
+	border: 3px solid var(--c-ground);
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--c-ink-3);
+	background-clip: padding-box;
+}
+
+.bay::-webkit-scrollbar-thumb {
+	border-color: var(--c-sunk);
+}
+
+/* ---------- the shell ---------- */
+
+@media (min-width: 1024px) {
+	.bay {
+		min-height: calc(100vh - var(--nav-height));
+	}
+
+	.bay.is-stuck {
+		position: fixed;
+		left: 0;
+		top: var(--nav-height);
+		bottom: 0;
+		width: var(--bay);
+		overflow-y: auto;
+	}
+}
+
+/* ---------- collapse toggle + right rail ---------- */
+
+.scrim {
+	display: none;
+}
+
+.rail {
+	display: none;
+}
+
+@media (min-width: 1024px) {
+	body:not(.nav-menu-open) [data-cv-shell] {
+		--bay: 0px;
+	}
+
+	body:not(.nav-menu-open) .bay {
+		opacity: 0;
+		transform: translateX(-18px);
+		pointer-events: none;
+		padding-left: 0;
+		padding-right: 0;
+		border-right-color: transparent;
+	}
+
+	body:not(.nav-menu-open) .rail {
+		display: flex;
+	}
+}
+
+/* ---------- cards inside the bay ---------- */
+
+.toc a.is-on {
+	background: var(--c-accent-soft);
+	color: var(--c-ink);
+	font-weight: 600;
+}
+
+.toc a.is-on .n {
+	color: var(--c-accent);
+}
+
+/* ---------- content column ---------- */
+
+/* The column is the full width of its grid track. Each section then centres
+   its own measure inside it, so a filterable grid and a column of prose can
+   sit on one page at different widths and still share one hairline that
+   spans the column. Same idea as the old ModuleWrapper's isFullWidth, made
+   an explicit measure rather than a boolean. */
+.sec {
+	--sec-width: var(--content-width);
+	--sec-gutter: 42px;
+	padding: 64px max(var(--sec-gutter), (100% - var(--sec-width)) / 2);
+	border-top: 1px solid var(--c-line-2);
+	scroll-margin-top: calc(var(--nav-height) + 18px);
+}
+
+@media (max-width: 539.98px) {
+	.sec {
+		--sec-gutter: 20px;
+	}
+}
+
+.sec:first-child {
+	border-top: 0;
+	padding-top: 52px;
+}
+
+/* ---------- mobile: the bay becomes a chip strip, the rail goes away ---------- */
+
+/* These override rules that appear above them. Media queries add no
+   specificity, so an override placed earlier in the sheet loses. */
+@media (max-width: 1023.98px) {
+	.rail {
+		display: none !important;
+	}
+
+	/* On a phone the bay stops being a bay and becomes the menu: a full-width
+	   panel that slides in from the left and covers the page, the same shape
+	   as the existing site's mobile navigation. The nav stays above it, so
+	   the toggle you opened it with is the toggle you close it with. */
+	body.nav-menu-open .bay {
+		left: 0;
+	}
+
+	.scrim {
+		display: block;
+		position: fixed;
+		inset: var(--nav-height) 0 0;
+		z-index: 59;
+		background: rgba(0, 0, 0, 0.42);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.22s ease;
+	}
+
+	body.nav-menu-open .scrim {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+}
+
+/* The label sits beside the text on a wide screen. At phone width that
+   leaves the paragraph a measure of about 20 characters, so it stacks.
+   A deliberate divergence from the mockup, which does not. */
+@media (max-width: 539.98px) {
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
 	}
 }
