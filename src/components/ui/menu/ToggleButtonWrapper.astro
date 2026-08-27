@@ -1,0 +1,25 @@
+---
+import { twMerge } from "tailwind-merge";
+
+export interface Props {
+	label?: string;
+	class?: string;
+	ariaExpanded?: boolean;
+	ariaControls?: string;
+	// The `data-*` attribute `main.js` binds to.
+	toggleAttr?: string;
+}
+
+const { label = "Toggle", class: className = "", ariaExpanded = false, ariaControls = "bay", toggleAttr = "data-menu-toggle" } = Astro.props;
+---
+
+<button
+	type="button"
+	class={twMerge("flex justify-center items-center rounded cursor-pointer group", className)}
+	aria-label={label}
+	aria-expanded={ariaExpanded ? "true" : "false"}
+	aria-controls={ariaControls}
+	{...{ [toggleAttr]: "" }}
+>
+	<slot />
+</button>
