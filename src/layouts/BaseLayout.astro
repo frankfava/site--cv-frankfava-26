@@ -12,17 +12,20 @@ import Analytics from "@/components/includes/Analytics.astro";
 import Fonts from "@/components/includes/Fonts.astro";
 
 import type { MetaData } from "@/types";
+import { twMerge } from "tailwind-merge";
 
 export interface Props {
 	metadata?: MetaData;
+	htmlClass?: string;
+	bodyClass?: string;
 }
 
-const { metadata = {} } = Astro.props;
+const { metadata = {}, htmlClass = "", bodyClass = "" } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection}>
+<html lang={language} dir={textDirection} class:list={htmlClass}>
 	<head>
 		<Favicons />
 		<MetaTags {...metadata} />
@@ -32,7 +35,7 @@ const { language, textDirection } = I18N;
 		<!-- <JsApplySidebarState /> -->
 		<CustomStyles />
 	</head>
-	<body id="top" class="bg-page text-base text-page antialiased tracking-tight">
+	<body id="top" class:list={twMerge(["bg-page text-base text-page antialiased tracking-tight", bodyClass])}>
 		<slot />
 
 		<script src="../assets/js/main.js"></script>

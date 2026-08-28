@@ -1,34 +1,23 @@
 ---
-import Layout from "@/layouts/BaseLayout.astro";
+import Layout, { type Props as BaseLayoutProps } from "@/layouts/BaseLayout.astro";
 import MainHeader, { type Props as HeaderProps } from "@/components/includes/MainHeader.astro";
 import MainFooter, { type Props as FooterProps } from "@/components/includes/MainFooter.astro";
 import ScrollTop from "@/components/ui/menu/ScrollTop.astro";
-import type { MetaData } from "@/types";
 
-export interface Props {
-	metadata?: MetaData;
+export interface Props extends BaseLayoutProps {
 	header?: HeaderProps;
 	footer?: FooterProps;
 	showScrollTop?: boolean;
 }
 
-const {
-	metadata,
-	header = {
-		showToggleTheme: true,
-	},
-	footer = {
-		showSocialLinks: true,
-		footNote: `Thank you for the consideration.`,
-	},
-	showScrollTop = true,
-} = Astro.props;
+const { header, footer, showScrollTop = true, ...baseLayoutProps } = Astro.props;
 ---
 
-<Layout metadata={metadata}>
+<Layout {...baseLayoutProps}>
 	<slot name="header">
 		<MainHeader {...header}>
 			<slot name="logo" slot="logo" />
+			<slot name="sidebarToggle" slot="sidebarToggle" />
 			<slot name="beforeMenu" slot="beforeMenu" />
 			<slot name="afterMenu" slot="afterMenu" />
 			<slot name="beforeActions" slot="beforeActions" />
