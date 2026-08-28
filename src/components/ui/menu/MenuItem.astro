@@ -17,9 +17,9 @@ const { text, href, icon, showLinkIcon = true, currentPath = `/${trimSlash(new U
 <li class:list={[className]}>
 	<a
 		class:list={[
-			twMerge("border border-transparent hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass),
+			twMerge("border border-transparent text-ink hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass),
 			{
-				"aw-link-active bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800": href === currentPath,
+				"link-active bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800": href === currentPath,
 			},
 		]}
 		href={href}
