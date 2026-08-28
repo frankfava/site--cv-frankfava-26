@@ -97,7 +97,7 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			storageKey: "sidebarOpen",
 			autoHideAt: "2xl",
 			toggleAttr: "data-menu-toggle",
-			defaultOpen: true,
+			onLoad: "open",
 		},
 		socials: {},
 	};

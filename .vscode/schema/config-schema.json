@@ -454,6 +454,45 @@
 				}
 			}
 		},
+		"sidebar": {
+			"type": "object",
+			"properties": {
+				"storageKey": {
+					"type": "string",
+					"description": "localStorage key holding the visitor's open/closed preference.",
+					"default": "sidebarOpen"
+				},
+				"autoHideAt": {
+					"type": "string",
+					"description": "Below this breakpoint the sidebar is off-canvas by default and closes on navigation.",
+					"enum": [
+						"sm",
+						"md",
+						"lg",
+						"xl",
+						"2xl",
+						"3xl",
+						"4xl"
+					],
+					"default": "2xl"
+				},
+				"toggleAttr": {
+					"type": "string",
+					"description": "The `data-*` attribute every toggle carries.",
+					"default": "data-menu-toggle"
+				},
+				"onLoad": {
+					"type": "string",
+					"description": "What a first-time visitor gets, before any preference exists.",
+					"default": "open",
+					"enum": [
+						"open",
+						"closed",
+						"reveal"
+					]
+				}
+			}
+		},
 		"socials": {
 			"type": "object",
 			"properties": {

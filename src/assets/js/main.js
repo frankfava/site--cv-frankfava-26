@@ -81,6 +81,12 @@ function initSidebar() {
 			sidebar.close();
 		}
 	});
+
+	// Auto Show Sidebar (desktop only, respect saved preference)
+	setTimeout(() => {
+		if(sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).matches || !sidebar.preference()) return;
+		sidebar.open();
+	}, 500);
 }
 
 /**
