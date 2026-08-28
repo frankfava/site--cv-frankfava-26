@@ -12,7 +12,10 @@
 	--text-base--line-height: 1.625;
 }
 
-/**  single-purpose classes */
+/** ========================
+* single-purpose classes
+========================= */
+
 @utility bg-header {
 	background-color: var(--color-bg-header);
 }
@@ -42,8 +45,6 @@
 	font-variant-numeric: tabular-nums;
 }
 
-/** The display treatment for headings inside the indexed shell. Applied by the
- *  component that owns the heading rather than inherited from a page wrapper. */
 @utility heading-display {
 	margin: 0;
 	color: var(--c-ink);
@@ -55,7 +56,10 @@
 	font-variation-settings: "wdth" 96;
 }
 
-/* custom, reusable component classes */
+/* ========================
+* custom, reusable component classes
+========================= */
+
 @utility btn {
 	@apply inline-flex justify-center items-center border-gray-400 hover:border-gray-600 dark:hover:border-slate-800 dark:border-slate-500 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 px-[16px] py-[9px] md:px-8 border rounded-[5px] focus:ring-blue-500 focus:ring-2 focus:ring-offset-blue-200 focus:ring-offset-2 font-normal text-base text-center text-page dark:text-slate-300 leading-snug transition duration-200 cursor-pointer ease-in text-[15.64px] whitespace-nowrap;
 }
@@ -88,7 +92,10 @@
 	@apply btn hover:border-primary/10;
 }
 
-/* Setting up the initial styling environment + Default styles. */
+/* ========================
+* Setting up the initial styling environment + Default styles.
+========================= */
+
 @layer base {
 	body {
 		@apply font-normal leading-relaxed;
@@ -144,15 +151,18 @@
 	}
 
 	p {
-		@apply mb-3;
+		margin: 0;
 	}
 
 	a {
-		@apply font-semibold text-[#005c87] hover:text-[#2E6100];
+		color: var(--c-accent);
+		font-weight: inherit;
+		text-decoration: none;
+		transition: color 0.15s ease;
 	}
 
-	.font-semibold a {
-		@apply underline;
+	a:hover {
+		color: var(--c-link-hover);
 	}
 
 	b,
@@ -166,6 +176,21 @@
 
 	.logo-link {
 		@apply !text-inherit;
+	}
+}
+
+/* ========================
+* Global styles
+========================= */
+
+html {
+	font-size: 17px;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
 	}
 }
 
@@ -206,47 +231,21 @@
 	}
 }
 
-html {
-	font-size: 17px;
-	scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
-}
-
 @layer base {
-	[data-cv-shell] p {
-		margin: 0;
-	}
-
-	[data-cv-shell] a {
-		color: var(--c-accent);
-		font-weight: inherit;
-		text-decoration: none;
-	}
-
-	[data-cv-shell] .font-semibold a,
-	[data-cv-shell] a.font-semibold {
-		text-decoration: none;
-	}
-
-	[data-cv-shell] :focus-visible {
+	:focus-visible {
 		outline: 2px solid var(--c-accent);
 		outline-offset: 3px;
 		border-radius: 3px;
 	}
 
-	[data-cv-shell] svg text {
+	svg text {
 		font-family: var(--font-mono);
 	}
 }
 
 /* ---------- scrollbars, themed ---------- */
 
-* ,
+*,
 html {
 	scrollbar-width: thin;
 	scrollbar-color: var(--c-line) transparent;
@@ -279,21 +278,6 @@ html {
 
 /* ---------- the shell ---------- */
 
-@media (min-width: 1024px) {
-	.bay {
-		min-height: calc(100vh - var(--header-height));
-	}
-
-	.bay.is-stuck {
-		position: fixed;
-		left: 0;
-		top: var(--header-height);
-		bottom: 0;
-		width: var(--sidebar-width);
-		overflow-y: auto;
-	}
-}
-
 /* ---------- collapse toggle + right rail ---------- */
 
 .scrim {
@@ -305,11 +289,11 @@ html {
 }
 
 @media (min-width: 1024px) {
-	body:not(.nav-menu-open) [data-cv-shell] {
+	html:not(.nav-menu-open) {
 		--sidebar-width: 0px;
 	}
 
-	body:not(.nav-menu-open) .bay {
+	html:not(.nav-menu-open) .bay {
 		opacity: 0;
 		transform: translateX(-18px);
 		pointer-events: none;
@@ -318,7 +302,7 @@ html {
 		border-right-color: transparent;
 	}
 
-	body:not(.nav-menu-open) .rail {
+	html:not(.nav-menu-open) .rail {
 		display: flex;
 	}
 }
@@ -335,8 +319,6 @@ html {
 	color: var(--c-accent);
 }
 
-/* ---------- content column ---------- */
-
 /* ---------- mobile: the bay becomes a chip strip, the rail goes away ---------- */
 
 /* These override rules that appear above them. Media queries add no
@@ -350,7 +332,7 @@ html {
 	   panel that slides in from the left and covers the page, the same shape
 	   as the existing site's mobile navigation. The nav stays above it, so
 	   the toggle you opened it with is the toggle you close it with. */
-	body.nav-menu-open .bay {
+	html.nav-menu-open .bay {
 		left: 0;
 	}
 
@@ -365,18 +347,11 @@ html {
 		transition: opacity 0.22s ease;
 	}
 
-	body.nav-menu-open .scrim {
+	html.nav-menu-open .scrim {
 		opacity: 1;
 		pointer-events: auto;
 	}
-
 }
-
-/* The label sits beside the text on a wide screen. At phone width that
-   leaves the paragraph a measure of about 20 characters, so it stacks.
-   A deliberate divergence from the mockup, which does not. */
-@media (max-width: 539.98px) {
-	}
 
 @media (prefers-reduced-motion: reduce) {
 	*,

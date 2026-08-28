@@ -1,0 +1,16 @@
+---
+import { SIDEBAR } from "site:config";
+import { BREAKPOINTS } from "@/lib/_theme.generated";
+---
+
+<script is:inline define:vars={{ SIDEBAR, BREAKPOINTS }}>
+	try {
+		const open = SIDEBAR.storageKey in localStorage ? localStorage.getItem(SIDEBAR.storageKey) === "true" : SIDEBAR.defaultOpen;
+		const autoHideAt = BREAKPOINTS[SIDEBAR.autoHideAt] ?? BREAKPOINTS["2xl"];
+
+		// Apply the open class if the sidebar is open and the viewport is smaller than the auto hide at breakpoint, on html so it happens before paint
+		if (open && window.matchMedia(`(min-width: ${autoHideAt})`).matches) {
+			document.documentElement.classList.add("nav-menu-open");
+		}
+	} catch (_) {}
+</script>

@@ -9,6 +9,7 @@ export namespace Config {
 		i18n?: App.I18NConfig;
 		analytics?: App.Analytics.Config;
 		ui?: App.UIConfig;
+		sidebar?: App.SidebarConfig;
 		about?: About.Base;
 		display?: Display.Base;
 		socials?: Socials.Links;
@@ -21,6 +22,7 @@ export namespace Config {
 		i18n: App.I18NConfig;
 		analytics: App.Analytics.Config;
 		ui: App.UIConfig;
+		sidebar: App.SidebarConfig;
 		about: About.Base;
 		display: Display.Base;
 		socials: Socials.Links;
@@ -39,6 +41,7 @@ export namespace Config {
 			lightModeAllowed: boolean;
 			darkModeAllowed: boolean;
 		};
+		sidebar: App.SidebarConfig;
 		colors: { light: App.ModeConfig["colors"]; dark: App.ModeConfig["colors"] };
 		fonts: App.UIConfig["fonts"];
 		about: Omit<About.Base, "nationality" | "linguistics" | "focuses"> & {
@@ -153,19 +156,29 @@ export namespace App {
 		};
 	}
 
+	export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+
 	/** One colour mode's authored values. */
 	export type ModeConfig = {
 		colors?: Record<string, string>;
 		shadow?: string;
 	};
 
+	/** Sidebar mechanics. */
+	export type SidebarConfig = {
+		/** localStorage key holding the visitor's open/closed preference. */
+		storageKey?: string;
+		/** Below this breakpoint the sidebar is off-canvas by default and closes on navigation. */
+		autoHideAt?: Breakpoint;
+		/** The `data-*` attribute every toggle carries. */
+		toggleAttr?: string;
+		/** What a first-time visitor gets, before any preference exists. */
+		defaultOpen?: boolean;
+	};
+
 	export type UIConfig = {
 		theme: "system" | "light" | "dark" | "light:only" | "dark:only";
 		layout: "narrow" | "wide";
-		/** Colour is a function of mode, so mode is the outer axis. Every colour
-		 *  lives under both blocks and is ramped in both; light lands on `:root`
-		 *  and dark on `.dark`, so one class retints the site. Both modes should
-		 *  declare the same keys. */
 		light?: ModeConfig;
 		dark?: ModeConfig;
 		fonts?: {
@@ -231,14 +244,13 @@ export namespace About {
 }
 
 export namespace Display {
-
 	export type Base = {
 		tagline: string;
 		showAvailability: boolean;
 		showAvatar: boolean;
 		footer: Footer;
 	};
-	
+
 	export type Footer = {
 		lead: {
 			title: string;

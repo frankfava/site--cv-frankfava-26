@@ -1,0 +1,96 @@
+---
+/**
+ * The index bay. Off-canvas below the shell breakpoint, pinned beside the
+ * content above it;
+ *
+ * `navLinks` display the same links that are passed to the header
+ * `links` are only displayed when a blueprint is not in use.
+ */
+
+import type { Link } from "@/types";
+
+import { SOCIALS } from "site:config";
+import { BlueprintBuilder } from "@/lib/blueprints";
+import IndexCard from "@/components/ui/sidebar/cards/IndexCard.astro";
+import BayLinkCard from "./cards/BayLinkCard.astro";
+import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
+import MenuItem from "../menu/MenuItem.astro";
+import type { AstroVNode } from "astro/jsx-runtime";
+
+export interface Props {
+	showSocialLinks?: boolean;
+	showNavLinks?: boolean;
+	navLinks?: Array<Link>;
+	links?: Array<Link>;
+	useNestedBlueprintLinks?: boolean;
+	append?: (links: Link[]) => AstroVNode;
+}
+
+const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedBlueprintLinks = false, append } = Astro.props;
+
+const blueprintSchema = Astro.locals.blueprint?.blueprint;
+const blueprintSections = blueprintSchema?.getSidebarSections();
+const blueprintSectionLinks = BlueprintBuilder.menuLinks(blueprintSections ?? []);
+
+const useLinks = blueprintSectionLinks ?? links;
+---
+
+<aside
+	class="bay flex flex-col gap-5 fixed inset-y-0 top-(--header-height) -left-full z-60 w-full max-w-105 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:bottom-auto lg:top-(--header-height) lg:left-auto lg:z-auto lg:w-(--sidebar-width) lg:max-w-none lg:h-[calc(100vh-var(--header-height))] lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300"
+	id="bay"
+	data-sidebar-bay
+>
+	{
+		showSocialLinks && (
+			<div id="sidebar-social" class="text-center">
+				<SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1" linkClass="rounded-lg p-2 bg-surface" iconClass="w-6 h-6" />
+			</div>
+		)
+	}
+
+	{showNavLinks && !!navLinks.length && <BayLinkCard title="Links" links={navLinks} />}
+
+	{
+		useNestedBlueprintLinks && blueprintSections ? (
+			<nav id="blueprint-nav" class="py-6 p-4">
+				<ul class="flex flex-col gap-2 text-[0.8rem]">
+					{blueprintSections.map((section) => (
+						<>
+							{(!section?.hidden || !!(section?.sections || []).length) && (
+								<MenuItem
+									{...{
+										...section.convertToMenuLink(),
+										href: (section.hidden ? (!!(section?.sections || []).length ? (section?.sections || [])[0] : section) : section).convertToMenuLink()?.href,
+										linkClass: "lg:px-0 py-1.5 !font-semibold leading-4",
+										iconClass: "bg-primary rounded-full text-white p-2 h-8 w-8",
+									}}
+								>
+									{!!(section?.sections || []).length && (
+										<ul class="flex flex-col text-[0.8rem]">
+											{(section?.sections || []).map((section) => (
+												<MenuItem
+													{...{
+														...section.convertToMenuLink(),
+														class: "ps-6",
+														showLinkIcon: false,
+														linkClass: "lg:px-1 py-1 leading-4 border-0 border-l-2 border-gray-300 hover:border-primary-500 !pl-3",
+													}}
+												/>
+											))}
+										</ul>
+									)}
+								</MenuItem>
+							)}
+						</>
+					))}
+				</ul>
+			</nav>
+		) : (
+			!!useLinks.length && <IndexCard links={useLinks} />
+		)
+	}
+
+	<slot name="end">
+		{append ? append?.(useLinks) : null}
+	</slot>
+</aside>

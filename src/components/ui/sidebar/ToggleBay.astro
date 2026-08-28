@@ -1,0 +1,33 @@
+---
+import { twMerge } from "tailwind-merge";
+
+import ToggleMenu, { type Props as ToggleMenuProps } from "@/components/ui/menu/ToggleMenu.astro";
+
+export interface Props extends ToggleMenuProps {}
+
+const { label = "Index", showLabel = true, class: className, ariaExpanded, ariaControls, toggleAttr } = Astro.props;
+---
+
+<ToggleMenu
+	class={twMerge(
+		`flex-row gap-2.25 bg-none px-3 py-2.75 pl-2.5 font-secondary border-line hover:border-accent border rounded-lg text-sm text-ink-2 hover:text-accent leading-none transition-all duration-150`,
+		className,
+	)}
+	{showLabel}
+	{label}
+	{ariaExpanded}
+	{ariaControls}
+	{toggleAttr}
+>
+	<svg class="flex-none w-4.25 h-4.25" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+		<rect x="1.5" y="3.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.5"></rect>
+		<rect
+			class="opacity-90 in-[html:not(.nav-menu-open)]:opacity-35 transition-opacity duration-250 ease-[cubic-bezier(0.3,0.8,0.3,1)]"
+			x="1.5"
+			y="3.5"
+			width="6.5"
+			height="13"
+			rx="2.5"
+			fill="currentColor"></rect>
+	</svg>
+</ToggleMenu>

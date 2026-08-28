@@ -93,6 +93,12 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 				},
 			},
 		},
+		sidebar: {
+			storageKey: "sidebarOpen",
+			autoHideAt: "2xl",
+			toggleAttr: "data-menu-toggle",
+			defaultOpen: true,
+		},
 		socials: {},
 	};
 

@@ -7,7 +7,7 @@ import Favicons from "@/components/includes/Favicons.astro";
 import CustomStyles from "@/components/includes/CustomStyles.astro";
 import MetaTags from "@/components/includes/MetaTags.astro";
 import JsApplyColorMode from "@/components/includes/JsApplyColorMode.astro";
-// import JsApplySidebarState from "@/components/includes/JsApplySidebarState.astro";
+import JsApplySidebarState from "@/components/includes/JsApplySidebarState.astro";
 import Analytics from "@/components/includes/Analytics.astro";
 import Fonts from "@/components/includes/Fonts.astro";
 
@@ -29,11 +29,11 @@ const { language, textDirection } = I18N;
 	<head>
 		<Favicons />
 		<MetaTags {...metadata} />
-		<Fonts />
-		<JsApplyColorMode />
 		<Analytics />
-		<!-- <JsApplySidebarState /> -->
+		<Fonts />
 		<CustomStyles />
+		<JsApplyColorMode />
+		<JsApplySidebarState />
 	</head>
 	<body id="top" class:list={twMerge(["bg-page text-base text-page antialiased tracking-tight", bodyClass])}>
 		<slot />

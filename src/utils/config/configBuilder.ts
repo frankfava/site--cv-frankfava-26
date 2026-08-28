@@ -142,6 +142,9 @@ export function addUtils(config: Config.Complete) {
 		},
 	};
 
+	// Sidebar
+	const sidebar: Config.Final["sidebar"] = config.sidebar;
+
 	// Display
 	const display: Config.Final["display"] = config.display;
 
@@ -157,6 +160,7 @@ export function addUtils(config: Config.Complete) {
 		i18n,
 		analytics,
 		theme,
+		sidebar,
 		colors,
 		fonts,
 		about,

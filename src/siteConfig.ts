@@ -20,6 +20,7 @@ export const METADATA = parsed.metadata;
 export const I18N = parsed.i18n;
 export const ANALYTICS = parsed.analytics;
 export const THEME = parsed.theme;
+export const SIDEBAR = parsed.sidebar;
 export const COLORS = parsed.colors;
 export const FONTS = parsed.fonts;
 export const FEATURES = parsed.features;
@@ -35,6 +36,7 @@ export default {
 	I18N,
 	ANALYTICS,
 	THEME,
+	SIDEBAR,
 	COLORS,
 	FONTS,
 	FEATURES,

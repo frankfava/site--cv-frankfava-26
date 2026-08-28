@@ -26,9 +26,9 @@ const bar = "h-0.5 w-6 my-1 rounded-full bg-black dark:bg-white transition ease 
 	{...{ [toggleAttr]: "" }}
 >
 	<slot>
-		<span aria-hidden="true" class={`${bar} in-[body.nav-menu-open]:rotate-45 in-[body.nav-menu-open]:translate-y-2.5`}></span>
-		<span aria-hidden="true" class={`${bar} in-[body.nav-menu-open]:opacity-0`}></span>
-		<span aria-hidden="true" class={`${bar} in-[body.nav-menu-open]:-rotate-45 in-[body.nav-menu-open]:-translate-y-2.5`}></span>
+		<span aria-hidden="true" class={`${bar} in-[html.nav-menu-open]:rotate-45 in-[html.nav-menu-open]:translate-y-2.5`}></span>
+		<span aria-hidden="true" class={`${bar} in-[html.nav-menu-open]:opacity-0`}></span>
+		<span aria-hidden="true" class={`${bar} in-[html.nav-menu-open]:-rotate-45 in-[html.nav-menu-open]:-translate-y-2.5`}></span>
 	</slot>
 	<span class={showLabel ? "" : "sr-only"}>{label}</span>
 </button>

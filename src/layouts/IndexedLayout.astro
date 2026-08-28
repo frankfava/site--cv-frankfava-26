@@ -8,14 +8,18 @@ import { BlueprintBuilder, type BlueprintEntry } from "@/lib/blueprints";
 import type { Link } from "@/types";
 
 import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
+import ToggleBay from "@/components/ui/sidebar/ToggleBay.astro";
+import SideBay, { type Props as SideBayProps } from "@/components/ui/sidebar/SideBay.astro";
+import JumpRail from "@/components/ui/menu/JumpRail.astro";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
 	contentLinks?: Link[];
+	sidebar?: Omit<SideBayProps, "navLinks" | "links">;
 	showRail?: boolean;
 }
 
-const { blueprint: entry, contentLinks: passedContentLinks, showRail, header, footer, showSidebar, ...rest } = Astro.props;
+const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, sidebar, ...rest } = Astro.props;
 
 Astro.locals.blueprint = entry;
 
@@ -46,15 +50,10 @@ let useRail = useSidebar;
 if (showRail != undefined) {
 	useRail = showRail;
 }
-
-// TODO: The index and the rail read the same sections, so they can never drift.
-const contentLinks: Link[] = (entry ? BlueprintBuilder.menuLinks(entry?.blueprint?.getSidebarSections() ?? []) : passedContentLinks) ?? [];
-
-// The live fit reading is the capability check's read-out. Requires the section to be present.
-const showFitDial = contentLinks.some((link) => link.href === "#capability");
 ---
 
 <PageLayout {...{ ...layoutProps, showSidebar: useSidebar }}>
+	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
 	<slot slot="beforeMenu" name="beforeMenu">
 		{DISPLAY.tagline && <span class="hidden lg:block font-mono font-medium text-[12.58px] text-ink-3 uppercase tracking-[0.11em] whitespace-nowrap">{DISPLAY.tagline}</span>}
@@ -76,6 +75,17 @@ const showFitDial = contentLinks.some((link) => link.href === "#capability");
 	<slot slot="hero" name="hero" />
 
 	<slot slot="sidebar" name="sidebar">
+		{
+			useSidebar && (
+				<SideBay
+					{...{
+						navLinks: layoutProps.header?.links ?? [],
+						links: contentLinks,
+						...sidebar,
+					}}
+				/>
+			)
+		}
 	</slot>
 
 	<slot>
@@ -84,6 +94,13 @@ const showFitDial = contentLinks.some((link) => link.href === "#capability");
 
 	<Fragment slot="afterFooter">
 		<div class="scrim" aria-hidden="true" data-cv-scrim></div>
+		{
+			useRail && (
+				<slot name="rail">
+					<JumpRail links={contentLinks} />
+				</slot>
+			)
+		}
 		<slot name="afterFooter" />
 	</Fragment>
 </PageLayout>
