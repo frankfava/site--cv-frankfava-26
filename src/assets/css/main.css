@@ -217,16 +217,6 @@ html {
 	}
 }
 
-[data-cv-shell] {
-	--bay: 344px;
-	/* Overridden per page from the blueprint's `layout.contentWidth`. */
-	--content-width: 1120px;
-	/* Re-measured by `initCvBay` in main.js: the nav wraps to two rows
-	   on a narrow screen, and a hardcoded height puts the off-canvas panel and every
-	   anchor jump underneath it. */
-	--nav-height: 56px;
-}
-
 @layer base {
 	[data-cv-shell] p {
 		margin: 0;
@@ -291,15 +281,15 @@ html {
 
 @media (min-width: 1024px) {
 	.bay {
-		min-height: calc(100vh - var(--nav-height));
+		min-height: calc(100vh - var(--header-height));
 	}
 
 	.bay.is-stuck {
 		position: fixed;
 		left: 0;
-		top: var(--nav-height);
+		top: var(--header-height);
 		bottom: 0;
-		width: var(--bay);
+		width: var(--sidebar-width);
 		overflow-y: auto;
 	}
 }
@@ -316,7 +306,7 @@ html {
 
 @media (min-width: 1024px) {
 	body:not(.nav-menu-open) [data-cv-shell] {
-		--bay: 0px;
+		--sidebar-width: 0px;
 	}
 
 	body:not(.nav-menu-open) .bay {
@@ -347,30 +337,6 @@ html {
 
 /* ---------- content column ---------- */
 
-/* The column is the full width of its grid track. Each section then centres
-   its own measure inside it, so a filterable grid and a column of prose can
-   sit on one page at different widths and still share one hairline that
-   spans the column. Same idea as the old ModuleWrapper's isFullWidth, made
-   an explicit measure rather than a boolean. */
-.sec {
-	--sec-width: var(--content-width);
-	--sec-gutter: 42px;
-	padding: 64px max(var(--sec-gutter), (100% - var(--sec-width)) / 2);
-	border-top: 1px solid var(--c-line-2);
-	scroll-margin-top: calc(var(--nav-height) + 18px);
-}
-
-@media (max-width: 539.98px) {
-	.sec {
-		--sec-gutter: 20px;
-	}
-}
-
-.sec:first-child {
-	border-top: 0;
-	padding-top: 52px;
-}
-
 /* ---------- mobile: the bay becomes a chip strip, the rail goes away ---------- */
 
 /* These override rules that appear above them. Media queries add no
@@ -391,7 +357,7 @@ html {
 	.scrim {
 		display: block;
 		position: fixed;
-		inset: var(--nav-height) 0 0;
+		inset: var(--header-height) 0 0;
 		z-index: 59;
 		background: rgba(0, 0, 0, 0.42);
 		opacity: 0;

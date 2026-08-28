@@ -86,7 +86,12 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 			tagline: "",
 			showAvailability: true,
 			showAvatar: true,
-			footer: undefined
+			footer: {
+				lead: {
+					title: "",
+					description: "",
+				},
+			},
 		},
 		socials: {},
 	};

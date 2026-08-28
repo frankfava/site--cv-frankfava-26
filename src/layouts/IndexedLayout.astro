@@ -1,0 +1,89 @@
+---
+/**
+ * An adaptive layout for indexed pages.
+ */
+import { DISPLAY, ABOUT } from "site:config";
+import PageLayout, { type Props as LayoutProps } from "@/layouts/PageLayout.astro";
+import { BlueprintBuilder, type BlueprintEntry } from "@/lib/blueprints";
+import type { Link } from "@/types";
+
+import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
+
+export interface Props extends LayoutProps {
+	blueprint?: BlueprintEntry;
+	contentLinks?: Link[];
+	showRail?: boolean;
+}
+
+const { blueprint: entry, contentLinks: passedContentLinks, showRail, header, footer, showSidebar, ...rest } = Astro.props;
+
+Astro.locals.blueprint = entry;
+
+const layoutProps: LayoutProps = {
+	...rest,
+	header: {
+		isDark: false,
+		showToggleTheme: true,
+		showSocialLinks: false,
+		...header,
+	},
+	footer: {
+		showSocialText: true,
+		socialLinks: true,
+		layout: "narrow",
+		...footer,
+	},
+};
+
+let useSidebar = true;
+if (showSidebar != undefined) {
+	useSidebar = showSidebar;
+} else if (entry && entry?.config?.layout?.showSidebar != undefined) {
+	useSidebar = entry.config.layout.showSidebar;
+}
+
+let useRail = useSidebar;
+if (showRail != undefined) {
+	useRail = showRail;
+}
+
+// TODO: The index and the rail read the same sections, so they can never drift.
+const contentLinks: Link[] = (entry ? BlueprintBuilder.menuLinks(entry?.blueprint?.getSidebarSections() ?? []) : passedContentLinks) ?? [];
+
+// The live fit reading is the capability check's read-out. Requires the section to be present.
+const showFitDial = contentLinks.some((link) => link.href === "#capability");
+---
+
+<PageLayout {...{ ...layoutProps, showSidebar: useSidebar }}>
+
+	<slot slot="beforeMenu" name="beforeMenu">
+		{DISPLAY.tagline && <span class="hidden lg:block font-mono font-medium text-[12.58px] text-ink-3 uppercase tracking-[0.11em] whitespace-nowrap">{DISPLAY.tagline}</span>}
+	</slot>
+	<slot name="afterMenu" slot="afterMenu" />
+
+	<slot slot="beforeActions" name="beforeActions">
+		{
+			DISPLAY.showAvailability && (
+				<span class="inline-flex items-center gap-2.75 mr-3 font-mono text-[12.58px] text-good uppercase tracking-[0.08em] whitespace-nowrap">
+					<i class="bg-good rounded-[50%] w-2.75 h-2.75" />
+					{ABOUT.availability?.text ?? ABOUT.availability?.status}
+				</span>
+			)
+		}
+	</slot>
+	<slot name="afterActions" slot="afterActions" />
+
+	<slot slot="hero" name="hero" />
+
+	<slot slot="sidebar" name="sidebar">
+	</slot>
+
+	<slot>
+		{entry && <BlueprintDisplay blueprint={entry.blueprint ? entry.blueprint.assemble() : []} />}
+	</slot>
+
+	<Fragment slot="afterFooter">
+		<div class="scrim" aria-hidden="true" data-cv-scrim></div>
+		<slot name="afterFooter" />
+	</Fragment>
+</PageLayout>

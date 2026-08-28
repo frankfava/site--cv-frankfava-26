@@ -29,7 +29,7 @@ const eyebrowSlot = await Astro.slots.render("eyebrow");
 		</h1>
 
 		{
-			description && (
+			(description || Astro.slots.has("lead")) && (
 				<p class="mt-5 max-w-[58ch] text-[1.08rem] text-[#a8a8bd] [&_b]:font-semibold [&_b]:text-white">
 					<slot name="lead">{description}</slot>
 				</p>
