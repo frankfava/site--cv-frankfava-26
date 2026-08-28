@@ -32,7 +32,7 @@ const useLayout = forceLayout !== undefined ? forceLayout : THEME.layout;
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
 ---
 
-<WrapperTag class={twMerge("relative scroll-mt-[150px] module border-t border-gray-100 dark:border-gray-800", outerClass)} {...id ? { id } : {}}>
+<WrapperTag class={twMerge("relative scroll-mt-[calc(var(--header-height)+18px)] module border-t border-line-2", outerClass)} {...id ? { id } : {}}>
 	<div class="-z-[1] absolute inset-0 bg-inset pointer-events-none" aria-hidden="true">
 		<slot name="bg">
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}
