@@ -22,13 +22,6 @@ export interface BlueprintConfig {
 		showSidebar?: boolean;
 		showFooter?: boolean;
 		/**
-		 * Width of the reading column, for pages rendered by `RedesignLayout`.
-		 * Any CSS length. Prose wants a shorter measure than a filterable grid
-		 * does, so it is per-page rather than one number for the whole site.
-		 * Defaults to 1120px.
-		 */
-		contentWidth?: string;
-		/**
 		 * Whether the index bay starts collapsed on this page. A page whose index
 		 * is two entries long is paying 344px for them, which the content can
 		 * usually put to better use. Only a default: a visitor who has toggled the

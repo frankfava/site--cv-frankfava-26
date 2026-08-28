@@ -38,7 +38,7 @@ const content: string = Astro.slots.has("default") ? await Astro.slots.render("d
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}
 		</slot>
 	</div>
-	<div class:list={[twMerge("wrapper relative mx-auto px-6 w-full text-base py-12 lg:py-16", !isFullWidth ? "max-w-screen-2xl xl:px-4" : "md:px-6", className), { dark: isDark }]}>
+	<div class:list={[twMerge("wrapper relative mx-auto px-6 w-full text-base py-12 lg:py-16", !isFullWidth ? "max-w-(--content-width) xl:px-4" : "md:px-6", className), { dark: isDark }]}>
 		<div class="grid grid-cols-1 my-auto w-full" class:list={[twMerge("gap-6", contentClass), { "lg:grid-cols-3 lg:gap-12": useLayout == "narrow" && showHeader }]}>
 			{
 				showHeader && (

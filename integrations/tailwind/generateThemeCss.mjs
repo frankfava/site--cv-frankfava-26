@@ -74,6 +74,8 @@ themeLines.push(`\t--breakpoint-md: 768px;`);
 themeLines.push(`\t--breakpoint-lg: 1024px;`);
 themeLines.push(`\t--breakpoint-xl: 1280px;`);
 themeLines.push(`\t--breakpoint-2xl: 1536px;`);
+themeLines.push(`\t--breakpoint-3xl: 1920px;`);
+themeLines.push(`\t--breakpoint-4xl: 2560px;`);
 
 /* --------------------------------------------------------- @theme inline -- */
 /* Point Tailwind's colour namespace at the properties rather than copying
