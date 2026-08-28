@@ -1,4 +1,12 @@
 ---
+/**
+ * Colour mode control.
+ *
+ * `variant` filters the options rather than changing the markup: `menu` offers
+ * all three and opens a list, `single` keeps light and dark only and flips
+ * straight between them. Both drive the same `themeToggle` component, so a
+ * visitor who picked `system` keeps it.
+ */
 import { THEME } from "site:config";
 import { Icon } from "astro-icon/components";
 import { twMerge } from "tailwind-merge";
@@ -10,68 +18,76 @@ export interface Props {
 	lightIcon?: string;
 	darkIcon?: string;
 	systemIcon?: string;
+	variant?: "menu" | "single";
 }
 
-const { label = "Toggle between Dark and Light mode", class: className = "", iconClass = "", lightIcon = "ph:sun", darkIcon = "ph:moon-stars", systemIcon = "ph:desktop" } = Astro.props;
+const {
+	label = "Toggle between Dark and Light mode",
+	class: className = "",
+	iconClass = "",
+	lightIcon = "ph:sun",
+	darkIcon = "ph:moon-stars",
+	systemIcon = "ph:desktop",
+	variant = "menu",
+} = Astro.props;
 
-const icons = [
+const options = [
 	{ key: "light", icon: lightIcon, label: "Light" },
 	{ key: "dark", icon: darkIcon, label: "Dark" },
 	{ key: "system", icon: systemIcon, label: "System" },
-];
+].filter((o) => variant !== "single" || o.key !== "system");
 
-//TODO: https://github.com/alpinejs/alpine/discussions/3232
+/** With nothing to choose between, the trigger is the choice. */
+const isSingle = options.length < 3;
+
 ---
 
 {
 	!(THEME.default && THEME.default.endsWith(":only")) && (
-		<div x-data="themeToggle" data-theme={THEME.default} class="relative flex">
+		<div x-data="themeToggle" data-theme={THEME.default} data-options={options.map((o) => o.key).join(",")} class="relative flex">
 			<button
 				type="button"
-				@click="toggleOpen()"
+				@click={isSingle ? "toggle()" : "toggleOpen()"}
 				class={twMerge(
-					"inline-flex items-center dark:border-gray-600 hover:bg-gray-600 dark:hover:bg-gray-400 dark:hover:bg-primary-700 dark:bg-gray-800 p-2.5 border rounded-lg focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 text-gray-600 text-sm hover:text-white dark:text-white transition-colors duration-200 focus:outline-none",
+					"inline-flex items-center dark:border-gray-600 p-2.5 border rounded-lg focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 text-gray-600 text-sm dark:text-white transition-colors duration-200 focus:outline-none",
 					className,
 				)}
 				aria-label={label}
-				aria-haspopup="true"
-				:class="isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"
-				:aria-expanded="isOpen"
+				x-bind:aria-label={isSingle ? "label" : undefined}
+				aria-haspopup={isSingle ? undefined : "true"}
+				:class={isSingle ? undefined : "isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"}
+				:aria-expanded={isSingle ? undefined : "isOpen"}
 			>
-				{
-					icons.map((i) => (
-						<>
-							<Icon x-show={"isActive('" + i.key + "')"} name={i.icon} class="toggle-icon" class:list={[i.key, twMerge("w-6 h-6", iconClass)]} />
-						</>
-					))
-				}
+				{options.map((o) => (
+					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class="toggle-icon" class:list={[o.key, twMerge("w-6 h-6", iconClass)]} />
+				))}
 			</button>
-			<div
-				x-cloak
-				x-show="isOpen"
-				x-transition
-				@click.outside="close()"
-				@keydown.down.prevent="$focus.wrap().next()"
-				@keydown.up.prevent="$focus.wrap().previous()"
-				class="top-14 right-0 !z-10 absolute bg-white dark:bg-gray-700 shadow-xl py-1 rounded-lg divide-y divide-gray-100 ring-1 ring-gray-100 dark:ring-gray-600 w-30 font-semibold text-primary-700 text-sm dark:text-primary-300 overflow-hidden"
-				role="menu"
-			>
-				<ul class="py-2 text-gray-700 text-sm dark:text-gray-200" aria-labelledby="dropdownDefaultButton" role="listbox" tabindex="0" aria-orientation="vertical">
-					{
-						icons.map((i) => (
+			{!isSingle && (
+				<div
+					x-cloak
+					x-show="isOpen"
+					x-transition
+					@click.outside="close()"
+					@keydown.down.prevent="$focus.wrap().next()"
+					@keydown.up.prevent="$focus.wrap().previous()"
+					class="top-14 right-0 !z-10 absolute bg-white dark:bg-gray-700 shadow-xl py-1 rounded-lg divide-y divide-gray-100 ring-1 ring-gray-100 dark:ring-gray-600 w-30 font-semibold text-primary-700 text-sm dark:text-primary-300 overflow-hidden"
+					role="menu"
+				>
+					<ul class="py-2 text-gray-700 text-sm dark:text-gray-200" role="listbox" tabindex="0" aria-orientation="vertical">
+						{options.map((o) => (
 							<li
-								@click={"select('" + i.key + "')"}
+								@click={`select('${o.key}')`}
 								class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 px-4 py-2 dark:hover:text-white cursor-pointer active"
 								role="option"
 								tabindex="-1"
 							>
-								<Icon name={i.icon} class="mr-3 w-6 h-6 dark:fill-white" />
-								<span>{i.label}</span>
+								<Icon name={o.icon} class="mr-3 w-6 h-6 dark:fill-white" />
+								<span>{o.label}</span>
 							</li>
-						))
-					}
-				</ul>
-			</div>
+						))}
+					</ul>
+				</div>
+			)}
 		</div>
 	)
 }

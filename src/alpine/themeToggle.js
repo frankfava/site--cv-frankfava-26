@@ -18,9 +18,11 @@ export function themeToggle() {
 		isOpen: false,
 		activeTheme: "system",
 		isDark: false,
+		options: ["light", "dark", "system"],
 
 		init() {
 			this.activeTheme = this.$el.dataset.theme || "system";
+			this.options = (this.$el.dataset.options || "light,dark,system").split(",");
 			this.sync();
 			// A visitor on `system` follows the OS, which can change while the page
 			// is open. The switcher already listens; this keeps the icon in step.
@@ -41,7 +43,11 @@ export function themeToggle() {
 		},
 
 		isActive(key) {
-			return this.activeTheme === key;
+			// A control that does not offer the stored choice cannot mark it, so it
+			// falls back to whatever that choice currently resolves to. The switcher
+			// already reads the media query; asking it keeps one answer.
+			if (this.options.includes(this.activeTheme)) return this.activeTheme === key;
+			return window.colorSchemeSwitcher.lightOrDark() === key;
 		},
 
 		select(key) {
