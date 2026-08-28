@@ -26,7 +26,6 @@ export interface Link extends Omit<HTMLAttributes<"a">, "slot"> {
 	text?: string;
 	ariaLabel?: string;
 	icon?: string;
-	showOn?: string | string[];
 }
 
 // ==== Components

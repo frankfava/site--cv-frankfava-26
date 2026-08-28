@@ -1,36 +1,30 @@
 ---
 import type { Link } from "@/types";
 import MenuItem from "./MenuItem.astro";
-
-import { trimSlash } from "@/utils/permalinks";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	links?: Array<Link>;
 	showLinkIcons?: boolean;
 	itemClass?: string;
-	linkClass?: string;
+	linkClass?: HTMLAttributes<"a">["class:list"] | ((link: Link) => HTMLAttributes<"a">["class:list"]);
 	iconClass?: string;
+	filterLinks?: (link: Link) => boolean;
 }
 
-const { links = [], showLinkIcons = true, itemClass, linkClass, iconClass } = Astro.props;
+const { links = [], showLinkIcons = true, itemClass, linkClass, iconClass, filterLinks } = Astro.props;
 
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
-
-const visibleLinks = links.filter((link) => {
-	const showOn = (Array.isArray(link?.showOn) ? link?.showOn : [link?.showOn ?? ""]).filter(Boolean);
-	return !showOn.length ? true : showOn.includes(currentPath);
-});
+const filteredLinks = filterLinks ? links.filter(filterLinks) : links;
 ---
 
 {
-	visibleLinks.map((link) => (
+	filteredLinks.map((link) => (
 		<MenuItem
 			{...{
 				...link,
-				currentPath,
 				showLinkIcon: showLinkIcons,
-				itemClass,
-				linkClass,
+				class: [link.class, itemClass].filter(Boolean).join(" "),
+				linkClass: typeof linkClass === "function" ? linkClass(link) : linkClass,
 				iconClass,
 			}}
 		/>

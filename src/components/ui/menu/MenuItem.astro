@@ -1,31 +1,24 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { Link } from "@/types";
-import { trimSlash } from "@/utils/permalinks";
 import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props extends Link {
-	currentPath?: string;
 	showLinkIcon?: boolean;
-	linkClass?: string;
+	linkClass?: HTMLAttributes<"a">["class:list"];
 	iconClass?: string;
 }
 
-const { text, href, icon, showLinkIcon = true, currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`, class: className = "", linkClass = "", iconClass = "" } = Astro.props;
+const { text, href, icon, showLinkIcon = true, class: className = "", linkClass = "", iconClass = "", ...anchorAttrs } = Astro.props;
 ---
 
 <li class:list={[className]}>
-	<a
-		class:list={[
-			twMerge("border border-transparent text-ink hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass),
-			{
-				"link-active bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800": href === currentPath,
-			},
-		]}
-		href={href}
-	>
+	<a class={cn(["border border-transparent text-ink hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass])} href={href} {...anchorAttrs}>
 		{showLinkIcon && icon && <Icon name={icon} class={twMerge("w-5 h-5 mr-3", iconClass)} />}
-		<span class="flex-grow">{text}</span>
+		<slot name="lead" />
+		<span class="grow">{text}</span>
 	</a>
 	<slot />
 </li>
