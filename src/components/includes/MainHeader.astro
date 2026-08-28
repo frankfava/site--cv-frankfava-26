@@ -150,7 +150,16 @@ const currentPath = getCurrentPath(Astro.url);
 					!!links.length && (
 						<nav id="header-nav" class="flex justify-self-center items-center w-auto text-default md:overflow-x-auto xl:overflow-x-hidden" aria-label="Main navigation">
 							<ul class="flex flex-row justify-center gap-2 py-0 w-full font-semibold text-[0.8rem] self-center">
-								<MenuItems links={links} showLinkIcons={showLinkIcons} linkClass="text-base no-underline" />
+								<MenuItems
+									links={links}
+									showLinkIcons={showLinkIcons}
+									linkClass={(link) => [
+										"text-base no-underline",
+										{
+											"link-active bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800": link.href === currentPath,
+										},
+									]}
+								/>
 							</ul>
 						</nav>
 					)
@@ -174,7 +183,7 @@ const currentPath = getCurrentPath(Astro.url);
 				<div class="flex justify-between sm:justify-normal items-center gap-3 lg:gap-2 w-full sm:w-auto ml-0">
 					{Astro.slots.has("beforeActions") && typeof beforeActions == "string" && !!beforeActions ? <Fragment set:html={beforeActions} /> : ""}
 					<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
-					{showSocialLinks && <SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
+					{showSocialLinks && <SocialLinks socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
 					{showToggleTheme && <ToggleTheme variant="single" class="p-2 rounded-md text-ink-2 hover:text-accent border-line hover:border-accent" iconClass="w-6 h-6" />}
 					{Astro.slots.has("afterActions") && typeof afterActions == "string" && !!afterActions ? <Fragment set:html={afterActions} /> : ""}
 				</div>
