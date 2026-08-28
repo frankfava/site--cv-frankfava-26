@@ -84,11 +84,40 @@ function initSidebar() {
 }
 
 /**
+ * Sidebar Height
+ * 
+ * Make sure the sidebar is the correct height when the page is loaded.
+ * Under the hero, its partially hidden, so we need to make sure it's the correct height to scroll
+ */
+function initSidebarHeight() {
+	const bay = document.querySelector("[data-sidebar-bay]");
+	if (!bay) return;
+
+	function apply() {
+		const style = getComputedStyle(bay);
+		if (style.position !== "sticky") {
+			bay.style.removeProperty("height");
+			return;
+		}
+		const pinnedTop = parseFloat(style.top) || 0;
+		const available = window.innerHeight - bay.getBoundingClientRect().top;
+		bay.style.height = `${Math.min(available, window.innerHeight - pinnedTop)}px`;
+	}
+
+	attachEvent("window", "scroll", apply);
+	attachEvent("window", "resize", apply);
+	attachEvent("window", "load", apply);
+	document.fonts?.ready.then(apply);
+	apply();
+}
+
+/**
  * Init
  */
 const setup = () => {
 	initMobileClass();
 	initSidebar();
+	initSidebarHeight();
 };
 
 const refreshOnResize = () => {
