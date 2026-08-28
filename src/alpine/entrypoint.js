@@ -6,10 +6,10 @@ import { particleField } from "./particleField.js";
 
 export default (Alpine) => {
 	Alpine.data("themeToggle", themeToggle);
-	
+
 	Alpine.data("skillsComponent", skillsComponent);
 	Alpine.data("projectsComponent", projectsComponent);
 	Alpine.data("workHistoryAccordion", workHistoryAccordion);
-	
+
 	Alpine.data("particleField", particleField);
 };

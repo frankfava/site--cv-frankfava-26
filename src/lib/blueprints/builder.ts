@@ -23,7 +23,6 @@ type BlueprintProxy<T extends BlueprintSchema> = BlueprintBuilder<T> & Record<Ne
 /** */
 type BlueprintSectionProxy = BlueprintSection & BlueprintComponent;
 
-
 /** Build Blueprint from schema */
 export class BlueprintBuilder<T extends BlueprintSchema> {
 	private cache: Map<string, BlueprintSectionProxy>;

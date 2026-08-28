@@ -85,7 +85,7 @@
 	},
 	"about": {
 		"name": "Frank Fava",
-		"focuses": ["AI", "Solutions Architecture", "Full-Stack Engineering","Management"],
+		"focuses": ["AI", "Solutions Architecture", "Full-Stack Engineering", "Management"],
 		"availability": {
 			"noticeRequired": "Minimal",
 			"status": "available",

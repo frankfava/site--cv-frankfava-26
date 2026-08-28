@@ -33,8 +33,6 @@ export const trim = (str = "", ch?: string) => {
 	return start > 0 || end < str.length ? str.substring(start, end) : str;
 };
 
-
-
 export const pluralize = (n: number, label: string) => `${n} ${label}${n === 1 ? "" : "s"}`;
 export const truncate = (str: string = "", length: number = 200, suffix: string = "...") => {
 	return str.length > length ? `${str.substring(0, length)}${suffix}` : str;

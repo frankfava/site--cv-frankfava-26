@@ -5,14 +5,9 @@
 		"icon": "devicon:javascript",
 		"proficiency": "expert",
 		"yrsExperience": 20,
-		"keywords": [
-			"Frontend Development"
-		],
+		"keywords": ["Frontend Development"],
 		"usedForCv": true,
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "PHP",
@@ -20,16 +15,9 @@
 		"icon": "devicon:php",
 		"proficiency": "expert",
 		"yrsExperience": 18,
-		"keywords": [
-			"PHP",
-			"Backend Development",
-			"Server"
-		],
+		"keywords": ["PHP", "Backend Development", "Server"],
 		"note": "Main language I've used",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "PYTHON",
@@ -37,14 +25,8 @@
 		"icon": "devicon:python",
 		"proficiency": "proficient",
 		"yrsExperience": 4,
-		"keywords": [
-			"Backend Development",
-			"Server"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["Backend Development", "Server"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "NODE",
@@ -52,15 +34,9 @@
 		"icon": "devicon:nodejs",
 		"proficiency": "senior",
 		"yrsExperience": 8,
-		"keywords": [
-			"Backend Development",
-			"JavaScript",
-			"Server"
-		],
+		"keywords": ["Backend Development", "JavaScript", "Server"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "GITHUB",
@@ -68,16 +44,10 @@
 		"icon": "devicon:github",
 		"proficiency": "senior",
 		"yrsExperience": 11,
-		"keywords": [
-			"Version Control",
-			"Collaboration"
-		],
+		"keywords": ["Version Control", "Collaboration"],
 		"usedForCv": true,
 		"note": "CI/CD for deployments",
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "GIT",
@@ -85,15 +55,9 @@
 		"icon": "devicon:git",
 		"proficiency": "senior",
 		"yrsExperience": 13,
-		"keywords": [
-			"Version Control",
-			"Collaboration"
-		],
+		"keywords": ["Version Control", "Collaboration"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "SCSS",
@@ -101,17 +65,8 @@
 		"icon": "devicon:sass",
 		"proficiency": "expert",
 		"yrsExperience": 10,
-		"keywords": [
-			"Frontend Development",
-			"Responsive Design",
-			"Build Tools",
-			"CSS Processing",
-			"UI"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Frontend Development", "Responsive Design", "Build Tools", "CSS Processing", "UI"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "POSTCSS",
@@ -119,17 +74,9 @@
 		"icon": "devicon:postcss",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Frontend Development",
-			"Responsive Design",
-			"Build Tools",
-			"CSS Processing"
-		],
+		"keywords": ["Frontend Development", "Responsive Design", "Build Tools", "CSS Processing"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "TAILWIND",
@@ -137,19 +84,9 @@
 		"icon": "devicon:tailwindcss",
 		"proficiency": "senior",
 		"yrsExperience": 6,
-		"keywords": [
-			"Frontend Development",
-			"Framework/Library",
-			"Responsive Design",
-			"TALL Stack",
-			"UI"
-		],
+		"keywords": ["Frontend Development", "Framework/Library", "Responsive Design", "TALL Stack", "UI"],
 		"usedForCv": true,
-		"relevance": [
-			"active_stack",
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["active_stack", "shipped", "peripheral"]
 	},
 	{
 		"id": "FLOWBITE",
@@ -157,16 +94,8 @@
 		"icon": "framework/flowbite",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Frontend Development",
-			"Framework/Library",
-			"UI",
-			"JavaScript"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Frontend Development", "Framework/Library", "UI", "JavaScript"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "BOOTSTRAP",
@@ -174,16 +103,8 @@
 		"icon": "devicon:bootstrap",
 		"proficiency": "expert",
 		"yrsExperience": 8,
-		"keywords": [
-			"Frontend Development",
-			"Framework/Library",
-			"Responsive Design",
-			"UI"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Frontend Development", "Framework/Library", "Responsive Design", "UI"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "REACT",
@@ -191,17 +112,8 @@
 		"icon": "devicon:react",
 		"proficiency": "proficient",
 		"yrsExperience": 5,
-		"keywords": [
-			"Frontend Development",
-			"Framework/Library",
-			"UI",
-			"DOM Manipulation",
-			"JavaScript",
-			"TypeScript"
-		],
-		"relevance": [
-			"active_stack"
-		]
+		"keywords": ["Frontend Development", "Framework/Library", "UI", "DOM Manipulation", "JavaScript", "TypeScript"],
+		"relevance": ["active_stack"]
 	},
 	{
 		"id": "VUEJS",
@@ -210,18 +122,8 @@
 		"featured": true,
 		"proficiency": "expert",
 		"yrsExperience": 7,
-		"keywords": [
-			"Frontend Development",
-			"Framework/Library",
-			"UI",
-			"DOM Manipulation",
-			"JavaScript",
-			"TypeScript"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["Frontend Development", "Framework/Library", "UI", "DOM Manipulation", "JavaScript", "TypeScript"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "ALPINEJS",
@@ -229,17 +131,9 @@
 		"icon": "devicon:alpinejs",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Frontend Development",
-			"JavaScript",
-			"TALL Stack",
-			"Framework/Library",
-			"DOM Manipulation"
-		],
+		"keywords": ["Frontend Development", "JavaScript", "TALL Stack", "Framework/Library", "DOM Manipulation"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "TYPESCRIPT",
@@ -247,16 +141,9 @@
 		"icon": "devicon:typescript",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Frontend Development",
-			"Backend Development",
-			"JavaScript"
-		],
+		"keywords": ["Frontend Development", "Backend Development", "JavaScript"],
 		"usedForCv": true,
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "ASTRO",
@@ -265,21 +152,10 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Frontend Development",
-			"SSR",
-			"Static Sites",
-			"Framework/Library",
-			"Performance",
-			"TypeScript",
-			"Headless CMS"
-		],
+		"keywords": ["Frontend Development", "SSR", "Static Sites", "Framework/Library", "Performance", "TypeScript", "Headless CMS"],
 		"usedForCv": true,
 		"note": "Go-to choice for static sites",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "LARAVEL",
@@ -288,18 +164,9 @@
 		"featured": true,
 		"proficiency": "expert",
 		"yrsExperience": 9,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Backend Development",
-			"TALL Stack",
-			"Framework/Library"
-		],
+		"keywords": ["PHP", "Laravel", "Backend Development", "TALL Stack", "Framework/Library"],
 		"note": "Today's go-to choice for backend development",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "PINT",
@@ -307,15 +174,8 @@
 		"icon": "laravel/pint",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Linting"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["PHP", "Laravel", "Linting"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "CASHIER",
@@ -323,14 +183,8 @@
 		"icon": "laravel/cashier",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Payment Gateways"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "Payment Gateways"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "ECHO",
@@ -338,14 +192,8 @@
 		"icon": "laravel/echo",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Web Sockets"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "Web Sockets"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "FORGE",
@@ -353,16 +201,8 @@
 		"icon": "laravel/forge",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Server",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["PHP", "Laravel", "Server", "DevOps"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "INERTIA",
@@ -370,14 +210,8 @@
 		"icon": "laravel/inertia",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"UI"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "UI"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "NOVA",
@@ -385,15 +219,8 @@
 		"icon": "laravel/nova",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Headless CMS",
-			"Admin Panel"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "Headless CMS", "Admin Panel"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SANCTUM",
@@ -401,14 +228,8 @@
 		"icon": "laravel/sanctum",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"REST API"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "REST API"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SCOUT",
@@ -416,14 +237,8 @@
 		"icon": "laravel/scout",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Search Engine"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "Search Engine"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SOCIALITE",
@@ -431,14 +246,8 @@
 		"icon": "laravel/socialite",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"OAUTH"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "OAUTH"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SPARK",
@@ -446,14 +255,8 @@
 		"icon": "laravel/spark",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"Payment Gateways"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "Payment Gateways"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "FILAMENTPHP",
@@ -462,20 +265,9 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"PHP",
-			"Backend Development",
-			"Laravel",
-			"TALL Stack",
-			"Framework/Library",
-			"Admin Panel",
-			"Headless CMS",
-			"CMS"
-		],
+		"keywords": ["PHP", "Backend Development", "Laravel", "TALL Stack", "Framework/Library", "Admin Panel", "Headless CMS", "CMS"],
 		"note": "Go-to choice for admin panels",
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "LIVEWIRE",
@@ -483,16 +275,8 @@
 		"icon": "laravel/livewire",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"PHP",
-			"Laravel",
-			"TALL Stack",
-			"Frontend Development",
-			"UI"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Laravel", "TALL Stack", "Frontend Development", "UI"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "REVERB",
@@ -500,14 +284,8 @@
 		"icon": "devicon:laravel",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Web Sockets",
-			"Push Notifications",
-			"Laravel"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Web Sockets", "Push Notifications", "Laravel"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "WORDPRESS",
@@ -516,16 +294,9 @@
 		"featured": true,
 		"proficiency": "expert",
 		"yrsExperience": 18,
-		"keywords": [
-			"PHP",
-			"Backend Development",
-			"Headless CMS",
-			"CMS"
-		],
+		"keywords": ["PHP", "Backend Development", "Headless CMS", "CMS"],
 		"note": "For years, I lived and breathed WordPress.",
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "WOOCOMMERCE",
@@ -533,14 +304,8 @@
 		"icon": "devicon:woocommerce",
 		"proficiency": "senior",
 		"yrsExperience": 9,
-		"keywords": [
-			"PHP",
-			"Backend Development",
-			"Payment Gateways"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["PHP", "Backend Development", "Payment Gateways"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "PUSHER",
@@ -548,14 +313,8 @@
 		"icon": "framework/pusher",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Web Sockets",
-			"Push Notifications",
-			"Laravel"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Web Sockets", "Push Notifications", "Laravel"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "MYSQL",
@@ -563,15 +322,8 @@
 		"icon": "devicon:mysql",
 		"proficiency": "senior",
 		"yrsExperience": 11,
-		"keywords": [
-			"Databases",
-			"Backend Development",
-			"SQL"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["Databases", "Backend Development", "SQL"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "POSTGRESQL",
@@ -579,14 +331,8 @@
 		"icon": "devicon:postgresql",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Databases",
-			"Backend Development",
-			"SQL"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Databases", "Backend Development", "SQL"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SNOWFLAKE",
@@ -594,14 +340,8 @@
 		"icon": "platform/snowflake",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Databases",
-			"Data Warehouse",
-			"SQL"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Databases", "Data Warehouse", "SQL"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "CAPACITOR",
@@ -609,14 +349,8 @@
 		"icon": "devicon:capacitor",
 		"proficiency": "proficient",
 		"yrsExperience": 1,
-		"keywords": [
-			"Mobile Development",
-			"Cross-platform",
-			"Native Apps"
-		],
-		"relevance": [
-			"peripheral"
-		]
+		"keywords": ["Mobile Development", "Cross-platform", "Native Apps"],
+		"relevance": ["peripheral"]
 	},
 	{
 		"id": "REDIS",
@@ -624,15 +358,8 @@
 		"icon": "devicon:redis",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Databases",
-			"Caching",
-			"Backend Development",
-			"Performance"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Databases", "Caching", "Backend Development", "Performance"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "WEBPACK",
@@ -640,16 +367,8 @@
 		"icon": "devicon:webpack",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Build Tools",
-			"Frontend Development",
-			"Development Tools",
-			"Node.js"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Build Tools", "Frontend Development", "Development Tools", "Node.js"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "VITEJS",
@@ -657,17 +376,9 @@
 		"icon": "devicon:vitejs",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Build Tools",
-			"Frontend Development",
-			"Development Tools",
-			"Node.js"
-		],
+		"keywords": ["Build Tools", "Frontend Development", "Development Tools", "Node.js"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "GA",
@@ -675,14 +386,8 @@
 		"icon": "google/analytics",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Analytics/Tracking",
-			"Performance"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Analytics/Tracking", "Performance"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "GTM",
@@ -690,14 +395,8 @@
 		"icon": "google/tag-manager",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Analytics/Tracking",
-			"Performance"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Analytics/Tracking", "Performance"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "VULTR",
@@ -705,14 +404,8 @@
 		"icon": "platform/vultr",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Server",
-			"Hosting",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Server", "Hosting", "DevOps"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "AWS",
@@ -720,14 +413,8 @@
 		"icon": "aws/logo",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"AWS",
-			"Server",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["AWS", "Server", "DevOps"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "EC2",
@@ -735,15 +422,8 @@
 		"icon": "aws/ec2",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"AWS",
-			"Server",
-			"Hosting",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["AWS", "Server", "Hosting", "DevOps"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "S3",
@@ -751,15 +431,8 @@
 		"icon": "aws/s3",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"AWS",
-			"Server",
-			"REST API",
-			"File Storage"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["AWS", "Server", "REST API", "File Storage"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "RDS",
@@ -767,14 +440,8 @@
 		"icon": "aws/rds",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"AWS",
-			"REST API",
-			"Databases"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["AWS", "REST API", "Databases"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "UBUNTU",
@@ -782,13 +449,8 @@
 		"icon": "devicon:ubuntu",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Server",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Server", "DevOps"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SSH",
@@ -796,14 +458,8 @@
 		"icon": "devicon:ssh",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Server",
-			"DevOps"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Server", "DevOps"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "NGINX",
@@ -811,12 +467,8 @@
 		"icon": "devicon:nginx",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Server"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Server"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "API",
@@ -825,14 +477,8 @@
 		"featured": true,
 		"proficiency": "expert",
 		"yrsExperience": 12,
-		"keywords": [
-			"API Development",
-			"Backend Development"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["API Development", "Backend Development"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "WEBHOOKS",
@@ -840,13 +486,8 @@
 		"icon": "ph:webhooks-logo-duotone",
 		"proficiency": "expert",
 		"yrsExperience": 8,
-		"keywords": [
-			"API Development",
-			"Backend Development"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["API Development", "Backend Development"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "SWAGGER",
@@ -854,15 +495,8 @@
 		"icon": "devicon:swagger",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"REST API",
-			"API Development",
-			"Backend Development"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["REST API", "API Development", "Backend Development"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "INSOMNIA",
@@ -870,15 +504,8 @@
 		"icon": "platform/kong",
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"REST API",
-			"API Development",
-			"Backend Development"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["REST API", "API Development", "Backend Development"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "POSTMAN",
@@ -886,15 +513,8 @@
 		"icon": "devicon:postman",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"REST API",
-			"API Development",
-			"Backend Development"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["REST API", "API Development", "Backend Development"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "NETLIFY",
@@ -902,18 +522,10 @@
 		"icon": "devicon:netlify",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Hosting",
-			"Static Sites",
-			"SSR",
-			"JAMstack"
-		],
+		"keywords": ["Hosting", "Static Sites", "SSR", "JAMstack"],
 		"usedForCv": true,
 		"note": "Deployments for static and SSR sites",
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "FIREBASE",
@@ -921,15 +533,8 @@
 		"icon": "devicon:firebase",
 		"proficiency": "proficient",
 		"yrsExperience": 2,
-		"keywords": [
-			"Databases",
-			"Backend Development",
-			"Serverless Functions",
-			"Hosting"
-		],
-		"relevance": [
-			"peripheral"
-		]
+		"keywords": ["Databases", "Backend Development", "Serverless Functions", "Hosting"],
+		"relevance": ["peripheral"]
 	},
 	{
 		"id": "SHOPIFY",
@@ -937,15 +542,9 @@
 		"icon": "platform/shopify",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"CMS",
-			"Frontend Development",
-			"Serverless Functions"
-		],
+		"keywords": ["CMS", "Frontend Development", "Serverless Functions"],
 		"note": "Custom themes and API integrations",
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "STRIPE",
@@ -953,13 +552,8 @@
 		"icon": "platform/stripe",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"REST API",
-			"Payment Gateways"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["REST API", "Payment Gateways"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "HUBSPOT",
@@ -968,17 +562,8 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"CMS",
-			"CRM",
-			"Marketing Automation",
-			"REST API",
-			"Frontend Development",
-			"Serverless Functions"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["CMS", "CRM", "Marketing Automation", "REST API", "Frontend Development", "Serverless Functions"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "ACTIVECAMPAIGN",
@@ -986,14 +571,8 @@
 		"icon": "platform/activecampaign",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"CRM",
-			"Marketing Automation",
-			"REST API"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["CRM", "Marketing Automation", "REST API"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "MAILCHIMP",
@@ -1001,14 +580,8 @@
 		"icon": "platform/mailchimp",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"CRM",
-			"Marketing Automation",
-			"REST API"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["CRM", "Marketing Automation", "REST API"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "PIPEDRIVE",
@@ -1016,14 +589,8 @@
 		"icon": "platform/pipedrive",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"CRM",
-			"Marketing Automation",
-			"REST API"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["CRM", "Marketing Automation", "REST API"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "TERRAFORM",
@@ -1031,13 +598,8 @@
 		"icon": "devicon:terraform",
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"DevOps",
-			"Infrastructure as Code"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["DevOps", "Infrastructure as Code"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "ANSIBLE",
@@ -1045,14 +607,8 @@
 		"icon": "devicon:ansible",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"DevOps",
-			"Provisioning",
-			"Infrastructure as Code"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["DevOps", "Provisioning", "Infrastructure as Code"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "ALGOLIA",
@@ -1060,13 +616,8 @@
 		"icon": "devicon:algolia",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Search Engine",
-			"Backend Development"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["Search Engine", "Backend Development"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "PRETTIER",
@@ -1074,15 +625,9 @@
 		"icon": "platform/prettier",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"JavaScript",
-			"Code Formatter"
-		],
+		"keywords": ["JavaScript", "Code Formatter"],
 		"usedForCv": true,
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "ASANA",
@@ -1090,15 +635,8 @@
 		"icon": "platform/asana",
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"Agile",
-			"Collaboration",
-			"Project Management"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Agile", "Collaboration", "Project Management"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "JIRA",
@@ -1106,15 +644,8 @@
 		"icon": "devicon:jira",
 		"proficiency": "senior",
 		"yrsExperience": 3,
-		"keywords": [
-			"Agile",
-			"Collaboration",
-			"Issue Tracking"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Agile", "Collaboration", "Issue Tracking"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "CLICKUP",
@@ -1122,15 +653,8 @@
 		"icon": "platform/clickup",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Agile",
-			"Collaboration",
-			"Issue Tracking"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Agile", "Collaboration", "Issue Tracking"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "LINEAR",
@@ -1138,16 +662,8 @@
 		"icon": "platform/linear",
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"Agile",
-			"Collaboration",
-			"Issue Tracking",
-			"Project Management"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Agile", "Collaboration", "Issue Tracking", "Project Management"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "SENTRY",
@@ -1155,14 +671,8 @@
 		"icon": "devicon:sentry",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Issue Tracking",
-			"Performance"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Issue Tracking", "Performance"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "SLACKAPI",
@@ -1170,14 +680,9 @@
 		"icon": "devicon:slack",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Collaboration",
-			"REST API"
-		],
+		"keywords": ["Collaboration", "REST API"],
 		"note": "Custom slash commands, API integration",
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "ZAPIER",
@@ -1185,14 +690,9 @@
 		"icon": "platform/zapier",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"Automation",
-			"REST API"
-		],
+		"keywords": ["Automation", "REST API"],
 		"note": "Creating a custom plugin",
-		"relevance": [
-			"shipped"
-		]
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "DOCKER",
@@ -1200,14 +700,8 @@
 		"icon": "devicon:docker",
 		"proficiency": "senior",
 		"yrsExperience": 4,
-		"keywords": [
-			"Containerization",
-			"DevOps"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["Containerization", "DevOps"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "CLAUDE",
@@ -1216,17 +710,9 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"LLM",
-			"AI Agent",
-			"Agentic Systems",
-			"MCP"
-		],
+		"keywords": ["LLM", "AI Agent", "Agentic Systems", "MCP"],
 		"note": "Daily driver - Claude Code CLI, the API, and custom agent skills I build and run in production.",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "GPT",
@@ -1234,13 +720,8 @@
 		"icon": "platform/chatgpt",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"LLM",
-			"AI Agent"
-		],
-		"relevance": [
-			"peripheral"
-		]
+		"keywords": ["LLM", "AI Agent"],
+		"relevance": ["peripheral"]
 	},
 	{
 		"id": "LOVABLE",
@@ -1248,12 +729,8 @@
 		"icon": "platform/lovable",
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"AI Agent"
-		],
-		"relevance": [
-			"shipped"
-		]
+		"keywords": ["AI Agent"],
+		"relevance": ["shipped"]
 	},
 	{
 		"id": "MCP",
@@ -1262,16 +739,9 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 1,
-		"keywords": [
-			"AI Agent",
-			"Agentic Systems",
-			"API Development"
-		],
+		"keywords": ["AI Agent", "Agentic Systems", "API Development"],
 		"note": "Self-hosted an MCP server so agents can read and act on a live knowledge base remotely.",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "AGENTIC",
@@ -1280,16 +750,9 @@
 		"featured": true,
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"AI Agent",
-			"LLM",
-			"Agentic Systems"
-		],
+		"keywords": ["AI Agent", "LLM", "Agentic Systems"],
 		"note": "Design and operate autonomous agents in production - orchestration, tool use, guardrails, evals.",
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "PROMPTENG",
@@ -1297,14 +760,8 @@
 		"icon": "ph:sparkle-duotone",
 		"proficiency": "senior",
 		"yrsExperience": 2,
-		"keywords": [
-			"AI Agent",
-			"LLM"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["AI Agent", "LLM"],
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "HTML",
@@ -1312,15 +769,9 @@
 		"icon": "devicon:html5",
 		"proficiency": "expert",
 		"yrsExperience": 20,
-		"keywords": [
-			"Frontend Development",
-			"DOM Manipulation"
-		],
+		"keywords": ["Frontend Development", "DOM Manipulation"],
 		"usedForCv": true,
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "CSS",
@@ -1328,15 +779,9 @@
 		"icon": "devicon:css3",
 		"proficiency": "expert",
 		"yrsExperience": 20,
-		"keywords": [
-			"Frontend Development",
-			"CSS Processing"
-		],
+		"keywords": ["Frontend Development", "CSS Processing"],
 		"usedForCv": true,
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"relevance": ["active_stack", "shipped"]
 	},
 	{
 		"id": "NPM",
@@ -1344,14 +789,8 @@
 		"icon": "devicon:npm",
 		"proficiency": "senior",
 		"yrsExperience": 13,
-		"keywords": [
-			"Build Tools",
-			"Development Tools"
-		],
-		"relevance": [
-			"active_stack",
-			"peripheral"
-		]
+		"keywords": ["Build Tools", "Development Tools"],
+		"relevance": ["active_stack", "peripheral"]
 	},
 	{
 		"id": "JSON",
@@ -1359,14 +798,8 @@
 		"icon": "devicon:json",
 		"proficiency": "expert",
 		"yrsExperience": 18,
-		"keywords": [
-			"API Development",
-			"Development Tools"
-		],
-		"relevance": [
-			"active_stack",
-			"peripheral"
-		]
+		"keywords": ["API Development", "Development Tools"],
+		"relevance": ["active_stack", "peripheral"]
 	},
 	{
 		"id": "MARKDOWN",
@@ -1374,14 +807,8 @@
 		"icon": "devicon:markdown",
 		"proficiency": "expert",
 		"yrsExperience": 13,
-		"keywords": [
-			"CMS",
-			"Development Tools"
-		],
-		"relevance": [
-			"active_stack",
-			"peripheral"
-		]
+		"keywords": ["CMS", "Development Tools"],
+		"relevance": ["active_stack", "peripheral"]
 	},
 	{
 		"id": "VSCODE",
@@ -1389,13 +816,8 @@
 		"icon": "devicon:vscode",
 		"proficiency": "expert",
 		"yrsExperience": 10,
-		"keywords": [
-			"Development Tools"
-		],
-		"relevance": [
-			"active_stack",
-			"peripheral"
-		]
+		"keywords": ["Development Tools"],
+		"relevance": ["active_stack", "peripheral"]
 	},
 	{
 		"id": "SQLITE",
@@ -1403,13 +825,8 @@
 		"icon": "devicon:sqlite",
 		"proficiency": "proficient",
 		"yrsExperience": 8,
-		"keywords": [
-			"Databases"
-		],
-		"relevance": [
-			"shipped",
-			"peripheral"
-		]
+		"keywords": ["Databases"],
+		"relevance": ["shipped", "peripheral"]
 	},
 	{
 		"id": "BIOME",
@@ -1417,14 +834,8 @@
 		"icon": "devicon:biome",
 		"proficiency": "proficient",
 		"yrsExperience": 2,
-		"keywords": [
-			"Code Formatter",
-			"Development Tools"
-		],
-		"relevance": [
-			"active_stack",
-			"peripheral"
-		]
+		"keywords": ["Code Formatter", "Development Tools"],
+		"relevance": ["active_stack", "peripheral"]
 	},
 	{
 		"id": "JAMSTACK",
@@ -1432,13 +843,7 @@
 		"icon": "devicon:jamstack",
 		"proficiency": "senior",
 		"yrsExperience": 5,
-		"keywords": [
-			"Static Sites",
-			"Frontend Development"
-		],
-		"relevance": [
-			"active_stack",
-			"shipped"
-		]
+		"keywords": ["Static Sites", "Frontend Development"],
+		"relevance": ["active_stack", "shipped"]
 	}
 ]
