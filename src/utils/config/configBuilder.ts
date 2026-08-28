@@ -109,7 +109,7 @@ export function addUtils(config: Config.Complete) {
 		...config.about,
 		firstName,
 		lastName,
-		jobTitles: (Array.isArray(config.about.jobTitles) ? config.about.jobTitles : [config.about.jobTitles]).filter(Boolean) as Config.Final["about"]["jobTitles"],
+		focuses: (Array.isArray(config.about.focuses) ? config.about.focuses : [config.about.focuses]).filter(Boolean) as Config.Final["about"]["focuses"],
 		linguistics: {
 			...config.about.linguistics,
 			languages: (Array.isArray(config.about.linguistics?.languages) ? config.about.linguistics?.languages : [config.about.linguistics?.languages]).filter(

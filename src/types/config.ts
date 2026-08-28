@@ -41,11 +41,11 @@ export namespace Config {
 		};
 		colors: { light: App.ModeConfig["colors"]; dark: App.ModeConfig["colors"] };
 		fonts: App.UIConfig["fonts"];
-		about: Omit<About.Base, "nationality" | "linguistics" | "jobTitles"> & {
+		about: Omit<About.Base, "nationality" | "linguistics" | "focuses"> & {
 			firstName: string;
 			lastName: string;
 			age: number;
-			jobTitles: string[];
+			focuses: string[];
 			locationFull: string;
 			getImage: (name: string) => string | undefined;
 			nationality: About.Nationality[];
@@ -186,7 +186,7 @@ export namespace App {
 export namespace About {
 	export type Base = {
 		name: string;
-		jobTitles: string | string[];
+		focuses: string | string[];
 		availability?: Availability;
 		dob?: Date | string;
 		location?: Location | undefined;

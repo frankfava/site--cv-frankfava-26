@@ -277,11 +277,18 @@
 				"name": {
 					"type": "string"
 				},
-				"jobTitles": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					}
+				"focuses": {
+					"oneOf": [
+						{
+							"type": "string"
+						},
+						{
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					]
 				},
 				"availability": {
 					"type": "object",
@@ -404,7 +411,7 @@
 			},
 			"required": [
 				"name",
-				"jobTitles",
+				"focuses",
 				"dob",
 				"location"
 			]

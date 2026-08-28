@@ -85,16 +85,9 @@
 	},
 	"about": {
 		"name": "Frank Fava",
-		"jobTitles": [
-			"AI Solutions Architect",
-			"Solutions Architect",
-			"Forward Deployed Engineer",
-			"Senior Full-Stack Engineer",
-			"AI Engineer",
-			"Engineering Manager"
-		],
+		"focuses": ["AI", "Solutions Architecture", "Full-Stack Engineering","Management"],
 		"availability": {
-			"noticeRequired" : "Minimal",
+			"noticeRequired": "Minimal",
 			"status": "available",
 			"text": "Available"
 		},

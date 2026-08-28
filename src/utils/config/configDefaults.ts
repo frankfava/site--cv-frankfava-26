@@ -66,7 +66,7 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 		},
 		about: {
 			name: "",
-			jobTitles: [],
+			focuses: [],
 			availability: {
 				status: "available",
 				text: "Available",
