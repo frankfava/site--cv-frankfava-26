@@ -9,7 +9,7 @@
 		"netlify": "SITE_URL=http://localhost:8888 netlify dev --port 8888",
 		"preview": "astro preview",
 		"astro": "astro",
-		"gen:theme": "node integrations/tailwind/generateThemeCss.mjs",
+		"gen:theme": "node integrations/tailwind/generateTheme.mjs",
 		"check": "npm run check:astro",
 		"check:astro": "astro check",
 		"format": "prettier --write ./src"
