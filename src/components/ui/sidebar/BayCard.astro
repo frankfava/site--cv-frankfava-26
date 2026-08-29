@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/utils/class";
+
+export interface Props extends HTMLAttributes<"div"> {
+	title: string;
+	contentClass?: HTMLAttributes<"div">["class:list"];
+}
+
+const { title, "class:list": classList, class: className = "", contentClass, ...divAttrs } = Astro.props;
+---
+
+<div {...{ ...divAttrs, class: cn("border border-line rounded-lg bg-surface shadow-(--c-shadow)", classList, className) }}>
+	<div class="flex items-center gap-2.5 bg-sunk px-5 py-3.5 border-line-2 border-b rounded-t-lg">
+		<span class="eyebrow text-ink-3">{title}</span>
+		<slot name="meta" />
+	</div>
+	{
+		contentClass ? (
+			<div class:list={cn(contentClass)}>
+				<slot />
+			</div>
+		) : (
+			<slot />
+		)
+	}
+</div>

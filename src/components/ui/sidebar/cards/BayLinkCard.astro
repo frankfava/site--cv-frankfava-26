@@ -1,0 +1,69 @@
+---
+import type { Link } from "@/types";
+import BayCard, { type Props as BayCardProps } from "@/components/ui/sidebar/BayCard.astro";
+import MenuItem from "@/components/ui/menu/MenuItem.astro";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends Omit<BayCardProps, "title"> {
+	title?: BayCardProps["title"];
+	navClass?: HTMLAttributes<"nav">["class:list"];
+	useNestedLinks?: boolean;
+	links: Array<Omit<Link, "id"> & { id?: Link["id"]; children?: Array<Omit<Link, "id">> }>;
+	lead?: "numbers" | "icons" | undefined;
+}
+
+const { links, title = "On this page", navClass, lead = "numbers", useNestedLinks = false, ...bayCardProps } = Astro.props;
+---
+
+{
+	!!links.length && (
+		<BayCard {...{ ...bayCardProps, title, contentClass: "p-2.5" }}>
+			<slot name="meta" slot="meta" />
+			<nav {...{ "class:list": navClass, "aria-label": title }}>
+				<slot name="list">
+					<ul class="flex flex-col gap-1">
+						<slot name="items">
+							{links.map((link, i) => (
+								<MenuItem
+									{...{
+										...link,
+										linkClass: [
+											"grid gap-2 px-1 lg:px-2 py-2.5 rounded-lg text-[0.92rem]/[1.4] text-(--c-ink-2)! transition-all duration-[140ms] ease-[ease] hover:bg-(--c-sunk) hover:text-(--c-ink)! dark:hover:text-(--c-ink)! leading-4",
+											{
+												"grid-cols-[20px_1fr] items-baseline": lead === "numbers",
+												"grid-cols-[30px_1fr] items-center": lead === "icons" && !!link?.icon,
+												"grid-cols-[1fr] items-baseline": lead === undefined,
+											},
+										],
+										showLinkIcon: lead === "icons",
+										iconClass: "bg-primary rounded-full text-white p-1.5 h-7 w-7",
+										lead: lead === "numbers" ? () => <span class="n font-mono text-[0.71rem] text-ink-3">{String(i + 1).padStart(2, "0")}</span> : undefined,
+										["data-cv-section-link"]: "true",
+									}}
+								>
+									{link.children && useNestedLinks && (
+										<ul class="flex flex-col text-[0.8rem]">
+											{(link.children || []).map((child, j) => (
+												<MenuItem
+													{...{
+														...child,
+														"class:list": { "ps-6": lead === "icons", "ps-4": lead === "numbers" },
+														showLinkIcon: false,
+														linkClass: [
+															"lg:px-1 py-1 leading-4 border-0 border-l-2 border-line hover:border-accent",
+															{ "!pl-3": lead === "icons", "!pl-5": lead === "numbers" },
+														],
+													}}
+												/>
+											))}
+										</ul>
+									)}
+								</MenuItem>
+							))}
+						</slot>
+					</ul>
+				</slot>
+			</nav>
+		</BayCard>
+	)
+}

@@ -10,27 +10,38 @@
 import type { Link } from "@/types";
 
 import { SOCIALS } from "site:config";
-import { BlueprintBuilder } from "@/lib/blueprints";
-import IndexCard from "@/components/ui/sidebar/cards/IndexCard.astro";
-import BayLinkCard from "./cards/BayLinkCard.astro";
+import BayLinkCard, { type Props as BayLinkCardProps } from "./cards/BayLinkCard.astro";
 import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
-import MenuItem from "../menu/MenuItem.astro";
 import type { AstroVNode } from "astro/jsx-runtime";
 
 export interface Props {
 	showSocialLinks?: boolean;
 	showNavLinks?: boolean;
 	navLinks?: Array<Link>;
-	links?: Array<Link>;
-	useNestedBlueprintLinks?: boolean;
+	links?: BayLinkCardProps["links"];
+	useNestedLinks?: BayLinkCardProps["useNestedLinks"];
+	linkLeadType?: BayLinkCardProps["lead"];
 	append?: (links: Link[]) => AstroVNode;
 }
 
-const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedBlueprintLinks = false, append } = Astro.props;
+const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType, append } = Astro.props;
 
 const blueprintSchema = Astro.locals.blueprint?.blueprint;
 const blueprintSections = blueprintSchema?.getSidebarSections();
-const blueprintSectionLinks = BlueprintBuilder.menuLinks(blueprintSections ?? []);
+
+// Convert blueprint sections to links
+const blueprintSectionLinks = blueprintSections
+	?.map((section) => {
+		if (section?.hidden && !section.hasSections()) {
+			return undefined;
+		}
+		return {
+			...section.convertToMenuLink({ id: null }),
+			href: section.hidden ? section.getFirstSection()?.convertToMenuLink()?.href : section.convertToMenuLink()?.href,
+			children: section.hasSections() ? section.sections?.map((section) => section.convertToMenuLink({ id: null })) : undefined,
+		};
+	})
+	.filter(Boolean) as BayLinkCardProps["links"];
 
 const useLinks = blueprintSectionLinks ?? links;
 ---
@@ -48,45 +59,15 @@ const useLinks = blueprintSectionLinks ?? links;
 		)
 	}
 
-	{showNavLinks && !!navLinks.length && <BayLinkCard title="Links" links={navLinks} />}
+	{showNavLinks && !!navLinks.length && <BayLinkCard id="nav-links" class="lg:hidden" title="Links" links={navLinks as BayLinkCardProps["links"]} />}
 
 	{
-		useNestedBlueprintLinks && blueprintSections ? (
-			<nav id="blueprint-nav" class="py-6 p-4">
-				<ul class="flex flex-col gap-2 text-[0.8rem]">
-					{blueprintSections.map((section) => (
-						<>
-							{(!section?.hidden || !!(section?.sections || []).length) && (
-								<MenuItem
-									{...{
-										...section.convertToMenuLink(),
-										href: (section.hidden ? (!!(section?.sections || []).length ? (section?.sections || [])[0] : section) : section).convertToMenuLink()?.href,
-										linkClass: "lg:px-0 py-1.5 !font-semibold leading-4",
-										iconClass: "bg-primary rounded-full text-white p-2 h-8 w-8",
-									}}
-								>
-									{!!(section?.sections || []).length && (
-										<ul class="flex flex-col text-[0.8rem]">
-											{(section?.sections || []).map((section) => (
-												<MenuItem
-													{...{
-														...section.convertToMenuLink(),
-														class: "ps-6",
-														showLinkIcon: false,
-														linkClass: "lg:px-1 py-1 leading-4 border-0 border-l-2 border-gray-300 hover:border-primary-500 !pl-3",
-													}}
-												/>
-											))}
-										</ul>
-									)}
-								</MenuItem>
-							)}
-						</>
-					))}
-				</ul>
-			</nav>
-		) : (
-			!!useLinks.length && <IndexCard links={useLinks} />
+		!!useLinks.length && (
+			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType }}>
+				<span class="tab ml-auto font-mono text-[0.72rem] text-accent" slot="meta" data-cv-progress>
+					0%
+				</span>
+			</BayLinkCard>
 		)
 	}
 
