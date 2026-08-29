@@ -16,13 +16,17 @@ export const media = {
 	transparency: window.matchMedia(`(prefers-transparency: prefer-reduced)`).matches,
 };
 
+export const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+
 export const scroll = {
 	position: () => ({
 		x: window.scrollX,
-		y: window.scrollY | document.body.scrollTop,
+		y: window.scrollY,
 	}),
-	top: () => scrollPosition().y,
-	bottom: () => scrollPosition().y + window.innerHeight,
+	top: () => scroll.position().y,
+	bottom: () => scroll.position().y + window.innerHeight,
+	max: () => document.documentElement.scrollHeight - document.documentElement.clientHeight,
+	atEnd: () => window.scrollY >= scroll.max() - 2,
 	intoView: (target) => {
 		target.scrollIntoView({ behavior: media.reducedMotion ? "instant" : "smooth" });
 	},

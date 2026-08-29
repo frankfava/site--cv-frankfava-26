@@ -1,6 +1,6 @@
 import { SIDEBAR } from "site:config";
 import { BREAKPOINTS } from "@/lib/_theme.generated";
-import { attachEvent, readStored, writeStored, scroll } from "./utils";
+import { attachEvent, readStored, writeStored, clamp, scroll } from "./utils";
 
 /**
  * Mobile Class
@@ -22,7 +22,6 @@ function initMobileClass() {
  * Scroll
  *
  * One listener and one frame for everything that follows the scroll position.
- * Register with `onScroll`; it runs the pass immediately, then once a frame.
  */
 const scrollPasses = [];
 
@@ -67,8 +66,8 @@ function initHeaderScroll() {
 		}
 
 		if (bar) {
-			const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-			bar.style.width = `${max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max)) * 100}%`;
+			const max = scroll.max();
+			bar.style.width = `${max <= 0 ? 0 : clamp(window.scrollY / max) * 100}%`;
 		}
 	});
 }
@@ -90,10 +89,11 @@ function initSidebar() {
 		},
 	};
 
+	const wideEnough = window.matchMedia(`(min-width: ${BREAKPOINTS[SIDEBAR.autoHideAt]})`);
+
 	const sidebar = {
 		sidebarShowClass: "nav-menu-open",
 		storageKey: SIDEBAR.storageKey,
-		autoHideAt: BREAKPOINTS[SIDEBAR.autoHideAt],
 		isOpen: () => document.documentElement.classList.contains(sidebar.sidebarShowClass),
 		toggleClass: (open) => {
 			document.documentElement.classList.toggle(sidebar.sidebarShowClass, open);
@@ -133,7 +133,7 @@ function initSidebar() {
 	});
 
 	// Close Sidebar Nav on viewport change, reopen only if preference allows
-	window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).addEventListener("change", (e) => {
+	wideEnough.addEventListener("change", (e) => {
 		!e.matches || !sidebar.preference() ? sidebar.close() : sidebar.open();
 	});
 
@@ -155,7 +155,7 @@ function initSidebar() {
 
 	// Auto Show Sidebar (desktop only, respect saved preference)
 	setTimeout(() => {
-		if (sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).matches || !sidebar.preference()) return;
+		if (sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !wideEnough.matches || !sidebar.preference()) return;
 		sidebar.open();
 	}, 500);
 
@@ -193,15 +193,17 @@ function initSidebarHeight() {
  * One read of where you are, feeding the index and rail links.
  */
 function initScrollSpy() {
-	const anchors = Array.from(document.querySelectorAll("[data-section-link]")).filter((a) => a.getAttribute("href")?.startsWith("#"));
-	const ids = [...new Set(anchors.map((a) => a.getAttribute("href").slice(1)))];
+	const href = (a) => a.getAttribute("href");
 
+	const anchors = Array.from(document.querySelectorAll('[data-section-link][href^="#"]'));
+	const ids = [...new Set(anchors.map((a) => href(a).slice(1)))];
 	const readouts = document.querySelectorAll("[data-read-progress]");
-	const parents = new Map();
+
+	const parentHref = new Map();
 	const lists = new Map();
 	anchors.forEach((a) => {
 		const parent = a.closest("li")?.parentElement?.closest("li")?.querySelector("a[data-section-link]");
-		if (parent) parents.set(a.getAttribute("href"), parent.getAttribute("href"));
+		if (parent) parentHref.set(href(a), href(parent));
 
 		const list = a.closest("nav") ?? document.body;
 		lists.set(list, [...(lists.get(list) ?? []), a]);
@@ -211,88 +213,75 @@ function initScrollSpy() {
 	if (!sections().length) return;
 
 	// Where a section takes over. Raise the fraction to hand over sooner.
-	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + window.innerHeight * 0.1;
+	const readingLine = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + window.innerHeight * 0.1;
+
+	function sectionAtLine(els) {
+		if (scroll.atEnd()) return els.at(-1);
+
+		const line = readingLine();
+		const spansLine = (el) => el.getBoundingClientRect().top <= line && el.getBoundingClientRect().bottom > line;
+		const belowLine = (el) => el.getBoundingClientRect().top > line;
+
+		const heroStillOwnsTheScreen = belowLine(els[0]);
+		if (heroStillOwnsTheScreen) return null;
+
+		return els.find(spansLine) ?? els.find(belowLine) ?? els.at(-1);
+	}
+
+	function showProgressThroughSections(els) {
+		if (!readouts.length) return;
+
+		const from = els[0].getBoundingClientRect().top + window.scrollY;
+		const to = els.at(-1).getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+		const read = to > from ? clamp((window.scrollY - from) / (to - from)) : window.scrollY >= from ? 1 : 0;
+
+		readouts.forEach((el) => (el.textContent = `${Math.round(read * 100)}%`));
+	}
+
+	function markOnePerList(id) {
+		lists.forEach((list) => {
+			let target = id && `#${id}`;
+			while (target && !list.some((a) => href(a) === target)) {
+				target = parentHref.get(target) ?? null;
+			}
+			list.forEach((a) => a.classList.toggle("is-on", href(a) === target));
+		});
+	}
 
 	let current;
 	let hashTimer;
 
-	function resolve(els) {
-		const at = line();
-
-		// A short last section never reaches the line.
-		if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
-			return els[els.length - 1];
-		}
-
-		// The hero still owns the screen.
-		if (els[0].getBoundingClientRect().top > at) {
-			return null;
-		}
-
-		return (
-			els.find((el) => {
-				const rect = el.getBoundingClientRect();
-				return rect.top <= at && rect.bottom > at;
-			}) ??
-			els.find((el) => el.getBoundingClientRect().top > at) ??
-			els[els.length - 1]
-		);
-	}
-
-	function apply() {
-		const els = sections();
-		if (!els.length) return;
-
-		// Across the sections, not the document: no hero, no footer.
-		if (readouts.length) {
-			const from = els[0].getBoundingClientRect().top + window.scrollY;
-			const to = els[els.length - 1].getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
-			const read = to > from ? Math.min(1, Math.max(0, (window.scrollY - from) / (to - from))) : Number(window.scrollY >= from);
-			readouts.forEach((el) => (el.textContent = `${Math.round(read * 100)}%`));
-		}
-
-		const id = resolve(els)?.id ?? null;
-		if (id === current) return;
-		current = id;
-
-		// One mark per list; a list without its own entry falls back to the ancestor.
-		lists.forEach((list) => {
-			let href = id ? `#${id}` : null;
-			while (href && !list.some((a) => a.getAttribute("href") === href)) {
-				href = parents.get(href) ?? null;
-			}
-			list.forEach((a) => a.classList.toggle("is-on", a.getAttribute("href") === href));
-		});
-
-		// Safari throws past 100 replaceState calls in 30 seconds.
+	// Safari throws past 100 replaceState calls in 30 seconds.
+	function writeHashWhenSettled(id) {
 		clearTimeout(hashTimer);
 		hashTimer = setTimeout(() => history.replaceState(null, "", id ? `#${id}` : window.location.pathname), 150);
 	}
 
-	onScroll(apply);
+	onScroll(() => {
+		const els = sections();
+		if (!els.length) return;
+
+		showProgressThroughSections(els);
+
+		const id = sectionAtLine(els)?.id ?? null;
+		if (id === current) return;
+		current = id;
+
+		markOnePerList(id);
+		writeHashWhenSettled(id);
+	});
 }
 
 /**
  * Jump Links
  */
 function jumpLinks() {
-	const jumpLinks = document.querySelectorAll("a");
-	if (!jumpLinks.length) return;
+	attachEvent('a[href^="#"]:not([href="#"])', "click", (e, link) => {
+		const target = document.querySelector(link.getAttribute("href"));
+		if (!target) return;
 
-	// Filter out links that start with a #
-	const hashLinks = Array.from(jumpLinks).filter((link) => link.getAttribute("href")?.startsWith("#"));
-
-	hashLinks.forEach((link) => {
-		link.addEventListener("click", (e) => {
-			const href = link.getAttribute("href");
-			e.preventDefault();
-			if (href != "#") {
-				const target = document.querySelector(href);
-				if (target) {
-					scroll.intoView(target);
-				}
-			}
-		});
+		e.preventDefault();
+		scroll.intoView(target);
 	});
 }
 
