@@ -4,6 +4,7 @@ import { projectsComponent } from "./projectsComponent.js";
 import { workHistoryAccordion } from "./workHistoryAccordion.js";
 import { particleField } from "./backgrounds/particleField.js";
 import { orb } from "./backgrounds/orb.js";
+import { hologram } from "./backgrounds/hologram.js";
 import { capabilityStore, capabilityPanel, capabilityRow, fitDial, CAPABILITY_STORE } from "./capability";
 import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, careerDoughnut, careerArc, CAREER_STORE } from "./career";
 
@@ -16,6 +17,7 @@ export default (Alpine) => {
 
 	Alpine.data("particleField", particleField);
 	Alpine.data("orb", orb);
+	Alpine.data("hologram", hologram);
 
 	Alpine.store(CAPABILITY_STORE, capabilityStore());
 	Alpine.data("capabilityPanel", capabilityPanel);
