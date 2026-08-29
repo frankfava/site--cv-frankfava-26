@@ -172,6 +172,106 @@ function initSidebarHeight() {
 	apply();
 }
 
+/**
+ * Scroll Spy
+ *
+ * One read of where you are, feeding the index and rail links.
+ */
+function initScrollSpy() {
+	const anchors = Array.from(document.querySelectorAll("[data-section-link]")).filter((a) => a.getAttribute("href")?.startsWith("#"));
+	const ids = [...new Set(anchors.map((a) => a.getAttribute("href").slice(1)))];
+
+	// Resolved per pass rather than held, so a section that renders late is picked up.
+	const sections = () => (ids.length ? ids.map((id) => document.getElementById(id)) : Array.from(document.querySelectorAll("main section[id]"))).filter(Boolean);
+	if (!sections().length) return;
+
+	// The reading line sits under the header, wherever the header ends up.
+	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + 24;
+
+	let current;
+	let hashTimer;
+
+	function resolve(els) {
+		const at = line();
+
+		// A short last section never reaches the reading line, so the bottom of the
+		// page counts as being in it.
+		if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+			return els[els.length - 1];
+		}
+
+		// Above the first section the hero still owns the screen, and nothing in the
+		// index is being read yet.
+		if (els[0].getBoundingClientRect().top > at) {
+			return null;
+		}
+
+		return (
+			els.find((el) => {
+				const rect = el.getBoundingClientRect();
+				return rect.top <= at && rect.bottom > at;
+			}) ??
+			els.find((el) => el.getBoundingClientRect().top > at) ??
+			els[els.length - 1]
+		);
+	}
+
+	function apply() {
+		const els = sections();
+		if (!els.length) return;
+
+		const id = resolve(els)?.id ?? null;
+		if (id === current) return;
+		current = id;
+
+		anchors.forEach((a) => a.classList.toggle("is-on", !!id && a.getAttribute("href") === `#${id}`));
+
+		// Safari throws once replaceState is called more than 100 times in 30
+		// seconds, which a wobble on a section boundary can reach. Waiting for the
+		// crossings to settle means a burst writes once, at the end.
+		clearTimeout(hashTimer);
+		hashTimer = setTimeout(() => history.replaceState(null, "", id ? `#${id}` : window.location.pathname), 150);
+	}
+
+	let ticking = false;
+	attachEvent([document], "scroll", () => {
+		if (ticking) return;
+		ticking = true;
+		window.requestAnimationFrame(() => {
+			apply();
+			ticking = false;
+		});
+	});
+
+	attachEvent("window", "resize", apply);
+	attachEvent("window", "load", apply);
+	apply();
+}
+
+/**
+ * Read Progress
+ *
+ * How far down the page you are, in its two renderings: the bar under the
+ * header and the percentage in the bay. Neither has to be on the page.
+ */
+function initReadProgress() {
+	const bar = document.getElementById("scroll-progress")?.querySelector("div:first-child");
+	const readouts = document.querySelectorAll("[data-read-progress]");
+	if (!bar && !readouts.length) return;
+
+	function apply() {
+		const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		const read = max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max));
+
+		if (bar) bar.style.width = `${read * 100}%`;
+		readouts.forEach((el) => (el.textContent = `${Math.round(read * 100)}%`));
+	}
+
+	attachEvent([document], "scroll", apply);
+	attachEvent("window", "resize", apply);
+	attachEvent("window", "load", apply);
+	apply();
+}
 
 /**
  * Jump Links
@@ -244,14 +344,14 @@ async function handleCopyToClipboardLinks() {
  * Init
  */
 const setup = () => {
-	initHeaderScroll();
 	initMobileClass();
+	initHeaderScroll();
 	initSidebar();
 	initSidebarHeight();
+	initScrollSpy();
 	initReadProgress();
 	jumpLinks();
 	handleUrlHash();
-	initScrollSpy();
 	handleCopyToClipboardLinks();
 };
 
