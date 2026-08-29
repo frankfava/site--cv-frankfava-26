@@ -58,15 +58,15 @@ if (showRail != undefined) {
 	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
 	<slot slot="beforeMenu" name="beforeMenu">
-		{DISPLAY.tagline && <span class="hidden lg:block font-mono font-medium text-[12.58px] text-ink-3 uppercase tracking-[0.11em] whitespace-nowrap">{DISPLAY.tagline}</span>}
+		{DISPLAY.tagline && <span class="hidden font-mono text-[12.58px] font-medium tracking-[0.11em] whitespace-nowrap text-ink-3 uppercase lg:block">{DISPLAY.tagline}</span>}
 	</slot>
 	<slot name="afterMenu" slot="afterMenu" />
 
 	<slot slot="beforeActions" name="beforeActions">
 		{
 			DISPLAY.showAvailability && (
-				<span class="inline-flex items-center gap-2.5 mr-3 font-mono text-[12.58px] text-good uppercase tracking-[0.08em] whitespace-nowrap">
-					<i class="bg-good rounded-[50%] w-2.5 h-2.5" />
+				<span class="mr-3 inline-flex items-center gap-2.5 font-mono text-[12.58px] tracking-[0.08em] whitespace-nowrap text-good uppercase">
+					<i class="size-2.5 rounded-[50%] bg-good" />
 					{ABOUT.availability?.text ?? ABOUT.availability?.status}
 				</span>
 			)

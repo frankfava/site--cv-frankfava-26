@@ -61,31 +61,31 @@
 ========================= */
 
 @utility btn {
-	@apply inline-flex justify-center items-center border-gray-400 hover:border-gray-600 dark:hover:border-slate-800 dark:border-slate-500 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 px-[16px] py-[9px] md:px-8 border rounded-[5px] focus:ring-blue-500 focus:ring-2 focus:ring-offset-blue-200 focus:ring-offset-2 font-normal text-base text-center text-page dark:text-slate-300 leading-snug transition duration-200 cursor-pointer ease-in text-[15.64px] whitespace-nowrap;
+	@apply inline-flex cursor-pointer items-center justify-center rounded-[5px] border border-gray-400 bg-transparent px-[16px] py-[9px] text-center text-base text-[15.64px] leading-snug font-normal whitespace-nowrap text-page transition duration-200 ease-in hover:border-gray-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 md:px-8 dark:border-slate-500 dark:text-slate-300 dark:hover:border-slate-800 dark:hover:bg-slate-800;
 }
 
 @utility btn-primary {
-	@apply btn border-primary hover:border-primary-700 dark:hover:border-primary-700 dark:border-primary bg-primary hover:bg-primary-700 dark:hover:bg-primary-700 dark:bg-primary font-normal text-white;
+	@apply btn border-primary bg-primary font-normal text-white hover:border-primary-700 hover:bg-primary-700 dark:border-primary dark:bg-primary dark:hover:border-primary-700 dark:hover:bg-primary-700;
 }
 
 @utility btn-outline-primary {
-	@apply btn relative border-primary bg-transparent hover:bg-primary text-center text-gray-900 hover:text-white;
+	@apply relative btn border-primary bg-transparent text-center text-gray-900 hover:bg-primary hover:text-white;
 }
 
 @utility btn-secondary {
-	@apply btn border-secondary hover:border-secondary-700 dark:hover:border-secondary-700 dark:border-secondary bg-secondary hover:bg-secondary-700 dark:hover:bg-secondary-700 dark:bg-secondary font-normal text-white;
+	@apply btn border-secondary bg-secondary font-normal text-white hover:border-secondary-700 hover:bg-secondary-700 dark:border-secondary dark:bg-secondary dark:hover:border-secondary-700 dark:hover:bg-secondary-700;
 }
 
 @utility btn-outline-secondary {
-	@apply btn relative border-secondary bg-transparent hover:bg-secondary text-center text-gray-900 hover:text-white;
+	@apply relative btn border-secondary bg-transparent text-center text-gray-900 hover:bg-secondary hover:text-white;
 }
 
 @utility btn-accent {
-	@apply btn border-accent hover:border-accent-700 dark:hover:border-accent-700 dark:border-accent bg-accent hover:bg-accent-800 dark:bg-accent text-white;
+	@apply btn border-accent bg-accent text-white hover:border-accent-700 hover:bg-accent-800 dark:border-accent dark:bg-accent dark:hover:border-accent-700;
 }
 
 @utility btn-outline-accent {
-	@apply btn relative border-accent bg-transparent hover:bg-accent text-center text-gray-900 hover:text-white;
+	@apply relative btn border-accent bg-transparent text-center text-gray-900 hover:bg-accent hover:text-white;
 }
 
 @utility btn-tertiary {
@@ -94,7 +94,7 @@
 
 @layer base {
 	body {
-		@apply font-normal leading-relaxed;
+		@apply leading-relaxed font-normal;
 	}
 
 	h1,
@@ -103,7 +103,7 @@
 	h4,
 	h5,
 	h6 {
-		@apply font-bold font-primary leading-tight;
+		@apply font-primary leading-tight font-bold;
 	}
 
 	.heading,
@@ -213,7 +213,7 @@ html {
 	}
 
 	#header-nav {
-		@apply 2xl:flex hidden;
+		@apply hidden 2xl:flex;
 	}
 
 	/* Offset Main for sticky header */
@@ -258,7 +258,7 @@ html {
 /* ---------- Scroll Progress Bar ---------- */
 
 #scroll-progress {
-	@apply fixed w-full left-0;
+	@apply fixed left-0 w-full;
 
 	&,
 	> div {

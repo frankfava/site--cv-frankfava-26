@@ -21,12 +21,12 @@ const variants = {
 	type === "button" || type === "submit" || type === "reset" ? (
 		<button type={type} class={twMerge(variants[variant] || "", className)} {...rest}>
 			<Fragment set:html={text} />
-			{icon && <Icon name={icon} class="inline-block -mr-1.5 rtl:mr-1 ml-1 rtl:-ml-1.5 w-5 h-5" />}
+			{icon && <Icon name={icon} class="-mr-1.5 ml-1 inline-block size-5 rtl:mr-1 rtl:-ml-1.5" />}
 		</button>
 	) : (
 		<a class={twMerge(variants[variant] || "", className)} {...(target ? { target: target, rel: "noopener noreferrer" } : {})} {...rest}>
 			<Fragment set:html={text} />
-			{icon && <Icon name={icon} class="inline-block -mr-1.5 rtl:mr-1 ml-1 rtl:-ml-1.5 w-5 h-5" />}
+			{icon && <Icon name={icon} class="-mr-1.5 ml-1 inline-block size-5 rtl:mr-1 rtl:-ml-1.5" />}
 		</a>
 	)
 }

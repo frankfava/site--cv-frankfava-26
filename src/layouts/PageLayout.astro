@@ -31,7 +31,7 @@ const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim(
 	</slot>
 
 	<div id="wrapper">
-		<main class="bg-ground font-secondary text-[17.34px]/[1.62] text-ink tracking-normal">
+		<main class="bg-ground font-secondary text-[17.34px]/[1.62] tracking-normal text-ink">
 			<slot name="hero" />
 
 			<div
@@ -57,7 +57,7 @@ const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim(
 
 		{
 			!footerInContent && (
-				<div class:list={["px-5 sm:px-10.5 pb-15 sm:pb-17.5 transition-[margin-left] duration-300 ease-[cubic-bezier(0.3,0.8,0.3,1)]"]}>
+				<div class:list={["px-5 pb-15 transition-[margin-left] duration-300 ease-[cubic-bezier(0.3,0.8,0.3,1)] sm:px-10.5 sm:pb-17.5"]}>
 					<slot name="footer">
 						<MainFooter {...footer} />
 					</slot>

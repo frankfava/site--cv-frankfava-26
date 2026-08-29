@@ -5,7 +5,7 @@ import BayCard from "@/components/ui/sidebar/BayCard.astro";
 
 <BayCard title="Live fit reading" class="hidden lg:block" x-data="fitDial">
 	<div class="px-5 pt-5 pb-1.5">
-		<svg class="block mx-auto w-full max-w-[220px] h-auto" viewBox="0 0 220 128" role="img" aria-label="Fit dial">
+		<svg class="mx-auto block h-auto w-full max-w-52" viewBox="0 0 220 128" role="img" aria-label="Fit dial">
 			<path d="M18 110 A92 92 0 0 1 202 110" fill="none" stroke="var(--c-sunk)" stroke-width="11" stroke-linecap="round"></path>
 			<path
 				class="[&.is-covered]:stroke-good [&.is-gap]:stroke-bad [&.is-none]:stroke-line [&.is-tight]:stroke-warn"
@@ -19,17 +19,17 @@ import BayCard from "@/components/ui/sidebar/BayCard.astro";
 			<line x1="110" y1="110" x2="110" y2="36" stroke="var(--c-ink)" stroke-width="2.5" stroke-linecap="round" x-bind:transform="needleTransform"></line>
 			<circle cx="110" cy="110" r="6" fill="var(--c-ink)"></circle>
 		</svg>
-		<div class="tab font-primary font-extrabold text-[2.1rem]/[1] text-center tracking-[-0.035em] [font-variation-settings:'wdth'_88]" x-text="value"></div>
-		<div class="mt-1.5 px-2.5 font-mono text-[0.7rem] text-ink-3 text-center uppercase tracking-[0.09em]" x-text="label">of what you asked for is covered</div>
+		<div class="text-center font-primary text-4xl/[1] font-extrabold tracking-tight tab [font-variation-settings:'wdth'_88]" x-text="value"></div>
+		<div class="mt-1.5 px-2.5 text-center font-mono text-xs tracking-widest text-ink-3 uppercase" x-text="label">of what you asked for is covered</div>
 	</div>
 
-	<div class="mt-4.5 px-4.5 pt-4 pb-4.5 border-line-2 border-t">
-		<p class="text-[0.87rem] text-ink-2" x-text="text"></p>
-		<div class="mt-2.5 pt-2.5 border-line border-t border-dashed text-[0.84rem] text-ink-2">
+	<div class="mt-4.5 border-t border-line-2 px-4.5 pt-4 pb-4.5">
+		<p class="text-sm text-ink-2" x-text="text"></p>
+		<div class="mt-2.5 border-t border-dashed border-line pt-2.5 text-sm text-ink-2">
 			<b class="font-semibold text-ink" x-text="noteLead"></b>
 			<span x-text="noteBody"></span>
 		</div>
 	</div>
 
-	<a class="block hover:bg-sunk px-4.5 py-3.5 border-line-2 border-t font-mono text-[0.74rem]" href="#capability">Adjust what your role needs &rarr;</a>
+	<a class="block border-t border-line-2 px-4.5 py-3.5 font-mono text-xs hover:bg-sunk" href="#capability">Adjust what your role needs &rarr;</a>
 </BayCard>

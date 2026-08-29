@@ -17,7 +17,7 @@ const { btnText = "Open Modal", btnClass, modalTitle = "Modal", modalDescription
 		<slot name="button">
 			<button
 				class:list={twMerge(
-					"flex justify-center items-center space-x-2 bg-indigo-500 dark:hover:bg-indigo-700 hover:bg-indigo-600 dark:focus:bg-indigo-700 focus:bg-indigo-500 dark:bg-indigo-600 px-3 py-2 rounded-md focus:ring-3 focus:ring-indigo-300/50 text-sm text-white capitalize tracking-wide transform transition-colors duration-200 focus:outline-none",
+					"flex transform items-center justify-center space-x-2 rounded-md bg-indigo-500 px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 hover:bg-indigo-600 focus:bg-indigo-500 focus:ring-3 focus:ring-indigo-300/50 focus:outline-none dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700",
 					btnClass,
 				)}
 			>
@@ -27,8 +27,8 @@ const { btnText = "Open Modal", btnClass, modalTitle = "Modal", modalDescription
 	</div>
 
 	<template x-teleport="body">
-		<div x-show="modelOpen" class="z-50 fixed inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-			<div class="sm:block flex justify-center items-center px-4 sm:p-0 min-h-screen text-center">
+		<div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+			<div class="flex min-h-screen items-center justify-center px-4 text-center sm:block sm:p-0">
 				<div
 					x-cloak
 					@click="modelOpen = false"
@@ -39,7 +39,7 @@ const { btnText = "Open Modal", btnClass, modalTitle = "Modal", modalDescription
 					x-transition:leave="transition ease-in duration-200 transform"
 					x-transition:leave-start="opacity-100"
 					x-transition:leave-end="opacity-0"
-					class="z-40 fixed inset-0 bg-gray-500/40 transition-opacity"
+					class="fixed inset-0 z-40 bg-gray-500/40 transition-opacity"
 					aria-hidden="true"
 				>
 				</div>
@@ -52,15 +52,15 @@ const { btnText = "Open Modal", btnClass, modalTitle = "Modal", modalDescription
 					x-transition:leave="transition ease-in duration-200 transform"
 					x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
 					x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-					class="z-50 relative inline-block bg-white shadow-xl my-8 lg:my-24 p-8 rounded-lg w-full max-w-xl 2xl:max-w-2xl text-left transform transition-all overflow-hidden"
+					class="relative z-50 my-8 inline-block w-full max-w-xl transform overflow-hidden rounded-lg bg-white p-8 text-left shadow-xl transition-all lg:my-24 2xl:max-w-2xl"
 				>
-					<div class="flex justify-between items-center space-x-4">
-						<h1 class="font-semibold text-gray-800 text-xl">{modalTitle}</h1>
+					<div class="flex items-center justify-between space-x-4">
+						<h1 class="text-xl font-semibold text-gray-800">{modalTitle}</h1>
 						<button @click="modelOpen = false" class="text-gray-600 hover:text-gray-700 focus:outline-none">
-							<Icon name="ph:x-circle-duotone" class="w-6 h-6" />
+							<Icon name="ph:x-circle-duotone" class="size-6" />
 						</button>
 					</div>
-					{modalDescription && <p class="mt-2 text-gray-500 text-sm">{modalDescription}</p>}
+					{modalDescription && <p class="mt-2 text-sm text-gray-500">{modalDescription}</p>}
 					<div class="mt-5">
 						<slot />
 					</div>

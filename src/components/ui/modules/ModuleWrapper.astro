@@ -32,14 +32,14 @@ const useLayout = forceLayout !== undefined ? forceLayout : THEME.layout;
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
 ---
 
-<WrapperTag class={twMerge("relative scroll-mt-[calc(var(--header-height)+18px)] module border-t border-line-2", outerClass)} {...id ? { id } : {}}>
-	<div class="-z-[1] absolute inset-0 bg-inset pointer-events-none" aria-hidden="true">
+<WrapperTag class={twMerge("module relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", outerClass)} {...id ? { id } : {}}>
+	<div class="bg-inset pointer-events-none absolute inset-0 -z-1" aria-hidden="true">
 		<slot name="bg">
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}
 		</slot>
 	</div>
-	<div class:list={[twMerge("wrapper relative mx-auto px-6 w-full text-base py-12 lg:py-16", !isFullWidth ? "max-w-(--content-width) xl:px-4" : "md:px-6", className), { dark: isDark }]}>
-		<div class="grid grid-cols-1 my-auto w-full" class:list={[twMerge("gap-6", contentClass), { "lg:grid-cols-3 lg:gap-12": useLayout == "narrow" && showHeader }]}>
+	<div class:list={[twMerge("wrapper relative mx-auto w-full px-6 py-12 text-base lg:py-16", !isFullWidth ? "max-w-(--content-width) xl:px-4" : "md:px-6", className), { dark: isDark }]}>
+		<div class="my-auto grid w-full grid-cols-1" class:list={[twMerge("gap-6", contentClass), { "lg:grid-cols-3 lg:gap-12": useLayout == "narrow" && showHeader }]}>
 			{
 				showHeader && (
 					<div

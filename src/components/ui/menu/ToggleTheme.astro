@@ -48,7 +48,7 @@ const isSingle = options.length < 3;
 				type="button"
 				@click={isSingle ? "toggle()" : "toggleOpen()"}
 				class={twMerge(
-					"inline-flex items-center dark:border-gray-600 p-2.5 border rounded-lg focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 text-gray-600 text-sm dark:text-white transition-colors duration-200 focus:outline-none",
+					"inline-flex items-center rounded-lg border p-2.5 text-sm text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:ring-gray-700",
 					className,
 				)}
 				aria-label={label}
@@ -58,7 +58,7 @@ const isSingle = options.length < 3;
 				x-bind:aria-expanded={isSingle ? undefined : "isOpen"}
 			>
 				{options.map((o) => (
-					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class="toggle-icon" class:list={[o.key, twMerge("w-6 h-6", iconClass)]} />
+					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class="toggle-icon" class:list={[o.key, twMerge("size-6", iconClass)]} />
 				))}
 			</button>
 			{!isSingle && (
@@ -69,18 +69,18 @@ const isSingle = options.length < 3;
 					@click.outside="close()"
 					@keydown.down.prevent="$focus.wrap().next()"
 					@keydown.up.prevent="$focus.wrap().previous()"
-					class="top-14 right-0 !z-10 absolute bg-white dark:bg-gray-700 shadow-xl py-1 rounded-lg divide-y divide-gray-100 ring-1 ring-gray-100 dark:ring-gray-600 w-30 font-semibold text-primary-700 text-sm dark:text-primary-300 overflow-hidden"
+					class="absolute top-14 right-0 z-10! w-30 divide-y divide-gray-100 overflow-hidden rounded-lg bg-white py-1 text-sm font-semibold text-primary-700 shadow-xl ring-1 ring-gray-100 dark:bg-gray-700 dark:text-primary-300 dark:ring-gray-600"
 					role="menu"
 				>
-					<ul class="py-2 text-gray-700 text-sm dark:text-gray-200" role="listbox" tabindex="0" aria-orientation="vertical">
+					<ul class="py-2 text-sm text-gray-700 dark:text-gray-200" role="listbox" tabindex="0" aria-orientation="vertical">
 						{options.map((o) => (
 							<li
 								@click={`select('${o.key}')`}
-								class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 px-4 py-2 dark:hover:text-white cursor-pointer active"
+								class="active flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
 								role="option"
 								tabindex="-1"
 							>
-								<Icon name={o.icon} class="mr-3 w-6 h-6 dark:fill-white" />
+								<Icon name={o.icon} class="mr-3 size-6 dark:fill-white" />
 								<span>{o.label}</span>
 							</li>
 						))}

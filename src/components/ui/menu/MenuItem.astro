@@ -20,9 +20,9 @@ delete leadProps.lead;
 ---
 
 <li class={className} class:list={cn(classList)}>
-	<a class={cn(["border border-transparent text-ink hover:text-accent dark:hover:text-white px-1 lg:px-3 py-1 flex text-wrap items-center", linkClass])} href={href} {...anchorAttrs}>
+	<a class={cn(["flex items-center border border-transparent p-1 text-wrap text-ink hover:text-accent lg:px-3 dark:hover:text-white", linkClass])} href={href} {...anchorAttrs}>
 		<slot name="lead">
-			{lead ? lead(leadProps) : showLinkIcon && icon && <Icon name={icon} class={cn("w-5 h-5 mr-3", iconClass)} />}
+			{lead ? lead(leadProps) : showLinkIcon && icon && <Icon name={icon} class={cn("mr-3 size-5", iconClass)} />}
 		</slot>
 		<span class="grow">{text}</span>
 	</a>

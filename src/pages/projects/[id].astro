@@ -56,7 +56,7 @@ const metadata = {
 		</div>
 		{
 			(demoUrl || repoUrl) && (
-				<div class="flex flex-wrap justify-center gap-3 mt-2">
+				<div class="mt-2 flex flex-wrap justify-center gap-3">
 					{demoUrl && (
 						<div>
 							<a href={demoUrl} target="_blank">
@@ -82,18 +82,18 @@ const metadata = {
 			class: "max-w-screen-xl",
 		}}
 	>
-		<div class="flex xl:flex-row flex-col xl:justify-center gap-6">
+		<div class="flex flex-col gap-6 xl:flex-row xl:justify-center">
 			{
 				!!(highlights || []).length && (
-					<div class="xl:border-gray-200 xl:pr-6 xl:border-r w-full xl:w-1/4">
-						<div class="gap-4 grid">
-							<div class="border-gray-100 shadow-md p-4 border rounded-md">
+					<div class="w-full xl:w-1/4 xl:border-r xl:border-gray-200 xl:pr-6">
+						<div class="grid gap-4">
+							<div class="rounded-md border border-gray-100 p-4 shadow-md">
 								<div class="mb-2 text-lg">
 									<span class="font-semibold">Highlights</span>
 								</div>
 								{!!(highlights || []).length && (
 									<div class="text-gray-600">
-										<ul class="space-y-2 ml-6 list-disc list-outside">
+										<ul class="ml-6 list-outside list-disc space-y-2">
 											{(highlights || []).map((r) => (
 												<li set:html={r} />
 											))}
@@ -105,10 +105,10 @@ const metadata = {
 					</div>
 				)
 			}
-			<div class="w-full xl:w-3/4 lg:overflow-y-auto">
+			<div class="w-full lg:overflow-y-auto xl:w-3/4">
 				<div class="mb-2">
 					<a href="/" class="inline-flex items-center gap-2">
-						<Icon name="ph:arrow-fat-line-left-duotone" class="w-5 h-5" />
+						<Icon name="ph:arrow-fat-line-left-duotone" class="size-5" />
 						Back
 					</a>
 				</div>
@@ -116,10 +116,10 @@ const metadata = {
 				{
 					!!projectSkills.length && (
 						<div class="mt-10">
-							<ul class="flex flex-wrap gap-2 mt-2 text-gray-600 text-sm">
+							<ul class="mt-2 flex flex-wrap gap-2 text-sm text-gray-600">
 								{projectSkills.map(({ data }) => (
-									<li class="inline-flex items-center gap-1 mr-2 px-2 py-1 border border-gray-200 rounded">
-										<Icon name={data.icon} class="w-5 h-5" />
+									<li class="mr-2 inline-flex items-center gap-1 rounded border border-gray-200 px-2 py-1">
+										<Icon name={data.icon} class="size-5" />
 										<span>{data.label}</span>
 									</li>
 								))}

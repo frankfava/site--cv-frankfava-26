@@ -17,7 +17,7 @@ const { label, icon, href, text, showText = true, class: className, linkClass, i
 
 <a
 	class={twMerge(
-		"inline-flex items-center rounded-lg text-sm p-2.5 transition-colors duration-200 text-primary-900 hover:text-accent dark:text-white dark:hover:text-white bg-gray-100 hover:bg-accent-100 dark:bg-primary-600 dark:hover:bg-primary-700 border border-primary-100 hover:border-accent-200 dark:border-primary-500 dark:hover:border-primary-600 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 gap-x-2",
+		"inline-flex items-center gap-x-2 rounded-lg border border-primary-100 bg-gray-100 p-2.5 text-sm text-primary-900 transition-colors duration-200 hover:border-accent-200 hover:bg-accent-100 hover:text-accent focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-primary-500 dark:bg-primary-600 dark:text-white dark:hover:border-primary-600 dark:hover:bg-primary-700 dark:hover:text-white dark:focus:ring-gray-700",
 		linkClass,
 		className,
 	)}
@@ -32,7 +32,7 @@ const { label, icon, href, text, showText = true, class: className, linkClass, i
 			<Fragment set:html={content} />
 		) : (
 			<>
-				{icon && <Icon name={icon} class={twMerge("w-5 h-5", iconClass)} />}
+				{icon && <Icon name={icon} class={twMerge("size-5", iconClass)} />}
 				{showText && <Fragment set:html={label ?? text} />}
 			</>
 		)

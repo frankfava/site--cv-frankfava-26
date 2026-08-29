@@ -30,9 +30,9 @@ const leadDescription = typeof lead == "object" && lead?.description ? lead.desc
 const currentPath = getCurrentPath(Astro.url);
 ---
 
-<footer {...id ? { id } : {}} class:list={[{ dark: isDark }, "print:hidden relative border-t border-gray-200 dark:border-slate-800 not-prose"]}>
-	<div class="relative mx-auto px-4 sm:px-6 max-w-(--content-width) dark:text-slate-300">
-		<div class="gap-4 gap-y-2 grid grid-cols-1 lg:grid-cols-3 my-auto py-8 lg:py-12 lg:pb-16 w-full text-center" class:list={{ "lg:text-start": layout == "narrow" }}>
+<footer {...id ? { id } : {}} class:list={[{ dark: isDark }, "not-prose relative border-t border-gray-200 dark:border-slate-800 print:hidden"]}>
+	<div class="relative mx-auto max-w-(--content-width) px-4 sm:px-6 dark:text-slate-300">
+		<div class="my-auto grid w-full grid-cols-1 gap-4 gap-y-2 py-8 text-center lg:grid-cols-3 lg:py-12 lg:pb-16" class:list={{ "lg:text-start": layout == "narrow" }}>
 			<div class:list={layout == "wide" ? "col-span-3" : "col-span-1"}>
 				<slot name="lead">
 					{
@@ -40,12 +40,12 @@ const currentPath = getCurrentPath(Astro.url);
 							<Fragment set:html={lead} />
 						) : leadTitle ? (
 							<>
-								<h2 class="heading-display font-extrabold! text-[clamp(1.4rem,3vw,2.05rem)]">{leadTitle}</h2>
+								<h2 class="heading-display text-[clamp(1.4rem,3vw,2.05rem)] font-extrabold!">{leadTitle}</h2>
 								{leadDescription && <p class="mt-3.5! text-ink-2">{leadDescription}</p>}
 							</>
 						) : (
 							<>
-								<a class="inline-flex items-center logo-link" href={currentPath == "/" ? "#top" : getHomePermalink()}>
+								<a class="logo-link inline-flex items-center" href={currentPath == "/" ? "#top" : getHomePermalink()}>
 									<Logo class="site-logo" />
 								</a>
 							</>
@@ -54,7 +54,7 @@ const currentPath = getCurrentPath(Astro.url);
 				</slot>
 			</div>
 			<div
-				class="inline-flex flex-col flex-wrap col-span-3"
+				class="col-span-3 inline-flex flex-col flex-wrap"
 				class:list={{
 					"lg:col-span-2 lg:flex-row": layout == "narrow",
 					"ml-auto": layout == "narrow" && !actions.length,
@@ -76,13 +76,13 @@ const currentPath = getCurrentPath(Astro.url);
 					{
 						links.map(({ text, href }, index) => (
 							<div
-								class="inline-flex gap-1 mt-2 text-md"
+								class="text-md mt-2 inline-flex gap-1"
 								class:list={{
 									"lg:px-2": layout == "narrow",
 								}}
 							>
 								{index !== 0 ? " · " : ""}
-								<a class="text-accent hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out" href={href} set:html={text} />
+								<a class="text-accent transition duration-150 ease-in-out hover:text-gray-700 hover:underline dark:text-gray-400" href={href} set:html={text} />
 							</div>
 						))
 					}

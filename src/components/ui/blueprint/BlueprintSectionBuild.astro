@@ -46,7 +46,7 @@ const isHidden = section.hidden || !(await checkResolve(section.content));
 							},
 						}}
 					>
-						{section.icon && <Icon slot="beforeHeader" name={section.icon} class="w-10 h-10 leading-4 inline-block mb-3" />}
+						{section.icon && <Icon slot="beforeHeader" name={section.icon} class="mb-3 inline-block size-10 leading-4" />}
 					</ModuleWrapper>
 				)}
 				{section.sections.map((f) => (

@@ -47,7 +47,7 @@ const useLinks = blueprintSectionLinks ?? links;
 ---
 
 <aside
-	class="bay flex flex-col gap-5 fixed inset-y-0 top-(--header-height) -left-full z-60 w-full max-w-105 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:bottom-auto lg:top-(--header-height) lg:left-auto lg:z-auto lg:w-(--sidebar-width) lg:max-w-none lg:h-[calc(100vh-var(--header-height))] lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300"
+	class="bay fixed inset-y-0 top-(--header-height) -left-full z-60 flex w-full max-w-105 flex-col gap-5 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:top-(--header-height) lg:bottom-auto lg:left-auto lg:z-auto lg:h-[calc(100vh-var(--header-height))] lg:w-(--sidebar-width) lg:max-w-none lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300"
 	id="bay"
 	data-sidebar-bay
 >
@@ -64,7 +64,7 @@ const useLinks = blueprintSectionLinks ?? links;
 	{
 		!!useLinks.length && (
 			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType ?? "numbers" }}>
-				<span class="tab ml-auto font-mono text-[0.72rem] text-accent" slot="meta" data-read-progress>
+				<span class="ml-auto font-mono text-[0.72rem] text-accent tab" slot="meta" data-read-progress>
 					0%
 				</span>
 			</BayLinkCard>

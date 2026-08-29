@@ -12,9 +12,9 @@ export interface Props {
 const { icon, subtitle = "You may be wondering...", title, class: className, iconClass } = Astro.props;
 ---
 
-<div class="flex bg-gray-50 p-5 border border-gray-200 rounded" class:list={className}>
-	{icon && <Icon name={icon} class="inline-block mt-1 min-w-7 max-w-7 min-h-7 max-h-7 me-2" class:list={iconClass} />}
-	<div class="flex-grow">
+<div class="flex rounded border border-gray-200 bg-gray-50 p-5" class:list={className}>
+	{icon && <Icon name={icon} class="me-2 mt-1 inline-block max-h-7 min-h-7 max-w-7 min-w-7" class:list={iconClass} />}
+	<div class="grow">
 		<div class="italic">{subtitle}</div>
 		<h3 class="mb-3 text-lg">
 			<span>{title}</span>

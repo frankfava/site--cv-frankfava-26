@@ -10,9 +10,13 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"gen:theme": "node integrations/tailwind/generateTheme.mjs",
-		"check": "npm run check:astro",
+		"check": "npm run check:astro && npm run check:format && npm run check:lint",
 		"check:astro": "astro check",
-		"format": "prettier --write ./src"
+		"check:format": "prettier --check ./src",
+		"check:lint": "eslint src",
+		"fix": "npm run fix:lint && npm run fix:format",
+		"fix:format": "prettier --write ./src",
+		"fix:lint": "eslint src --fix"
 	},
 	"dependencies": {
 		"@alpinejs/csp": "^3.16.2",
@@ -44,8 +48,13 @@
 	"devDependencies": {
 		"@types/alpinejs": "^3.13.11",
 		"@types/node": "^26.2.0",
+		"@typescript-eslint/parser": "^8.68.0",
+		"eslint": "^10.9.1",
+		"eslint-plugin-astro": "^3.1.0",
+		"eslint-plugin-tailwindcss": "^4.4.0",
 		"prettier": "^3.9.6",
-		"prettier-plugin-astro": "^0.14.1"
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-tailwindcss": "^0.8.1"
 	},
 	"overrides": {
 		"deepmerge-ts": "^8.0.2",

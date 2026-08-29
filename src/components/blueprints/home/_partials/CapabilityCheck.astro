@@ -12,13 +12,13 @@ const { class: className } = Astro.props;
 ---
 
 <div class={twMerge("text-left", className)} x-data="capabilityPanel">
-	<div class="items-start gap-3.5 grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
-		<div class="bg-surface shadow-(--c-shadow) border border-line rounded-lg overflow-hidden">
-			<div class="flex items-center gap-3 bg-sunk px-4.5 py-3 border-line-2 border-b">
-				<span class="text-ink-3 eyebrow">What your role needs</span>
+	<div class="grid grid-cols-1 items-start gap-3.5 xl:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
+		<div class="overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)">
+			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
+				<span class="eyebrow text-ink-3">What your role needs</span>
 				<button
 					type="button"
-					class="hover:border-accent ml-auto px-2.5 py-1.5 border border-line rounded font-mono text-[0.72rem] text-ink-2 hover:text-accent uppercase tracking-[0.06em] cursor-pointer"
+					class="ml-auto cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase hover:border-accent hover:text-accent"
 					x-on:click="reset">Reset</button
 				>
 			</div>
@@ -26,23 +26,23 @@ const { class: className } = Astro.props;
 			<div class="px-4.5 pt-1 pb-4">
 				{
 					CAPABILITIES.map((cap) => (
-						<div class="py-3.5 border-line-2 border-b last:border-b-0" x-data="capabilityRow" data-capability={cap.id}>
-							<div class="flex items-baseline gap-3 mb-0.5">
-								<label class="font-semibold text-[0.99rem]" for={`need-${cap.id}`}>
+						<div class="border-b border-line-2 py-3.5 last:border-b-0" x-data="capabilityRow" data-capability={cap.id}>
+							<div class="mb-0.5 flex items-baseline gap-3">
+								<label class="text-base font-semibold" for={`need-${cap.id}`}>
 									{cap.label}
 								</label>
-								<span class="ml-auto font-mono text-[0.76rem] text-ink-3 whitespace-nowrap">
+								<span class="ml-auto font-mono text-xs whitespace-nowrap text-ink-3">
 									need{" "}
-									<b class="tab font-medium text-ink" x-text="need">
+									<b class="font-medium text-ink tab" x-text="need">
 										{cap.defaultNeed}
 									</b>
 								</span>
 							</div>
 
-							<p class="mb-2.5 text-[0.87rem] text-ink-3">{cap.evidence}</p>
+							<p class="mb-2.5 text-sm text-ink-3">{cap.evidence}</p>
 
 							<input
-								class="block m-0 w-full accent-accent"
+								class="m-0 block w-full accent-accent"
 								type="range"
 								id={`need-${cap.id}`}
 								min="0"
@@ -53,8 +53,8 @@ const { class: className } = Astro.props;
 								x-on:input="setNeed"
 							/>
 
-							<div class="flex items-center gap-2 mt-2 text-[0.87rem] text-ink-3 [&.is-covered]:text-good [&.is-gap]:text-bad [&.is-tight]:text-warn" x-bind:class="verdictClass">
-								<i class="flex-none bg-current rounded-full w-2 h-2" />
+							<div class="mt-2 flex items-center gap-2 text-sm text-ink-3 [&.is-covered]:text-good [&.is-gap]:text-bad [&.is-tight]:text-warn" x-bind:class="verdictClass">
+								<i class="size-2 flex-none rounded-full bg-current" />
 								<span x-text="verdictText">Covered, with room to spare.</span>
 							</div>
 						</div>
@@ -63,13 +63,13 @@ const { class: className } = Astro.props;
 			</div>
 		</div>
 
-		<div class="bg-surface shadow-(--c-shadow) border border-line rounded-lg overflow-hidden">
-			<div class="flex items-center gap-3 bg-sunk px-4.5 py-3 border-line-2 border-b">
-				<span class="text-ink-3 eyebrow">Your role vs me</span>
+		<div class="overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)">
+			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
+				<span class="eyebrow text-ink-3">Your role vs me</span>
 			</div>
 
 			<div class="px-2 pt-3.5 pb-0.5">
-				<svg class="block w-full h-auto" viewBox={radar.viewBox} role="img" aria-label="Radar comparing what your role needs against Frank's evidence">
+				<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label="Radar comparing what your role needs against Frank's evidence">
 					{radar.rings.map((d) => <path d={d} fill="none" stroke="var(--c-line)" stroke-width="1" />)}
 					{
 						radar.spokes.map((spoke) => (
@@ -93,9 +93,9 @@ const { class: className } = Astro.props;
 				</svg>
 			</div>
 
-			<div class="flex flex-wrap gap-4 px-4 pt-0.5 pb-3.5 text-ink-3 eyebrow">
-				<span class="flex items-center gap-1.5"><i class="bg-accent rounded-sm w-4 h-1"></i>What you need</span>
-				<span class="flex items-center gap-1.5"><i class="bg-good rounded-sm w-4 h-1"></i>Where I sit</span>
+			<div class="flex flex-wrap gap-4 px-4 pt-0.5 pb-3.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
+				<span class="flex items-center gap-1.5"><i class="h-1 w-4 rounded-xs bg-accent"></i>What you need</span>
+				<span class="flex items-center gap-1.5"><i class="h-1 w-4 rounded-xs bg-good"></i>Where I sit</span>
 			</div>
 		</div>
 	</div>

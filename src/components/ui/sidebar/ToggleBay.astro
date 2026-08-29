@@ -10,7 +10,7 @@ const { label = "Index", showLabel = true, class: className, ariaExpanded, ariaC
 
 <ToggleMenu
 	class={twMerge(
-		`flex-row gap-2.5 bg-none px-3 py-2.5 pl-2.5 font-secondary border-line hover:border-accent border rounded-lg text-sm text-ink-2 hover:text-accent leading-none transition-all duration-150`,
+		`flex-row gap-2.5 rounded-lg border border-line bg-none px-3 py-2.5 pl-2.5 font-secondary text-sm leading-none text-ink-2 transition-all duration-150 hover:border-accent hover:text-accent`,
 		className,
 	)}
 	{showLabel}
@@ -19,10 +19,10 @@ const { label = "Index", showLabel = true, class: className, ariaExpanded, ariaC
 	{ariaControls}
 	{toggleAttr}
 >
-	<svg class="flex-none w-4.5 h-4.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+	<svg class="size-4.5 flex-none" viewBox="0 0 20 20" fill="none" aria-hidden="true">
 		<rect x="1.5" y="3.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.5"></rect>
 		<rect
-			class="opacity-90 in-[html:not(.nav-menu-open)]:opacity-35 transition-opacity duration-250 ease-[cubic-bezier(0.3,0.8,0.3,1)]"
+			class="opacity-90 transition-opacity duration-250 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html:not(.nav-menu-open)]:opacity-35"
 			x="1.5"
 			y="3.5"
 			width="6.5"
