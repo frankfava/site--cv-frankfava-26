@@ -83,11 +83,7 @@ if (showRail != undefined) {
 						navLinks: layoutProps.header?.links ?? [],
 						links: contentLinks,
 						append: (links: Link[]) => {
-							const showFit = links.some((link) => link.href === "#capability");
-
-							return (
-									<PracticalCard />
-							);
+							return <PracticalCard />;
 						},
 						...sidebar,
 					}}
