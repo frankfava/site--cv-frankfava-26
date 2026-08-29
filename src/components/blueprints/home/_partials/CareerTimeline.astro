@@ -1,0 +1,164 @@
+---
+/** Four series across the whole career, scrubbable, with a read-out for the year under the cursor. */
+import { twMerge } from "tailwind-merge";
+import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
+import { CHART, chartX, chartY } from "@/alpine/career/chart";
+
+export interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const opening = CAREER_YEARS[CAREER_DEFAULT_INDEX];
+const first = CAREER_YEARS[0].year;
+const last = CAREER_YEARS[CAREER_YEARS.length - 1].year;
+const count = CAREER_YEARS.length;
+
+const gridlines = [0, 25, 50, 75, 100].map((value) => ({ value, y: chartY(value) }));
+
+const shapes = CAREER_SERIES.map((series) => {
+	const line = CAREER_YEARS.map((year, i) => `${i ? "L" : "M"}${chartX(i, count).toFixed(1)} ${chartY(year[series.key]).toFixed(1)}`).join(" ");
+	return {
+		...series,
+		line,
+		area: `${line} L ${chartX(count - 1, count)} ${chartY(0)} L ${chartX(0, count)} ${chartY(0)} Z`,
+		fill: `color-mix(in srgb, ${series.color} 13%, transparent)`,
+	};
+});
+
+/** Every third year, plus the last. Which survive at a given width is decided on the client. */
+const yearLabels = CAREER_YEARS.map((year, i) => ({ ...year, i })).filter((year) => year.year % 3 === 0 || year.i === count - 1);
+---
+
+<div class={twMerge("overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)} x-data="careerTimeline">
+	<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
+		<span class="eyebrow text-ink-3">{first} &ndash; {last} &middot; drag to read a year</span>
+	</div>
+
+	<div class="relative px-4.5 pt-4 pb-1.5">
+		<svg
+			class="block h-auto w-full touch-none"
+			x-ref="chart"
+			viewBox={`0 0 ${CHART.W} ${CHART.H}`}
+			role="img"
+			aria-label={`Four series across ${first} to ${last}`}
+			x-on:pointermove="scrub"
+			x-on:pointerdown="scrub"
+		>
+			{
+				gridlines.map((gridline) => (
+					<>
+						<line x1={CHART.LEFT} x2={CHART.W - CHART.RIGHT} y1={gridline.y} y2={gridline.y} stroke="var(--c-line-2)" stroke-width="1" />
+						<text x={CHART.LEFT - 9} y={gridline.y} text-anchor="end" dominant-baseline="middle" fill="var(--c-ink-3)" font-size="11" x-show="showAxisValues" x-bind:font-size="labelSize">
+							{gridline.value}
+						</text>
+					</>
+				))
+			}
+
+			{
+				shapes.map((shape) => (
+					<>
+						<path d={shape.area} fill={shape.fill} stroke="none" />
+						<path d={shape.line} fill="none" stroke={shape.color} stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+					</>
+				))
+			}
+
+			{
+				yearLabels.map((label, n) => (
+					<text
+						x={chartX(label.i, count)}
+						y={CHART.H - 11}
+						text-anchor="middle"
+						fill="var(--c-ink-3)"
+						font-size="11"
+						x-data="careerYearLabel"
+						data-index={label.i}
+						data-previous={n === 0 ? -1 : yearLabels[n - 1].i}
+						x-show="show"
+						x-bind:font-size="size"
+					>
+						{label.year}
+					</text>
+				))
+			}
+
+			<line
+				x1={chartX(CAREER_DEFAULT_INDEX, count)}
+				x2={chartX(CAREER_DEFAULT_INDEX, count)}
+				y1={CHART.TOP}
+				y2={CHART.H - CHART.BOTTOM}
+				stroke="var(--c-ink-2)"
+				stroke-width="1"
+				stroke-opacity=".5"
+				x-bind:x1="cursorX"
+				x-bind:x2="cursorX"></line>
+
+			{
+				CAREER_SERIES.map((series) => (
+					<circle
+						r="4.5"
+						cx={chartX(CAREER_DEFAULT_INDEX, count)}
+						cy={chartY(opening[series.key])}
+						fill={series.color}
+						stroke="var(--c-surface)"
+						stroke-width="2"
+						x-data="careerDot"
+						data-series={series.key}
+						x-bind:cx="cx"
+						x-bind:cy="cy"
+					/>
+				))
+			}
+		</svg>
+
+		<label class="sr-only" for="career-year">Year</label>
+		<input class="mt-1 block w-full accent-accent" id="career-year" type="range" min="0" max={count - 1} value={CAREER_DEFAULT_INDEX} step="1" x-bind:value="index" x-on:input="setIndex" />
+	</div>
+
+	<div class="flex flex-wrap gap-4.5 px-4.5 pt-1.5 pb-3">
+		{
+			CAREER_SERIES.map((series) => (
+				<span class="flex items-center gap-1.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
+					<i class="h-2 w-3.5 flex-none rounded-xs" style={`background:${series.color}`} />
+					{series.label}
+				</span>
+			))
+		}
+	</div>
+
+	<div class="grid grid-cols-1 gap-3.5 border-t border-line-2 p-4.5 md:grid-cols-[minmax(0,1fr)_244px] md:gap-5.5">
+		<div>
+			<div class="font-mono text-xs tracking-wider text-accent tab" x-text="year.year">{opening.year}</div>
+			<h4 class="mt-1.5 mb-0.5 text-lg" x-text="year.role">{opening.role}</h4>
+			<div class="mb-2.5 text-sm text-ink-3" x-text="year.company">{opening.company}</div>
+			<p class="text-sm text-ink-2" x-text="year.note">{opening.note}</p>
+		</div>
+
+		<div class="flex flex-col gap-2.5">
+			{
+				CAREER_SERIES.map((series) => (
+					<div>
+						<div class="mb-1.5 flex justify-between gap-2.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
+							<span>{series.label}</span>
+							<b class="font-medium text-ink tab" x-text={`year.${series.key}`}>
+								{opening[series.key]}
+							</b>
+						</div>
+						<div class="h-1.5 overflow-hidden rounded-full bg-sunk">
+							<i
+								class="block h-full rounded-full transition-[width] duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
+								style={`background:${series.color};width:${opening[series.key]}%`}
+								x-data="careerBar"
+								data-series={series.key}
+								x-bind:style="style"
+							/>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
