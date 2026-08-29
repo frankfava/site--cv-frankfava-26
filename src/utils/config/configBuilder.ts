@@ -1,6 +1,7 @@
 /**
  * Config Utility
  */
+import { SITE } from "site:config";
 import type { Config } from "@/types/config";
 import { createSocialsManager } from "@/lib/socials";
 
@@ -21,7 +22,13 @@ export function addUtils(config: Config.Complete) {
 	};
 
 	// Metadata
-	const metadata: Config.Final["metadata"] = config.metadata;
+	const metadata: Config.Final["metadata"] = {
+		...config.metadata,
+		title: {
+			default: config.metadata?.title?.default.replace("%site_name", site.name) || site.name,
+			template: config.metadata?.title?.template?.replace("%site_name", site.name) || `%s | ${site.name}`,
+		},
+	};
 
 	// i18N
 	const i18n: Config.Final["i18n"] = config.i18n;

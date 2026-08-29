@@ -20,7 +20,7 @@ export const buildVcard = () => {
 		imagePath ? `PHOTO;ENCODING=b;TYPE=JPEG:${imageBase64}` : "",
 		`TEL;TYPE=CELL:${SOCIALS.phone.href.replace("tel:", "")}`,
 		`ADR;CHARSET=UTF-8;TYPE=HOME:;;;${ABOUT.location?.city};;;${ABOUT.location?.region}`,
-		`ROLE;CHARSET=UTF-8:${ABOUT.jobTitles[0]}`,
+		`ROLE;CHARSET=UTF-8:${ABOUT.focuses.join(", ")}`,
 		`URL;CHARSET=UTF-8:${import.meta.env.SITE_URL ?? import.meta.env.URL}`,
 		`X-SOCIALPROFILE;TYPE=linkedin:${SOCIALS.linkedin.href}`,
 		`X-SOCIALPROFILE;TYPE=github:${SOCIALS.github.href}`,

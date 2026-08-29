@@ -42,8 +42,8 @@ const baseSeoProps: AstroSeoProps = {
 };
 
 const metadataSeoProps: AstroSeoProps = {
-	title: METADATA?.title?.default ? METADATA?.title?.default.replace("%site_name", SITE.name) : undefined,
-	titleTemplate: METADATA?.title?.template && title ? METADATA?.title?.template.replace("%site_name", SITE.name) : undefined,
+	title: METADATA?.title?.default,
+	titleTemplate: METADATA?.title?.template,
 	noindex: typeof METADATA?.robots?.index !== "undefined" ? !METADATA.robots.index : undefined,
 	nofollow: typeof METADATA?.robots?.follow !== "undefined" ? !METADATA.robots.follow : undefined,
 	description: METADATA?.description,
