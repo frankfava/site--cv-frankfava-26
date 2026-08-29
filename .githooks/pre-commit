@@ -1,0 +1,51 @@
+#!/bin/sh
+# Format and lint what is actually being committed, not what is on disk.
+#
+# A half-staged file has two versions: `git add -p` puts some hunks in the index
+# and leaves the rest in the working tree. Checking the file on disk would judge
+# lines you did not stage. So anything whose index and working copies differ is
+# read out of the index and piped in, and the rest are checked in one batch,
+# because both tools cost about 300ms to start and almost nothing per file.
+
+# Straight to the binaries: `npx` costs more to resolve than either tool costs to run.
+bin="$(git rev-parse --show-toplevel)/node_modules/.bin"
+
+lintable='astro|js|jsx|ts|tsx|mjs|cjs'
+formattable="$lintable|css|json|md"
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "^src/.*\.($formattable)$")
+[ -z "$staged" ] && exit 0
+
+partial=$(git diff --name-only -- $staged)
+if [ -z "$partial" ]; then
+	whole="$staged"
+else
+	whole=$(printf '%s\n' "$staged" | grep -vxF "$partial")
+fi
+
+status=0
+
+if [ -n "$whole" ]; then
+	"$bin/prettier" --check $whole || status=1
+	code=$(printf '%s\n' "$whole" | grep -E "\.($lintable)$")
+	if [ -n "$code" ]; then
+		"$bin/eslint" --max-warnings 0 $code || status=1
+	fi
+fi
+
+for file in $partial; do
+	printf '%s\n' "$file" | grep -qE "\.($formattable)$" || continue
+	git show ":$file" | "$bin/prettier" --check --stdin-filepath "$file" || status=1
+
+	printf '%s\n' "$file" | grep -qE "\.($lintable)$" || continue
+	git show ":$file" | "$bin/eslint" --max-warnings 0 --stdin --stdin-filename "$file" || status=1
+done
+
+if [ "$status" -ne 0 ]; then
+	printf '\n  Staged changes are not clean.\n\n'
+	printf '  fix:   npm run fix\n'
+	printf '  then:  git add -p   (re-stage what you meant to commit)\n\n'
+	printf '  skip:  git commit --no-verify\n\n'
+fi
+
+exit "$status"
