@@ -35,6 +35,7 @@
 		"clsx": "^2.1.1",
 		"defu": "^6.1.7",
 		"limax": "^4.2.3",
+		"sweetalert2": "^11.26.25",
 		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3"

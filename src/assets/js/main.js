@@ -117,12 +117,43 @@ function initSidebarHeight() {
 }
 
 /**
+ * Copy to clipboard Links
+ */
+async function handleCopyToClipboardLinks() {
+	const copyLinks = document.querySelectorAll("a.copy-to-clipboard");
+	if (!copyLinks.length) return;
+
+	copyLinks.forEach((link) => {
+		link.addEventListener("click", async (e) => {
+			e.preventDefault();
+			const { default: Swal } = await import("sweetalert2");
+			const textToCopy = link.getAttribute("data-copy") ?? link.textContent;
+			if (!textToCopy) {
+				return;
+			}
+
+			await window.navigator.clipboard.writeText(textToCopy);
+
+			Swal.fire({
+				title: "Copied to Clipboard",
+				text: textToCopy,
+				icon: "success",
+				showConfirmButton: false,
+				timer: 1500,
+			});
+		});
+	});
+}
+
+
+/**
  * Init
  */
 const setup = () => {
 	initMobileClass();
 	initSidebar();
 	initSidebarHeight();
+	handleCopyToClipboardLinks();
 };
 
 const refreshOnResize = () => {
