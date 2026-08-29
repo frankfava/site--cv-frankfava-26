@@ -256,6 +256,91 @@ html {
 }
 
 
+/* ---------- Scroll Progress Bar ---------- */
+
+#scroll-progress {
+	@apply fixed w-full left-0;
+
+	&,
+	> div {
+		@apply h-(--scroll-progress-height);
+	}
+}
+
+#header {
+	/* Reserve the strip the progress bar will occupy. */
+	&[data-scroll-progress="show"] {
+		@apply pt-(--scroll-progress-height);
+
+		#scroll-progress {
+			@apply top-0;
+		}
+	}
+
+	&[data-scroll-progress="animate"] {
+		@apply transition-[padding] duration-200 ease-linear;
+
+		#scroll-progress {
+			@apply -top-(--scroll-progress-height) transition-[top] duration-200 ease-linear;
+		}
+	}
+
+	&[data-sticky-header][data-scroll-progress="show"] ~ #wrapper {
+		@apply pt-[calc(var(--header-height)+var(--scroll-progress-height))];
+	}
+}
+
+.progress-bar-striped {
+	background-image: linear-gradient(
+		45deg,
+		rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%,
+		transparent 75%,
+		transparent
+	);
+	background-size: 1rem 1rem;
+
+	&.striped-dark {
+		background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.15) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.15) 75%, transparent 75%, transparent);
+	}
+
+	&.animated {
+		animation: progress-bar-stripes 1s linear infinite;
+		animation-direction: reverse;
+	}
+}
+
+@keyframes progress-bar-stripes {
+	from {
+		background-position: 1rem 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}
+
+.scroll #header {
+	&[data-shrink-header] #header-inner {
+		@apply h-[calc(var(--header-height)-1.5rem)];
+	}
+
+	&[data-shrink-header][data-scroll-progress="animate"] #header-inner {
+		@apply h-[calc(var(--header-height)-1rem)];
+	}
+
+	&[data-scroll-progress="animate"] {
+		@apply pt-(--scroll-progress-height);
+
+		#scroll-progress {
+			@apply !top-0;
+		}
+	}
+}
+
 /* ---------- Sidebar ---------- */
 
 .scrim {

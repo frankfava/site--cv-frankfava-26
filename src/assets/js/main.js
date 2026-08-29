@@ -118,6 +118,69 @@ function initSidebarHeight() {
 
 
 /**
+ * Scroll
+ */
+function initHeaderScroll() {
+	const header = document.querySelector("#header[data-sticky-header]");
+	if (!header) return;
+
+	let lastKnownScrollPosition = window.scrollY;
+	let ticking = true;
+
+	function applyScrollClass() {
+		const headerHeight = header.offsetHeight;
+		const headerOffset = headerHeight - 40;
+
+		if (lastKnownScrollPosition > headerOffset && !document.body.classList.contains("scroll")) {
+			document.body.classList.add("scroll");
+			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: true } }));
+		} else if (lastKnownScrollPosition <= headerOffset && document.body.classList.contains("scroll")) {
+			document.body.classList.remove("scroll");
+			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: false } }));
+		}
+
+		ticking = false;
+	}
+	applyScrollClass();
+
+	attachEvent([document], "scroll", function () {
+		lastKnownScrollPosition = window.scrollY;
+		if (!ticking) {
+			window.requestAnimationFrame(() => {
+				applyScrollClass();
+			});
+			ticking = true;
+		}
+	});
+}
+
+/**
+ * Init Progress Bar
+ */
+function initProgressBar() {
+	const scrollProgress = document.getElementById("scroll-progress");
+	if (!scrollProgress) {
+		return;
+	}
+
+	const scrollProgressBar = scrollProgress.querySelector("div:first-child");
+
+	let scrollPercentage = 0;
+
+	function onWindowScroll() {
+		const scrollOffset = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+		const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+		scrollPercentage = (scrollOffset / windowHeight) * 100;
+
+		scrollProgressBar.style.width = `${scrollPercentage}%`;
+	}
+
+	window.addEventListener("scroll", onWindowScroll);
+	onWindowScroll();
+}
+
+/**
  * Jump Links
  */
 function jumpLinks() {
@@ -228,6 +291,8 @@ const setup = () => {
 	initMobileClass();
 	initSidebar();
 	initSidebarHeight();
+	initHeaderScroll();
+	initProgressBar();
 	jumpLinks();
 	handleUrlHash();
 	updateUrlHashOnScroll();

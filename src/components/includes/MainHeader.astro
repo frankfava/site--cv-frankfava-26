@@ -7,6 +7,7 @@ import ToggleTheme from "@/components/ui/menu/ToggleTheme.astro";
 import ToggleMenu from "@/components/ui/menu/ToggleMenu.astro";
 import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
 import MenuItems from "@/components/ui/menu/MenuItems.astro";
+import ScrollProgressBar from "@/components/ui/menu/ScrollProgressBar.astro";
 import { Icon } from "astro-icon/components";
 
 import type { Link, _CallToAction } from "@/types";
@@ -88,8 +89,7 @@ const currentPath = getCurrentPath(Astro.url);
 	{...shrinkHeader ? { "data-shrink-header": true } : {}}
 	{...showScrollProgress
 		? {
-				'data-scroll-progress="animate"': animateScrollProgress,
-				'data-scroll-progress="show"': !animateScrollProgress,
+				"data-scroll-progress": animateScrollProgress ? "animate" : "show",
 			}
 		: {}}
 	{...id ? { id } : {}}
@@ -169,6 +169,7 @@ const currentPath = getCurrentPath(Astro.url);
 				""
 			)
 		}
+		{showScrollProgress && <ScrollProgressBar>{/*showBookmarks && <Bookmarks blueprint={blueprint} />*/}</ScrollProgressBar>}
 		<div
 			class:list={[
 				{ "ml-auto rtl:ml-0 rtl:mr-auto": menuPosition === "left" && !hasAfterMenuSlot },
