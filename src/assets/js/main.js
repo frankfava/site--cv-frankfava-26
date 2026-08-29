@@ -21,18 +21,43 @@ function initMobileClass() {
 /**
  * Scroll
  *
+ * One listener and one frame for everything that follows the scroll position.
+ * Register with `onScroll`; it runs the pass immediately, then once a frame.
+ */
+const scrollPasses = [];
+
+function onScroll(pass) {
+	scrollPasses.push(pass);
+	pass();
+}
+
+function initScroll() {
+	let ticking = false;
+
+	function run() {
+		ticking = false;
+		scrollPasses.forEach((pass) => pass());
+	}
+
+	attachEvent([document], "scroll", () => {
+		if (ticking) return;
+		ticking = true;
+		window.requestAnimationFrame(run);
+	});
+	attachEvent("window", "resize", run);
+	attachEvent("window", "load", run);
+	run();
+}
+
+/**
  * Header state and the progress bar, off one read of the document position.
  */
-function initScroll() {
+function initHeaderScroll() {
 	const header = document.querySelector("#header[data-sticky-header]");
 	const bar = document.getElementById("scroll-progress")?.querySelector("div:first-child");
 	if (!header && !bar) return;
 
-	let ticking = false;
-
-	function apply() {
-		ticking = false;
-
+	onScroll(() => {
 		if (header) {
 			const scrolled = window.scrollY > header.offsetHeight - 40;
 			if (scrolled !== document.body.classList.contains("scroll")) {
@@ -45,16 +70,7 @@ function initScroll() {
 			const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 			bar.style.width = `${max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max)) * 100}%`;
 		}
-	}
-
-	attachEvent([document], "scroll", () => {
-		if (ticking) return;
-		ticking = true;
-		window.requestAnimationFrame(apply);
 	});
-	attachEvent("window", "resize", apply);
-	attachEvent("window", "load", apply);
-	apply();
 }
 
 /**
@@ -167,11 +183,8 @@ function initSidebarHeight() {
 		bay.style.height = `${Math.min(available, window.innerHeight - pinnedTop)}px`;
 	}
 
-	attachEvent("window", "scroll", apply);
-	attachEvent("window", "resize", apply);
-	attachEvent("window", "load", apply);
 	document.fonts?.ready.then(apply);
-	apply();
+	onScroll(apply);
 }
 
 /**
@@ -198,7 +211,7 @@ function initScrollSpy() {
 	if (!sections().length) return;
 
 	// Where a section takes over. Raise the fraction to hand over sooner.
-	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + window.innerHeight * 0.25;
+	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + window.innerHeight * 0.1;
 
 	let current;
 	let hashTimer;
@@ -256,19 +269,7 @@ function initScrollSpy() {
 		hashTimer = setTimeout(() => history.replaceState(null, "", id ? `#${id}` : window.location.pathname), 150);
 	}
 
-	let ticking = false;
-	attachEvent([document], "scroll", () => {
-		if (ticking) return;
-		ticking = true;
-		window.requestAnimationFrame(() => {
-			apply();
-			ticking = false;
-		});
-	});
-
-	attachEvent("window", "resize", apply);
-	attachEvent("window", "load", apply);
-	apply();
+	onScroll(apply);
 }
 
 /**
@@ -343,13 +344,14 @@ async function handleCopyToClipboardLinks() {
  */
 const setup = () => {
 	initMobileClass();
-	initScroll();
+	initHeaderScroll();
 	initSidebar();
 	initSidebarHeight();
 	initScrollSpy();
 	jumpLinks();
 	handleUrlHash();
 	handleCopyToClipboardLinks();
+	initScroll();
 };
 
 const refreshOnResize = () => {
