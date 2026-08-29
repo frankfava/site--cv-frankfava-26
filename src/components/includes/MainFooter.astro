@@ -31,7 +31,7 @@ const currentPath = getCurrentPath(Astro.url);
 ---
 
 <footer {...id ? { id } : {}} class:list={[{ dark: isDark }, "print:hidden relative border-t border-gray-200 dark:border-slate-800 not-prose"]}>
-	<div class="relative mx-auto px-4 sm:px-6 max-w-screen-2xl dark:text-slate-300">
+	<div class="relative mx-auto px-4 sm:px-6 max-w-(--content-width) dark:text-slate-300">
 		<div class="gap-4 gap-y-2 grid grid-cols-1 lg:grid-cols-3 my-auto py-8 lg:py-12 lg:pb-16 w-full text-center" class:list={{ "lg:text-start": layout == "narrow" }}>
 			<div class:list={layout == "wide" ? "col-span-3" : "col-span-1"}>
 				<slot name="lead">
