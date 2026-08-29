@@ -13,7 +13,7 @@ function initMobileClass() {
 		document.body.classList.toggle(mobileClass, isMobile);
 	}
 
-	const isDesktop = window.matchMedia(`(min-width: ${BREAKPOINTS.lg}`);
+	const isDesktop = window.matchMedia(`(min-width: ${BREAKPOINTS.lg})`);
 	toggleMobileClass(!isDesktop.matches);
 	isDesktop.addEventListener("change", (e) => toggleMobileClass(!e.matches));
 }
@@ -44,13 +44,21 @@ function initSidebar() {
 			document.documentElement.classList.toggle(sidebar.sidebarShowClass, open);
 		},
 		preference: () => readStored(sidebar.storageKey) !== "false",
+		// Mark the sidebar bay as inert when it is closed, so it doesn't interfere with the tab order.
+		syncInert: () => {
+			const bay = document.querySelector("[data-sidebar-bay]");
+			if (!bay) return;
+			sidebar.isOpen() ? bay.removeAttribute("inert") : bay.setAttribute("inert", "");
+		},
 		open: () => {
 			sidebar.toggleClass(true);
 			toggles.toggle(true);
+			sidebar.syncInert();
 		},
 		close: () => {
 			sidebar.toggleClass(false);
 			toggles.toggle(false);
+			sidebar.syncInert();
 		},
 	};
 
@@ -74,11 +82,20 @@ function initSidebar() {
 		!e.matches || !sidebar.preference() ? sidebar.close() : sidebar.open();
 	});
 
+	// Close Sidebar Nav on scrim click, only rendered where it covers the page
+	attachEvent("[data-sidebar-scrim]", "click", () => sidebar.close());
+
+	// Close Sidebar Nav on Escape
+	attachEvent([document], "keydown", (e) => {
+		if (e.key === "Escape") sidebar.close();
+	});
+
 	// Close Sidebar Nav on mobile change
 	attachEvent("window", "on:mobile", function (e) {
 		if (e.detail.isMobile) {
 			sidebar.close();
 		}
+		sidebar.syncInert();
 	});
 
 	// Auto Show Sidebar (desktop only, respect saved preference)
@@ -86,6 +103,8 @@ function initSidebar() {
 		if (sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).matches || !sidebar.preference()) return;
 		sidebar.open();
 	}, 500);
+
+	sidebar.syncInert();
 }
 
 /**
@@ -115,7 +134,6 @@ function initSidebarHeight() {
 	document.fonts?.ready.then(apply);
 	apply();
 }
-
 
 /**
  * Scroll
