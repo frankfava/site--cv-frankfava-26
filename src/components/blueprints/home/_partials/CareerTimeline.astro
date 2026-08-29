@@ -3,12 +3,21 @@
 import { twMerge } from "tailwind-merge";
 import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
 import { CHART, chartX, chartY } from "@/alpine/career/chart";
+import CareerDoughnut, { type Props as DoughnutProps } from "./CareerDoughnut.astro";
 
 export interface Props {
+	/** How the selected year's four numbers read: as bars, or as a ring with their average. */
+	readout?: "bars" | "rings" | "segments";
+	/** Passed straight through when `readout` is a ring. */
+	doughnut?: Omit<DoughnutProps, "variant">;
 	class?: string;
 }
 
-const { class: className } = Astro.props;
+const { readout = "bars", doughnut, class: className } = Astro.props;
+
+/** Only a ring with its key beside it needs the wider track. Both spelled out so Tailwind sees them. */
+const wideReadout = readout !== "bars" && doughnut?.showKey !== false;
+const readoutColumns = wideReadout ? "md:grid-cols-[minmax(0,1fr)_340px]" : "md:grid-cols-[minmax(0,1fr)_244px]";
 
 const opening = CAREER_YEARS[CAREER_DEFAULT_INDEX];
 const first = CAREER_YEARS[0].year;
@@ -129,7 +138,7 @@ const yearLabels = CAREER_YEARS.map((year, i) => ({ ...year, i })).filter((year)
 		}
 	</div>
 
-	<div class="grid grid-cols-1 gap-3.5 border-t border-line-2 p-4.5 md:grid-cols-[minmax(0,1fr)_244px] md:gap-5.5">
+	<div class:list={["grid grid-cols-1 gap-3.5 border-t border-line-2 p-4.5 md:gap-5.5", readoutColumns]}>
 		<div>
 			<div class="font-mono text-xs tracking-wider text-accent tab" x-text="year.year">{opening.year}</div>
 			<h4 class="mt-1.5 mb-0.5 text-lg" x-text="year.role">{opening.role}</h4>
@@ -137,28 +146,32 @@ const yearLabels = CAREER_YEARS.map((year, i) => ({ ...year, i })).filter((year)
 			<p class="text-sm text-ink-2" x-text="year.note">{opening.note}</p>
 		</div>
 
-		<div class="flex flex-col gap-2.5">
-			{
-				CAREER_SERIES.map((series) => (
-					<div>
-						<div class="mb-1.5 flex justify-between gap-2.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
-							<span>{series.label}</span>
-							<b class="font-medium text-ink tab" x-text={`year.${series.key}`}>
-								{opening[series.key]}
-							</b>
+		{
+			readout === "bars" ? (
+				<div class="flex flex-col gap-2.5">
+					{CAREER_SERIES.map((series) => (
+						<div>
+							<div class="mb-1.5 flex justify-between gap-2.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
+								<span>{series.label}</span>
+								<b class="font-medium text-ink tab" x-text={`year.${series.key}`}>
+									{opening[series.key]}
+								</b>
+							</div>
+							<div class="h-1.5 overflow-hidden rounded-full bg-sunk">
+								<i
+									class="block h-full rounded-full transition-[width] duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
+									style={`background:${series.color};width:${opening[series.key]}%`}
+									x-data="careerBar"
+									data-series={series.key}
+									x-bind:style="style"
+								/>
+							</div>
 						</div>
-						<div class="h-1.5 overflow-hidden rounded-full bg-sunk">
-							<i
-								class="block h-full rounded-full transition-[width] duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
-								style={`background:${series.color};width:${opening[series.key]}%`}
-								x-data="careerBar"
-								data-series={series.key}
-								x-bind:style="style"
-							/>
-						</div>
-					</div>
-				))
-			}
-		</div>
+					))}
+				</div>
+			) : (
+				<CareerDoughnut variant={readout} {...doughnut} />
+			)
+		}
 	</div>
 </div>

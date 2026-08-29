@@ -1,0 +1,116 @@
+---
+/**
+ * The selected year as a ring: `rings` gives each series its own circle,
+ * `segments` divides one circle by each series' share.
+ *
+ * The viewBox matches the rendered width, so size, band and gap are plain pixels.
+ */
+import { twMerge } from "tailwind-merge";
+import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
+import { arcSpan } from "@/alpine/career/chart";
+
+export interface Props {
+	variant?: "rings" | "segments";
+	/** Rendered width in px. Everything else is measured against it. */
+	size?: number;
+	/** Ring thickness. Defaults to 6 for `rings`, 30 for the single `segments` ring. */
+	band?: number;
+	/** Space between the rings, or between the segments. Defaults to 2 and 4. */
+	gap?: number;
+	/** What the centre figure is called. */
+	label?: string;
+	/** Appended to the centre figure, e.g. "%". */
+	suffix?: string;
+	/** Each series' own number, next to the ring. */
+	showKey?: boolean;
+	class?: string;
+}
+
+const {
+	variant = "rings",
+	showKey = true,
+	size = showKey ? 200 : 150,
+	band = variant === "segments" ? 30 : 6,
+	gap = variant === "segments" ? 4 : 2,
+	label = "match",
+	suffix = "%",
+	class: className,
+} = Astro.props;
+
+/** The viewBox is the rendered size, so the centre type has to scale with it. */
+const figureSize = Math.round(size * 0.19);
+const labelSize = Math.round(size * 0.055);
+const labelOffset = Math.round(size * 0.13);
+
+const centre = size / 2;
+
+/** The outer ring sits flush inside the box, so its stroke just touches the edge. */
+const outer = centre - band / 2;
+
+const opening = CAREER_YEARS[CAREER_DEFAULT_INDEX];
+const total = CAREER_SERIES.reduce((sum, series) => sum + opening[series.key], 0);
+
+/** Concentric rings work inwards; segments all sit on the outer one. */
+const radiusFor = (index: number) => (variant === "segments" ? outer : outer - index * (band + gap));
+
+/** Drawn once so the ring is on the page before Alpine runs; only the spans move. */
+let before = 0;
+const arcs = CAREER_SERIES.map((series, i) => {
+	const radius = radiusFor(i);
+	const circumference = 2 * Math.PI * radius;
+	const { drawn, rest } = arcSpan({ variant, value: opening[series.key], total, circumference, gap });
+	const dashoffset = variant === "segments" ? -circumference * before : 0;
+	before += variant === "segments" ? opening[series.key] / total : 0;
+
+	return { ...series, radius, dasharray: `${drawn} ${rest}`, dashoffset };
+});
+---
+
+<div class={twMerge("flex items-center justify-center gap-4", className)} x-data="careerDoughnut" data-suffix={suffix}>
+	<svg class="block h-auto w-full flex-none" style={`max-width:${size}px`} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Four measures of the selected year, and their ${label}`}>
+		{arcs.map((arc) => <circle cx={centre} cy={centre} r={arc.radius} fill="none" stroke="var(--c-sunk)" stroke-width={band} transform={`rotate(-90 ${centre} ${centre})`} />)}
+
+		{
+			arcs.map((arc) => (
+				<circle
+					class="transition-[stroke-dasharray,stroke-dashoffset] duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
+					cx={centre}
+					cy={centre}
+					r={arc.radius}
+					fill="none"
+					stroke={arc.color}
+					stroke-width={band}
+					stroke-linecap="butt"
+					stroke-dasharray={arc.dasharray}
+					stroke-dashoffset={arc.dashoffset}
+					transform={`rotate(-90 ${centre} ${centre})`}
+					x-data="careerArc"
+					data-series={arc.key}
+					data-variant={variant}
+					data-gap={gap}
+					x-bind:style="style"
+				/>
+			))
+		}
+
+		<text class="fill-ink font-primary font-extrabold tab" font-size={figureSize} x={centre} y={centre} text-anchor="middle" dominant-baseline="middle" x-text="reading"
+			>{Math.round(total / CAREER_SERIES.length)}{suffix}</text
+		>
+		<text class="fill-ink-3 font-mono uppercase" font-size={labelSize} x={centre} y={centre + labelOffset} text-anchor="middle" letter-spacing="1.2">{label}</text>
+	</svg>
+
+	{
+		showKey && (
+			<dl class="grid min-w-0 flex-1 gap-2.5">
+				{CAREER_SERIES.map((series) => (
+					<div class="border-l-2 pl-2" style={`border-color:${series.color}`}>
+						<dt class="font-mono text-[10px] leading-tight tracking-wider text-ink-3 uppercase">{series.label}</dt>
+						<dd class="font-medium text-ink tab" x-text={`year.${series.key}`}>
+							{opening[series.key]}
+						</dd>
+					</div>
+				))}
+			</dl>
+		)
+	}
+</div>

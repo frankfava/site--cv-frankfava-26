@@ -1,5 +1,5 @@
 /** Which year the timeline is reading, shared by the chart and its read-out. */
-import { CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
+import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
 import { CHART, chartX, chartY } from "./chart";
 
 export const CAREER_STORE = "career";
@@ -48,6 +48,30 @@ export function careerStore() {
 
 		barWidth(key) {
 			return `${this.year[key]}%`;
+		},
+
+		get total() {
+			return CAREER_SERIES.reduce((sum, series) => sum + this.year[series.key], 0);
+		},
+
+		/** What the centre of the doughnut reads. */
+		get average() {
+			return Math.round(this.total / CAREER_SERIES.length);
+		},
+
+		/** Segmented variant: this series' share of the year. */
+		shareOf(key) {
+			return this.total ? this.year[key] / this.total : 0;
+		},
+
+		/** How far round the ring this series starts. */
+		offsetOf(key) {
+			let before = 0;
+			for (const series of CAREER_SERIES) {
+				if (series.key === key) break;
+				before += this.shareOf(series.key);
+			}
+			return before;
 		},
 
 		showYear(index, previous) {

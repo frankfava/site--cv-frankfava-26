@@ -4,7 +4,7 @@ import { projectsComponent } from "./projectsComponent.js";
 import { workHistoryAccordion } from "./workHistoryAccordion.js";
 import { particleField } from "./particleField.js";
 import { capabilityStore, capabilityPanel, capabilityRow, fitDial, CAPABILITY_STORE } from "./capability";
-import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, CAREER_STORE } from "./career";
+import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, careerDoughnut, careerArc, CAREER_STORE } from "./career";
 
 export default (Alpine) => {
 	Alpine.data("themeToggle", themeToggle);
@@ -25,4 +25,6 @@ export default (Alpine) => {
 	Alpine.data("careerYearLabel", careerYearLabel);
 	Alpine.data("careerDot", careerDot);
 	Alpine.data("careerBar", careerBar);
+	Alpine.data("careerDoughnut", careerDoughnut);
+	Alpine.data("careerArc", careerArc);
 };
