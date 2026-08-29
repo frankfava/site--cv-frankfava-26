@@ -10,6 +10,7 @@
 import type { Link } from "@/types";
 
 import { SOCIALS } from "site:config";
+import { cn } from "@/utils/class";
 import BayLinkCard, { type Props as BayLinkCardProps } from "./cards/BayLinkCard.astro";
 import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
 import type { AstroVNode } from "astro/jsx-runtime";
@@ -22,9 +23,11 @@ export interface Props {
 	useNestedLinks?: BayLinkCardProps["useNestedLinks"];
 	linkLeadType?: BayLinkCardProps["lead"];
 	append?: (links: Link[]) => AstroVNode;
+	/** Style the sidebar as bare, without the default card chrome. */
+	bare?: boolean;
 }
 
-const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType, append } = Astro.props;
+const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType, append, bare = false } = Astro.props;
 
 const blueprintSchema = Astro.locals.blueprint?.blueprint;
 const blueprintSections = blueprintSchema?.getSidebarSections();
@@ -47,9 +50,13 @@ const useLinks = blueprintSectionLinks ?? links;
 ---
 
 <aside
-	class="bay fixed inset-y-0 top-(--header-height) -left-full z-60 flex w-full max-w-105 flex-col gap-5 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:top-(--header-height) lg:bottom-auto lg:left-auto lg:z-auto lg:h-[calc(100vh-var(--header-height))] lg:w-(--sidebar-width) lg:max-w-none lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300"
+	class={cn(
+		"bay fixed inset-y-0 top-(--header-height) -left-full z-60 flex w-full max-w-105 flex-col gap-5 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:top-(--header-height) lg:bottom-auto lg:left-auto lg:z-auto lg:h-[calc(100vh-var(--header-height))] lg:w-(--sidebar-width) lg:max-w-none lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300",
+		bare && "gap-8",
+	)}
 	id="bay"
 	data-sidebar-bay
+	data-bay-bare={bare ? "" : undefined}
 >
 	{
 		showSocialLinks && (

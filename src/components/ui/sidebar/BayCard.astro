@@ -8,16 +8,23 @@ export interface Props extends HTMLAttributes<"div"> {
 }
 
 const { title, "class:list": classList, class: className = "", contentClass, ...divAttrs } = Astro.props;
+
+// use sidebar attr to style the card
+const bare = {
+	card: "[[data-bay-bare]_&]:rounded-none [[data-bay-bare]_&]:border-0 [[data-bay-bare]_&]:bg-transparent [[data-bay-bare]_&]:shadow-none",
+	head: "[[data-bay-bare]_&]:rounded-none [[data-bay-bare]_&]:border-b-0 [[data-bay-bare]_&]:bg-transparent [[data-bay-bare]_&]:px-0 [[data-bay-bare]_&]:pt-0 [[data-bay-bare]_&]:pb-3.5",
+	body: "[[data-bay-bare]_&]:p-0",
+};
 ---
 
-<div {...{ ...divAttrs, class: cn("rounded-lg border border-line bg-surface shadow-(--c-shadow)", classList, className) }}>
-	<div class="flex items-center gap-2.5 rounded-t-lg border-b border-line-2 bg-sunk px-5 py-3.5">
+<div {...{ ...divAttrs, class: cn("rounded-lg border border-line bg-surface shadow-(--c-shadow)", bare.card, classList, className) }}>
+	<div class={cn("flex items-center gap-2.5 rounded-t-lg border-b border-line-2 bg-sunk px-5 py-3.5", bare.head)}>
 		<span class="eyebrow text-ink-3">{title}</span>
 		<slot name="meta" />
 	</div>
 	{
 		contentClass ? (
-			<div class:list={cn(contentClass)}>
+			<div class:list={cn(contentClass, bare.body)}>
 				<slot />
 			</div>
 		) : (
