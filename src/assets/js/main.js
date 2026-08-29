@@ -1,6 +1,6 @@
 import { SIDEBAR } from "site:config";
 import { BREAKPOINTS } from "@/lib/_theme.generated";
-import { attachEvent, readStored, writeStored } from "./utils";
+import { attachEvent, readStored, writeStored, scroll } from "./utils";
 
 /**
  * Mobile Class
@@ -116,6 +116,81 @@ function initSidebarHeight() {
 	apply();
 }
 
+
+/**
+ * Jump Links
+ */
+function jumpLinks() {
+	const jumpLinks = document.querySelectorAll("a");
+	if (!jumpLinks.length) return;
+
+	// Filter out links that start with a #
+	const hashLinks = Array.from(jumpLinks).filter((link) => link.getAttribute("href")?.startsWith("#"));
+
+	hashLinks.forEach((link) => {
+		link.addEventListener("click", (e) => {
+			const href = link.getAttribute("href");
+			e.preventDefault();
+			if (href != "#") {
+				const target = document.querySelector(href);
+				if (target) {
+					scroll.intoView(target);
+				}
+			}
+		});
+	});
+}
+
+/**
+ * Scroll page with hash
+ */
+function handleUrlHash() {
+	if (window.location.hash) {
+		const target = document.querySelector(window.location.hash);
+		if (!target) return;
+		scroll.intoView(target);
+	} else {
+		scroll.to(0);
+	}
+}
+
+/**
+ * Update URL hash based on visible section
+ */
+function updateUrlHashOnScroll() {
+	let timeoutId = null;
+
+	// Check which section is in view on scroll
+	window.addEventListener("scroll", () => {
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+		}
+
+		timeoutId = setTimeout(updateUrlHash, 100);
+	});
+}
+
+function updateUrlHash() {
+	// Get all sections that can be scrolled to
+	const sections = document.querySelectorAll("main section[id]");
+	if (!sections.length) return;
+
+	const scrollPosition = window.scrollY + window.innerHeight * 0.2;
+
+	sections.forEach((section, index) => {
+		const sectionTop = section.offsetTop;
+		const sectionHeight = section.offsetHeight;
+
+		if (scrollPosition >= sectionTop && scrollPosition <= sectionTop + sectionHeight) {
+			if (index === 0) {
+				history.replaceState(null, null, window.location.pathname);
+			} else {
+				history.replaceState(null, null, `#${section.getAttribute("id")}`);
+			}
+		}
+	});
+}
+
 /**
  * Copy to clipboard Links
  */
@@ -153,11 +228,14 @@ const setup = () => {
 	initMobileClass();
 	initSidebar();
 	initSidebarHeight();
+	jumpLinks();
+	handleUrlHash();
+	updateUrlHashOnScroll();
 	handleCopyToClipboardLinks();
 };
 
 const refreshOnResize = () => {
-	//
+	updateUrlHash();
 };
 
 const loadIt = () => {

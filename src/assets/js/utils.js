@@ -11,6 +11,26 @@ export function attachEvent(selector, event, fn) {
 	}
 }
 
+export const media = {
+	reducedMotion: window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,
+	transparency: window.matchMedia(`(prefers-transparency: prefer-reduced)`).matches,
+};
+
+export const scroll = {
+	position: () => ({
+		x: window.scrollX,
+		y: window.scrollY | document.body.scrollTop,
+	}),
+	top: () => scrollPosition().y,
+	bottom: () => scrollPosition().y + window.innerHeight,
+	intoView: (target) => {
+		target.scrollIntoView({ behavior: media.reducedMotion ? "instant" : "smooth" });
+	},
+	to: (offset = 0) => {
+		window.scrollTo({ top: offset, behavior: media.reducedMotion ? "instant" : "smooth" });
+	},
+}
+
 /** localStorage throws in private mode; every caller wants the same fallback. */
 export const readStored = (key, fallback = null) => {
 	try {
