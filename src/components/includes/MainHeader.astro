@@ -169,7 +169,7 @@ const currentPath = getCurrentPath(Astro.url);
 				""
 			)
 		}
-		{showScrollProgress && <ScrollProgressBar>{/*showBookmarks && <Bookmarks blueprint={blueprint} />*/}</ScrollProgressBar>}
+		{showScrollProgress && <ScrollProgressBar />}
 		<div
 			class:list={[
 				{ "ml-auto rtl:ml-0 rtl:mr-auto": menuPosition === "left" && !hasAfterMenuSlot },
