@@ -1,26 +1,32 @@
 ---
+import { twMerge } from "tailwind-merge";
 import { ABOUT, DISPLAY } from "site:config";
+import ParticleField from "@/components/ui/display/ParticleField.astro";
 
 export interface Props {
 	title?: string;
 	description?: string;
 	eyebrow?: string;
 	facts?: Array<{ value: string; label: string }>;
+	class?: string;
 }
 
-const { title, description, eyebrow, facts = [] } = Astro.props;
+const { title, description, eyebrow, facts = [], class: className } = Astro.props;
 
 const eyebrowSlot = await Astro.slots.render("eyebrow");
 ---
 
-<header
-	class="relative overflow-hidden border-b border-line bg-[#08080e] text-[#f2f2f8] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)] before:content-['']"
-	x-data="particleField"
->
-	<canvas class="absolute inset-0 size-full opacity-85" x-ref="canvas" aria-hidden="true"></canvas>
+<header class={twMerge("relative overflow-hidden border-b border-line bg-[#08080e] text-[#f2f2f8]", className)}>
+	<slot name="background">
+		<div
+			class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)]"
+		>
+		</div>
+		<ParticleField />
+	</slot>
 
 	<div class="relative mx-auto max-w-(--content-width) px-5.5 pt-12.5 pb-11 md:px-8.5 md:pt-18 md:pb-15">
-		{(!!eyebrowSlot?.trim() || eyebrow) && <span class="mb-5 block eyebrow text-cyan">{!!eyebrowSlot?.trim() ? <Fragment set:html={eyebrowSlot} /> : eyebrow}</span>}
+		{(!!eyebrowSlot?.trim() || eyebrow) && <span class="mb-5 block eyebrow text-cyan-200">{!!eyebrowSlot?.trim() ? <Fragment set:html={eyebrowSlot} /> : eyebrow}</span>}
 
 		<h1
 			class="heading-display max-w-[20ch] text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold text-white! [&_b]:bg-[linear-gradient(96deg,#67e8f9,#c4b5fd_60%,#f0abfc)] [&_b]:bg-clip-text [&_b]:text-transparent"
