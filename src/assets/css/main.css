@@ -57,7 +57,7 @@
 }
 
 /* ========================
-* custom, reusable component classes
+* Layers
 ========================= */
 
 @utility btn {
@@ -91,10 +91,6 @@
 @utility btn-tertiary {
 	@apply btn hover:border-primary/10;
 }
-
-/* ========================
-* Setting up the initial styling environment + Default styles.
-========================= */
 
 @layer base {
 	body {
@@ -177,6 +173,16 @@
 	.logo-link {
 		@apply !text-inherit;
 	}
+
+	:focus-visible {
+		outline: 2px solid var(--c-accent);
+		outline-offset: 3px;
+		border-radius: 3px;
+	}
+
+	svg text {
+		font-family: var(--font-mono);
+	}
 }
 
 /* ========================
@@ -198,9 +204,7 @@ html {
 	@apply relative 2xl:transition-[margin-left] 2xl:duration-200 2xl:ease-linear;
 }
 
-/** =======
-* HEADER
-========= */
+/* ---------- header ---------- */
 
 #header {
 	#header-inner {
@@ -212,34 +216,9 @@ html {
 		@apply 2xl:flex hidden;
 	}
 
-	/* Reserve the strip the progress bar will occupy. */
-	&[data-scroll-progress="show"] {
-		@apply pt-(--scroll-progress-height);
-	}
-
-	&[data-scroll-progress="animate"] {
-		@apply transition-[padding] duration-200 ease-linear;
-	}
-
 	/* Offset Main for sticky header */
 	&[data-sticky-header] ~ #wrapper {
 		@apply pt-(--header-height) print:pt-0;
-	}
-
-	&[data-sticky-header][data-scroll-progress="show"] ~ #wrapper {
-		@apply pt-[calc(var(--header-height)+var(--scroll-progress-height))];
-	}
-}
-
-@layer base {
-	:focus-visible {
-		outline: 2px solid var(--c-accent);
-		outline-offset: 3px;
-		border-radius: 3px;
-	}
-
-	svg text {
-		font-family: var(--font-mono);
 	}
 }
 
@@ -276,9 +255,8 @@ html {
 	border-color: var(--c-sunk);
 }
 
-/* ---------- the shell ---------- */
 
-/* ---------- collapse toggle + right rail ---------- */
+/* ---------- Sidebar ---------- */
 
 .scrim {
 	display: none;
