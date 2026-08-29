@@ -59,11 +59,11 @@ const useLinks = blueprintSectionLinks ?? links;
 		)
 	}
 
-	{showNavLinks && !!navLinks.length && <BayLinkCard id="nav-links" class="lg:hidden" title="Links" links={navLinks as BayLinkCardProps["links"]} />}
+	{showNavLinks && !!navLinks.length && <BayLinkCard {...{ id: "nav-links", class: "lg:hidden", title: "Links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
 
 	{
 		!!useLinks.length && (
-			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType }}>
+			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType ?? "numbers" }}>
 				<span class="tab ml-auto font-mono text-[0.72rem] text-accent" slot="meta" data-read-progress>
 					0%
 				</span>

@@ -19,6 +19,43 @@ function initMobileClass() {
 }
 
 /**
+ * Scroll
+ */
+function initHeaderScroll() {
+	const header = document.querySelector("#header[data-sticky-header]");
+	if (!header) return;
+
+	let lastKnownScrollPosition = window.scrollY;
+	let ticking = true;
+
+	function applyScrollClass() {
+		const headerHeight = header.offsetHeight;
+		const headerOffset = headerHeight - 40;
+
+		if (lastKnownScrollPosition > headerOffset && !document.body.classList.contains("scroll")) {
+			document.body.classList.add("scroll");
+			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: true } }));
+		} else if (lastKnownScrollPosition <= headerOffset && document.body.classList.contains("scroll")) {
+			document.body.classList.remove("scroll");
+			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: false } }));
+		}
+
+		ticking = false;
+	}
+	applyScrollClass();
+
+	attachEvent([document], "scroll", function () {
+		lastKnownScrollPosition = window.scrollY;
+		if (!ticking) {
+			window.requestAnimationFrame(() => {
+				applyScrollClass();
+			});
+			ticking = true;
+		}
+	});
+}
+
+/**
  * Sidebar Nav. Drives the `[data-menu-toggle]` toggle buttons
  * and sidebar visibility.
  */
@@ -135,68 +172,6 @@ function initSidebarHeight() {
 	apply();
 }
 
-/**
- * Scroll
- */
-function initHeaderScroll() {
-	const header = document.querySelector("#header[data-sticky-header]");
-	if (!header) return;
-
-	let lastKnownScrollPosition = window.scrollY;
-	let ticking = true;
-
-	function applyScrollClass() {
-		const headerHeight = header.offsetHeight;
-		const headerOffset = headerHeight - 40;
-
-		if (lastKnownScrollPosition > headerOffset && !document.body.classList.contains("scroll")) {
-			document.body.classList.add("scroll");
-			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: true } }));
-		} else if (lastKnownScrollPosition <= headerOffset && document.body.classList.contains("scroll")) {
-			document.body.classList.remove("scroll");
-			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: false } }));
-		}
-
-		ticking = false;
-	}
-	applyScrollClass();
-
-	attachEvent([document], "scroll", function () {
-		lastKnownScrollPosition = window.scrollY;
-		if (!ticking) {
-			window.requestAnimationFrame(() => {
-				applyScrollClass();
-			});
-			ticking = true;
-		}
-	});
-}
-
-/**
- * Init Progress Bar
- */
-function initProgressBar() {
-	const scrollProgress = document.getElementById("scroll-progress");
-	if (!scrollProgress) {
-		return;
-	}
-
-	const scrollProgressBar = scrollProgress.querySelector("div:first-child");
-
-	let scrollPercentage = 0;
-
-	function onWindowScroll() {
-		const scrollOffset = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-		const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-		scrollPercentage = (scrollOffset / windowHeight) * 100;
-
-		scrollProgressBar.style.width = `${scrollPercentage}%`;
-	}
-
-	window.addEventListener("scroll", onWindowScroll);
-	onWindowScroll();
-}
 
 /**
  * Jump Links
@@ -236,43 +211,6 @@ function handleUrlHash() {
 }
 
 /**
- * Update URL hash based on visible section
- */
-function updateUrlHashOnScroll() {
-	let timeoutId = null;
-
-	// Check which section is in view on scroll
-	window.addEventListener("scroll", () => {
-		if (timeoutId) {
-			clearTimeout(timeoutId);
-		}
-
-		timeoutId = setTimeout(updateUrlHash, 100);
-	});
-}
-
-function updateUrlHash() {
-	// Get all sections that can be scrolled to
-	const sections = document.querySelectorAll("main section[id]");
-	if (!sections.length) return;
-
-	const scrollPosition = window.scrollY + window.innerHeight * 0.2;
-
-	sections.forEach((section, index) => {
-		const sectionTop = section.offsetTop;
-		const sectionHeight = section.offsetHeight;
-
-		if (scrollPosition >= sectionTop && scrollPosition <= sectionTop + sectionHeight) {
-			if (index === 0) {
-				history.replaceState(null, null, window.location.pathname);
-			} else {
-				history.replaceState(null, null, `#${section.getAttribute("id")}`);
-			}
-		}
-	});
-}
-
-/**
  * Copy to clipboard Links
  */
 async function handleCopyToClipboardLinks() {
@@ -306,19 +244,19 @@ async function handleCopyToClipboardLinks() {
  * Init
  */
 const setup = () => {
+	initHeaderScroll();
 	initMobileClass();
 	initSidebar();
 	initSidebarHeight();
-	initHeaderScroll();
-	initProgressBar();
+	initReadProgress();
 	jumpLinks();
 	handleUrlHash();
-	updateUrlHashOnScroll();
+	initScrollSpy();
 	handleCopyToClipboardLinks();
 };
 
 const refreshOnResize = () => {
-	updateUrlHash();
+	//
 };
 
 const loadIt = () => {
