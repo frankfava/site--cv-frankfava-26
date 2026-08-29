@@ -222,7 +222,7 @@ export class BlueprintSection {
 	constructor(data: BlueprintComponent) {
 		this.data = {
 			showInSidebar: data.showInSidebar ?? true,
-			showInSearch: data.showInSearch ?? true,
+			// showInSearch: data.showInSearch ?? true,
 			bookmark: !!data.bookmark,
 			...data,
 			description: data.description || "",
@@ -306,7 +306,7 @@ export class BlueprintSection {
 			content: this.data.content as AssembledSection["content"],
 			sections: this.sections?.map((section) => section.assemble()) || [],
 			hidden: !!this.data.hidden,
-			showInSearch: this.data.showInSearch ?? true,
+			// showInSearch: this.data.showInSearch ?? true,
 			header: {
 				...((this.data.props ?? {})?.header ?? {}),
 				title: this.data.title,
