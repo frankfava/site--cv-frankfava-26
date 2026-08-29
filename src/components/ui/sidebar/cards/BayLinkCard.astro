@@ -38,7 +38,7 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 										showLinkIcon: lead === "icons",
 										iconClass: "bg-primary rounded-full text-white p-1.5 h-7 w-7",
 										lead: lead === "numbers" ? () => <span class="n font-mono text-[0.71rem] text-ink-3">{String(i + 1).padStart(2, "0")}</span> : undefined,
-										["data-cv-section-link"]: "true",
+										["data-section-link"]: "true",
 									}}
 								>
 									{link.children && useNestedLinks && (
