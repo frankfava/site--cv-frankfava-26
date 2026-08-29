@@ -1,5 +1,5 @@
 /** Which year the timeline is reading, shared by the chart and its read-out. */
-import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
+import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX, yearAverage } from "@/data/career";
 import { CHART, chartX, chartY } from "./chart";
 
 export const CAREER_STORE = "career";
@@ -56,7 +56,7 @@ export function careerStore() {
 
 		/** What the centre of the doughnut reads. */
 		get average() {
-			return Math.round(this.total / CAREER_SERIES.length);
+			return yearAverage(this.year);
 		},
 
 		/** Segmented variant: this series' share of the year. */

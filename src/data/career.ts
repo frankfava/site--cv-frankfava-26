@@ -221,5 +221,10 @@ export const CAREER_YEARS: CareerYear[] = [
 	},
 ];
 
+/** The four series averaged: one number for how much of a year's work suited me. */
+export function yearAverage(year: CareerYear): number {
+	return Math.round(CAREER_SERIES.reduce((sum, series) => sum + year[series.key], 0) / CAREER_SERIES.length);
+}
+
 /** The year the read-out opens on. */
 export const CAREER_DEFAULT_INDEX = CAREER_YEARS.findIndex((y) => y.year === 2022);
