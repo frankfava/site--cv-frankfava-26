@@ -30,7 +30,7 @@ const items = [
 	<div class="flex flex-col flex-wrap gap-3 px-5 pt-4 pb-5 text-sm text-ink-2">
 		{
 			items.map((item) => (
-				<div class="grid grid-cols-[1fr_2fr] items-baseline gap-2.25">
+				<div class="grid grid-cols-[1fr_2fr] items-baseline gap-2.5">
 					<b class="font-semibold text-sm text-ink whitespace-nowrap">{item.label}</b> <Fragment set:html={item.value} />
 				</div>
 			))

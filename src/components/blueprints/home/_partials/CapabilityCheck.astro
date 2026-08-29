@@ -18,7 +18,7 @@ const { class: className } = Astro.props;
 				<span class="text-ink-3 eyebrow">What your role needs</span>
 				<button
 					type="button"
-					class="hover:border-accent ml-auto px-2.75 py-1.5 border border-line rounded font-mono text-[0.72rem] text-ink-2 hover:text-accent uppercase tracking-[0.06em] cursor-pointer"
+					class="hover:border-accent ml-auto px-2.5 py-1.5 border border-line rounded font-mono text-[0.72rem] text-ink-2 hover:text-accent uppercase tracking-[0.06em] cursor-pointer"
 					x-on:click="reset">Reset</button
 				>
 			</div>
@@ -27,7 +27,7 @@ const { class: className } = Astro.props;
 				{
 					CAPABILITIES.map((cap) => (
 						<div class="py-3.5 border-line-2 border-b last:border-b-0" x-data="capabilityRow" data-capability={cap.id}>
-							<div class="flex items-baseline gap-3 mb-0.75">
+							<div class="flex items-baseline gap-3 mb-0.5">
 								<label class="font-semibold text-[0.99rem]" for={`need-${cap.id}`}>
 									{cap.label}
 								</label>
@@ -39,7 +39,7 @@ const { class: className } = Astro.props;
 								</span>
 							</div>
 
-							<p class="mb-2.25 text-[0.87rem] text-ink-3">{cap.evidence}</p>
+							<p class="mb-2.5 text-[0.87rem] text-ink-3">{cap.evidence}</p>
 
 							<input
 								class="block m-0 w-full accent-accent"
@@ -94,8 +94,8 @@ const { class: className } = Astro.props;
 			</div>
 
 			<div class="flex flex-wrap gap-4 px-4 pt-0.5 pb-3.5 text-ink-3 eyebrow">
-				<span class="flex items-center gap-1.75"><i class="bg-accent rounded-sm w-4 h-1"></i>What you need</span>
-				<span class="flex items-center gap-1.75"><i class="bg-good rounded-sm w-4 h-1"></i>Where I sit</span>
+				<span class="flex items-center gap-1.5"><i class="bg-accent rounded-sm w-4 h-1"></i>What you need</span>
+				<span class="flex items-center gap-1.5"><i class="bg-good rounded-sm w-4 h-1"></i>Where I sit</span>
 			</div>
 		</div>
 	</div>
