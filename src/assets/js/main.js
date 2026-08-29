@@ -20,39 +20,41 @@ function initMobileClass() {
 
 /**
  * Scroll
+ *
+ * Header state and the progress bar, off one read of the document position.
  */
-function initHeaderScroll() {
+function initScroll() {
 	const header = document.querySelector("#header[data-sticky-header]");
-	if (!header) return;
+	const bar = document.getElementById("scroll-progress")?.querySelector("div:first-child");
+	if (!header && !bar) return;
 
-	let lastKnownScrollPosition = window.scrollY;
-	let ticking = true;
+	let ticking = false;
 
-	function applyScrollClass() {
-		const headerHeight = header.offsetHeight;
-		const headerOffset = headerHeight - 40;
-
-		if (lastKnownScrollPosition > headerOffset && !document.body.classList.contains("scroll")) {
-			document.body.classList.add("scroll");
-			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: true } }));
-		} else if (lastKnownScrollPosition <= headerOffset && document.body.classList.contains("scroll")) {
-			document.body.classList.remove("scroll");
-			window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: false } }));
-		}
-
+	function apply() {
 		ticking = false;
-	}
-	applyScrollClass();
 
-	attachEvent([document], "scroll", function () {
-		lastKnownScrollPosition = window.scrollY;
-		if (!ticking) {
-			window.requestAnimationFrame(() => {
-				applyScrollClass();
-			});
-			ticking = true;
+		if (header) {
+			const scrolled = window.scrollY > header.offsetHeight - 40;
+			if (scrolled !== document.body.classList.contains("scroll")) {
+				document.body.classList.toggle("scroll", scrolled);
+				window.dispatchEvent(new CustomEvent("scrolled", { detail: { show: scrolled } }));
+			}
 		}
+
+		if (bar) {
+			const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+			bar.style.width = `${max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max)) * 100}%`;
+		}
+	}
+
+	attachEvent([document], "scroll", () => {
+		if (ticking) return;
+		ticking = true;
+		window.requestAnimationFrame(apply);
 	});
+	attachEvent("window", "resize", apply);
+	attachEvent("window", "load", apply);
+	apply();
 }
 
 /**
@@ -181,12 +183,22 @@ function initScrollSpy() {
 	const anchors = Array.from(document.querySelectorAll("[data-section-link]")).filter((a) => a.getAttribute("href")?.startsWith("#"));
 	const ids = [...new Set(anchors.map((a) => a.getAttribute("href").slice(1)))];
 
-	// Resolved per pass rather than held, so a section that renders late is picked up.
+	const readouts = document.querySelectorAll("[data-read-progress]");
+	const parents = new Map();
+	const lists = new Map();
+	anchors.forEach((a) => {
+		const parent = a.closest("li")?.parentElement?.closest("li")?.querySelector("a[data-section-link]");
+		if (parent) parents.set(a.getAttribute("href"), parent.getAttribute("href"));
+
+		const list = a.closest("nav") ?? document.body;
+		lists.set(list, [...(lists.get(list) ?? []), a]);
+	});
+
 	const sections = () => (ids.length ? ids.map((id) => document.getElementById(id)) : Array.from(document.querySelectorAll("main section[id]"))).filter(Boolean);
 	if (!sections().length) return;
 
-	// The reading line sits under the header, wherever the header ends up.
-	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + 24;
+	// Where a section takes over. Raise the fraction to hand over sooner.
+	const line = () => (document.querySelector("#header")?.getBoundingClientRect().height ?? 0) + window.innerHeight * 0.25;
 
 	let current;
 	let hashTimer;
@@ -194,14 +206,12 @@ function initScrollSpy() {
 	function resolve(els) {
 		const at = line();
 
-		// A short last section never reaches the reading line, so the bottom of the
-		// page counts as being in it.
+		// A short last section never reaches the line.
 		if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
 			return els[els.length - 1];
 		}
 
-		// Above the first section the hero still owns the screen, and nothing in the
-		// index is being read yet.
+		// The hero still owns the screen.
 		if (els[0].getBoundingClientRect().top > at) {
 			return null;
 		}
@@ -220,15 +230,28 @@ function initScrollSpy() {
 		const els = sections();
 		if (!els.length) return;
 
+		// Across the sections, not the document: no hero, no footer.
+		if (readouts.length) {
+			const from = els[0].getBoundingClientRect().top + window.scrollY;
+			const to = els[els.length - 1].getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+			const read = to > from ? Math.min(1, Math.max(0, (window.scrollY - from) / (to - from))) : Number(window.scrollY >= from);
+			readouts.forEach((el) => (el.textContent = `${Math.round(read * 100)}%`));
+		}
+
 		const id = resolve(els)?.id ?? null;
 		if (id === current) return;
 		current = id;
 
-		anchors.forEach((a) => a.classList.toggle("is-on", !!id && a.getAttribute("href") === `#${id}`));
+		// One mark per list; a list without its own entry falls back to the ancestor.
+		lists.forEach((list) => {
+			let href = id ? `#${id}` : null;
+			while (href && !list.some((a) => a.getAttribute("href") === href)) {
+				href = parents.get(href) ?? null;
+			}
+			list.forEach((a) => a.classList.toggle("is-on", a.getAttribute("href") === href));
+		});
 
-		// Safari throws once replaceState is called more than 100 times in 30
-		// seconds, which a wobble on a section boundary can reach. Waiting for the
-		// crossings to settle means a burst writes once, at the end.
+		// Safari throws past 100 replaceState calls in 30 seconds.
 		clearTimeout(hashTimer);
 		hashTimer = setTimeout(() => history.replaceState(null, "", id ? `#${id}` : window.location.pathname), 150);
 	}
@@ -243,31 +266,6 @@ function initScrollSpy() {
 		});
 	});
 
-	attachEvent("window", "resize", apply);
-	attachEvent("window", "load", apply);
-	apply();
-}
-
-/**
- * Read Progress
- *
- * How far down the page you are, in its two renderings: the bar under the
- * header and the percentage in the bay. Neither has to be on the page.
- */
-function initReadProgress() {
-	const bar = document.getElementById("scroll-progress")?.querySelector("div:first-child");
-	const readouts = document.querySelectorAll("[data-read-progress]");
-	if (!bar && !readouts.length) return;
-
-	function apply() {
-		const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-		const read = max <= 0 ? 0 : Math.min(1, Math.max(0, window.scrollY / max));
-
-		if (bar) bar.style.width = `${read * 100}%`;
-		readouts.forEach((el) => (el.textContent = `${Math.round(read * 100)}%`));
-	}
-
-	attachEvent([document], "scroll", apply);
 	attachEvent("window", "resize", apply);
 	attachEvent("window", "load", apply);
 	apply();
@@ -345,11 +343,10 @@ async function handleCopyToClipboardLinks() {
  */
 const setup = () => {
 	initMobileClass();
-	initHeaderScroll();
+	initScroll();
 	initSidebar();
 	initSidebarHeight();
 	initScrollSpy();
-	initReadProgress();
 	jumpLinks();
 	handleUrlHash();
 	handleCopyToClipboardLinks();
