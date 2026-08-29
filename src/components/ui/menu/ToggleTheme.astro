@@ -39,7 +39,6 @@ const options = [
 
 /** With nothing to choose between, the trigger is the choice. */
 const isSingle = options.length < 3;
-
 ---
 
 {
@@ -55,8 +54,8 @@ const isSingle = options.length < 3;
 				aria-label={label}
 				x-bind:aria-label={isSingle ? "label" : undefined}
 				aria-haspopup={isSingle ? undefined : "true"}
-				:class={isSingle ? undefined : "isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"}
-				:aria-expanded={isSingle ? undefined : "isOpen"}
+				x-bind:class={isSingle ? undefined : "isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"}
+				x-bind:aria-expanded={isSingle ? undefined : "isOpen"}
 			>
 				{options.map((o) => (
 					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class="toggle-icon" class:list={[o.key, twMerge("w-6 h-6", iconClass)]} />

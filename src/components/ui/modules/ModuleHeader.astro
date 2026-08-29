@@ -23,9 +23,7 @@ const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.
 					}}
 				>
 					<slot name="beforeHeader" />
-					{title && (
-						<h2 class={twMerge("font-heading font-semibold text-2xl text-heading lg:text-3xl leading-tighter tracking-tighter", classes?.title)} set:html={title} />
-					)}
+					{title && <h2 class={twMerge("font-heading font-semibold text-2xl text-heading lg:text-3xl leading-tighter tracking-tighter", classes?.title)} set:html={title} />}
 					{subtitle && (
 						<div class={twMerge("mt-2 text-gray-500 text-lg dark:text-slate-400", classes?.subtitle)}>
 							{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0 text-gray-500" set:html={subtitle} />}

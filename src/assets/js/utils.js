@@ -33,7 +33,7 @@ export const scroll = {
 	to: (offset = 0) => {
 		window.scrollTo({ top: offset, behavior: media.reducedMotion ? "instant" : "smooth" });
 	},
-}
+};
 
 /** localStorage throws in private mode; every caller wants the same fallback. */
 export const readStored = (key, fallback = null) => {

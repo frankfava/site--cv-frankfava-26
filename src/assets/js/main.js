@@ -327,7 +327,6 @@ async function handleCopyToClipboardLinks() {
 	});
 }
 
-
 /**
  * Init
  */
