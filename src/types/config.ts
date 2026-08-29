@@ -173,7 +173,7 @@ export namespace App {
 		/** The `data-*` attribute every toggle carries. */
 		toggleAttr: string;
 		/** What a first-time visitor gets, before any preference exists. */
-		onLoad: 'open' | 'closed' | 'reveal';
+		onLoad: "open" | "closed" | "reveal";
 	};
 
 	export type UIConfig = {

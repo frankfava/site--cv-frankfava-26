@@ -23,7 +23,6 @@ function initMobileClass() {
  * and sidebar visibility.
  */
 function initSidebar() {
-	
 	const toggles = {
 		toggleAttr: SIDEBAR.toggleAttr,
 		// Every toggle reflects the same state, so they never disagree.
@@ -84,14 +83,14 @@ function initSidebar() {
 
 	// Auto Show Sidebar (desktop only, respect saved preference)
 	setTimeout(() => {
-		if(sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).matches || !sidebar.preference()) return;
+		if (sidebar.isOpen() || SIDEBAR.onLoad !== "reveal" || !window.matchMedia(`(min-width: ${sidebar.autoHideAt})`).matches || !sidebar.preference()) return;
 		sidebar.open();
 	}, 500);
 }
 
 /**
  * Sidebar Height
- * 
+ *
  * Make sure the sidebar is the correct height when the page is loaded.
  * Under the hero, its partially hidden, so we need to make sure it's the correct height to scroll
  */
