@@ -1,0 +1,25 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import Callout from "@/components/ui/display/Callout.astro";
+import CapabilityCheck from "./_partials/CapabilityCheck.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Capability check",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "wide", ...props, header }}>
+	<span slot="beforeHeader" class="block mb-2 text-accent eyebrow">Capability</span>
+
+	<Callout title="How to read this">
+		Move a slider to say how much your role needs that capability. The dashed shape is what you asked for; the solid shape is me. Where mine sits outside yours you're covered; where it sits
+		inside, you'd be stretching me.
+	</Callout>
+
+	<CapabilityCheck />
+</ModuleWrapper>

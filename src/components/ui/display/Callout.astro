@@ -1,0 +1,17 @@
+---
+/** A bordered note with a lead label beside it. */
+import { twMerge } from "tailwind-merge";
+
+export interface Props {
+	title?: string;
+	class?: string;
+	titleClass?: string;
+}
+
+const { title, class: className, titleClass } = Astro.props;
+---
+
+<div class={twMerge("flex items-start gap-2.5 my-5 mb-6 px-3.5 py-2.75 max-w-[80ch] border border-line border-l-accent border-l-[3px] bg-surface text-ink-2", className)}>
+	{title && <b class={twMerge("pt-0.5 text-accent whitespace-nowrap eyebrow", titleClass)}>{title}</b>}
+	<p class="m-0"><slot /></p>
+</div>

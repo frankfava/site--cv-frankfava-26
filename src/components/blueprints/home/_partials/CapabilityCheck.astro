@@ -1,0 +1,102 @@
+---
+/** The capability check: the sliders, and the radar they redraw. */
+import { twMerge } from "tailwind-merge";
+import { CAPABILITIES } from "@/data/capabilities";
+import { radar } from "@/alpine/capability/radar";
+
+export interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={twMerge("text-left", className)} x-data="capabilityPanel">
+	<div class="items-start gap-3.5 grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
+		<div class="bg-surface shadow-(--c-shadow) border border-line rounded-lg overflow-hidden">
+			<div class="flex items-center gap-3 bg-sunk px-4.5 py-3 border-line-2 border-b">
+				<span class="text-ink-3 eyebrow">What your role needs</span>
+				<button
+					type="button"
+					class="hover:border-accent ml-auto px-2.75 py-1.5 border border-line rounded font-mono text-[0.72rem] text-ink-2 hover:text-accent uppercase tracking-[0.06em] cursor-pointer"
+					x-on:click="reset">Reset</button
+				>
+			</div>
+
+			<div class="px-4.5 pt-1 pb-4">
+				{
+					CAPABILITIES.map((cap) => (
+						<div class="py-3.5 border-line-2 border-b last:border-b-0" x-data="capabilityRow" data-capability={cap.id}>
+							<div class="flex items-baseline gap-3 mb-0.75">
+								<label class="font-semibold text-[0.99rem]" for={`need-${cap.id}`}>
+									{cap.label}
+								</label>
+								<span class="ml-auto font-mono text-[0.76rem] text-ink-3 whitespace-nowrap">
+									need{" "}
+									<b class="tab font-medium text-ink" x-text="need">
+										{cap.defaultNeed}
+									</b>
+								</span>
+							</div>
+
+							<p class="mb-2.25 text-[0.87rem] text-ink-3">{cap.evidence}</p>
+
+							<input
+								class="block m-0 w-full accent-accent"
+								type="range"
+								id={`need-${cap.id}`}
+								min="0"
+								max="100"
+								step="5"
+								value={cap.defaultNeed}
+								x-bind:value="need"
+								x-on:input="setNeed"
+							/>
+
+							<div class="flex items-center gap-2 mt-2 text-[0.87rem] text-ink-3 [&.is-covered]:text-good [&.is-gap]:text-bad [&.is-tight]:text-warn" x-bind:class="verdictClass">
+								<i class="flex-none bg-current rounded-full w-2 h-2" />
+								<span x-text="verdictText">Covered, with room to spare.</span>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="bg-surface shadow-(--c-shadow) border border-line rounded-lg overflow-hidden">
+			<div class="flex items-center gap-3 bg-sunk px-4.5 py-3 border-line-2 border-b">
+				<span class="text-ink-3 eyebrow">Your role vs me</span>
+			</div>
+
+			<div class="px-2 pt-3.5 pb-0.5">
+				<svg class="block w-full h-auto" viewBox={radar.viewBox} role="img" aria-label="Radar comparing what your role needs against Frank's evidence">
+					{radar.rings.map((d) => <path d={d} fill="none" stroke="var(--c-line)" stroke-width="1" />)}
+					{
+						radar.spokes.map((spoke) => (
+							<>
+								<line x1={radar.cx} y1={radar.cy} x2={spoke.x2} y2={spoke.y2} stroke="var(--c-line)" stroke-width="1" />
+								<text x={spoke.labelX} y={spoke.labelY} text-anchor={spoke.anchor} fill="var(--c-ink-3)" font-size="10.5" letter-spacing=".4">
+									{spoke.label}
+								</text>
+							</>
+						))
+					}
+					<path d={radar.mineShape} stroke="var(--c-good)" fill="color-mix(in srgb, var(--c-good) 16%, transparent)" stroke-width="2" stroke-linejoin="round"></path>
+					<path
+						d={radar.yoursShape}
+						x-bind:d="yoursShape"
+						stroke="var(--c-accent)"
+						fill="color-mix(in srgb, var(--c-accent) 12%, transparent)"
+						stroke-width="2"
+						stroke-linejoin="round"
+						stroke-dasharray="5 4"></path>
+				</svg>
+			</div>
+
+			<div class="flex flex-wrap gap-4 px-4 pt-0.5 pb-3.5 text-ink-3 eyebrow">
+				<span class="flex items-center gap-1.75"><i class="bg-accent rounded-sm w-4 h-1"></i>What you need</span>
+				<span class="flex items-center gap-1.75"><i class="bg-good rounded-sm w-4 h-1"></i>Where I sit</span>
+			</div>
+		</div>
+	</div>
+</div>
