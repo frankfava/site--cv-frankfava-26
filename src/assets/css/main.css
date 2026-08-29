@@ -377,7 +377,7 @@ html {
 	font-weight: 600;
 }
 
-.toc a.is-on .n {
+.toc a.is-on .num {
 	color: var(--c-accent);
 }
 

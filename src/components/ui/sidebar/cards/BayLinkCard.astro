@@ -37,7 +37,7 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 										],
 										showLinkIcon: lead === "icons",
 										iconClass: "bg-primary rounded-full text-white p-1.5 h-7 w-7",
-										lead: lead === "numbers" ? () => <span class="n font-mono text-[0.71rem] text-ink-3">{String(i + 1).padStart(2, "0")}</span> : undefined,
+										lead: lead === "numbers" ? () => <span class="num font-mono text-[0.71rem] text-ink-3">{String(i + 1).padStart(2, "0")}</span> : undefined,
 										["data-section-link"]: "true",
 									}}
 								>
@@ -47,12 +47,9 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 												<MenuItem
 													{...{
 														...child,
-														"class:list": { "ps-6": lead === "icons", "ps-4": lead === "numbers" },
+														"class:list": ["child-link border-l-2 pl-2 border-line hover:border-accent", { "ms-5": lead === "icons", "ms-4": lead === "numbers" }],
 														showLinkIcon: false,
-														linkClass: [
-															"lg:px-1 py-1 leading-4 border-0 border-l-2 border-line hover:border-accent",
-															{ "!pl-3": lead === "icons", "!pl-5": lead === "numbers" },
-														],
+														linkClass: ["lg:px-1 py-1 rounded-sm leading-4 border-0 ", { "!pl-3.5": lead === "icons", "!pl-3": lead === "numbers" }],
 														["data-section-link"]: "true",
 													}}
 												/>
