@@ -282,6 +282,21 @@ export class BlueprintSection {
 		return this.sections || [];
 	}
 
+	hasSections(): boolean {
+		return this.getSections().length > 0;
+	}
+
+	/** Negative indexes count back from the end. */
+	getSection(index: number): BlueprintSectionProxy | undefined {
+		const sections = this.getSections();
+		const section = sections.at(index);
+		return section ? BlueprintSection.createProxy(section) : undefined;
+	}
+
+	getFirstSection(): BlueprintSectionProxy | undefined {
+		return this.getSection(0);
+	}
+
 	/** Map the data to a type we can build with */
 	assemble(): AssembledSection {
 		return {
