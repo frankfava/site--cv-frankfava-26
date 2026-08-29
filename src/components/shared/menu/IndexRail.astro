@@ -1,0 +1,21 @@
+---
+/**
+ * The jump rail for the indexed layout.
+ *
+ * - `links` are only displayed when a blueprint is not in use.
+ */
+import JumpRail, { type Props as JumpRailProps } from "@/components/ui/menu/JumpRail.astro";
+import { BlueprintBuilder } from "@/lib/blueprints";
+
+export interface Props extends JumpRailProps {}
+
+const { links } = Astro.props;
+
+const blueprintSchema = Astro.locals.blueprint?.blueprint;
+const blueprintSections = blueprintSchema?.getSidebarSections();
+const blueprintSectionLinks = BlueprintBuilder.menuLinks(blueprintSections ?? []);
+
+const useLinks = blueprintSectionLinks ?? links;
+---
+
+<JumpRail {...{ links: useLinks }} />

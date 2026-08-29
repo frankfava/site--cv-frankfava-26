@@ -61,7 +61,7 @@ function setupFont(fontString: string, type: string = "sans-serif", loader: "bun
 function createAstroFontConfig(fonts: Record<string, fontDefinitionWithUrl | undefined>) {
 	return Object.entries(fonts)
 		.filter(([_k, font]) => !!font)
-		.map(([k, font]) => {
+		.map(([_d, font]) => {
 			font = font as fontDefinitionWithUrl;
 			return {
 				src: [],

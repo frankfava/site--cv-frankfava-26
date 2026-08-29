@@ -251,7 +251,7 @@ html {
 	background-clip: padding-box;
 }
 
-.bay::-webkit-scrollbar-thumb {
+#bay::-webkit-scrollbar-thumb {
 	border-color: var(--c-sunk);
 }
 
@@ -355,7 +355,7 @@ html {
 		--sidebar-width: 0px;
 	}
 
-	html:not(.nav-menu-open) .bay {
+	html:not(.nav-menu-open) #bay {
 		opacity: 0;
 		transform: translateX(-18px);
 		pointer-events: none;
@@ -394,7 +394,7 @@ html {
 	   panel that slides in from the left and covers the page, the same shape
 	   as the existing site's mobile navigation. The nav stays above it, so
 	   the toggle you opened it with is the toggle you close it with. */
-	html.nav-menu-open .bay {
+	html.nav-menu-open #bay {
 		left: 0;
 	}
 

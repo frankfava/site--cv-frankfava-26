@@ -1,0 +1,74 @@
+---
+/**
+ * The index bay.
+ *
+ * - `navLinks` display the same links that are passed to the header
+ * - `links` are only displayed when a blueprint is not in use.
+ */
+import type { Link } from "@/types";
+
+import { SOCIALS } from "site:config";
+import SideBay from "@/components/ui/sidebar/SideBay.astro";
+import BayLinkCard, { type Props as BayLinkCardProps } from "@/components/ui/sidebar/BayLinkCard.astro";
+import SocialLinks from "@/components/ui/social/SocialLinks.astro";
+import FitDial from "@/components/shared/sidebar/FitDial.astro";
+import PracticalCard from "@/components/shared/sidebar/PracticalCard.astro";
+
+export interface Props {
+	showSocialLinks?: boolean;
+	showNavLinks?: boolean;
+	navLinks?: Array<Link>;
+	links?: BayLinkCardProps["links"];
+	useNestedLinks?: BayLinkCardProps["useNestedLinks"];
+	linkLeadType?: BayLinkCardProps["lead"];
+}
+
+const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType } = Astro.props;
+
+const blueprintSchema = Astro.locals.blueprint?.blueprint;
+const blueprintSections = blueprintSchema?.getSidebarSections();
+
+// Convert blueprint sections to links
+const blueprintSectionLinks = blueprintSections
+	?.map((section) => {
+		if (section?.hidden && !section.hasSections()) {
+			return undefined;
+		}
+		return {
+			...section.convertToMenuLink({ id: null }),
+			href: section.hidden ? section.getFirstSection()?.convertToMenuLink()?.href : section.convertToMenuLink()?.href,
+			children: section.hasSections() ? section.sections?.map((section) => section.convertToMenuLink({ id: null })) : undefined,
+		};
+	})
+	.filter(Boolean) as BayLinkCardProps["links"];
+
+const useLinks = blueprintSectionLinks ?? links;
+
+const showFit = useLinks.some((link) => link.href === "#capability");
+---
+
+<SideBay>
+	{
+		showSocialLinks && (
+			<div id="sidebar-social" class="text-center">
+				<SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1" linkClass="rounded-lg p-2 bg-surface" iconClass="w-6 h-6" />
+			</div>
+		)
+	}
+
+	{showNavLinks && !!navLinks.length && <BayLinkCard {...{ id: "nav-links", class: "lg:hidden", title: "Links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
+
+	{
+		!!useLinks.length && (
+			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType ?? "numbers" }}>
+				<span class="ml-auto font-mono text-[0.72rem] text-accent tab" slot="meta" data-read-progress>
+					0%
+				</span>
+			</BayLinkCard>
+		)
+	}
+
+	{showFit && <FitDial />}
+
+	<PracticalCard />
+</SideBay>

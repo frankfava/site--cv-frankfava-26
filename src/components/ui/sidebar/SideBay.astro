@@ -1,52 +1,15 @@
 ---
 /**
- * The index bay. Off-canvas below the shell breakpoint, pinned beside the
- * content above it;
- *
- * `navLinks` display the same links that are passed to the header
- * `links` are only displayed when a blueprint is not in use.
+ * The sidebar bay.
  */
-
-import type { Link } from "@/types";
-
-import { SOCIALS } from "site:config";
 import { cn } from "@/utils/class";
-import BayLinkCard, { type Props as BayLinkCardProps } from "./cards/BayLinkCard.astro";
-import SocialLinks from "@/components/ui/menu/SocialLinks.astro";
-import type { AstroVNode } from "astro/jsx-runtime";
 
 export interface Props {
-	showSocialLinks?: boolean;
-	showNavLinks?: boolean;
-	navLinks?: Array<Link>;
-	links?: BayLinkCardProps["links"];
-	useNestedLinks?: BayLinkCardProps["useNestedLinks"];
-	linkLeadType?: BayLinkCardProps["lead"];
-	append?: (links: Link[]) => AstroVNode;
 	/** Style the sidebar as bare, without the default card chrome. */
 	bare?: boolean;
 }
 
-const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType, append, bare = false } = Astro.props;
-
-const blueprintSchema = Astro.locals.blueprint?.blueprint;
-const blueprintSections = blueprintSchema?.getSidebarSections();
-
-// Convert blueprint sections to links
-const blueprintSectionLinks = blueprintSections
-	?.map((section) => {
-		if (section?.hidden && !section.hasSections()) {
-			return undefined;
-		}
-		return {
-			...section.convertToMenuLink({ id: null }),
-			href: section.hidden ? section.getFirstSection()?.convertToMenuLink()?.href : section.convertToMenuLink()?.href,
-			children: section.hasSections() ? section.sections?.map((section) => section.convertToMenuLink({ id: null })) : undefined,
-		};
-	})
-	.filter(Boolean) as BayLinkCardProps["links"];
-
-const useLinks = blueprintSectionLinks ?? links;
+const { bare = false } = Astro.props;
 ---
 
 <aside
@@ -58,27 +21,5 @@ const useLinks = blueprintSectionLinks ?? links;
 	data-sidebar-bay
 	data-bay-bare={bare ? "" : undefined}
 >
-	{
-		showSocialLinks && (
-			<div id="sidebar-social" class="text-center">
-				<SocialLinks slot="actions" socialLinks={SOCIALS.toArray()} showText={false} class="gap-1" linkClass="rounded-lg p-2 bg-surface" iconClass="w-6 h-6" />
-			</div>
-		)
-	}
-
-	{showNavLinks && !!navLinks.length && <BayLinkCard {...{ id: "nav-links", class: "lg:hidden", title: "Links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
-
-	{
-		!!useLinks.length && (
-			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType ?? "numbers" }}>
-				<span class="ml-auto font-mono text-[0.72rem] text-accent tab" slot="meta" data-read-progress>
-					0%
-				</span>
-			</BayLinkCard>
-		)
-	}
-
-	<slot name="end">
-		{append ? append?.(useLinks) : null}
-	</slot>
+	<slot />
 </aside>

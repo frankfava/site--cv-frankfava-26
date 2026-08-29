@@ -2,7 +2,7 @@ import { themeToggle } from "./themeToggle.js";
 import { skillsComponent } from "./skillsComponent.js";
 import { projectsComponent } from "./projectsComponent.js";
 import { workHistoryAccordion } from "./workHistoryAccordion.js";
-import { particleField } from "./particleField.js";
+import { particleField } from "./backgrounds/particleField.js";
 import { capabilityStore, capabilityPanel, capabilityRow, fitDial, CAPABILITY_STORE } from "./capability";
 import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, careerDoughnut, careerArc, CAREER_STORE } from "./career";
 

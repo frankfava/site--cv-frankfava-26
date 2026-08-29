@@ -5,19 +5,16 @@
 import { DISPLAY, ABOUT } from "site:config";
 import PageLayout, { type Props as LayoutProps } from "@/layouts/PageLayout.astro";
 import { type BlueprintEntry } from "@/lib/blueprints";
-import type { Link } from "@/types";
 
 import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
 import ToggleBay from "@/components/ui/sidebar/ToggleBay.astro";
-import SideBay, { type Props as SideBayProps } from "@/components/ui/sidebar/SideBay.astro";
-import JumpRail from "@/components/ui/menu/JumpRail.astro";
-import FitDial from "@/components/ui/sidebar/cards/FitDial.astro";
-import PracticalCard from "@/components/ui/sidebar/cards/PracticalCard.astro";
+import IndexBay, { type Props as IndexBayProps } from "@/components/shared/sidebar/IndexBay.astro";
+import IndexRail from "@/components/shared/menu/IndexRail.astro";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
-	contentLinks?: SideBayProps["links"];
-	sidebar?: Omit<SideBayProps, "navLinks" | "links">;
+	contentLinks?: IndexBayProps["links"];
+	sidebar?: Omit<IndexBayProps, "navLinks" | "links">;
 	showRail?: boolean;
 }
 
@@ -79,20 +76,10 @@ if (showRail != undefined) {
 	<slot slot="sidebar" name="sidebar">
 		{
 			useSidebar && (
-				<SideBay
+				<IndexBay
 					{...{
 						navLinks: layoutProps.header?.links ?? [],
 						links: contentLinks,
-						append: (links: Link[]) => {
-							const showFit = links.some((link) => link.href === "#capability");
-
-							return (
-								<>
-									{showFit && <FitDial />}
-									<PracticalCard />
-								</>
-							);
-						},
 						...sidebar,
 					}}
 				/>
@@ -109,7 +96,7 @@ if (showRail != undefined) {
 		{
 			useRail && (
 				<slot name="rail">
-					<JumpRail links={contentLinks} />
+					<IndexRail links={contentLinks} />
 				</slot>
 			)
 		}
