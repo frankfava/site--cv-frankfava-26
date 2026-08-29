@@ -167,13 +167,13 @@ export namespace App {
 	/** Sidebar mechanics. */
 	export type SidebarConfig = {
 		/** localStorage key holding the visitor's open/closed preference. */
-		storageKey?: string;
+		storageKey: string;
 		/** Below this breakpoint the sidebar is off-canvas by default and closes on navigation. */
-		autoHideAt?: Breakpoint;
+		autoHideAt: Breakpoint;
 		/** The `data-*` attribute every toggle carries. */
-		toggleAttr?: string;
+		toggleAttr: string;
 		/** What a first-time visitor gets, before any preference exists. */
-		onLoad?: 'open' | 'closed' | 'reveal';
+		onLoad: 'open' | 'closed' | 'reveal';
 	};
 
 	export type UIConfig = {

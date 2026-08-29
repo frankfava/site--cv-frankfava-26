@@ -111,11 +111,11 @@ const currentPath = getCurrentPath(Astro.url);
 			{
 				showSidebar &&
 					(Astro.slots.has("sidebarToggle") && typeof sidebarToggle == "string" && !!sidebarToggle ? (
-						<span class="sidebar-toggle">
+						<span class="sidebar-toggle hidden lg:block">
 							<Fragment set:html={sidebarToggle} />
 						</span>
 					) : (
-						<ToggleMenu class="sidebar-toggle">
+						<ToggleMenu class="sidebar-toggle hidden lg:flex">
 							<Icon name="ph:sidebar-duotone" class="w-8 h-8" />
 						</ToggleMenu>
 					))
