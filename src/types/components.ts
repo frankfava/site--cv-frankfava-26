@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from "astro/types";
 import type { App } from "site:config";
-import type { _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
 
 /** Used for Passing Meta to Layout for meta tags/SEO */
 export interface MetaData {

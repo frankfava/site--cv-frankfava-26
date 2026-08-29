@@ -1,7 +1,6 @@
 /**
  * Config Utility
  */
-import { SITE } from "site:config";
 import type { Config } from "@/types/config";
 import { createSocialsManager } from "@/lib/socials";
 

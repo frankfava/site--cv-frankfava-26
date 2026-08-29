@@ -1,6 +1,7 @@
 import tsParser from "@typescript-eslint/parser";
 import astro from "eslint-plugin-astro";
 import tailwind from "eslint-plugin-tailwindcss";
+import unusedImports from "eslint-plugin-unused-imports";
 
 /**
  * Tailwind class hygiene, on the Astro parser.
@@ -14,6 +15,14 @@ export default [
 	...astro.configs["flat/base"],
 
 	{ files: ["**/*.{ts,tsx,mts,cts}"], languageOptions: { parser: tsParser } },
+
+	{
+		// Only the import rule. The general unused-variable rule misfires on
+		// TypeScript syntax without the @typescript-eslint plugin.
+		files: ["**/*.astro", "**/*.{js,ts,jsx,tsx,mjs,cjs}"],
+		plugins: { "unused-imports": unusedImports },
+		rules: { "unused-imports/no-unused-imports": "warn" },
+	},
 
 	{
 		...tailwind.configs.recommended,
