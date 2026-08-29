@@ -23,7 +23,7 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 				<slot name="list">
 					<ul class="flex flex-col gap-1">
 						<slot name="items">
-							{links.map((link, i) => (
+							{links.map(({ children, ...link }, i) => (
 								<MenuItem
 									{...{
 										...link,
@@ -41,9 +41,9 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 										["data-section-link"]: "true",
 									}}
 								>
-									{link.children && useNestedLinks && (
+									{children && useNestedLinks && (
 										<ul class="flex flex-col text-[0.8rem]">
-											{(link.children || []).map((child, j) => (
+											{children.map((child) => (
 												<MenuItem
 													{...{
 														...child,
