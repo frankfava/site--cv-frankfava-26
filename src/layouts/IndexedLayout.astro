@@ -11,10 +11,11 @@ import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
 import ToggleBay from "@/components/ui/sidebar/ToggleBay.astro";
 import SideBay, { type Props as SideBayProps } from "@/components/ui/sidebar/SideBay.astro";
 import JumpRail from "@/components/ui/menu/JumpRail.astro";
+import PracticalCard from "@/components/ui/sidebar/cards/PracticalCard.astro";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
-	contentLinks?: Link[];
+	contentLinks?: SideBayProps["links"];
 	sidebar?: Omit<SideBayProps, "navLinks" | "links">;
 	showRail?: boolean;
 }
@@ -81,6 +82,13 @@ if (showRail != undefined) {
 					{...{
 						navLinks: layoutProps.header?.links ?? [],
 						links: contentLinks,
+						append: (links: Link[]) => {
+							const showFit = links.some((link) => link.href === "#capability");
+
+							return (
+									<PracticalCard />
+							);
+						},
 						...sidebar,
 					}}
 				/>

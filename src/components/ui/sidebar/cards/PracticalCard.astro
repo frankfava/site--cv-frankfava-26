@@ -1,0 +1,40 @@
+---
+import { ABOUT } from "site:config";
+import BayCard from "@/components/ui/sidebar/BayCard.astro";
+
+const items = [
+	{
+		label: "Based",
+		value: (ABOUT.location?.city ? `${ABOUT.location?.city} &middot; ` : "") + `Remote or hybrid`,
+	},
+	{
+		label: "Rights",
+		value: ABOUT.workRights,
+	},
+	{
+		label: "Language",
+		value: ABOUT.linguistics.languages
+			.map((language) => {
+				return language.language + (language.fluency != "Native" ? ` (${language.fluency})` : "");
+			})
+			.join(", "),
+	},
+	{
+		label: "Notice",
+		value: ABOUT.availability?.noticeRequired,
+	},
+].filter((item) => item.value != undefined);
+---
+
+<BayCard title="Practical">
+	<div class="flex flex-col flex-wrap gap-3 px-5 pt-4 pb-5 text-sm text-ink-2">
+		{
+			items.map((item) => (
+				<div class="grid grid-cols-[1fr_2fr] items-baseline gap-2.25">
+					<b class="font-semibold text-sm text-ink whitespace-nowrap">{item.label}</b> <Fragment set:html={item.value} />
+				</div>
+			))
+		}
+		<div class="mt-3"><a href="/one-pager">One-page version &rarr;</a></div>
+	</div>
+</BayCard>
