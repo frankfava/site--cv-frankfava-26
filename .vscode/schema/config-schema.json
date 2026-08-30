@@ -358,6 +358,11 @@
 					"type": "string",
 					"description": "The tagline to display."
 				},
+				"showTagline": {
+					"type": "boolean",
+					"description": "Whether to show the tagline.",
+					"default": true
+				},
 				"showAvailability": {
 					"type": "boolean",
 					"description": "Whether to show the availability status.",

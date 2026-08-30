@@ -84,6 +84,7 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 		},
 		display: {
 			tagline: "",
+			showTagline: true,
 			showAvailability: true,
 			showAvatar: true,
 			footer: {

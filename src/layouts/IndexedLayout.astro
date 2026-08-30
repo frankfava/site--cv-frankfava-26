@@ -59,7 +59,7 @@ const layoutProps: LayoutProps = {
 	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
 	<Fragment slot="beforeMenu">
-		{DISPLAY.tagline && <Tagline class="hidden xl:block" tagline={DISPLAY.tagline} />}
+		{DISPLAY.showTagline && DISPLAY.tagline && <Tagline class="hidden xl:block" tagline={DISPLAY.tagline} />}
 		<slot name="beforeMenu" />
 	</Fragment>
 	<slot name="afterMenu" slot="afterMenu" />

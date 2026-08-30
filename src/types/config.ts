@@ -246,6 +246,7 @@ export namespace About {
 export namespace Display {
 	export type Base = {
 		tagline: string;
+		showTagline: boolean;
 		showAvailability: boolean;
 		showAvatar: boolean;
 		footer: Footer;

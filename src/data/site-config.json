@@ -136,6 +136,7 @@
 	},
 	"display": {
 		"tagline": "The bridge between the customer and the system",
+		"showTagline": true,
 		"showAvailability": true,
 		"showAvatar": true,
 		"footer": {
