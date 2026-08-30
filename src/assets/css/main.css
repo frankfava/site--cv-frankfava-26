@@ -181,14 +181,6 @@
 		outline-offset: 3px;
 		border-radius: 3px;
 	}
-
-	svg text {
-		font-family: var(--font-mono);
-	}
-
-	.bg-inset > * {
-		@apply absolute inset-0;
-	}
 }
 
 /* ========================
@@ -262,21 +254,126 @@ html {
 		@apply h-(--header-height) border-b border-line duration-200 ease-linear;
 	}
 
-	#header-nav {
-		@apply hidden 2xl:flex;
-	}
-
-	/* Offset Main for sticky header */
-	&[data-sticky-header] ~ #wrapper {
-		@apply pt-(--header-height) print:pt-0;
-	}
-
 	.logo-link {
 		.site-logo {
 			@apply py-2;
 		}
 	}
+
+	/** Sidebar Toggle */
+	.mobile-toggle {
+		@apply lg:hidden;
+	}
+
+	.sidebar-toggle {
+		@apply hidden lg:flex;
+	}
+
+	/** Header Nav */
+	#header-nav {
+		@apply hidden 2xl:flex;
+	}
+
+	~ #wrapper #nav-links {
+		@apply 2xl:hidden;
+	}
+
+	/** Social Links */
+	.social-links {
+		@apply hidden 3xl:inline-flex;
+	}
+
+	/** Header Meta */
+	.availability {
+		@apply hidden sm:inline-flex;
+	}
+	~ #wrapper #bay .availability {
+		@apply sm:hidden;
+	}
+
+	.tagline {
+		@apply hidden lg:inline-flex;
+	}
 }
+
+.scroll #header[data-shrink-header] {
+	#header-inner {
+		@apply h-(--header-height-small,var(--header-height));
+	}
+	&[data-scroll-progress="animate"] #header-inner {
+		@apply h-[calc(var(--header-height-small,var(--header-height))+var(--scroll-progress-height))];
+	}
+}
+
+#header[data-sticky-header] ~ #wrapper {
+	@apply pt-(--header-height);
+}
+
+/* ---------- Sidebar ---------- */
+
+#bay::-webkit-scrollbar-thumb {
+	border-color: var(--c-sunk);
+}
+
+.scroll #bay {
+	top: calc(var(--header-height) + var(--scroll-progress-height));
+}
+
+.scroll #header[data-shrink-header] {
+	~ #wrapper #bay {
+		@apply top-(--header-height-small,var(--header-height));
+	}
+	&[data-scroll-progress="animate"] ~ #wrapper #bay {
+		@apply top-[calc(var(--header-height-small,var(--header-height))+var(--scroll-progress-height))];
+	}
+}
+
+@media (min-width: theme("screens.lg")) {
+	html:not(.nav-menu-open) {
+		--sidebar-width: 0px;
+		#bay {
+			opacity: 0;
+			transform: translateX(-18px);
+			pointer-events: none;
+			padding-left: 0;
+			padding-right: 0;
+			border-right-color: transparent;
+		}
+	}
+}
+
+@media (max-width: theme("screens.lg")) {
+	html.nav-menu-open #bay {
+		left: 0;
+	}
+}
+
+/* ---------- Sidebar links ---------- */
+
+.toc a.is-on {
+	background: var(--c-accent-soft);
+	color: var(--c-ink);
+	font-weight: 600;
+	.num {
+		color: var(--c-accent);
+	}
+}
+
+/* ---------- rail ---------- */
+
+.rail {
+	display: none;
+}
+
+@media (min-width: theme("screens.lg")) {
+	html:not(.nav-menu-open) .rail {
+		display: flex;
+	}
+}
+
+@media (max-width: theme("screens.lg")) {
+}
+
 /* ---------- Scroll Progress Bar ---------- */
 
 #scroll-progress {
@@ -345,57 +442,43 @@ html {
 }
 
 .scroll #header {
-	&[data-shrink-header] #header-inner {
-		@apply h-[calc(var(--header-height)-1.5rem)];
-	}
-
-	&[data-shrink-header][data-scroll-progress="animate"] #header-inner {
-		@apply h-[calc(var(--header-height)-1rem)];
-	}
-
 	&[data-scroll-progress="animate"] {
 		@apply pt-(--scroll-progress-height);
 
 		#scroll-progress {
-			@apply !top-0;
+			@apply top-0!;
 		}
 	}
 }
 
-/* ---------- Sidebar ---------- */
-
-#bay::-webkit-scrollbar-thumb {
-	border-color: var(--c-sunk);
-}
+/* ---------- scrim ---------- */
 
 .scrim {
 	display: none;
+	position: fixed;
+	inset: var(--header-height) 0 0;
+	z-index: 59;
+	background: rgba(0, 0, 0, 0.42);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.22s ease;
 }
 
-.rail {
-	display: none;
-}
-
-@media (min-width: 1024px) {
-	html:not(.nav-menu-open) {
-		--sidebar-width: 0px;
-	}
-
-	html:not(.nav-menu-open) #bay {
-		opacity: 0;
-		transform: translateX(-18px);
-		pointer-events: none;
-		padding-left: 0;
-		padding-right: 0;
-		border-right-color: transparent;
-	}
-
-	html:not(.nav-menu-open) .rail {
-		display: flex;
+@media (max-width: theme("screens.lg")) {
+	html.nav-menu-open .scrim {
+		display: block;
+		opacity: 1;
+		pointer-events: auto;
 	}
 }
 
 /* ---------- modules ---------- */
+
+.module {
+	.bg-inset > * {
+		@apply absolute inset-0;
+	}
+}
 
 .indexed {
 	.module--header:not(.text-center) {
@@ -409,51 +492,7 @@ html {
 	}
 }
 
-/* ---------- cards inside the bay ---------- */
-
-.toc a.is-on {
-	background: var(--c-accent-soft);
-	color: var(--c-ink);
-	font-weight: 600;
-}
-
-.toc a.is-on .num {
-	color: var(--c-accent);
-}
-
-/* ---------- mobile: the bay becomes a chip strip, the rail goes away ---------- */
-
-/* These override rules that appear above them. Media queries add no
-   specificity, so an override placed earlier in the sheet loses. */
-@media (max-width: 1023.98px) {
-	.rail {
-		display: none !important;
-	}
-
-	/* On a phone the bay stops being a bay and becomes the menu: a full-width
-	   panel that slides in from the left and covers the page, the same shape
-	   as the existing site's mobile navigation. The nav stays above it, so
-	   the toggle you opened it with is the toggle you close it with. */
-	html.nav-menu-open #bay {
-		left: 0;
-	}
-
-	.scrim {
-		display: block;
-		position: fixed;
-		inset: var(--header-height) 0 0;
-		z-index: 59;
-		background: rgba(0, 0, 0, 0.42);
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 0.22s ease;
-	}
-
-	html.nav-menu-open .scrim {
-		opacity: 1;
-		pointer-events: auto;
-	}
-}
+/* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
 	*,
