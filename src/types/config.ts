@@ -211,7 +211,7 @@ export namespace About {
 
 	export type Availability = {
 		status: "available" | "unavailable" | "notice_required";
-		text: string;
+		text?: string;
 		noticeRequired: "Minimal" | "Standard" | "Extended" | "None" | string;
 	};
 

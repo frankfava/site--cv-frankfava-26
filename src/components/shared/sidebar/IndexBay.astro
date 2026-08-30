@@ -7,23 +7,23 @@
  */
 import type { Link } from "@/types";
 
-import { SOCIALS } from "site:config";
+import { ABOUT, DISPLAY, SOCIALS } from "site:config";
 import SideBay from "@/components/ui/sidebar/SideBay.astro";
 import BayLinkCard, { type Props as BayLinkCardProps } from "@/components/ui/sidebar/BayLinkCard.astro";
 import SocialLinks from "@/components/ui/social/SocialLinks.astro";
 import FitDial from "@/components/shared/sidebar/FitDial.astro";
 import PracticalCard from "@/components/shared/sidebar/PracticalCard.astro";
+import Availability from "../Availability.astro";
 
 export interface Props {
 	showSocialLinks?: boolean;
-	showNavLinks?: boolean;
 	navLinks?: Array<Link>;
 	links?: BayLinkCardProps["links"];
 	useNestedLinks?: BayLinkCardProps["useNestedLinks"];
 	linkLeadType?: BayLinkCardProps["lead"];
 }
 
-const { showSocialLinks = true, showNavLinks = false, navLinks = [], links = [], useNestedLinks = true, linkLeadType } = Astro.props;
+const { showSocialLinks = true, navLinks = [], links = [], useNestedLinks = true, linkLeadType } = Astro.props;
 
 const blueprintSchema = Astro.locals.blueprint?.blueprint;
 const blueprintSections = blueprintSchema?.getSidebarSections();
@@ -56,7 +56,9 @@ const showFit = useLinks.some((link) => link.href === "#capability");
 		)
 	}
 
-	{showNavLinks && !!navLinks.length && <BayLinkCard {...{ id: "nav-links", class: "lg:hidden", title: "Links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
+	{DISPLAY.showAvailability && <Availability {...ABOUT.availability} class="mx-auto" />}
+
+	{!!navLinks.length && <BayLinkCard {...{ title: "Links", id: "nav-links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
 
 	{
 		!!useLinks.length && (
