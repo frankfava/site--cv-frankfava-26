@@ -60,36 +60,42 @@
 * Layers
 ========================= */
 
+/* The hero carries `.dark` whatever the site theme, so `dark:` here means
+   "on a dark surface", not "in dark mode". On one, hover has to lighten. */
+
 @utility btn {
-	@apply inline-flex cursor-pointer items-center justify-center rounded-[5px] border border-gray-400 bg-transparent px-[16px] py-[9px] text-center text-base text-[15.64px] leading-snug font-normal whitespace-nowrap text-page transition duration-200 ease-in hover:border-gray-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200 md:px-8 dark:border-slate-500 dark:text-slate-300 dark:hover:border-slate-800 dark:hover:bg-slate-800;
+	@apply inline-flex cursor-pointer items-center justify-center rounded-[5px] border border-ink-3 bg-transparent px-[16px] py-[9px] text-center text-base text-[15.64px] leading-snug font-normal whitespace-nowrap text-page transition duration-200 ease-in hover:border-ink-2 hover:bg-sunk md:px-8;
 }
 
 @utility btn-primary {
-	@apply btn border-primary bg-primary font-normal text-white hover:border-primary-700 hover:bg-primary-700 dark:border-primary dark:bg-primary dark:hover:border-primary-700 dark:hover:bg-primary-700;
+	@apply btn border-primary bg-primary font-normal text-white hover:border-primary-700 hover:bg-primary-700 dark:border-primary-400 dark:hover:border-primary-400 dark:hover:bg-primary-400;
 }
 
 @utility btn-outline-primary {
-	@apply relative btn border-primary bg-transparent text-center text-gray-900 hover:bg-primary hover:text-white;
+	@apply relative btn border-primary hover:bg-primary hover:text-white dark:border-primary-400;
 }
 
+/* `secondary` is the one colour authored the same in both modes, and it is too
+   light to carry white text on either. */
+
 @utility btn-secondary {
-	@apply btn border-secondary bg-secondary font-normal text-white hover:border-secondary-700 hover:bg-secondary-700 dark:border-secondary dark:bg-secondary dark:hover:border-secondary-700 dark:hover:bg-secondary-700;
+	@apply btn border-secondary-600 bg-secondary font-normal text-secondary-900 hover:border-secondary-700 hover:bg-secondary-700 hover:text-white dark:hover:border-secondary-300 dark:hover:bg-secondary-300 dark:hover:text-secondary-900;
 }
 
 @utility btn-outline-secondary {
-	@apply relative btn border-secondary bg-transparent text-center text-gray-900 hover:bg-secondary hover:text-white;
+	@apply relative btn border-secondary-600 hover:bg-secondary hover:text-secondary-900;
 }
 
 @utility btn-accent {
-	@apply btn border-accent bg-accent text-white hover:border-accent-700 hover:bg-accent-800 dark:border-accent dark:bg-accent dark:hover:border-accent-700;
+	@apply btn border-accent bg-accent text-white hover:border-accent-700 hover:bg-accent-800 dark:text-ground dark:hover:border-accent-300 dark:hover:bg-accent-300;
 }
 
 @utility btn-outline-accent {
-	@apply relative btn border-accent bg-transparent text-center text-gray-900 hover:bg-accent hover:text-white;
+	@apply relative btn border-accent hover:bg-accent hover:text-white dark:hover:text-ground;
 }
 
 @utility btn-tertiary {
-	@apply btn hover:border-primary/10;
+	@apply btn hover:border-ink-3;
 }
 
 @layer base {

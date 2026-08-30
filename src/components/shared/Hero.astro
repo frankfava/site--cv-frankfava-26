@@ -1,16 +1,19 @@
 ---
 import { twMerge } from "tailwind-merge";
 import ParticleField from "@/components/shared/backgrounds/ParticleField.astro";
+import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
+import type { _CallToAction } from "@/types";
 
 export interface Props {
 	title?: string;
 	description?: string;
 	eyebrow?: string;
 	facts?: Array<{ value: string; label: string }>;
+	actions?: Array<_CallToAction>;
 	class?: string;
 }
 
-const { title, description, eyebrow, facts = [], class: className } = Astro.props;
+const { title, description, eyebrow, facts = [], actions = [], class: className } = Astro.props;
 
 const eyebrowSlot = await Astro.slots.render("eyebrow");
 ---
@@ -52,5 +55,7 @@ const eyebrowSlot = await Astro.slots.render("eyebrow");
 				</div>
 			)
 		}
+
+		{!!actions.length && <ButtonGroup actions={actions} class="mt-7 gap-4" btnClass="rounded-full py-2.5 px-5.5 md:px-6" />}
 	</div>
 </header>
