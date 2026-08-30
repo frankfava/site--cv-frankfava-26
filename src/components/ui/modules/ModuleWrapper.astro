@@ -27,8 +27,6 @@ const WrapperTag = as;
 const useLayout = forceLayout !== undefined ? forceLayout : "side";
 
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
-
-console.log(header);
 ---
 
 <WrapperTag class={cn("module module--wrapper relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", className, classes?.wrapper)} {...id ? { id } : {}}>

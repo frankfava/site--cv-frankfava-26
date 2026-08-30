@@ -16,10 +16,7 @@
 					"type": "string"
 				},
 				"trailingSlash": {
-					"type": [
-						"boolean",
-						"null"
-					]
+					"type": ["boolean", "null"]
 				},
 				"logos": {
 					"type": "object",
@@ -36,9 +33,7 @@
 					}
 				}
 			},
-			"required": [
-				"name"
-			],
+			"required": ["name"],
 			"additionalProperties": false
 		},
 		"metadata": {
@@ -48,16 +43,10 @@
 					"type": "object",
 					"properties": {
 						"default": {
-							"type": [
-								"string",
-								"null"
-							]
+							"type": ["string", "null"]
 						},
 						"template": {
-							"type": [
-								"string",
-								"null"
-							]
+							"type": ["string", "null"]
 						}
 					}
 				},
@@ -100,11 +89,7 @@
 											"type": "integer"
 										}
 									},
-									"required": [
-										"url",
-										"width",
-										"height"
-									]
+									"required": ["url", "width", "height"]
 								}
 							]
 						},
@@ -127,22 +112,13 @@
 							"type": "string"
 						}
 					},
-					"required": [
-						"handle",
-						"site",
-						"cardType"
-					]
+					"required": ["handle", "site", "cardType"]
 				},
 				"manifestPublic": {
-					"type": [
-						"string",
-						"null"
-					]
+					"type": ["string", "null"]
 				}
 			},
-			"required": [
-				"description"
-			],
+			"required": ["description"],
 			"additionalProperties": false
 		},
 		"i18n": {
@@ -155,10 +131,7 @@
 					"type": "string"
 				}
 			},
-			"required": [
-				"language",
-				"textDirection"
-			],
+			"required": ["language", "textDirection"],
 			"additionalProperties": false
 		},
 		"analytics": {
@@ -166,18 +139,7 @@
 			"properties": {
 				"vendor": {
 					"type": "string",
-					"enum": [
-						"fathom",
-						"googleAnalytics",
-						"metrical",
-						"plausible",
-						"simpleAnalytics",
-						"umami",
-						"amplitude",
-						"matomo",
-						"minimalAnalytics",
-						"none"
-					]
+					"enum": ["fathom", "googleAnalytics", "metrical", "plausible", "simpleAnalytics", "umami", "amplitude", "matomo", "minimalAnalytics", "none"]
 				}
 			},
 			"additionalProperties": false
@@ -187,20 +149,11 @@
 			"properties": {
 				"theme": {
 					"type": "string",
-					"enum": [
-						"system",
-						"light",
-						"dark",
-						"light:only",
-						"dark:only"
-					]
+					"enum": ["system", "light", "dark", "light:only", "dark:only"]
 				},
 				"layout": {
 					"type": "string",
-					"enum": [
-						"narrow",
-						"wide"
-					]
+					"enum": ["narrow", "wide"]
 				},
 				"light": {
 					"type": "object",
@@ -266,9 +219,7 @@
 					}
 				}
 			},
-			"required": [
-				"theme"
-			],
+			"required": ["theme"],
 			"additionalProperties": false
 		},
 		"about": {
@@ -295,7 +246,8 @@
 					"properties": {
 						"status": {
 							"type": "string",
-							"description": "The status of the availability."
+							"description": "The status of the availability.",
+							"enum": ["available", "unavailable", "notice_required"]
 						},
 						"text": {
 							"type": "string",
@@ -303,12 +255,19 @@
 						},
 						"noticeRequired": {
 							"type": "string",
-							"description": "The notice required for the availability status."
+							"description": "The notice required for the availability status.",
+							"oneOf": [
+								{
+									"type": "string"
+								},
+								{
+									"type": "string",
+									"enum": ["Minimal", "Standard", "Extended", "None"]
+								}
+							]
 						}
 					},
-					"required": [
-						"status"
-					]
+					"required": ["status"]
 				},
 				"dob": {
 					"type": "string"
@@ -326,11 +285,7 @@
 							"type": "string"
 						}
 					},
-					"required": [
-						"city",
-						"countryCode",
-						"region"
-					]
+					"required": ["city", "countryCode", "region"]
 				},
 				"workRights": {
 					"type": "string",
@@ -348,10 +303,7 @@
 								"type": "string"
 							}
 						},
-						"required": [
-							"label",
-							"flagIcon"
-						]
+						"required": ["label", "flagIcon"]
 					}
 				},
 				"linguistics": {
@@ -370,22 +322,13 @@
 									},
 									"fluency": {
 										"type": "string",
-										"enum": [
-											"Native",
-											"Fluent",
-											"Conversational",
-											"Elementary",
-											"Beginner"
-										]
+										"enum": ["Native", "Fluent", "Conversational", "Elementary", "Beginner"]
 									},
 									"description": {
 										"type": "string"
 									}
 								},
-								"required": [
-									"language",
-									"fluency"
-								]
+								"required": ["language", "fluency"]
 							}
 						}
 					}
@@ -402,19 +345,11 @@
 								"type": "string"
 							}
 						},
-						"required": [
-							"name",
-							"url"
-						]
+						"required": ["name", "url"]
 					}
 				}
 			},
-			"required": [
-				"name",
-				"focuses",
-				"dob",
-				"location"
-			]
+			"required": ["name", "focuses", "dob", "location"]
 		},
 		"display": {
 			"type": "object",
@@ -448,9 +383,7 @@
 							}
 						}
 					},
-					"required": [
-						"lead"
-					]
+					"required": ["lead"]
 				}
 			}
 		},
@@ -465,15 +398,7 @@
 				"autoHideAt": {
 					"type": "string",
 					"description": "Below this breakpoint the sidebar is off-canvas by default and closes on navigation.",
-					"enum": [
-						"sm",
-						"md",
-						"lg",
-						"xl",
-						"2xl",
-						"3xl",
-						"4xl"
-					],
+					"enum": ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl"],
 					"default": "2xl"
 				},
 				"toggleAttr": {
@@ -485,11 +410,7 @@
 					"type": "string",
 					"description": "What a first-time visitor gets, before any preference exists.",
 					"default": "open",
-					"enum": [
-						"open",
-						"closed",
-						"reveal"
-					]
+					"enum": ["open", "closed", "reveal"]
 				}
 			}
 		},
@@ -530,9 +451,7 @@
 			"required": []
 		}
 	},
-	"required": [
-		"site"
-	],
+	"required": ["site"],
 	"definitions": {
 		"socialLink": {
 			"type": "object",
@@ -547,10 +466,7 @@
 					"type": "string"
 				}
 			},
-			"required": [
-				"text",
-				"href"
-			],
+			"required": ["text", "href"],
 			"additionalProperties": false
 		}
 	}

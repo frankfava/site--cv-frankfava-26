@@ -106,7 +106,7 @@ const currentPath = getCurrentPath(Astro.url);
 			},
 		]}
 	>
-		<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": menuPosition === "right" && !hasBeforeMenuSlot }, "flex items-center gap-2 md:gap-5"]}>
+		<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": menuPosition === "right" && !hasBeforeMenuSlot }, "flex h-full items-center gap-2 md:gap-5"]}>
 			{showSidebar && <ToggleMenu class="mobile-toggle lg:hidden" />}
 			{
 				showSidebar &&
@@ -120,7 +120,7 @@ const currentPath = getCurrentPath(Astro.url);
 						</ToggleMenu>
 					))
 			}
-			<a class="logo-link flex items-center" href={currentPath == "/" ? "#top" : getHomePermalink()}>
+			<a class="logo-link inline-flex items-center" href={currentPath == "/" ? "#top" : getHomePermalink()}>
 				{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
 			</a>
 		</div>

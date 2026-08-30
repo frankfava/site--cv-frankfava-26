@@ -14,7 +14,7 @@ const { bare = false } = Astro.props;
 
 <aside
 	class={cn(
-		"bay fixed inset-y-0 top-(--header-height) -left-full z-60 flex w-full max-w-105 flex-col gap-5 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:top-(--header-height) lg:bottom-auto lg:left-auto lg:z-auto lg:h-[calc(100vh-var(--header-height))] lg:w-(--sidebar-width) lg:max-w-none lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300",
+		"fixed inset-y-0 top-(--header-height) -left-full z-60 flex w-full max-w-105 flex-col gap-5 overflow-y-auto overscroll-contain border-r border-line bg-ground p-[18px_20px_40px] transition-[left] duration-220 ease-[cubic-bezier(0.3,0.8,0.3,1)] in-[html.nav-menu-open]:left-0 lg:sticky lg:top-(--header-height) lg:bottom-auto lg:left-auto lg:z-auto lg:h-[calc(100vh-var(--header-height))] lg:w-(--sidebar-width) lg:max-w-none lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-auto lg:bg-sunk lg:p-[30px_26px_44px] lg:transition-[opacity,transform] lg:duration-300",
 		bare && "gap-8",
 	)}
 	id="bay"

@@ -176,10 +176,6 @@
 		@apply after:border-none;
 	}
 
-	.logo-link {
-		@apply !text-inherit;
-	}
-
 	:focus-visible {
 		outline: 2px solid var(--c-accent);
 		outline-offset: 3px;
@@ -210,29 +206,7 @@ html {
 	}
 }
 
-#wrapper {
-	@apply relative 2xl:transition-[margin-left] 2xl:duration-200 2xl:ease-linear;
-}
-
-/* ---------- header ---------- */
-
-#header {
-	#header-inner {
-		transition-property: height;
-		@apply h-(--header-height) border-b border-line duration-200 ease-linear;
-	}
-
-	#header-nav {
-		@apply hidden 2xl:flex;
-	}
-
-	/* Offset Main for sticky header */
-	&[data-sticky-header] ~ #wrapper {
-		@apply pt-(--header-height) print:pt-0;
-	}
-}
-
-/* ---------- scrollbars, themed ---------- */
+/* ---------- scrollbars ---------- */
 
 *,
 html {
@@ -261,6 +235,48 @@ html {
 	background-clip: padding-box;
 }
 
+/* ---------- wrapper ---------- */
+
+#wrapper {
+	@apply relative 2xl:transition-[margin-left] 2xl:duration-200 2xl:ease-linear;
+}
+
+/* ---------- logo ---------- */
+
+.logo-link {
+	@apply h-full max-h-(--header-height) text-inherit!;
+}
+
+.site-logo {
+	@apply h-full;
+	img {
+		@apply h-full;
+	}
+}
+
+/* ---------- header ---------- */
+
+#header {
+	#header-inner {
+		transition-property: height;
+		@apply h-(--header-height) border-b border-line duration-200 ease-linear;
+	}
+
+	#header-nav {
+		@apply hidden 2xl:flex;
+	}
+
+	/* Offset Main for sticky header */
+	&[data-sticky-header] ~ #wrapper {
+		@apply pt-(--header-height) print:pt-0;
+	}
+
+	.logo-link {
+		.site-logo {
+			@apply py-2;
+		}
+	}
+}
 /* ---------- Scroll Progress Bar ---------- */
 
 #scroll-progress {
