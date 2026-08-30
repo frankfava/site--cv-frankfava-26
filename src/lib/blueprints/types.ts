@@ -28,6 +28,11 @@ export interface BlueprintConfig {
 		 * bay keeps their choice.
 		 */
 		bay?: "open" | "closed";
+		/**
+		 * Move the hero inside the content column, so the sidebar is full height
+		 * from the first paint instead of starting below the hero.
+		 */
+		fullHeight?: boolean;
 	};
 }
 

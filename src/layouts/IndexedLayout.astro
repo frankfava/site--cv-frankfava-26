@@ -16,9 +16,10 @@ export interface Props extends LayoutProps {
 	contentLinks?: IndexBayProps["links"];
 	sidebar?: Omit<IndexBayProps, "navLinks" | "links">;
 	showRail?: boolean;
+	fullHeight?: boolean;
 }
 
-const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, sidebar, ...rest } = Astro.props;
+const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, fullHeight, sidebar, ...rest } = Astro.props;
 
 Astro.locals.blueprint = entry;
 
@@ -49,9 +50,16 @@ let useRail = useSidebar;
 if (showRail != undefined) {
 	useRail = showRail;
 }
+
+let useFullHeight = false;
+if (fullHeight != undefined) {
+	useFullHeight = fullHeight;
+} else if (entry && entry?.config?.layout?.fullHeight != undefined) {
+	useFullHeight = entry.config.layout.fullHeight;
+}
 ---
 
-<PageLayout {...{ ...layoutProps, showSidebar: useSidebar }}>
+<PageLayout {...{ ...layoutProps, showSidebar: useSidebar, fullHeight: useFullHeight }}>
 	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
 	<slot slot="beforeMenu" name="beforeMenu">

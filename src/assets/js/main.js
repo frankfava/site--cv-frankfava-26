@@ -172,6 +172,9 @@ function initSidebarHeight() {
 	const bay = document.querySelector("[data-sidebar-bay]");
 	if (!bay) return;
 
+	// The full-height shell starts the grid at the header, so the bay's CSS height already holds at every scroll position.
+	if (bay.closest("[data-full-height]")) return;
+
 	function apply() {
 		const style = getComputedStyle(bay);
 		if (style.position !== "sticky") {

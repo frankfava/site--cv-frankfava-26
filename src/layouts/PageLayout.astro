@@ -8,11 +8,13 @@ export interface Props extends BaseLayoutProps {
 	header?: HeaderProps;
 	footer?: FooterProps;
 	showSidebar?: boolean;
+	/** Move the hero inside the content column, beside a sidebar that is full height from the first paint. */
+	fullHeight?: boolean;
 	footerInContent?: boolean;
 	showScrollTop?: boolean;
 }
 
-const { header, footer, showSidebar, footerInContent = true, showScrollTop = true, ...baseLayoutProps } = Astro.props;
+const { header, footer, showSidebar, fullHeight = false, footerInContent = true, showScrollTop = true, ...baseLayoutProps } = Astro.props;
 
 const sidebar = await Astro.slots.render("sidebar");
 const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim();
@@ -32,17 +34,19 @@ const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim(
 
 	<div id="wrapper">
 		<main class="bg-ground font-secondary text-[17.34px]/[1.62] tracking-normal text-ink">
-			<slot name="hero" />
+			{!fullHeight && <slot name="hero" />}
 
 			<div
 				class:list={[
 					"grid grid-cols-1 items-start transition-[grid-template-columns] duration-300 ease-[cubic-bezier(0.3,0.8,0.3,1)]",
 					{ "lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)]": useSidebar },
 				]}
+				data-full-height={fullHeight ? "" : undefined}
 			>
 				{useSidebar && <Fragment set:html={sidebar} />}
 
 				<div class:list={["mx-auto w-full", { "lg:col-start-2": useSidebar }]}>
+					{fullHeight && <slot name="hero" />}
 					<slot />
 					{
 						footerInContent && (
