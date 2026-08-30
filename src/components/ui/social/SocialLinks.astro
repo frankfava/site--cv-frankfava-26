@@ -1,26 +1,34 @@
 ---
 import type { Socials } from "@/types";
-import SocialLinkButton from "./SocialLinkButton.astro";
+import SocialLinkButton, { type Props as SocialLinkButtonProps } from "./SocialLinkButton.astro";
+import type { HTMLAttributes } from "astro/types";
 
-export interface Props {
+export interface Props extends Pick<SocialLinkButtonProps, "showText" | "linkClass" | "iconClass" | "suffixIconClass"> {
+	class?: HTMLAttributes<"ul">["class:list"];
 	socialLinks: Socials.Link[];
-	showText?: boolean;
 	showIcon?: boolean;
-	class?: string;
-	linkClass?: string;
-	iconClass?: string;
 }
 
-const { socialLinks = [], showText = true, showIcon = true, class: className, linkClass, iconClass } = Astro.props;
+const { socialLinks = [], showText = true, showIcon = true, class: className, linkClass, iconClass, suffixIconClass } = Astro.props;
 ---
 
 <>
 	{
 		socialLinks?.length && (
 			<ul class:list={["social-links inline-flex flex-wrap items-center", className]}>
-				{socialLinks.map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
+				{socialLinks.map(({ icon, suffixIcon, ...rest }) => (
 					<li class="flex">
-						<SocialLinkButton {...{ href, icon: showIcon ? icon : undefined, label, text, class: className ?? "", linkClass, iconClass, showText, ...rest }} />
+						<SocialLinkButton
+							{...{
+								...rest,
+								showText,
+								linkClass,
+								icon: showIcon ? icon : undefined,
+								suffixIcon: showIcon ? suffixIcon : undefined,
+								iconClass,
+								suffixIconClass,
+							}}
+						/>
 					</li>
 				))}
 			</ul>

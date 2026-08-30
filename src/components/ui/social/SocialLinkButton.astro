@@ -6,20 +6,23 @@ import type { HTMLAttributes } from "astro/types";
 
 export interface Props extends Socials.Link {
 	showText?: boolean;
-	class?: string;
-	linkClass?: HTMLAttributes<"a">["class:list"];
+	linkClass?: HTMLAttributes<"li">["class:list"] | ((link: Socials.Link) => HTMLAttributes<"li">["class:list"]);
 	iconClass?: HTMLAttributes<any>["class:list"];
+	suffixIconClass?: HTMLAttributes<any>["class:list"];
 	content?: string;
-	[key: string]: any;
 }
 
-const { label, icon, href, text, showText = true, class: className, linkClass, iconClass, content = await Astro.slots.render("content"), ...rest } = Astro.props;
+const { class: className, showText = true, linkClass, iconClass, suffixIconClass, content = await Astro.slots.render("content"), ...link } = Astro.props;
+
+const { href, text, label, icon, suffixIcon, ...rest } = link;
+
+const linkClassList = linkClass ? (typeof linkClass === "function" ? linkClass(link) : linkClass) : undefined;
 ---
 
 <a
 	class={cn(
 		"inline-flex items-center gap-x-2 rounded-lg border border-primary-100 bg-gray-100 p-2.5 text-sm text-primary-900 transition-colors duration-200 hover:border-accent-200 hover:bg-accent-100 hover:text-accent focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-primary-500 dark:bg-primary-600 dark:text-white dark:hover:border-primary-600 dark:hover:bg-primary-700 dark:hover:text-white dark:focus:ring-gray-700",
-		linkClass,
+		linkClassList,
 		className,
 	)}
 	aria-label={label ?? text}
@@ -35,6 +38,7 @@ const { label, icon, href, text, showText = true, class: className, linkClass, i
 			<>
 				{icon && <Icon name={icon} class={cn("size-5", iconClass)} />}
 				{showText && <Fragment set:html={label ?? text} />}
+				{suffixIcon && <Icon name={suffixIcon} class={cn("size-5", suffixIconClass ?? iconClass)} />}
 			</>
 		)
 	}

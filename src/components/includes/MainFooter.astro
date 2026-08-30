@@ -54,10 +54,10 @@ const currentPath = getCurrentPath(Astro.url);
 				</slot>
 			</div>
 			<div
-				class="col-span-3 inline-flex flex-col flex-wrap"
+				class="inline-flex flex-col flex-wrap"
 				class:list={{
 					"lg:col-span-2 lg:flex-row": layout == "narrow",
-					"ml-auto": layout == "narrow" && !actions.length,
+					"lg:ml-auto": layout == "narrow" && !actions.length,
 				}}
 			>
 				<div class="inline-flex flex-col items-center lg:mr-4" class:list={{ "lg:items-start": layout == "narrow" }}>
@@ -68,7 +68,13 @@ const currentPath = getCurrentPath(Astro.url);
 								showText={showSocialText}
 								showIcon={false || !showSocialText}
 								class="gap-2"
-								linkClass={showSocialText ? "border border-line rounded-md px-3.5 py-2.5 hover:border-accent hover:text-accent" : "bg-white rounded-md p-2"}
+								linkClass={(link) => {
+									let out = showSocialText ? "border border-line rounded-md px-3.5 py-2.5 hover:border-accent hover:text-accent" : "bg-white rounded-md p-2";
+									if (link.label == "Email") {
+										out += " dark";
+									}
+									return out;
+								}}
 								iconClass={showSocialText ? "w-4 h-4" : "w-8 h-8"}
 							/>
 						)
