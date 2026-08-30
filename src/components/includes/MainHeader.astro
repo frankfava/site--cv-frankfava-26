@@ -46,7 +46,7 @@ const {
 	logo = await Astro.slots.render("logo"),
 	// Style
 	isSticky = true,
-	isDark = true,
+	isDark = false,
 	addShadow = true,
 	isFullWidth = true,
 	// Behavior
@@ -65,8 +65,8 @@ const {
 	actions = [],
 	beforeActions = await Astro.slots.render("beforeActions"),
 	afterActions = await Astro.slots.render("afterActions"),
-	showSocialLinks = true,
-	showToggleTheme = false,
+	showSocialLinks = false,
+	showToggleTheme = true,
 } = Astro.props;
 
 const hasBeforeMenuSlot = Astro.slots.has("beforeMenu") && typeof beforeMenu == "string" && !!beforeMenu;
@@ -98,7 +98,7 @@ const currentPath = getCurrentPath(Astro.url);
 	<div
 		id="header-inner"
 		class:list={[
-			"text-default relative mx-auto flex w-full flex-wrap items-center gap-2 px-5 py-3 sm:flex-nowrap sm:gap-4 sm:px-6 sm:py-0 lg:grow",
+			"text-default relative mx-auto flex w-full flex-wrap items-center gap-2 px-2 py-0 sm:flex-nowrap sm:gap-4 md:px-6 lg:grow",
 			{
 				"items-center md:flex md:justify-between": menuPosition !== "center",
 				"flex w-full items-center": menuPosition === "center",
@@ -107,15 +107,15 @@ const currentPath = getCurrentPath(Astro.url);
 		]}
 	>
 		<div class:list={[{ "mr-auto rtl:mr-0 rtl:ml-auto": menuPosition === "right" && !hasBeforeMenuSlot }, "flex h-full items-center gap-2 md:gap-5"]}>
-			{showSidebar && <ToggleMenu class="mobile-toggle lg:hidden" />}
+			{showSidebar && <ToggleMenu class="mobile-toggle mr-3" />}
 			{
 				showSidebar &&
 					(Astro.slots.has("sidebarToggle") && typeof sidebarToggle == "string" && !!sidebarToggle ? (
-						<span class="sidebar-toggle hidden lg:block">
+						<span class="sidebar-toggle">
 							<Fragment set:html={sidebarToggle} />
 						</span>
 					) : (
-						<ToggleMenu class="sidebar-toggle hidden lg:flex">
+						<ToggleMenu class="sidebar-toggle">
 							<Icon name="ph:sidebar-duotone" class="size-8" />
 						</ToggleMenu>
 					))
@@ -170,17 +170,39 @@ const currentPath = getCurrentPath(Astro.url);
 			)
 		}
 		{showScrollProgress && <ScrollProgressBar />}
-		<div
-			class:list={[
-				{ "ml-auto rtl:mr-auto rtl:ml-0": menuPosition === "left" && !hasAfterMenuSlot },
-				"fixed bottom-0 left-0 hidden w-full items-center justify-end p-3 md:static md:mb-0 md:flex md:w-auto md:self-center md:justify-self-end md:p-0 rtl:right-0 rtl:left-auto",
-			]}
-		>
+		<div class:list={[{ "ml-auto rtl:mr-auto rtl:ml-0": menuPosition === "left" && !hasAfterMenuSlot }, "header-actions flex w-auto items-center justify-end self-center justify-self-end"]}>
 			<div class="ml-0 flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-normal lg:gap-2">
 				{Astro.slots.has("beforeActions") && typeof beforeActions == "string" && !!beforeActions ? <Fragment set:html={beforeActions} /> : ""}
-				<ButtonGroup actions={actions.slice(0, 2)} btnClass="py-2.5 px-5.5 md:px-6" />
-				{showSocialLinks && <SocialLinks socialLinks={SOCIALS.toArray()} showText={false} class="gap-1 lg:gap-2" linkClass="rounded-md p-2" iconClass="w-6 h-6" />}
-				{showToggleTheme && <ToggleTheme variant="single" class="rounded-md border-line p-2 text-ink-2 hover:border-accent hover:text-accent" iconClass="w-6 h-6" />}
+				<ButtonGroup
+					{...{
+						actions: actions.slice(0, 2),
+						btnClass: "py-2.5 px-5.5 md:px-6",
+					}}
+				/>
+				{
+					showSocialLinks && (
+						<SocialLinks
+							{...{
+								socialLinks: SOCIALS.toArray(),
+								showText: false,
+								class: "gap-1 lg:gap-2",
+								linkClass: ["rounded-md p-2"],
+								iconClass: "w-6 h-6",
+							}}
+						/>
+					)
+				}
+				{
+					showToggleTheme && (
+						<ToggleTheme
+							{...{
+								variant: "single",
+								class: "rounded-md border-line p-2 text-ink-2 hover:border-accent hover:text-accent",
+								iconClass: "w-6 h-6",
+							}}
+						/>
+					)
+				}
 				{Astro.slots.has("afterActions") && typeof afterActions == "string" && !!afterActions ? <Fragment set:html={afterActions} /> : ""}
 			</div>
 		</div>

@@ -50,22 +50,8 @@ const layoutProps: LayoutProps = {
 	bodyClass: "indexed",
 	showSidebar: useSidebar,
 	fullHeight: useFullHeight,
-	header: {
-		isDark: false,
-		showToggleTheme: true,
-		// showSocialLinks: false,
-		links: [
-			{ text: "Config", href: "/config.json", icon: "ph:file" },
-			{ text: "PersonLd", href: "/personLd.json", icon: "ph:user-circle" },
-		],
-		...header,
-	},
-	footer: {
-		showSocialText: true,
-		socialLinks: true,
-		layout: "narrow",
-		...footer,
-	},
+	header: { isDark: undefined, ...header },
+	footer: { showSocialText: true, ...footer },
 };
 ---
 
