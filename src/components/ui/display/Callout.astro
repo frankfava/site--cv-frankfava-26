@@ -24,7 +24,7 @@ const variants = {
 };
 ---
 
-<div class={cn("callout flex items-start gap-2.5 border border-l-4 border-line bg-surface px-3.5 py-2.5 text-ink-2", className, classes?.outer, variants[variant])}>
+<div class={cn("callout flex flex-col items-start gap-2.5 border border-l-4 border-line bg-surface px-3.5 py-2.5 text-ink-2 md:flex-row", className, classes?.outer, variants[variant])}>
 	{title && <b class={cn("pt-0.5 eyebrow whitespace-nowrap text-accent", classes?.title)}>{title}</b>}
 	<p class={cn("m-0", classes?.content)}><slot /></p>
 </div>
