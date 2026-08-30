@@ -1,6 +1,6 @@
 ---
 import { SIDEBAR } from "site:config";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	label?: string;
@@ -19,7 +19,7 @@ const bar = "h-0.5 w-6 my-1 rounded-full bg-black dark:bg-white transition ease 
 
 <button
 	type="button"
-	class={twMerge("group flex cursor-pointer flex-col items-center justify-center rounded", className)}
+	class={cn("group flex cursor-pointer flex-col items-center justify-center rounded", className)}
 	aria-label={label}
 	aria-expanded={ariaExpanded ? "true" : "false"}
 	aria-controls={ariaControls}

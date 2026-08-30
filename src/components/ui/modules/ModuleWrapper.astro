@@ -1,8 +1,8 @@
 ---
 import { THEME } from "site:config";
 import type { HTMLTag } from "astro/types";
-import type { App, _Module, _ModuleHeader } from "@/types";
-import { twMerge } from "tailwind-merge";
+import type { _Module, _ModuleHeader } from "@/types";
+import { cn } from "@/utils/class";
 
 export type { _ModuleHeader } from "@/types";
 
@@ -10,10 +10,8 @@ import ModuleHeader from "./ModuleHeader.astro";
 
 export interface _ModuleWrapper extends _Module {
 	class?: string;
-	outerClass?: string;
-	contentClass?: string;
 	isFullWidth?: boolean;
-	forceLayout?: App.UIConfig["layout"];
+	forceLayout?: "stacked" | "side";
 	flip?: boolean;
 	showHeader?: boolean;
 	header?: _ModuleHeader;
@@ -23,7 +21,7 @@ export interface Props extends _ModuleWrapper {
 	["as"]?: HTMLTag;
 }
 
-const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class: className, outerClass = "", contentClass, showHeader = true, flip, header } = Astro.props;
+const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class: className, classes = {}, showHeader = true, flip, header } = Astro.props;
 
 const WrapperTag = as;
 
@@ -32,31 +30,31 @@ const useLayout = forceLayout !== undefined ? forceLayout : THEME.layout;
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
 ---
 
-<WrapperTag class={twMerge("module relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", outerClass)} {...id ? { id } : {}}>
+<WrapperTag class={cn("module module--wrapper relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", className, classes?.wrapper)} {...id ? { id } : {}}>
 	<div class="bg-inset pointer-events-none absolute inset-0 -z-1" aria-hidden="true">
 		<slot name="bg">
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}
 		</slot>
 	</div>
-	<div class:list={[twMerge("wrapper relative mx-auto w-full px-6 py-12 text-base lg:py-16", !isFullWidth ? "max-w-(--content-width) xl:px-4" : "md:px-6", className), { dark: isDark }]}>
-		<div class="my-auto grid w-full grid-cols-1" class:list={[twMerge("gap-6", contentClass), { "lg:grid-cols-3 lg:gap-12": useLayout == "narrow" && showHeader }]}>
+	<div
+		class:list={[cn("module--container relative mx-auto w-full px-6 py-12 text-base lg:py-16", !isFullWidth ? "max-w-(--content-width) xl:px-4" : "md:px-6", classes?.container), { dark: isDark }]}
+	>
+		<div class={cn("module--content my-auto grid w-full grid-cols-1 gap-6", { "lg:grid-cols-3 lg:gap-12": useLayout == "side" && showHeader }, classes?.content)}>
 			{
 				showHeader && (
 					<div
 						class="lg:px-3"
 						class:list={{
-							"xl:order-last": flip,
-							"col-span-3 lg:col-span-1": useLayout == "narrow",
-							"col-span-1": useLayout != "narrow",
+							"xl:order-last": flip && useLayout == "side",
+							"col-span-3 lg:col-span-1": useLayout == "side",
+							"col-span-1": useLayout != "side",
 						}}
 					>
 						<slot name="header">
-							{header && (
-								<ModuleHeader {...header}>
-									<slot slot="beforeHeader" name="beforeHeader" />
-									<slot slot="afterHeader" name="afterHeader" />
-								</ModuleHeader>
-							)}
+							<ModuleHeader {...header}>
+								<slot slot="beforeHeader" name="beforeHeader" />
+								<slot slot="afterHeader" name="afterHeader" />
+							</ModuleHeader>
 						</slot>
 					</div>
 				)
@@ -64,16 +62,17 @@ const content: string = Astro.slots.has("default") ? await Astro.slots.render("d
 			{
 				!!content.trim() && (
 					<div
-						class="flex flex-col lg:px-3"
-						class:list={[
+						class={cn([
+							"module--body flex flex-col gap-4 lg:gap-6 lg:px-3",
 							{
-								"col-span-3 lg:col-span-2": useLayout == "narrow" && showHeader,
+								"col-span-3 lg:col-span-2": useLayout == "side" && showHeader,
 							},
-						]}
+							classes?.body,
+						])}
 					>
-						<div class="my-auto">
-							<Fragment set:html={content} />
-						</div>
+						<slot name="beforeContent" />
+						<Fragment set:html={content} />
+						<slot name="afterContent" />
 					</div>
 				)
 			}

@@ -23,22 +23,6 @@ const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, f
 
 Astro.locals.blueprint = entry;
 
-const layoutProps: LayoutProps = {
-	...rest,
-	header: {
-		isDark: false,
-		showToggleTheme: true,
-		showSocialLinks: false,
-		...header,
-	},
-	footer: {
-		showSocialText: true,
-		socialLinks: true,
-		layout: "narrow",
-		...footer,
-	},
-};
-
 let useSidebar = true;
 if (showSidebar != undefined) {
 	useSidebar = showSidebar;
@@ -57,9 +41,28 @@ if (fullHeight != undefined) {
 } else if (entry && entry?.config?.layout?.fullHeight != undefined) {
 	useFullHeight = entry.config.layout.fullHeight;
 }
+
+const layoutProps: LayoutProps = {
+	...rest,
+	bodyClass: "indexed",
+	showSidebar: useSidebar,
+	fullHeight: useFullHeight,
+	header: {
+		isDark: false,
+		showToggleTheme: true,
+		showSocialLinks: false,
+		...header,
+	},
+	footer: {
+		showSocialText: true,
+		socialLinks: true,
+		layout: "narrow",
+		...footer,
+	},
+};
 ---
 
-<PageLayout {...{ ...layoutProps, showSidebar: useSidebar, fullHeight: useFullHeight }}>
+<PageLayout {...layoutProps}>
 	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
 	<slot slot="beforeMenu" name="beforeMenu">

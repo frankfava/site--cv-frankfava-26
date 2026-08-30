@@ -39,7 +39,7 @@ const isHidden = section.hidden || !(await checkResolve(section.content));
 							...section,
 							id: section.id,
 							bg: "bg-gray-50 dark:bg-gray-800",
-							forceLayout: "wide",
+							forceLayout: "stacked",
 							header: {
 								headerAlign: "center",
 								...(section.header ?? {}),

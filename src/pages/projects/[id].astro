@@ -34,8 +34,10 @@ const metadata = {
 	<ModuleWrapper
 		{...{
 			bg: "bg-gray-50 dark:bg-gray-800",
-			forceLayout: "wide",
-			contentClass: "gap-3",
+			forceLayout: "stacked",
+			classes: {
+				content: "gap-3",
+			},
 			header: {
 				headerAlign: "center",
 				title,
@@ -77,9 +79,11 @@ const metadata = {
 	</ModuleWrapper>
 	<ModuleWrapper
 		{...{
-			forceLayout: "wide",
+			forceLayout: "stacked",
 			showHeader: false,
-			class: "max-w-screen-xl",
+			classes: {
+				container: "max-w-screen-xl",
+			},
 		}}
 	>
 		<div class="flex flex-col gap-6 xl:flex-row xl:justify-center">

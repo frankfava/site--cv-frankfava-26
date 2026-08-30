@@ -1,10 +1,11 @@
 ---
+import { cn } from "@/utils/class";
 import { Icon } from "astro-icon/components";
-import { twMerge } from "tailwind-merge";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	btnText?: string;
-	btnClass?: string;
+	btnClass?: HTMLAttributes<"button">["class:list"];
 	modalTitle: string;
 	modalDescription?: string;
 }
@@ -16,7 +17,7 @@ const { btnText = "Open Modal", btnClass, modalTitle = "Modal", modalDescription
 	<div @click="modelOpen =!modelOpen" class="flex">
 		<slot name="button">
 			<button
-				class:list={twMerge(
+				class:list={cn(
 					"flex transform items-center justify-center space-x-2 rounded-md bg-indigo-500 px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 hover:bg-indigo-600 focus:bg-indigo-500 focus:ring-3 focus:ring-indigo-300/50 focus:outline-none dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700",
 					btnClass,
 				)}

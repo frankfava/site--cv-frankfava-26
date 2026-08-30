@@ -1,8 +1,8 @@
 ---
 /** The capability check: the sliders, and the radar they redraw. */
-import { twMerge } from "tailwind-merge";
 import { CAPABILITIES } from "@/data/capabilities";
 import { radar } from "@/alpine/capability/radar";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	class?: string;
@@ -11,7 +11,7 @@ export interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class={twMerge("text-left", className)} x-data="capabilityPanel">
+<div class={cn("text-left", className)} x-data="capabilityPanel">
 	<div class="grid grid-cols-1 items-start gap-3.5 xl:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
 		<div class="overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)">
 			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">

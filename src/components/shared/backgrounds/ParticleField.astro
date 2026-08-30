@@ -1,6 +1,6 @@
 ---
 /** The particle canvas on its own, so it can back any surface. */
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	class?: string;
@@ -9,4 +9,4 @@ export interface Props {
 const { class: className } = Astro.props;
 ---
 
-<canvas class={twMerge("absolute inset-0 size-full opacity-85", className)} x-data="particleField" aria-hidden="true"></canvas>
+<canvas class={cn("absolute inset-0 size-full opacity-85", className)} x-data="particleField" aria-hidden="true"></canvas>

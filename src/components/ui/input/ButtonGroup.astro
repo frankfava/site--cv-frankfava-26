@@ -1,12 +1,13 @@
 ---
-import { twMerge } from "tailwind-merge";
 import type { _CallToAction } from "@/types";
 import Button from "./Button.astro";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	class?: string;
 	actions?: Array<_CallToAction>;
-	btnClass?: string;
+	btnClass?: HTMLAttributes<"button" | "a">["class:list"];
 }
 
 const { actions = [], class: className = "", btnClass } = Astro.props;
@@ -14,9 +15,9 @@ const { actions = [], class: className = "", btnClass } = Astro.props;
 
 {
 	actions.length ? (
-		<div class:list={twMerge("flex gap-2", className)}>
+		<div class={cn("flex gap-2", className)}>
 			{actions.filter(Boolean).map((btnProps) => (
-				<Button {...btnProps} class={twMerge("w-auto", btnClass)} />
+				<Button {...btnProps} class={cn("w-auto", btnClass)} />
 			))}
 		</div>
 	) : (

@@ -1,17 +1,30 @@
 ---
 /** A bordered note with a lead label beside it. */
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	title?: string;
 	class?: string;
-	titleClass?: string;
+	classes?: Partial<{
+		outer: HTMLAttributes<"div">["class:list"];
+		title: HTMLAttributes<"b">["class:list"];
+		content: HTMLAttributes<"p">["class:list"];
+	}>;
+	variant?: "primary" | "secondary" | "accent" | "default";
 }
 
-const { title, class: className, titleClass } = Astro.props;
+const { title, class: className, classes, variant = "accent" } = Astro.props;
+
+const variants = {
+	primary: "border-l-primary",
+	secondary: "border-l-secondary",
+	accent: "border-l-accent",
+	default: "",
+};
 ---
 
-<div class={twMerge("my-5 mb-6 flex max-w-[80ch] items-start gap-2.5 border border-l-4 border-line border-l-accent bg-surface px-3.5 py-2.5 text-ink-2", className)}>
-	{title && <b class={twMerge("pt-0.5 eyebrow whitespace-nowrap text-accent", titleClass)}>{title}</b>}
-	<p class="m-0"><slot /></p>
+<div class={cn("callout flex items-start gap-2.5 border border-l-4 border-line bg-surface px-3.5 py-2.5 text-ink-2", className, classes?.outer, variants[variant])}>
+	{title && <b class={cn("pt-0.5 eyebrow whitespace-nowrap text-accent", classes?.title)}>{title}</b>}
+	<p class={cn("m-0", classes?.content)}><slot /></p>
 </div>

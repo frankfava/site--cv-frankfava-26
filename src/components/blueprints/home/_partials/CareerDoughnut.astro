@@ -5,9 +5,9 @@
  *
  * The viewBox matches the rendered width, so size, band and gap are plain pixels.
  */
-import { twMerge } from "tailwind-merge";
 import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
 import { arcSpan } from "@/alpine/career/chart";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	variant?: "rings" | "segments";
@@ -66,7 +66,7 @@ const arcs = CAREER_SERIES.map((series, i) => {
 });
 ---
 
-<div class={twMerge("flex items-center justify-center gap-4", className)} x-data="careerDoughnut" data-suffix={suffix}>
+<div class={cn("flex items-center justify-center gap-4", className)} x-data="careerDoughnut" data-suffix={suffix}>
 	<svg class="block h-auto w-full flex-none" style={`max-width:${size}px`} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Four measures of the selected year, and their ${label}`}>
 		{arcs.map((arc) => <circle cx={centre} cy={centre} r={arc.radius} fill="none" stroke="var(--c-sunk)" stroke-width={band} transform={`rotate(-90 ${centre} ${centre})`} />)}
 

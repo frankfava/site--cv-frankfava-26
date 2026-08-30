@@ -1,50 +1,49 @@
 ---
 import type { _ModuleHeader as Props } from "@/types";
 import Button from "@/components/ui/input/Button.astro";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
 
 const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.render("subtitle"), headerAlign = "left", stacked = true, classes = {}, cta: callToAction } = Astro.props;
 ---
 
-<>
-	{
-		(title || subtitle) && (
+{
+	(title || subtitle) && (
+		<div
+			class={cn("module--header w-full", stacked ? "" : `w-full items-end gap-6 lg:flex`, classes?.container)}
+			class:list={{
+				"text-center": headerAlign == "center",
+				"text-left": headerAlign == "left",
+				"text-right": headerAlign == "right",
+			}}
+		>
 			<div
-				class={twMerge("w-full", stacked ? "" : `w-full items-end gap-6 lg:flex`, classes?.container)}
 				class:list={{
-					"text-center": headerAlign == "center",
-					"text-left": headerAlign == "left",
-					"text-right": headerAlign == "right",
+					"grow lg:max-w-[70%]": !stacked,
 				}}
 			>
-				<div
-					class:list={{
-						"flex-grow lg:max-w-[70%]": !stacked,
-					}}
-				>
-					<slot name="beforeHeader" />
-					{title && <h2 class={twMerge("font-heading text-heading leading-tighter text-2xl font-semibold tracking-tighter lg:text-3xl", classes?.title)} set:html={title} />}
-					{subtitle && (
-						<div class={twMerge("mt-2 text-lg text-gray-500 dark:text-slate-400", classes?.subtitle)}>
-							{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0 text-gray-500" set:html={subtitle} />}
-						</div>
-					)}
-					<slot name="afterHeader" />
-				</div>
-				{callToAction && (
-					<div class="mt-4" class:list={{ "lg:ml-auto": !stacked }}>
-						<div class={twMerge("inline-flex justify-center font-semibold", classes?.cta)}>
-							<Button
-								{...{
-									class: twMerge("text-sm", classes?.ctaBtn),
-									variant: "primary",
-									...callToAction,
-								}}
-							/>
-						</div>
+				<slot name="beforeHeader" />
+				{title && <h2 class={cn("module--heading font-heading text-heading leading-tighter text-2xl font-semibold tracking-tighter lg:text-3xl", classes?.title)} set:html={title} />}
+
+				{subtitle && (
+					<div class={cn("module--subtitle mt-2 text-lg text-gray-500 dark:text-slate-400", classes?.subtitle)}>
+						{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0 text-gray-500" set:html={subtitle} />}
 					</div>
 				)}
+				<slot name="afterHeader" />
 			</div>
-		)
-	}
-</>
+			{callToAction && (
+				<div class="module--cta mt-4" class:list={{ "lg:ml-auto": !stacked }}>
+					<div class={cn("inline-flex justify-center font-semibold", classes?.cta)}>
+						<Button
+							{...{
+								class: cn("text-sm", classes?.ctaBtn),
+								variant: "primary",
+								...callToAction,
+							}}
+						/>
+					</div>
+				</div>
+			)}
+		</div>
+	)
+}

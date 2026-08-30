@@ -1,6 +1,7 @@
 ---
 /** The orb canvas on its own, so it can back any surface. */
-import { twMerge } from "tailwind-merge";
+
+import { cn } from "@/utils/class";
 
 export interface Props {
 	class?: string;
@@ -10,6 +11,6 @@ const { class: className } = Astro.props;
 ---
 
 <canvas
-	class={twMerge("pointer-events-none absolute top-1/2 right-[-6%] size-[min(660px,62vw)] -translate-y-1/2 opacity-95 max-lg:right-[-24%] max-lg:opacity-50", className)}
+	class={cn("pointer-events-none absolute top-1/2 right-[-6%] size-[min(660px,62vw)] -translate-y-1/2 opacity-95 max-lg:right-[-24%] max-lg:opacity-50", className)}
 	x-data="orb"
 	aria-hidden="true"></canvas>

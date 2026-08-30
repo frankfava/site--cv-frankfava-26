@@ -257,10 +257,6 @@ html {
 	background-clip: padding-box;
 }
 
-#bay::-webkit-scrollbar-thumb {
-	border-color: var(--c-sunk);
-}
-
 /* ---------- Scroll Progress Bar ---------- */
 
 #scroll-progress {
@@ -348,6 +344,10 @@ html {
 
 /* ---------- Sidebar ---------- */
 
+#bay::-webkit-scrollbar-thumb {
+	border-color: var(--c-sunk);
+}
+
 .scrim {
 	display: none;
 }
@@ -372,6 +372,16 @@ html {
 
 	html:not(.nav-menu-open) .rail {
 		display: flex;
+	}
+}
+
+/* ---------- modules ---------- */
+
+.indexed {
+	.module--heading,
+	.module--subtitle,
+	.module--body .callout {
+		@apply max-w-200;
 	}
 }
 

@@ -9,7 +9,7 @@
  */
 import { THEME } from "site:config";
 import { Icon } from "astro-icon/components";
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	label?: string;
@@ -47,7 +47,7 @@ const isSingle = options.length < 3;
 			<button
 				type="button"
 				@click={isSingle ? "toggle()" : "toggleOpen()"}
-				class={twMerge(
+				class={cn(
 					"inline-flex items-center rounded-lg border p-2.5 text-sm text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:ring-gray-700",
 					className,
 				)}
@@ -58,7 +58,7 @@ const isSingle = options.length < 3;
 				x-bind:aria-expanded={isSingle ? undefined : "isOpen"}
 			>
 				{options.map((o) => (
-					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class="toggle-icon" class:list={[o.key, twMerge("size-6", iconClass)]} />
+					<Icon x-show={`isActive('${o.key}')`} name={o.icon} class={cn("toggle-icon size-6", o.key, iconClass)} />
 				))}
 			</button>
 			{!isSingle && (

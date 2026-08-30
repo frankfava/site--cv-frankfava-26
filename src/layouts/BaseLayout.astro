@@ -2,6 +2,7 @@
 import "@/assets/css/main.css";
 
 import { I18N } from "site:config";
+import { cn } from "@/utils/class";
 
 import Favicons from "@/components/includes/Favicons.astro";
 import CustomStyles from "@/components/includes/CustomStyles.astro";
@@ -12,12 +13,12 @@ import Analytics from "@/components/includes/Analytics.astro";
 import Fonts from "@/components/includes/Fonts.astro";
 
 import type { MetaData } from "@/types";
-import { twMerge } from "tailwind-merge";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	metadata?: MetaData;
-	htmlClass?: string;
-	bodyClass?: string;
+	htmlClass?: HTMLAttributes<"html">["class:list"];
+	bodyClass?: HTMLAttributes<"body">["class:list"];
 }
 
 const { metadata = {}, htmlClass = "", bodyClass = "" } = Astro.props;
@@ -35,7 +36,7 @@ const { language, textDirection } = I18N;
 		<JsApplyColorMode />
 		<JsApplySidebarState />
 	</head>
-	<body id="top" class:list={twMerge(["bg-page text-base tracking-tight text-page antialiased", bodyClass])}>
+	<body id="top" class={cn(["bg-page text-base tracking-tight text-page antialiased", bodyClass])}>
 		<slot />
 
 		<script src="../assets/js/main.js"></script>

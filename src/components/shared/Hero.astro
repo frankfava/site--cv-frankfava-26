@@ -1,8 +1,8 @@
 ---
-import { twMerge } from "tailwind-merge";
 import ParticleField from "@/components/shared/backgrounds/ParticleField.astro";
 import ButtonGroup from "@/components/ui/input/ButtonGroup.astro";
 import type { _CallToAction } from "@/types";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	title?: string;
@@ -18,7 +18,7 @@ const { title, description, eyebrow, facts = [], actions = [], class: className 
 const eyebrowSlot = await Astro.slots.render("eyebrow");
 ---
 
-<header class={twMerge("relative overflow-hidden border-b border-line bg-[#08080e] text-[#f2f2f8]", className)}>
+<header class={cn("relative overflow-hidden border-b border-line bg-[#08080e] text-[#f2f2f8]", className)}>
 	<slot name="background">
 		<div
 			class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)]"

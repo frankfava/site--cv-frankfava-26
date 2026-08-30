@@ -1,9 +1,10 @@
 ---
 /** Four series across the whole career, scrubbable, with a read-out for the year under the cursor. */
-import { twMerge } from "tailwind-merge";
+
 import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX, yearAverage } from "@/data/career";
 import { CHART, chartX, chartY } from "@/alpine/career/chart";
 import CareerDoughnut, { type Props as DoughnutProps } from "./CareerDoughnut.astro";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	/** How the selected year's four numbers read: as bars, or as a ring with their average. */
@@ -47,7 +48,7 @@ const trendLine = CAREER_YEARS.map((year, i) => `${i ? "L" : "M"}${chartX(i, cou
 const yearLabels = CAREER_YEARS.map((year, i) => ({ ...year, i })).filter((year) => year.year % 3 === 0 || year.i === count - 1);
 ---
 
-<div class={twMerge("overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)} x-data="careerTimeline">
+<div class={cn("overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)} x-data="careerTimeline">
 	<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
 		<span class="eyebrow text-ink-3">{first} &ndash; {last} &middot; drag to read a year</span>
 	</div>

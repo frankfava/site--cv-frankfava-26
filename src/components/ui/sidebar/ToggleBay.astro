@@ -2,7 +2,7 @@
 /**
  * A button that toggles the sidebar.
  */
-import { twMerge } from "tailwind-merge";
+import { cn } from "@/utils/class";
 
 import ToggleMenu, { type Props as ToggleMenuProps } from "@/components/ui/menu/ToggleMenu.astro";
 
@@ -12,7 +12,7 @@ const { label = "Index", showLabel = true, class: className, ariaExpanded, ariaC
 ---
 
 <ToggleMenu
-	class={twMerge(
+	class={cn(
 		`flex-row gap-2.5 rounded-lg border border-line bg-none px-3 py-2.5 pl-2.5 font-secondary text-sm leading-none text-ink-2 transition-all duration-150 hover:border-accent hover:text-accent`,
 		className,
 	)}

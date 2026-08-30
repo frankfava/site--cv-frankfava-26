@@ -17,10 +17,10 @@ const { links = [] } = Astro.props;
 		<nav class="rail fixed top-1/2 right-5 z-65 -translate-y-1/2 flex-col gap-1" aria-label="Page sections">
 			{links.map((link) => (
 				<a href={link.href} class="group relative flex items-center justify-end px-1 py-2 text-ink-3! transition-all duration-160 ease-[ease]" data-section-link>
-					<span class="text-ink)! translate-x-1.45 pointer-events-none absolute right-full mr-3 rounded-full border border-line bg-surface px-3 py-2 text-[0.86rem] whitespace-nowrap opacity-0 shadow-[0_8px_22px_-16px_rgba(0,0,0,0.6)] transition-all duration-180 ease-[ease] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-[.is-on]:translate-x-0 group-[.is-on]:opacity-100">
+					<span class="pointer-events-none absolute right-full mr-3 translate-x-1.5 rounded-[999px] border border-line bg-surface px-4 py-1 text-[0.86rem] whitespace-nowrap text-ink! opacity-0 shadow-[0_8px_22px_-16px_rgba(0,0,0,0.6)] transition-all duration-180 ease-[ease] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 group-[.is-on]:translate-x-0 group-[.is-on]:opacity-100">
 						{link.text}
 					</span>
-					<i class="group-[.is-on]:scale-1.15 size-2.5 flex-none rounded-[50%] border-[1.5px] border-ink-3 bg-ground transition-all duration-180 ease-[ease] group-hover:border-accent group-[.is-on]:border-accent group-[.is-on]:bg-accent" />
+					<i class="size-2.5 flex-none rounded-full border-[1.5px] border-ink-3 bg-ground transition-all duration-180 ease-[ease] group-hover:border-accent group-[.is-on]:scale-125 group-[.is-on]:border-accent group-[.is-on]:bg-accent" />
 				</a>
 			))}
 		</nav>

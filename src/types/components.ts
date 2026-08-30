@@ -32,18 +32,16 @@ export interface Link extends Omit<HTMLAttributes<"a">, "slot"> {
 /** Base Module */
 export interface _Module {
 	id?: string;
-	// Falls back to the page's `layout.contentWidth`
-	contentWidth?: string;
 	isDark?: boolean;
 	bg?: string;
-	classes?: Record<PropertyKey, string | Record<PropertyKey, string>>;
+	classes?: Partial<Record<"wrapper" | "container" | "content" | "body", HTMLAttributes<any>["class:list"]>>;
 }
 
 /** Module Header */
 export interface _ModuleHeader {
 	title?: string;
 	subtitle?: string;
-	classes?: Record<string, string>;
+	classes?: Partial<Record<"container" | "title" | "subtitle" | "cta" | "ctaBtn" | string, HTMLAttributes<any>["class:list"]>>;
 	headerAlign?: "left" | "center" | "right";
 	stacked?: boolean;
 	cta?: _CallToAction;
@@ -54,6 +52,6 @@ export interface _CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
 	variant?: "primary" | "primaryOutline" | "secondary" | "secondaryOutline" | "accent" | "accentOutline" | "tertiary" | "link";
 	text?: string;
 	icon?: string;
-	classes?: Record<string, string>;
+	classes?: Partial<Record<"outer" | "text" | "icon", HTMLAttributes<any>["class:list"]>>;
 	type?: "button" | "submit" | "reset";
 }

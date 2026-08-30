@@ -1,7 +1,7 @@
 ---
 /** The hologram canvas on its own, so it can back any surface. */
-import { twMerge } from "tailwind-merge";
 import { hologramNodes, HOLOGRAM_FRAME } from "@/data/hologram";
+import { cn } from "@/utils/class";
 
 export interface Props {
 	class?: string;
@@ -13,7 +13,7 @@ const scene = { ...HOLOGRAM_FRAME, nodes: await hologramNodes() };
 ---
 
 <canvas
-	class={twMerge("pointer-events-none absolute top-1/2 right-[6%] h-[min(500px,62vw)] w-[min(750px,82vw)] -translate-y-1/2 opacity-95 max-lg:right-[-24%] max-lg:opacity-50", className)}
+	class={cn("pointer-events-none absolute top-1/2 right-[6%] h-[min(500px,62vw)] w-[min(750px,82vw)] -translate-y-1/2 opacity-95 max-lg:right-[-24%] max-lg:opacity-50", className)}
 	x-data="hologram"
 	data-scene={JSON.stringify(scene)}
 	aria-hidden="true"></canvas>

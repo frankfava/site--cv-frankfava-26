@@ -1,6 +1,5 @@
 ---
 import type { Socials } from "@/types";
-import { twMerge } from "tailwind-merge";
 import SocialLinkButton from "./SocialLinkButton.astro";
 
 export interface Props {
@@ -18,7 +17,7 @@ const { socialLinks = [], showText = true, showIcon = true, class: className, li
 <>
 	{
 		socialLinks?.length && (
-			<ul class={twMerge("inline-flex flex-wrap items-center", className)}>
+			<ul class:list={["inline-flex flex-wrap items-center", className]}>
 				{socialLinks.map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
 					<li class="flex">
 						<SocialLinkButton {...{ href, icon: showIcon ? icon : undefined, label, text, class: className ?? "", linkClass, iconClass, showText, ...rest }} />

@@ -20,7 +20,13 @@ const { links, title = "On this page", navClass, lead = "numbers", useNestedLink
 
 {
 	!!links.length && (
-		<BayCard {...{ ...bayCardProps, title, contentClass: "p-2.5" }}>
+		<BayCard
+			{...{
+				...bayCardProps,
+				title,
+				classes: { content: "gap-2.5" },
+			}}
+		>
 			<slot name="meta" slot="meta" />
 			<nav {...{ "class:list": navClass, "aria-label": title }}>
 				<slot name="list">
