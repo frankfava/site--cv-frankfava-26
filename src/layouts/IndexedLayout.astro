@@ -10,6 +10,7 @@ import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
 import ToggleBay from "@/components/ui/sidebar/ToggleBay.astro";
 import IndexBay, { type Props as IndexBayProps } from "@/components/shared/sidebar/IndexBay.astro";
 import IndexRail from "@/components/shared/menu/IndexRail.astro";
+import PersonJsonLd from "@/components/shared/PersonJsonLd.astro";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
@@ -112,5 +113,6 @@ const layoutProps: LayoutProps = {
 			)
 		}
 		<slot name="afterFooter" />
+		<PersonJsonLd />
 	</Fragment>
 </PageLayout>

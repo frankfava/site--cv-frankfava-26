@@ -1,0 +1,7 @@
+---
+import { buildPersonJsonLd } from "@/lib/personJsonLd";
+
+const personJsonLd = await buildPersonJsonLd();
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
