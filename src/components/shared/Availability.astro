@@ -1,0 +1,35 @@
+---
+import type { About } from "@/types/config";
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/utils/class";
+
+export interface Props extends Partial<About.Availability> {
+	class?: HTMLAttributes<"span">["class:list"];
+	toolTip?: string;
+}
+
+const { class: classes, toolTip, ...availability } = Astro.props;
+
+const { status, text, noticeRequired } = availability as About.Availability;
+
+const title: Record<About.Availability["status"], string> = {
+	available: "Available",
+	unavailable: "Unavailable",
+	notice_required: "Notice Required",
+};
+---
+
+<span
+	class={cn("availability group relative inline-flex items-center gap-2.5 text-xs tracking-wide whitespace-nowrap", classes)}
+	class:list={[{ "text-good": status === "available" }, { "text-bad": status === "unavailable" }, { "text-amber": status === "notice_required" }]}
+>
+	<i class="size-2.5 rounded-full" class:list={[{ "bg-good": status === "available" }, { "bg-bad": status === "unavailable" }, { "bg-amber": status === "notice_required" }]}></i>
+	<span class="availability-text font-mono uppercase">{text || title[status]}</span>
+	{
+		((status == "notice_required" && noticeRequired) || toolTip) && (
+			<span class="availability-icon pointer-events-none absolute top-full left-[50%] mt-3 translate-x-[-50%] translate-y-1.5 rounded-[999px] border border-line bg-surface px-4 py-1 whitespace-nowrap text-ink! opacity-0 shadow-[0_8px_22px_-16px_rgba(0,0,0,0.6)] transition-all duration-180 ease-[ease] group-hover:translate-y-0 group-hover:opacity-100">
+				{toolTip || noticeRequired}
+			</span>
+		)
+	}
+</span>

@@ -1,0 +1,13 @@
+---
+import type { Display } from "@/types/config";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends Partial<Pick<Display.Base, "tagline">> {
+	class?: HTMLAttributes<"span">["class:list"];
+}
+
+const { tagline, class: classes } = Astro.props;
+---
+
+<span class={cn("tagline font-mono text-xs font-medium tracking-wide whitespace-nowrap text-ink-3 uppercase", classes)}>{tagline}</span>

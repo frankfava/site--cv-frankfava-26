@@ -2,7 +2,7 @@
 /**
  * An adaptive layout for indexed pages.
  */
-import { DISPLAY, ABOUT } from "site:config";
+import { ABOUT, DISPLAY } from "site:config";
 import PageLayout, { type Props as LayoutProps } from "@/layouts/PageLayout.astro";
 import { type BlueprintEntry } from "@/lib/blueprints";
 
@@ -10,6 +10,8 @@ import BlueprintDisplay from "@/components/ui/blueprint/BlueprintDisplay.astro";
 import ToggleBay from "@/components/ui/sidebar/ToggleBay.astro";
 import IndexBay, { type Props as IndexBayProps } from "@/components/shared/sidebar/IndexBay.astro";
 import IndexRail from "@/components/shared/menu/IndexRail.astro";
+import Tagline from "@/components/shared/Tagline.astro";
+import Availability from "@/components/shared/Availability.astro";
 import PersonJsonLd from "@/components/shared/PersonJsonLd.astro";
 
 export interface Props extends LayoutProps {
@@ -51,7 +53,11 @@ const layoutProps: LayoutProps = {
 	header: {
 		isDark: false,
 		showToggleTheme: true,
-		showSocialLinks: false,
+		// showSocialLinks: false,
+		links: [
+			{ text: "Config", href: "/config.json", icon: "ph:file" },
+			{ text: "PersonLd", href: "/personLd.json", icon: "ph:user-circle" },
+		],
 		...header,
 	},
 	footer: {
@@ -66,21 +72,16 @@ const layoutProps: LayoutProps = {
 <PageLayout {...layoutProps}>
 	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
 
-	<slot slot="beforeMenu" name="beforeMenu">
-		{DISPLAY.tagline && <span class="hidden font-mono text-[12.58px] font-medium tracking-[0.11em] whitespace-nowrap text-ink-3 uppercase lg:block">{DISPLAY.tagline}</span>}
-	</slot>
+	<Fragment slot="beforeMenu">
+		{DISPLAY.tagline && <Tagline class="hidden xl:block" tagline={DISPLAY.tagline} />}
+		<slot name="beforeMenu" />
+	</Fragment>
 	<slot name="afterMenu" slot="afterMenu" />
 
-	<slot slot="beforeActions" name="beforeActions">
-		{
-			DISPLAY.showAvailability && (
-				<span class="mr-3 inline-flex items-center gap-2.5 font-mono text-[12.58px] tracking-[0.08em] whitespace-nowrap text-good uppercase">
-					<i class="size-2.5 rounded-[50%] bg-good" />
-					{ABOUT.availability?.text ?? ABOUT.availability?.status}
-				</span>
-			)
-		}
-	</slot>
+	<Fragment slot="beforeActions">
+		{DISPLAY.showAvailability && <Availability {...ABOUT.availability} class="mr-3" />}
+		<slot name="beforeActions" />
+	</Fragment>
 	<slot name="afterActions" slot="afterActions" />
 
 	<slot slot="hero" name="hero" />
