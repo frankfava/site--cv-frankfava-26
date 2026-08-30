@@ -384,10 +384,12 @@ html {
 .indexed {
 	.module--header:not(.text-center) {
 		.module--heading,
-		.module--subtitle,
-		.module--body .callout {
+		.module--subtitle {
 			@apply max-w-200;
 		}
+	}
+	.module--body .callout {
+		@apply max-w-200;
 	}
 }
 
