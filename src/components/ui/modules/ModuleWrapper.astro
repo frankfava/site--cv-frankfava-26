@@ -1,5 +1,4 @@
 ---
-import { THEME } from "site:config";
 import type { HTMLTag } from "astro/types";
 import type { _Module, _ModuleHeader } from "@/types";
 import { cn } from "@/utils/class";
@@ -25,13 +24,15 @@ const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class:
 
 const WrapperTag = as;
 
-const useLayout = forceLayout !== undefined ? forceLayout : THEME.layout;
+const useLayout = forceLayout !== undefined ? forceLayout : "side";
 
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+
+console.log(header);
 ---
 
 <WrapperTag class={cn("module module--wrapper relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", className, classes?.wrapper)} {...id ? { id } : {}}>
-	<div class="bg-inset pointer-events-none absolute inset-0 -z-1" aria-hidden="true">
+	<div class="bg-inset pointer-events-none absolute inset-0" aria-hidden="true">
 		<slot name="bg">
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}
 		</slot>

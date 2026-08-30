@@ -9,12 +9,16 @@ const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.
 {
 	(title || subtitle) && (
 		<div
-			class={cn("module--header w-full", stacked ? "" : `w-full items-end gap-6 lg:flex`, classes?.container)}
-			class:list={{
-				"text-center": headerAlign == "center",
-				"text-left": headerAlign == "left",
-				"text-right": headerAlign == "right",
-			}}
+			class={cn(
+				"module--header w-full",
+				stacked ? "" : `w-full items-end gap-6 lg:flex`,
+				{
+					"text-center": headerAlign == "center",
+					"text-left": headerAlign == "left",
+					"text-right": headerAlign == "right",
+				},
+				classes?.container,
+			)}
 		>
 			<div
 				class:list={{

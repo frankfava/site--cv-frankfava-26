@@ -189,6 +189,10 @@
 	svg text {
 		font-family: var(--font-mono);
 	}
+
+	.bg-inset > * {
+		@apply absolute inset-0;
+	}
 }
 
 /* ========================
@@ -378,10 +382,12 @@ html {
 /* ---------- modules ---------- */
 
 .indexed {
-	.module--heading,
-	.module--subtitle,
-	.module--body .callout {
-		@apply max-w-200;
+	.module--header:not(.text-center) {
+		.module--heading,
+		.module--subtitle,
+		.module--body .callout {
+			@apply max-w-200;
+		}
 	}
 }
 
