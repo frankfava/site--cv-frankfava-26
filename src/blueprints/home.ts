@@ -32,6 +32,15 @@ export const structure = {
 		description: "I would rather a real constraint ended this now than in week three.",
 		content: async () => import("@/components/blueprints/shared/Signals.astro"),
 	},
+	roleDossiers: {
+		id: "role-dossiers",
+		eyebrow: "Forward this",
+		title: "Four versions of the same evidence, one per role",
+		description: "Same evidence, reordered for the role it is aimed at, each with a one-page version you can forward.",
+		mainMenuLabel: "Which version to send",
+		icon: "ph:paper-plane-tilt-duotone",
+		content: async () => import("@/components/blueprints/shared/RoleDoissiers.astro"),
+	},
 	fullRecord: {
 		id: "full-record",
 		title: "The full record, one page at a time",
