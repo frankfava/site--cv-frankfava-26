@@ -1,98 +1,62 @@
 ---
 import Layout from "@/layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
-import { getSkills, Manager as SkillsManager } from "@/lib/collections/skills";
-import { ABOUT } from "site:config";
+import { ABOUT, DISPLAY } from "site:config";
 import { Image } from "astro:assets";
+import ParticleField from "@/components/shared/backgrounds/ParticleField.astro";
+import Orb from "@/components/shared/backgrounds/Orb.astro";
+import Tagline from "@/components/shared/Tagline.astro";
 
 if (import.meta.env.PROD) {
 	return new Response(null, { status: 404 });
 }
 
 const metadata = {
-	title: "Cover Letter",
+	title: "LinkedIn Cover Image",
 };
 
 export interface Props {
-	showSkills?: boolean;
-	skillSplit?: boolean;
-	skillCount?: number;
-	skillMore?: boolean;
 	imagePlaceholder?: boolean;
 }
 
-const { showSkills = true, skillSplit = true, skillMore = true, imagePlaceholder = false } = Astro.props;
-
-let skillCount = Astro.props.skillCount;
-if (skillCount == undefined) {
-	skillCount = skillSplit ? (skillMore ? 16 : 17) : skillMore ? 13 : 14;
-}
-
-const skills = new SkillsManager(await getSkills()).excludeRelevance("peripheral").sort("yrsExperience", false).sort("featured", false)._restructure();
+const { imagePlaceholder = false } = Astro.props;
 ---
 
 <Layout metadata={metadata}>
 	<div class="grid min-h-screen place-items-center bg-gray-400 text-[14px]">
-		<div class="relative flex flex-col overflow-hidden bg-cover sm:m-4 lg:h-99 lg:w-396 lg:max-w-none print:max-w-none">
+		<div class="relative flex flex-col overflow-hidden bg-cover sm:m-4 lg:h-99 lg:w-396 border lg:max-w-none print:max-w-none">
 			<div
-				class="relative grow text-white"
+				class="relative grow text-white "
 				style={{
 					"background-image":
 						'url("https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?q=80&w=2608&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
 					"background-position": "center 60%",
 				}}
 			>
-				<div class="absolute inset-0 z-10 bg-primary-700 opacity-95"></div>
+				<div class="pointer-events-none absolute inset-0 z-1 bg-[#08080e] opacity-98"></div>
+				<div
+					class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)] z-2"
+				>
+					<ParticleField />
+					<Orb class="right-[-10%] size-150" />
+				</div>
 				<div class="relative z-20 flex h-full flex-col pl-[27%]">
-					<div class="my-auto grid gap-4 text-3xl">
-						<div>Hello, I'm a</div>
-						<div class="text-5xl font-bold"><span class="text-yellow-500">Software Engineer</span> & Full-Stack Developer</div>
-						{
-							!!skills.length && !skillSplit && showSkills && (
-								<ul class="mt-5 flex flex-wrap items-center gap-3 text-2xl">
-									{skills.slice(0, skillCount).map(({ icon, label }) => (
-										<li class="inline-flex items-center gap-1 rounded border border-gray-200 bg-white px-3 py-2 text-gray-800">
-											<Icon name={icon} class="size-5" />
-											<span>{label}</span>
-										</li>
-									))}
-									{skillMore && skills.length - skillCount > 0 ? <li> + {skills.length - skillCount} more</li> : ""}
-								</ul>
-							)
-						}
+					<div class="my-auto grid gap-4 text-4xl">
+						<span class="block text-base eyebrow text-cyan-100 font-semibold max-w-200">{ABOUT.focuses.slice(0, 4).join(" · ")}</span>
+						{DISPLAY.showTagline && DISPLAY.tagline && <Tagline class="text-xl text-white normal-case" tagline={DISPLAY.tagline} />}
 					</div>
 				</div>
 			</div>
-			{
-				skillSplit && showSkills && (
-					<div class="bg-white">
-						<div class="z-20 py-6 pl-[27%]">
-							{!!skills.length && (
-								<ul class="flex flex-wrap items-center gap-3 text-2xl">
-									{skills.slice(0, skillCount).map(({ icon, label }) => (
-										<li class="mr-2 inline-flex items-center gap-1 rounded border border-gray-200 bg-white px-2 py-1 text-lg text-gray-800">
-											<Icon name={icon} class="size-5" />
-											<span>{label}</span>
-										</li>
-									))}
-									{skillMore && skills.length - skillCount > 0 ? <li> + {skills.length - skillCount} more</li> : ""}
-								</ul>
-							)}
-						</div>
-					</div>
-				)
-			}
 			{
 				imagePlaceholder && !!ABOUT.getImage("bw") && (
 					<div class="absolute top-[165px] left-[45px] z-20 size-[322px] rounded-full border-8 border-white bg-gray-50">
 						<Image
 							src={ABOUT.getImage("bw") as string}
-							width="322"
-							height="322"
+							width="306"
+							height="306"
 							alt={`${ABOUT.name} Face`}
 							loading="eager"
 							class="inline-block w-auto rounded-full"
-							style={{ "max-height": `322px`, "min-height": `322px` }}
+							style={{ "max-height": `306px`, "min-height": `306px` }}
 						/>
 					</div>
 				)
