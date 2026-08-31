@@ -11,9 +11,11 @@ export interface Props<T extends _Card = _Card> {
 	accentColor?: "good" | "bad" | ((card: T) => "good" | "bad" | undefined);
 	highlightEyebrow?: boolean;
 	borderHighlight?: boolean;
+	hoverBorder?: boolean;
+	linkText?: string;
 }
 
-const { class: className, cards, spaced = true, columnCount = 3, accentColor: accentColorProp, highlightEyebrow = true, borderHighlight = false } = Astro.props;
+const { class: className, cards = [], spaced = true, columnCount = 3, accentColor: accentColorProp, highlightEyebrow = false, borderHighlight = highlightEyebrow, hoverBorder = false, linkText } = Astro.props;
 
 const cardsData = typeof cards === "function" ? await cards() : (cards ?? []);
 
@@ -39,13 +41,14 @@ const accentColor = typeof accentColorProp === "function" ? accentColorProp : ()
 			<a
 				href={record.link?.href}
 				class={cn(
-					"block bg-surface p-4.5 text-ink",
+					"block bg-surface p-4.5 text-left text-ink",
 					{
 						"rounded-lg border border-line": spaced,
 						"rounded-l-none border-l-3": borderHighlight,
 						"border-l-good": accentColor(record) === "good" && borderHighlight,
 						"border-l-bad": accentColor(record) === "bad" && borderHighlight,
 						"transition-colors hover:bg-sunk": !spaced,
+						"transition-colors hover:border-accent": hoverBorder,
 					},
 					className,
 				)}
@@ -70,6 +73,7 @@ const accentColor = typeof accentColorProp === "function" ? accentColorProp : ()
 					</p>
 				)}
 			</a>
+				{(linkText || record.link?.text) && <span class="mt-3 block font-mono text-xs text-accent">{linkText ?? record.link.text}</span>}
 		))
 	}
 </div>
