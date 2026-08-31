@@ -11,43 +11,42 @@ import { THEME } from "site:config";
 import { Icon } from "astro-icon/components";
 import { cn } from "@/utils/class";
 import type { HTMLAttributes } from "astro/types";
-import SwitchCase from "../display/SwitchCase.astro";
+import type { AstroVNode } from "astro/jsx-runtime";
 
 type OptionKey = "light" | "dark" | "system";
-type ThemeOption = { key: OptionKey; icon: string; label: string };
+type ThemeOption = { key: OptionKey; label: string };
 
 export interface Props {
 	label?: string;
 	class?: HTMLAttributes<"button">["class:list"];
-	actveIconClass?: HTMLAttributes<any>["class:list"];
-	// activeIcon?: Partial<Record<OptionKey, string | ((key: OptionKey) => AstroVNode)>>;
-	activeIcon?: Partial<Record<OptionKey, string>>;
-	menuIcon?: Partial<Record<OptionKey, string>>;
+	activeIconClass?: HTMLAttributes<any>["class:list"];
+	activeIcon?: Partial<Record<OptionKey, string>> | ((option: ThemeOption & { activeIconClass: HTMLAttributes<any>["class:list"] }) => AstroVNode);
+	menuIcon?: Partial<Record<OptionKey, string>> | ((option: ThemeOption) => AstroVNode);
 	variant?: "menu" | "single";
 }
 
-const {
-	label = "Toggle between Dark and Light mode",
-	class: className = "",
-	actveIconClass = "",
-	activeIcon = {
-		light: "ph:sun",
-		dark: "ph:moon-stars",
-		system: "ph:desktop",
-	},
-	menuIcon = activeIcon,
-	variant = "menu",
-} = Astro.props;
+const icons = { light: "ph:sun", dark: "ph:moon-stars", system: "ph:desktop" } as Record<OptionKey, string>;
 
-const options = [{ key: "light", label: "Light" }, { key: "dark", label: "Dark" }, ...(variant !== "single" ? [{ key: "system", label: "System" }] : [])] as ThemeOption[];
+const { label = "Toggle between Dark and Light mode", class: className = "", activeIconClass = "", activeIcon = icons, menuIcon = icons, variant = "menu" } = Astro.props;
+
+const options = [
+	{ key: "light", label: "Light" },
+	{ key: "dark", label: "Dark" },
+	{ key: "system", label: "System" },
+] as ThemeOption[];
 
 /** With nothing to choose between, the trigger is the choice. */
-const isSingle = options.length < 3;
+const resolvedOptions = options.filter((o) => variant !== "single" || o.key !== "system");
+const isSingle = resolvedOptions.length < 3;
+
+const resolvedActiveIcon = typeof activeIcon === "function" ? Object.fromEntries(options.map((o) => [o.key, activeIcon({ ...o, activeIconClass }) ?? icons[o.key]])) : activeIcon;
+
+const resolvedMenuIcon = typeof menuIcon === "function" ? Object.fromEntries(options.map((o) => [o.key, menuIcon(o) ?? icons[o.key]])) : menuIcon;
 ---
 
 {
 	!(THEME.default && THEME.default.endsWith(":only")) && (
-		<div x-data="themeToggle" data-theme={THEME.default} data-options={options.map((o) => o.key).join(",")} class="relative flex">
+		<div x-data="themeToggle" data-theme={THEME.default} data-options={resolvedOptions.map((o) => o.key).join(",")} class="relative flex">
 			<button
 				type="button"
 				@click={isSingle ? "toggle()" : "toggleOpen()"}
@@ -61,10 +60,14 @@ const isSingle = options.length < 3;
 				x-bind:class={isSingle ? undefined : "isOpen ? 'text-neutral-900 dark:text-white' : 'text-neutral-600 dark:text-neutral-300'"}
 				x-bind:aria-expanded={isSingle ? undefined : "isOpen"}
 			>
-				{options.map(({ key }) => (
-					<SwitchCase value={key}>
-						<Icon slot="default" x-show={`isActive('${key}')`} name={activeIcon[key]} class={cn("toggle-icon size-6", key, actveIconClass)} />
-					</SwitchCase>
+				{resolvedOptions.map((o) => (
+					<>
+						{typeof resolvedActiveIcon[o.key] === "string" ? (
+							<Icon x-show={`isActive('${o.key}')`} name={resolvedActiveIcon[o.key]} class={cn("toggle-icon size-6", o.key, activeIconClass)} />
+						) : (
+							<Fragment set:html={resolvedActiveIcon[o.key]} />
+						)}
+					</>
 				))}
 			</button>
 			{!isSingle && (
@@ -79,17 +82,21 @@ const isSingle = options.length < 3;
 					role="menu"
 				>
 					<ul class="py-2 text-sm text-gray-700 dark:text-gray-200" role="listbox" tabindex="0" aria-orientation="vertical">
-						{options.map(({ key, label }) => (
+						{resolvedOptions.map((o) => (
 							<li
-								@click={`select('${key}')`}
+								@click={`select('${o.key}')`}
 								class="active flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
 								role="option"
 								tabindex="-1"
 							>
-								<SwitchCase value={key}>
-									<Icon slot="default" name={menuIcon[key]} class="mr-3 size-6 dark:fill-white" />
-								</SwitchCase>
-								<span>{label}</span>
+								<>
+									{typeof resolvedMenuIcon[o.key] === "string" ? (
+										<Icon name={resolvedMenuIcon[o.key]} class="mr-3 size-6 dark:fill-white" />
+									) : (
+										<Fragment set:html={resolvedMenuIcon[o.key]} />
+									)}
+								</>
+								<span>{o.label}</span>
 							</li>
 						))}
 					</ul>
