@@ -1,0 +1,32 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { destinations } from "@/data/fullRecord";
+import Cards from "@/components/ui/display/Cards.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "The full record",
+};
+---
+
+<ModuleWrapper
+	{...{
+		forceLayout: "stacked",
+		...props,
+		header,
+	}}
+>
+	<span slot="beforeHeader" class="mb-2 block eyebrow text-accent">Go deeper</span>
+
+	<Cards
+		{...{
+			cards: destinations,
+			spaced: false,
+			columnCount: 4,
+		}}
+	/>
+</ModuleWrapper>

@@ -1,0 +1,75 @@
+---
+import type { _Card } from "@/types";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props<T extends _Card = _Card> {
+	class?: HTMLAttributes<"div">["class:list"];
+	cards?: T[] | (() => Promise<T[]>);
+	spaced?: boolean;
+	columnCount?: 1 | 2 | 3 | 4;
+	accentColor?: "good" | "bad" | ((card: T) => "good" | "bad" | undefined);
+	highlightEyebrow?: boolean;
+	borderHighlight?: boolean;
+}
+
+const { class: className, cards, spaced = true, columnCount = 3, accentColor: accentColorProp, highlightEyebrow = true, borderHighlight = false } = Astro.props;
+
+const cardsData = typeof cards === "function" ? await cards() : (cards ?? []);
+
+const accentColor = typeof accentColorProp === "function" ? accentColorProp : () => accentColorProp as "good" | "bad" | undefined;
+---
+
+<div
+	class={cn(
+		"grid grid-cols-1",
+		{
+			"gap-4": spaced,
+			"overflow-hidden rounded-lg border border-line-2 bg-line-2": !spaced,
+			"gap-px": !spaced,
+			"sm:grid-cols-2": columnCount === 2,
+			"sm:grid-cols-2 xl:grid-cols-3": columnCount === 3,
+			"sm:grid-cols-2 xl:grid-cols-4": columnCount === 4,
+		},
+		className,
+	)}
+>
+	{
+		cardsData.map((record) => (
+			<a
+				href={record.link?.href}
+				class={cn(
+					"block bg-surface p-4.5 text-ink",
+					{
+						"rounded-lg border border-line": spaced,
+						"rounded-l-none border-l-3": borderHighlight,
+						"border-l-good": accentColor(record) === "good" && borderHighlight,
+						"border-l-bad": accentColor(record) === "bad" && borderHighlight,
+						"transition-colors hover:bg-sunk": !spaced,
+					},
+					className,
+				)}
+			>
+				{record.eyebrow && (
+					<span
+						class={cn("mb-2 block eyebrow", {
+							"text-ink-3": !highlightEyebrow || !accentColorProp,
+							"text-good": accentColor(record) === "good" && highlightEyebrow,
+							"text-bad": accentColor(record) === "bad" && highlightEyebrow,
+						})}
+					>
+						{record.eyebrow}
+					</span>
+				)}
+				<h4 class="mb-1 text-base">{record.title}</h4>
+				{record.body && <p class="text-sm text-ink-2">{record.body}</p>}
+				{record.turn && (
+					<p class="mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
+						{record.turnLead && <span class="font-semibold">{record.turnLead}</span>}
+						<span class="ml-1">{record.turn}</span>
+					</p>
+				)}
+			</a>
+		))
+	}
+</div>

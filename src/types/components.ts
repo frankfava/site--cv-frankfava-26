@@ -55,3 +55,12 @@ export interface _CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
 	classes?: Partial<Record<"outer" | "text" | "icon", HTMLAttributes<any>["class:list"]>>;
 	type?: "button" | "submit" | "reset";
 }
+
+export interface _Card {
+	title: string;
+	eyebrow?: string;
+	body?: string;
+	turnLead?: string;
+	turn?: string;
+	link?: Link;
+}

@@ -1,0 +1,35 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { signals, type Signal } from "@/data/signals";
+import Cards from "@/components/ui/display/Cards.astro";
+import Callout from "@/components/ui/display/Callout.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Signals",
+};
+---
+
+<ModuleWrapper
+	{...{
+		forceLayout: "stacked",
+		...props,
+		header,
+	}}
+>
+	<span slot="beforeHeader" class="mb-2 block eyebrow text-accent">Before we talk</span>
+
+	<Callout slot="beforeContent" title="How to read this">Red is a genuine blocker with no way around it. Green is a fact people sometimes read as a problem, with the reason it isn't.</Callout>
+
+	<Cards
+		{...{
+			cards: signals,
+			accentColor: (signal: Signal) => (signal.ends ? "bad" : "good"),
+			borderHighlight: true,
+		}}
+	/>
+</ModuleWrapper>
