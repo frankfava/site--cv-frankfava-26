@@ -1,11 +1,40 @@
 ---
-import PageLayout from "@/layouts/PageLayout.astro";
+import IndexedLayout from "@/layouts/IndexedLayout.astro";
+import Hero from "@/components/shared/Hero.astro";
+import { blueprints } from "@/data/blueprints";
+import { METADATA, ABOUT } from "site:config";
+import ParticleField from "@/components/shared/backgrounds/ParticleField.astro";
+import Orb from "@/components/shared/backgrounds/Orb.astro";
 
-import CONFIG from "site:config";
-
-const metadata = {};
+const metadata = {
+	title: METADATA?.title?.default,
+	ignoreTitleTemplate: true,
+};
 ---
 
-<PageLayout metadata={metadata}>
-	<pre class="p-5 text-sm whitespace-pre-wrap">{JSON.stringify(CONFIG, null, 4)}</pre>
-</PageLayout>
+<IndexedLayout {...{ metadata, blueprint: blueprints.home, fullHeight: false }}>
+	<Hero
+		slot="hero"
+		class="dark"
+		facts={[
+			{ value: "10 yrs", label: "customer-facing technical" },
+			{ value: "160+", label: "cold starts" },
+			{ value: "EU / EEA", label: "work rights" },
+		]}
+	>
+		<Fragment slot="backgroundAnimation">
+			<ParticleField />
+			<Orb />
+		</Fragment>
+		<Fragment slot="eyebrow">
+			{[ABOUT.location?.city, ABOUT.focuses.slice(0, 4).join(" · ")].filter(Boolean).join(" | ")}
+		</Fragment>
+		<Fragment slot="heading">
+			I'm the person between your customer's problem and <b>the system that fixes it.</b>
+		</Fragment>
+		<Fragment slot="lead">
+			Eighteen years of winning the work, designing it, building it, and <b>still being the call when it breaks four years later</b>. Ten of those years customer-facing. These days the systems
+			are agentic, and I run mine in production every day.
+		</Fragment>
+	</Hero>
+</IndexedLayout>
