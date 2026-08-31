@@ -311,6 +311,7 @@ export class BlueprintSection {
 				...((this.data.props ?? {})?.header ?? {}),
 				title: this.data.title,
 				subtitle: this.data.description,
+				eyebrow: this.data.eyebrow,
 			},
 		} as AssembledSection;
 	}

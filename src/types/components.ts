@@ -41,7 +41,9 @@ export interface _Module {
 export interface _ModuleHeader {
 	title?: string;
 	subtitle?: string;
-	classes?: Partial<Record<"container" | "title" | "subtitle" | "cta" | "ctaBtn" | string, HTMLAttributes<any>["class:list"]>>;
+	/** Short label above the title. */
+	eyebrow?: string;
+	classes?: Partial<Record<"container" | "title" | "subtitle" | "eyebrow" | "cta" | "ctaBtn" | string, HTMLAttributes<any>["class:list"]>>;
 	headerAlign?: "left" | "center" | "right";
 	stacked?: boolean;
 	cta?: _CallToAction;

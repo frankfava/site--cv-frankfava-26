@@ -17,6 +17,7 @@ export interface BlueprintComponent {
 	id?: string;
 	title: string;
 	description?: string;
+	eyebrow?: string;
 	icon: string;
 	content: Record<string, Omit<BlueprintComponent, "hidden">> | string | (() => Promise<object>);
 	mainMenuLabel?: string;
