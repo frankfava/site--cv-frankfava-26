@@ -11,7 +11,7 @@ export const structure = {
 		mainMenuLabel: "Capability check",
 		icon: "ph:sliders-horizontal-duotone",
 		description: "Every role calls this job something different, so rather than make you pick a title, set what you actually need. The dial on the left keeps your reading as you scroll.",
-		content: async () => import("@/components/blueprints/home/Capability.astro"),
+		content: async () => import("@/components/blueprints/shared/Capability.astro"),
 	},
 	trackRecord: {
 		id: "track-record",

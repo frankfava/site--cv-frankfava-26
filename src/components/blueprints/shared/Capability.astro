@@ -10,12 +10,12 @@ const props = Astro.props;
 const header: _ModuleHeader = {
 	...props.header,
 	title: props.header?.title || "Capability check",
+	eyebrow: props.header?.eyebrow || "Capability",
 };
 ---
 
 <ModuleWrapper {...{ forceLayout: "stacked", ...props, flip: true, header }}>
 	<span slot="beforeHeader" class="mb-2 block eyebrow text-accent">Capability</span>
-
 	<Callout slot="beforeContent" title="How to read this">
 		Move a slider to say how much your role needs that capability. The dashed shape is what you asked for; the solid shape is me. Where mine sits outside yours you're covered; where it sits
 		inside, you'd be stretching me.
