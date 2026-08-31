@@ -19,7 +19,7 @@ export const structure = {
 		mainMenuLabel: "Track record",
 		icon: "ph:chart-line-up-duotone",
 		description: "Nine roles across two continents, with one thread running through them: I am usually both the person the customer talks to and the person who builds it.",
-		content: async () => import("@/components/blueprints/home/TrackRecord.astro"),
+		content: async () => import("@/components/blueprints/shared/TrackRecord.astro"),
 	},
 	beforeWeTalk: {
 		id: "before-we-talk",
