@@ -1,0 +1,99 @@
+---
+import { ABOUT, SOCIALS } from "site:config";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+	hideName?: boolean;
+	showLocation?: boolean;
+	showCitizenships?: boolean;
+	imgSize?: number;
+	class?: string;
+}
+
+const { hideName, showLocation = true, showCitizenships = true, imgSize = 200, class: className } = Astro.props;
+
+const socials = SOCIALS.clone();
+---
+
+<div class="mx-auto max-w-md border bg-primary-600 text-white 2xl:max-w-sm" class:list={className}>
+	<div class="bg-primary-700 p-6 text-center">
+		{
+			!!ABOUT.getImage("bw") && (
+				<Image
+					src={ABOUT.getImage("bw") as string}
+					width={imgSize * 2}
+					height={imgSize * 2}
+					alt={`${ABOUT.name} Face`}
+					loading="eager"
+					class="inline-block w-auto rounded-full"
+					style={{ "max-height": `${imgSize}px`, "min-height": `${imgSize}px` }}
+				/>
+			)
+		}
+		{
+			!hideName && (
+				<div class="mt-2 font-primary text-2xl font-bold md:text-3xl">
+					{ABOUT.firstName}
+					<span class="font-normal">{ABOUT.lastName}</span>
+				</div>
+			)
+		}
+	</div>
+	<slot name="afterImage" />
+	<div class="flex flex-col gap-3 p-6">
+		<slot name="beforeList" />
+		<ul class="flex flex-col gap-3">
+			{
+				socials
+					.filter(([k, _i]) => k !== "vcard")
+					.toArray()
+					.map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
+						<li class="flex items-center gap-3 hover:text-gray-300">
+							<Icon name={icon} class="size-6 min-h-6 min-w-6" />
+							<a href={href} aria-label={label} title={label} class:list={["font-normal text-white hover:text-gray-100", className]} target="_blank" set:html={text} {...rest} />
+							{suffixIcon && (
+								<span>
+									<Icon name={suffixIcon} class="size-5 min-h-5 min-w-5" />
+								</span>
+							)}
+						</li>
+					))
+			}
+			{
+				showLocation && (
+					<li class="flex items-start gap-3">
+						<Icon name="ph:map-pin-area" class="size-6 min-h-6 min-w-6" />
+						<div>
+							<div>{ABOUT.locationFull}</div>
+							<div class="text-sm text-gray-100 italic">Current Location</div>
+						</div>
+					</li>
+				)
+			}
+			{
+				showCitizenships && (
+					<li class="flex items-start gap-3">
+						<Icon name="ph:flag" class="size-6 min-h-6 min-w-6" />
+						<div>
+							<div class="flex flex-wrap items-center gap-2">
+								{ABOUT.nationality.map((n, k) => (
+									<>
+										{k !== 0 && <span>+</span>}
+										<span class="flex items-center gap-1">
+											{n.flagIcon && <Icon name={n.flagIcon} class="size-5" />}
+											<span>{n.label}</span>
+										</span>
+									</>
+								))}
+							</div>
+							<div class="text-sm text-gray-100 italic">Citizenships</div>
+						</div>
+					</li>
+				)
+			}
+		</ul>
+		<slot name="afterList" />
+	</div>
+	<slot name="after" />
+</div>

@@ -90,6 +90,8 @@ const layoutProps: LayoutProps = {
 		{entry && <BlueprintDisplay blueprint={entry.blueprint ? entry.blueprint.assemble() : []} />}
 	</slot>
 
+	<slot slot="footer" name="footer" />
+
 	<Fragment slot="afterFooter">
 		<div class="scrim" aria-hidden="true" data-sidebar-scrim></div>
 		{

@@ -303,7 +303,7 @@
 								"type": "string"
 							}
 						},
-						"required": ["label", "flagIcon"]
+						"required": ["label"]
 					}
 				},
 				"linguistics": {

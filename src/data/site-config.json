@@ -100,12 +100,10 @@
 		"workRights": "EU and EEA, no sponsorship.",
 		"nationality": [
 			{
-				"label": "Australian",
-				"flagIcon": "twemoji:flag-australia"
+				"label": "Australian"
 			},
 			{
-				"label": "EU",
-				"flagIcon": "twemoji:flag-italy"
+				"label": "EU"
 			}
 		],
 		"linguistics": {
