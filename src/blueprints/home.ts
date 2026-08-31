@@ -23,6 +23,14 @@ export const structure = {
 		description: "Nine roles across two continents, with one thread running through them: I am usually both the person the customer talks to and the person who builds it.",
 		content: async () => import("@/components/blueprints/shared/TrackRecord.astro"),
 	},
+	stillRunning: {
+		id: "still-running",
+		title: "The systems still running without me",
+		mainMenuLabel: "What's still running",
+		icon: "ph:hard-drives-duotone",
+		description: "There's a real difference between work I contributed to and systems I designed, shipped and stayed accountable for.",
+		content: async () => import("@/components/blueprints/shared/StillRunning.astro"),
+	},
 	yourProblem: {
 		id: "your-problem",
 		eyebrow: "Your problem",
@@ -71,6 +79,7 @@ export const entry: BlueprintEntry = {
 	config: {
 		// search: {
 		// 	atomics: {
+		//		project: "still-running",
 		//		role: "track-record",
 		// 	},
 		// },

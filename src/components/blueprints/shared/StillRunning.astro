@@ -1,0 +1,24 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import Callout from "@/components/ui/display/Callout.astro";
+import SystemsSplit from "./_partials/SystemsSplit.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Still running",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "stacked", ...props, header }}>
+	<span slot="beforeHeader" class="mb-2 block eyebrow text-accent">What outlived me</span>
+
+	<Callout title="How to read this" class="mt-0">
+		Left column outlived the engagement and is still in service. Right column is good work done inside someone else's system. A green dot means it's live today.
+	</Callout>
+
+	<SystemsSplit />
+</ModuleWrapper>

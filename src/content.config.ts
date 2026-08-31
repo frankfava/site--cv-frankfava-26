@@ -67,6 +67,26 @@ const projects = defineCollection({
 				outcome: z.string(),
 			})
 			.optional(),
+		// A project earns a row in the "still running" section by carrying this
+		// block. `ownership` is the split the section exists to make: work whose
+		// architecture was mine against work done inside someone else's.
+		stillRunning: z
+			.object({
+				ownership: z.enum(["mine", "handed-over"]),
+				live: z.boolean(),
+				status: z.string(),
+				figure: z.string(),
+				figureNote: z.string(),
+				// The section argues a different point than the project page, so it
+				// gets its own copy rather than reusing `summary`.
+				body: z.string(),
+				// Strongest first within a column, which is neither date nor `order`.
+				rank: z.number(),
+				// Only where the canonical title misreads in a card - too long, or
+				// the row covers more than the one project.
+				title: z.string().optional(),
+			})
+			.optional(),
 	}),
 });
 

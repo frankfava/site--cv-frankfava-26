@@ -19,4 +19,13 @@ skills : [
 	"GITHUB",
 	"GIT",
 ]
+stillRunning:
+    ownership: mine
+    live: true
+    status: "Live · 3 tools"
+    figure: "Open"
+    figureNote: "others use them"
+    body: "Create MVP, a Claude Code skill packaging my delivery method, plus a prompt builder and an output analyser for Lovable."
+    rank: 4
+    title: "Published AI tooling"
 ---

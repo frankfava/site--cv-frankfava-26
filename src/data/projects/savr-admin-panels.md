@@ -22,4 +22,13 @@ caseStudy:
     build: Spear-headed admin panel work from a paired exploration in my first month at SAVR into three production tools across the engagement.
     outcome: Three production operability tools shipped. Non-engineering teams (data, customer service, analytics) unblocked on workflows that previously required engineering involvement.
 skills: ["PHP", "LARAVEL", "FILAMENTPHP", "LIVEWIRE", "PYTHON", "POSTGRESQL", "DOCKER", "GIT", "GITHUB", "CLAUDE"]
+stillRunning:
+    ownership: handed-over
+    live: false
+    status: "Handed over · in use"
+    figure: "3"
+    figureNote: "panels"
+    body: "Two FilamentPHP panels for the data and customer-service teams, one Streamlit tool over Snowflake for analysts. Right tool per audience, deliberately."
+    rank: 2
+    title: "SAVR operability tools"
 ---

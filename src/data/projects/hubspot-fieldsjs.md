@@ -31,4 +31,12 @@ skills: [
 	"GIT",
 	"API"
 ]
+stillRunning:
+    ownership: mine
+    live: true
+    status: "Live · adopted upstream"
+    figure: "Vendor"
+    figureNote: "cited it"
+    body: "A developer tool built inside HubSpot's own platform. Their core team referenced it in their official documentation."
+    rank: 3
 ---

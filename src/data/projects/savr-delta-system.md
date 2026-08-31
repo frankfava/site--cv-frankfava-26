@@ -22,4 +22,13 @@ caseStudy:
     build: Designed and built end-to-end as the closing project of my SAVR engagement - owned the architecture call, the implementation, and the cutover.
     outcome: Ingestion performance significantly improved. The delta approach replaced full-source pulls on the key data path.
 skills: ["PHP", "LARAVEL", "POSTGRESQL", "API", "DOCKER", "GIT", "GITHUB", "CLAUDE"]
+stillRunning:
+    ownership: handed-over
+    live: false
+    status: "Handed over · 2026"
+    figure: "Full to delta"
+    figureNote: "rebuild"
+    body: "Replaced full-source pulls with a delta-based system on a pipeline that was buckling, significantly improving throughput."
+    rank: 3
+    title: "SAVR delta ingestion rebuild"
 ---

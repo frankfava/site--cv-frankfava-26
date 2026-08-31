@@ -22,4 +22,13 @@ skills : [
 	"ANSIBLE",
 	"SSH",
 ]
+stillRunning:
+    ownership: mine
+    live: true
+    status: "Live · daily"
+    figure: "12+"
+    figureNote: "agents"
+    body: "Self-hosted MCP server on a box I administer. Claude Code agents with tool scoping, guardrails and version-controlled definitions, running unattended on a schedule."
+    rank: 2
+    title: "Frankenverse agentic system"
 ---

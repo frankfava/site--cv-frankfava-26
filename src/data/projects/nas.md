@@ -67,4 +67,12 @@ skills : [
     "HUBSPOT",
 	"CLAUDE",
 ]
+stillRunning:
+    ownership: mine
+    live: true
+    status: "Live · since 2022"
+    figure: "~90%"
+    figureNote: "of Australia"
+    body: "One domain model, three surfaces: internal operations, a customer portal, a contractor portal. I own architecture, security, roadmap and delivery as their only technical voice."
+    rank: 1
 ---
