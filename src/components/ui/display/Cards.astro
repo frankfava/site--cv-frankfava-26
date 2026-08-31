@@ -1,13 +1,19 @@
 ---
+/** A grid of cards, either spaced apart or ruled together into one block. */
 import type { _Card } from "@/types";
 import { cn } from "@/utils/class";
+import { slugify } from "@/utils/str";
+import Card from "./Card.astro";
 import type { HTMLAttributes } from "astro/types";
+
+export const cardKey = (card: _Card) => card.id ?? slugify(card.title);
 
 export interface Props<T extends _Card = _Card> {
 	class?: HTMLAttributes<"div">["class:list"];
 	cards?: T[] | (() => Promise<T[]>);
 	spaced?: boolean;
-	columnCount?: 1 | 2 | 3 | 4;
+	columnCount?: 1 | 2 | 3 | 4 | "auto";
+	columnWidth?: string;
 	accentColor?: "good" | "bad" | ((card: T) => "good" | "bad" | undefined);
 	highlightEyebrow?: boolean;
 	borderHighlight?: boolean;
@@ -15,20 +21,34 @@ export interface Props<T extends _Card = _Card> {
 	linkText?: string;
 }
 
-const { class: className, cards = [], spaced = true, columnCount = 3, accentColor: accentColorProp, highlightEyebrow = false, borderHighlight = highlightEyebrow, hoverBorder = false, linkText } = Astro.props;
+const {
+	class: className,
+	cards = [],
+	spaced = true,
+	columnCount = "auto",
+	columnWidth = "300px",
+	accentColor: accentColorProp,
+	highlightEyebrow = false,
+	borderHighlight = highlightEyebrow,
+	hoverBorder = false,
+	linkText,
+} = Astro.props;
 
-const cardsData = typeof cards === "function" ? await cards() : (cards ?? []);
+/** `T` is not in scope inside the template, so the list is widened here. */
+const cardsData: _Card[] = typeof cards === "function" ? await cards() : cards;
 
-const accentColor = typeof accentColorProp === "function" ? accentColorProp : () => accentColorProp as "good" | "bad" | undefined;
+type Accent = "good" | "bad" | undefined;
+const accentColor: (card: _Card) => Accent = typeof accentColorProp === "function" ? (accentColorProp as (card: _Card) => Accent) : () => accentColorProp;
 ---
 
 <div
+	style={ `--column-width: ${columnWidth}` }
 	class={cn(
 		"grid grid-cols-1",
 		{
 			"gap-4": spaced,
-			"overflow-hidden rounded-lg border border-line-2 bg-line-2": !spaced,
-			"gap-px": !spaced,
+			"gap-px overflow-hidden rounded-lg border border-line-2 bg-line-2": !spaced,
+			"grid-cols-[repeat(auto-fill,minmax(var(--column-width,300px),1fr))]": columnCount === "auto",
 			"sm:grid-cols-2": columnCount === 2,
 			"sm:grid-cols-2 xl:grid-cols-3": columnCount === 3,
 			"sm:grid-cols-2 xl:grid-cols-4": columnCount === 4,
@@ -37,43 +57,21 @@ const accentColor = typeof accentColorProp === "function" ? accentColorProp : ()
 	)}
 >
 	{
-		cardsData.map((record) => (
-			<a
-				href={record.link?.href}
-				class={cn(
-					"block bg-surface p-4.5 text-left text-ink",
-					{
+		cardsData.map((card) => (
+			<Card
+				{...{
+					card,
+					linkText,
+					highlightEyebrow,
+					borderHighlight,
+					accent: accentColor(card),
+					class: cn({
 						"rounded-lg border border-line": spaced,
-						"rounded-l-none border-l-3": borderHighlight,
-						"border-l-good": accentColor(record) === "good" && borderHighlight,
-						"border-l-bad": accentColor(record) === "bad" && borderHighlight,
 						"transition-colors hover:bg-sunk": !spaced,
 						"transition-colors hover:border-accent": hoverBorder,
-					},
-					className,
-				)}
-			>
-				{record.eyebrow && (
-					<span
-						class={cn("mb-2 block eyebrow", {
-							"text-ink-3": !highlightEyebrow || !accentColorProp,
-							"text-good": accentColor(record) === "good" && highlightEyebrow,
-							"text-bad": accentColor(record) === "bad" && highlightEyebrow,
-						})}
-					>
-						{record.eyebrow}
-					</span>
-				)}
-				<h4 class="mb-1 text-base">{record.title}</h4>
-				{record.body && <p class="text-sm text-ink-2">{record.body}</p>}
-				{record.turn && (
-					<p class="mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
-						{record.turnLead && <span class="font-semibold">{record.turnLead}</span>}
-						<span class="ml-1">{record.turn}</span>
-					</p>
-				)}
-			</a>
-				{(linkText || record.link?.text) && <span class="mt-3 block font-mono text-xs text-accent">{linkText ?? record.link.text}</span>}
+					}),
+				}}
+			/>
 		))
 	}
 </div>

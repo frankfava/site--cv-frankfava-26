@@ -1,0 +1,61 @@
+---
+/** One card. Its own surface and copy, no layout and no opinion on what wraps it. */
+import type { _Card } from "@/types";
+import { cn } from "@/utils/class";
+import type { HTMLTag } from "astro/types";
+
+export interface Props {
+	card: _Card;
+	["as"]?: HTMLTag;
+	accent?: "good" | "bad";
+	highlightEyebrow?: boolean;
+	borderHighlight?: boolean;
+	linkText?: string;
+	class?: HTMLAttributes<any>["class:list"];
+}
+
+
+const { card, as: Tag = "a", accent, highlightEyebrow = false, borderHighlight = false, linkText = card.link?.text, class: className, ...rest } = Astro.props;
+
+/** `Link` allows a URL; a dynamic tag will only take a string. */
+const href = Tag === "a" ? card.link?.href?.toString() : undefined;
+---
+
+<Tag
+	href={href}
+	class={cn(
+		"block bg-surface p-4.5 text-left text-ink",
+		className,
+		{
+			"rounded-l-none border-l-3": borderHighlight,
+			"border-l-good": borderHighlight && accent === "good",
+			"border-l-bad": borderHighlight && accent === "bad",
+		},
+	)}
+	{...rest}
+>
+	{
+		card.eyebrow && (
+			<span
+				class={cn("mb-2 block eyebrow", {
+					"text-ink-3": !highlightEyebrow || !accent,
+					"text-good": highlightEyebrow && accent === "good",
+					"text-bad": highlightEyebrow && accent === "bad",
+				})}
+			>
+				{card.eyebrow}
+			</span>
+		)
+	}
+	<h4 class="mb-1 text-base">{card.title}</h4>
+	{card.body && <p class="text-sm text-ink-2">{card.body}</p>}
+	{
+		card.turn && (
+			<p class="mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
+				{card.turnLead && <span class="font-semibold">{card.turnLead}</span>}
+				<span class="ml-1">{card.turn}</span>
+			</p>
+		)
+	}
+	{linkText && <span class="mt-3 block font-mono text-xs text-accent">{linkText}</span>}
+</Tag>
