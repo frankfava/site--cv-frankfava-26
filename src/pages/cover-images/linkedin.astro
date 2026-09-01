@@ -23,9 +23,9 @@ const { imagePlaceholder = false } = Astro.props;
 
 <Layout metadata={metadata}>
 	<div class="grid min-h-screen place-items-center bg-gray-400 text-[14px]">
-		<div class="relative flex flex-col overflow-hidden bg-cover sm:m-4 lg:h-99 lg:w-396 border lg:max-w-none print:max-w-none">
+		<div class="relative flex flex-col overflow-hidden border bg-cover sm:m-4 lg:h-99 lg:w-396 lg:max-w-none print:max-w-none">
 			<div
-				class="relative grow text-white "
+				class="relative grow text-white"
 				style={{
 					"background-image":
 						'url("https://images.unsplash.com/photo-1470790376778-a9fbc86d70e2?q=80&w=2608&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
@@ -34,14 +34,14 @@ const { imagePlaceholder = false } = Astro.props;
 			>
 				<div class="pointer-events-none absolute inset-0 z-1 bg-[#08080e] opacity-98"></div>
 				<div
-					class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)] z-2"
+					class="pointer-events-none absolute inset-0 z-2 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)]"
 				>
 					<ParticleField />
 					<Orb class="right-[-10%] size-150" />
 				</div>
 				<div class="relative z-20 flex h-full flex-col pl-[27%]">
 					<div class="my-auto grid gap-4 text-4xl">
-						<span class="block text-base eyebrow text-cyan-100 font-semibold max-w-200">{ABOUT.focuses.slice(0, 4).join(" · ")}</span>
+						<span class="block max-w-200 eyebrow text-base font-semibold text-cyan-100">{ABOUT.focuses.slice(0, 4).join(" · ")}</span>
 						{DISPLAY.showTagline && DISPLAY.tagline && <Tagline class="text-xl text-white normal-case" tagline={DISPLAY.tagline} />}
 					</div>
 				</div>
