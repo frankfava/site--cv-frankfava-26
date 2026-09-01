@@ -14,7 +14,7 @@ const header: _ModuleHeader = {
 };
 ---
 
-<ModuleWrapper {...{ forceLayout: "stacked", ...props, header }}>
+<ModuleWrapper {...{ ...props, header }}>
 	<Callout title="How to read this" class="mt-0"> Each answer is a real engagement, not a hypothetical. The figures underneath are what that engagement produced. </Callout>
 
 	<Cards {...{ cards: DOSSIERS, columnCount: 4, hoverBorder: true, linkText: "Open dossier →" }} />

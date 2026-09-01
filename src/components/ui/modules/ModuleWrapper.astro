@@ -24,7 +24,7 @@ const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class:
 
 const WrapperTag = as;
 
-const useLayout = forceLayout !== undefined ? forceLayout : "side";
+const useLayout = forceLayout !== undefined ? forceLayout : "stacked";
 
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
 ---
