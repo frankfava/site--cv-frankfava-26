@@ -12,7 +12,7 @@ export interface Props extends JumpRailProps {}
 const { links } = Astro.props;
 
 const blueprintSchema = Astro.locals.blueprint?.blueprint;
-const blueprintSections = blueprintSchema?.getSidebarSections();
+const blueprintSections = blueprintSchema?.getSidebarSections().filter((section) => !section.hidden);
 const blueprintSectionLinks = BlueprintBuilder.menuLinks(blueprintSections ?? []);
 
 const useLinks = blueprintSectionLinks ?? links;

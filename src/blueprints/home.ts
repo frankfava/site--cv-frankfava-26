@@ -25,6 +25,7 @@ export const structure = {
 	},
 	stillRunning: {
 		id: "still-running",
+		hidden: true,
 		title: "The systems still running without me",
 		mainMenuLabel: "What's still running",
 		icon: "ph:hard-drives-duotone",
