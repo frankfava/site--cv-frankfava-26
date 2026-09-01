@@ -53,6 +53,8 @@ const layoutProps: LayoutProps = {
 	header: { isDark: undefined, ...header },
 	footer: { showSocialText: true, ...footer },
 };
+
+const showFooter = entry?.config?.layout?.showFooter ?? true;
 ---
 
 <PageLayout {...layoutProps}>
@@ -90,7 +92,7 @@ const layoutProps: LayoutProps = {
 		{entry && <BlueprintDisplay blueprint={entry.blueprint ? entry.blueprint.assemble() : []} />}
 	</slot>
 
-	<slot slot="footer" name="footer" />
+	<Fragment slot={!showFooter ? "footer" : ""}></Fragment>
 
 	<Fragment slot="afterFooter">
 		<div class="scrim" aria-hidden="true" data-sidebar-scrim></div>
