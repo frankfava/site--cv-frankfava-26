@@ -3,8 +3,6 @@ import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/compon
 import Callout from "@/components/ui/display/Callout.astro";
 import SystemsSplit from "./_partials/SystemsSplit.astro";
 
-import { systemGroups } from "@/data/systems";
-
 export interface Props extends _ModuleWrapper {}
 
 const props = Astro.props;
@@ -13,8 +11,6 @@ const header: _ModuleHeader = {
 	...props.header,
 	title: props.header?.title || "Still running",
 };
-
-const groups = await systemGroups();
 ---
 
 <ModuleWrapper {...{ forceLayout: "stacked", ...props, header }}>
@@ -22,5 +18,5 @@ const groups = await systemGroups();
 		Left column outlived the engagement and is still in service. Right column is good work done inside someone else's system. A green dot means it's live today.
 	</Callout>
 
-	<SystemsSplit groups={groups} />
+	<SystemsSplit />
 </ModuleWrapper>
