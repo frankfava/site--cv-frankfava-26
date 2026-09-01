@@ -1,0 +1,23 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import Callout from "@/components/ui/display/Callout.astro";
+import ScenarioAnswer from "@/components/blueprints/shared/_partials/ScenarioAnswer.astro";
+
+import { SCENARIOS } from "@/data/scenarios";
+import Picker from "@/components/ui/display/Picker.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Your problem",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "stacked", ...props, header }}>
+	<Callout slot="beforeContent" title="How to read this"> Each answer is a real engagement, not a hypothetical. The figures underneath are what that engagement produced. </Callout>
+
+	<Picker {...{ key: "scenarios", cards: SCENARIOS, panel: ScenarioAnswer }} />
+</ModuleWrapper>

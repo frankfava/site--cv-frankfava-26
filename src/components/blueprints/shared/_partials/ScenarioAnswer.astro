@@ -1,0 +1,33 @@
+---
+/** The engagement behind one scenario, for the panel of a `Picker` card. */
+import type { Scenario } from "@/data/scenarios";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends Omit<Scenario, "card" | "key"> {
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { eyebrow, title, body, proof, class: className } = Astro.props;
+---
+
+<div class={cn(className)}>
+	{!!eyebrow && <span class="mb-2.5 block eyebrow text-accent">{eyebrow}</span>}
+	<h3 class="mb-2.5 max-w-[72ch] text-xl">{title}</h3>
+	{!!body && <p class="max-w-[90ch] text-ink-2">{body}</p>}
+
+	{
+		!!proof.length && (
+			<div class="mt-4 flex flex-wrap items-baseline gap-6 border-t border-line-2 pt-3.5">
+				{proof.map((proof) => (
+					<div>
+						<b class="mb-1 block font-primary text-xl leading-none font-extrabold tracking-tight" style='font-variation-settings:"wdth" 88'>
+							{proof.figure}
+						</b>
+						<small class="text-[0.81rem] text-ink-3">{proof.note}</small>
+					</div>
+				))}
+			</div>
+		)
+	}
+</div>
