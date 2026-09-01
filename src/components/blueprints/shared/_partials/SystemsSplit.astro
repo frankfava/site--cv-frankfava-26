@@ -1,16 +1,16 @@
 ---
 /** Two columns of systems: the ones still running, beside the ones handed over. */
 
-import { systemGroups } from "@/data/systems";
+import type { SystemGroup } from "@/data/systems";
 import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
-	class?: string;
+	groups: SystemGroup[];
+	class?: HTMLAttributes<"div">["class:list"];
 }
 
-const { class: className } = Astro.props;
-
-const groups = await systemGroups();
+const { groups, class: className } = Astro.props;
 ---
 
 <div class={cn("grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-6", className)}>
