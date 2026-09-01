@@ -59,6 +59,8 @@ export interface _CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
 }
 
 export interface _Card {
+	/** Names the card's slot when it carries one. Falls back to a slug of the title. */
+	key?: string;
 	title: string;
 	eyebrow?: string;
 	body?: string;

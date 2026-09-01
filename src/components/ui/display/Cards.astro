@@ -6,13 +6,25 @@ import { slugify } from "@/utils/str";
 import Card from "./Card.astro";
 import type { HTMLAttributes } from "astro/types";
 
-export const cardKey = (card: _Card) => card.id ?? slugify(card.title);
+export const cardKey = (card: _Card) => card.key ?? slugify(card.title);
+
+export type ColumnCount = 1 | 2 | 3 | 4 | "auto";
+
+/** Column classes for a card grid. `auto` fills to `--column-width`. */
+export const gridColumns = (columnCount: ColumnCount): string =>
+	({
+		1: "",
+		2: "sm:grid-cols-2",
+		3: "sm:grid-cols-2 xl:grid-cols-3",
+		4: "sm:grid-cols-2 xl:grid-cols-4",
+		auto: "grid-cols-[repeat(auto-fit,minmax(var(--column-width,300px),1fr))]",
+	})[columnCount];
 
 export interface Props<T extends _Card = _Card> {
 	class?: HTMLAttributes<"div">["class:list"];
 	cards?: T[] | (() => Promise<T[]>);
 	spaced?: boolean;
-	columnCount?: 1 | 2 | 3 | 4 | "auto";
+	columnCount?: ColumnCount;
 	columnWidth?: string;
 	accentColor?: "good" | "bad" | ((card: T) => "good" | "bad" | undefined);
 	highlightEyebrow?: boolean;
@@ -42,16 +54,13 @@ const accentColor: (card: _Card) => Accent = typeof accentColorProp === "functio
 ---
 
 <div
-	style={ `--column-width: ${columnWidth}` }
+	style={`--column-width: ${columnWidth}`}
 	class={cn(
 		"grid grid-cols-1",
+		gridColumns(columnCount),
 		{
 			"gap-4": spaced,
 			"gap-px overflow-hidden rounded-lg border border-line-2 bg-line-2": !spaced,
-			"grid-cols-[repeat(auto-fill,minmax(var(--column-width,300px),1fr))]": columnCount === "auto",
-			"sm:grid-cols-2": columnCount === 2,
-			"sm:grid-cols-2 xl:grid-cols-3": columnCount === 3,
-			"sm:grid-cols-2 xl:grid-cols-4": columnCount === 4,
 		},
 		className,
 	)}

@@ -9,28 +9,28 @@ import type { _Card } from "@/types";
 
 export const DOSSIERS: _Card[] = [
 	{
-		id: "solutions-architect",
+		key: "solutions-architect",
 		eyebrow: "Closest match",
 		title: "AI Solutions Architect",
 		body: "The first technical voice a customer hears. Discovery, demos, architecture, business case.",
 		link: { href: "/roles/solutions-architect" },
 	},
 	{
-		id: "engineering-manager",
+		key: "engineering-manager",
 		eyebrow: "Where the signal is",
 		title: "Engineering Manager",
 		body: "Coaching was my first profession, not a second skill. Interim or fixed term suits me best.",
 		link: { href: "/roles/engineering-manager" },
 	},
 	{
-		id: "forward-deployed-engineer",
+		key: "forward-deployed-engineer",
 		eyebrow: "Same job, field org",
 		title: "Forward Deployed Engineer",
 		body: "Embedded with the customer, owning the technical call from first conversation to production.",
 		link: { href: "/roles/forward-deployed-engineer" },
 	},
 	{
-		id: "senior-engineer",
+		key: "senior-engineer",
 		eyebrow: "Proven",
 		title: "Senior Engineer",
 		body: "Eighteen years of it, and genuinely good, but I'm moving toward the customer, not away.",

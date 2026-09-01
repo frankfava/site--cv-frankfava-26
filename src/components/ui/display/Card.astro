@@ -2,7 +2,7 @@
 /** One card. Its own surface and copy, no layout and no opinion on what wraps it. */
 import type { _Card } from "@/types";
 import { cn } from "@/utils/class";
-import type { HTMLTag } from "astro/types";
+import type { HTMLAttributes, HTMLTag } from "astro/types";
 
 export interface Props {
 	card: _Card;
@@ -14,7 +14,6 @@ export interface Props {
 	class?: HTMLAttributes<any>["class:list"];
 }
 
-
 const { card, as: Tag = "a", accent, highlightEyebrow = false, borderHighlight = false, linkText = card.link?.text, class: className, ...rest } = Astro.props;
 
 /** `Link` allows a URL; a dynamic tag will only take a string. */
@@ -23,15 +22,11 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 
 <Tag
 	href={href}
-	class={cn(
-		"block bg-surface p-4.5 text-left text-ink",
-		className,
-		{
-			"rounded-l-none border-l-3": borderHighlight,
-			"border-l-good": borderHighlight && accent === "good",
-			"border-l-bad": borderHighlight && accent === "bad",
-		},
-	)}
+	class={cn("block bg-surface p-4.5 text-left text-ink", className, {
+		"rounded-l-none border-l-3": borderHighlight,
+		"border-l-good": borderHighlight && accent === "good",
+		"border-l-bad": borderHighlight && accent === "bad",
+	})}
 	{...rest}
 >
 	{
