@@ -1,0 +1,50 @@
+---
+/** What each role produced, either grouped under its company or as one flat list. */
+
+import type { HTMLAttributes } from "astro/types";
+import { createWorkHistoryManager, type WorkHistory } from "@/lib/collections/workHistory";
+import { cn } from "@/utils/class";
+
+type AchievementGroup = Pick<WorkHistory.Sanitised, "company"> & { achievements: string[] };
+
+export interface Props {
+	achievements?: AchievementGroup[];
+	splitByCompany?: boolean;
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { achievements, splitByCompany, class: className } = Astro.props;
+
+const groups: AchievementGroup[] =
+	achievements ??
+	(await createWorkHistoryManager())
+		.sort()
+		._restructure()
+		.map(({ company, achievements }) => ({ company, achievements: achievements ?? [] }))
+		.filter((group) => !!group.achievements.length);
+---
+
+{
+	splitByCompany ? (
+		<div class={cn("space-y-3", className)}>
+			{groups.map(({ company, achievements }) => (
+				<div>
+					<h3 class="text-xl font-semibold text-ink">{company}</h3>
+					<ul class="mt-2 ml-6 list-outside list-disc text-ink-3">
+						{achievements.map((achievement) => (
+							<li set:html={achievement} />
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+	) : (
+		<ul class={cn("ml-6 list-outside list-disc space-y-2 text-ink-3", className)}>
+			{groups
+				.flatMap(({ achievements }) => achievements)
+				.map((achievement) => (
+					<li set:html={achievement} />
+				))}
+		</ul>
+	)
+}
