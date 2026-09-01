@@ -26,6 +26,7 @@ export const structure = {
 	stillRunning: {
 		id: "still-running",
 		hidden: true,
+		eyebrow: "What's outlived me",
 		title: "The systems still running without me",
 		mainMenuLabel: "What's still running",
 		icon: "ph:hard-drives-duotone",
@@ -57,7 +58,7 @@ export const structure = {
 		description: "Same evidence, reordered for the role it is aimed at, each with a one-page version you can forward.",
 		mainMenuLabel: "Which version to send",
 		icon: "ph:paper-plane-tilt-duotone",
-		content: async () => import("@/components/blueprints/shared/RoleDoissiers.astro"),
+		content: async () => import("@/components/blueprints/shared/RoleDossiers.astro"),
 	},
 	fullRecord: {
 		id: "full-record",
