@@ -22,7 +22,7 @@ export interface Props extends LayoutProps {
 	fullHeight?: boolean;
 }
 
-const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, fullHeight, sidebar, ...rest } = Astro.props;
+const { blueprint: entry, contentLinks, showRail, header, footer, showSidebar, showFooter: showFooterProp, fullHeight, sidebar, ...rest } = Astro.props;
 
 Astro.locals.blueprint = entry;
 
@@ -45,20 +45,30 @@ if (fullHeight != undefined) {
 	useFullHeight = entry.config.layout.fullHeight;
 }
 
+const showFooter = entry?.config?.layout?.showFooter ?? showFooterProp;
+
 const layoutProps: LayoutProps = {
 	...rest,
 	bodyClass: "indexed",
 	showSidebar: useSidebar,
 	fullHeight: useFullHeight,
+	showFooter,
 	header: { isDark: undefined, ...header },
 	footer: { showSocialText: true, ...footer },
 };
 
-const showFooter = entry?.config?.layout?.showFooter ?? true;
+const _header = await Astro.slots.render("header");
+const _footer = await Astro.slots.render("footer");
+const _sidebarToggle = await Astro.slots.render("_sidebarToggle");
+const _sidebar = await Astro.slots.render("sidebar");
+const _content = await Astro.slots.render("default");
+const _rail = await Astro.slots.render("rail");
 ---
 
 <PageLayout {...layoutProps}>
-	<slot slot="sidebarToggle" name="sidebarToggle"><ToggleBay /></slot>
+	<Fragment slot={!!_header?.trim() ? "header" : ""} set:html={_header} />
+
+	<Fragment slot="sidebarToggle">{_sidebarToggle?.trim() ? <Fragment set:html={_sidebarToggle} /> : <ToggleBay />}</Fragment>
 
 	<Fragment slot="beforeMenu">
 		{DISPLAY.showTagline && DISPLAY.tagline && <Tagline class="hidden xl:block" tagline={DISPLAY.tagline} />}
@@ -74,10 +84,13 @@ const showFooter = entry?.config?.layout?.showFooter ?? true;
 
 	<slot slot="hero" name="hero" />
 
-	<slot slot="sidebar" name="sidebar">
-		{
+	{
+		_sidebar?.trim() ? (
+			<Fragment slot="sidebar" set:html={_sidebar} />
+		) : (
 			useSidebar && (
 				<IndexBay
+					slot="sidebar"
 					{...{
 						navLinks: layoutProps.header?.links ?? [],
 						links: contentLinks,
@@ -85,24 +98,18 @@ const showFooter = entry?.config?.layout?.showFooter ?? true;
 					}}
 				/>
 			)
-		}
-	</slot>
+		)
+	}
 
-	<slot>
-		{entry && <BlueprintDisplay blueprint={entry.blueprint ? entry.blueprint.assemble() : []} />}
-	</slot>
+	<Fragment slot={!!_footer?.trim() ? "footer" : ""} set:html={_footer} />
 
-	<Fragment slot={!showFooter ? "footer" : ""}></Fragment>
+	<Fragment>
+		{_content?.trim() ? <Fragment set:html={_content} /> : entry && <BlueprintDisplay blueprint={entry.blueprint ? entry.blueprint.assemble() : []} />}
+	</Fragment>
 
 	<Fragment slot="afterFooter">
 		<div class="scrim" aria-hidden="true" data-sidebar-scrim></div>
-		{
-			useRail && (
-				<slot name="rail">
-					<IndexRail links={contentLinks} />
-				</slot>
-			)
-		}
+		{useRail && (_rail?.trim() ? <Fragment set:html={_rail} /> : <IndexRail links={contentLinks} />)}
 		<slot name="afterFooter" />
 		<PersonJsonLd />
 	</Fragment>

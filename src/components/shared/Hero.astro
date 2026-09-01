@@ -15,47 +15,58 @@ export interface Props {
 
 const { title, description, eyebrow, facts = [], actions = [], class: className } = Astro.props;
 
-const eyebrowSlot = await Astro.slots.render("eyebrow");
+const _background = await Astro.slots.render("background");
+const _backgroundAnimation = await Astro.slots.render("backgroundAnimation");
+const _forehead = await Astro.slots.render("forehead");
+const _eyebrow = await Astro.slots.render("eyebrow");
+const _heading = await Astro.slots.render("heading");
+const _lead = await Astro.slots.render("lead");
+const _actions = await Astro.slots.render("actions");
 ---
 
 <header class={cn("relative overflow-hidden border-b border-line bg-[#08080e] text-[#f2f2f8]", className)}>
-	<slot name="background">
-		<div
-			class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)]"
-		>
-		</div>
-		<slot name="backgroundAnimation"><ParticleField /></slot>
-	</slot>
+	{
+		_background?.trim() ? (
+			<Fragment set:html={_background} />
+		) : (
+			<>
+				<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(760px_420px_at_16%_8%,rgba(34,211,238,0.2),transparent_62%),radial-gradient(720px_460px_at_84%_92%,rgba(139,92,246,0.24),transparent_60%)]" />
+				{_backgroundAnimation?.trim() ? <Fragment set:html={_backgroundAnimation} /> : <ParticleField />}
+			</>
+		)
+	}
 
 	<div class="relative mx-auto max-w-(--content-width) px-5.5 pt-12.5 pb-11 md:px-8.5 md:pt-18 md:pb-15">
-		{(!!eyebrowSlot?.trim() || eyebrow) && <span class="mb-5 block eyebrow text-cyan-200">{!!eyebrowSlot?.trim() ? <Fragment set:html={eyebrowSlot} /> : eyebrow}</span>}
+		{_forehead?.trim() && <Fragment set:html={_forehead} />}
 
-		<h1
-			class="heading-display max-w-[20ch] text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold text-white! [&_b]:bg-[linear-gradient(96deg,#67e8f9,#c4b5fd_60%,#f0abfc)] [&_b]:bg-clip-text [&_b]:text-transparent"
-		>
-			<slot name="heading">{title}</slot>
-		</h1>
+		{_eyebrow?.trim() ? <Fragment set:html={_eyebrow} /> : eyebrow && <span class="mb-5 block eyebrow text-cyan-200">{eyebrow}</span>}
 
 		{
-			(description || Astro.slots.has("lead")) && (
-				<p class="mt-5 max-w-[58ch] text-[1.08rem] text-[#a8a8bd] [&_b]:font-semibold [&_b]:text-white">
-					<slot name="lead">{description}</slot>
-				</p>
+			_heading?.trim() ? (
+				<Fragment set:html={_heading} />
+			) : (
+				<h1 class="heading-display max-w-[20ch] text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold text-white! [&_b]:bg-[linear-gradient(96deg,#67e8f9,#c4b5fd_60%,#f0abfc)] [&_b]:bg-clip-text [&_b]:text-transparent">
+					{title}
+				</h1>
 			)
 		}
 
-		{
-			!!facts.length && (
-				<div class="mt-7 flex flex-wrap gap-2">
-					{facts.map((f) => (
-						<span class="rounded-full border border-[#26263a] bg-white/4 px-3.5 py-1.5 text-[0.88rem] text-[#a8a8bd]">
-							<b class="font-semibold text-white">{f.value}</b> {f.label}
-						</span>
-					))}
-				</div>
-			)
-		}
+		{_lead?.trim() ? <Fragment set:html={_lead} /> : description && <p class="mt-5 max-w-[58ch] text-[1.08rem] text-[#a8a8bd] [&_b]:font-semibold [&_b]:text-white">{description}</p>}
 
-		{!!actions.length && <ButtonGroup actions={actions} class="mt-7 gap-4" btnClass="rounded-full py-2.5 px-5.5 md:px-6" />}
+		<slot>
+			{
+				!!facts.length && (
+					<div class="mt-7 flex flex-wrap gap-2">
+						{facts.map((f) => (
+							<span class="rounded-full border border-[#26263a] bg-white/4 px-3.5 py-1.5 text-[0.88rem] text-[#a8a8bd]">
+								<b class="font-semibold text-white">{f.value}</b> {f.label}
+							</span>
+						))}
+					</div>
+				)
+			}
+		</slot>
+
+		{_actions?.trim() ? <Fragment set:html={_actions} /> : !!actions.length && <ButtonGroup actions={actions} class="mt-7 gap-4" btnClass="rounded-full py-2.5 px-5.5 md:px-6" />}
 	</div>
 </header>

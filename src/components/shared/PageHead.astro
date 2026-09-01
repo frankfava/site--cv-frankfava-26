@@ -1,0 +1,34 @@
+---
+/**
+ * The band at the top of a deeper page.
+ *
+ * The home page's hero, titled from the blueprint it heads, so a page's name and
+ * standfirst are written once. A page picks its own background by filling
+ * `backgroundAnimation`, and gets Hero's particle field when it does not.
+ */
+
+import Hero, { type Props as HeroProps } from "@/components/shared/Hero.astro";
+import type { Link } from "@/types";
+import { cn } from "@/utils/class";
+
+export interface Props extends HeroProps {
+	backLink?: Link;
+}
+
+const { title, description, backLink, class: className, ...hero } = Astro.props;
+---
+
+<Hero {...hero} {title} {description} class={cn("dark", className)}>
+	<Fragment slot="forehead">
+		{backLink && <a href={backLink.href} class="mb-5.5 inline-block font-mono text-[0.76rem] tracking-[0.06em] text-[#a8a8bd] hover:text-white" set:html={backLink.text} />}
+		<slot name="forehead" />
+	</Fragment>
+
+	<slot name="background" slot="background" />
+	<slot name="backgroundAnimation" slot="backgroundAnimation" />
+	<slot name="eyebrow" slot="eyebrow" />
+	<slot name="heading" slot="heading" />
+	<slot name="lead" slot="lead" />
+	<slot slot="default" />
+	<slot name="actions" slot="actions" />
+</Hero>

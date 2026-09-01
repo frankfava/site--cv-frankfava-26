@@ -1,0 +1,50 @@
+---
+/**
+ * An adaptive layout for indexed pages.
+ */
+
+import PageHead, { type Props as PageHeadProps } from "@/components/shared/PageHead.astro";
+import IndexedLayout, { type Props as IndexedLayoutProps } from "./IndexedLayout.astro";
+
+export interface Props extends IndexedLayoutProps {
+	head?: PageHeadProps;
+}
+
+const { blueprint, head, ...layoutProps } = Astro.props;
+---
+
+<IndexedLayout {...{ ...layoutProps, blueprint }}>
+	<PageHead
+		slot="hero"
+		{...{
+			title: blueprint?.title,
+			description: blueprint?.description,
+			eyebrow: "The full record",
+			backLink: {
+				href: "/",
+				text: "&larr; Back to the front page",
+			},
+			...head,
+		}}
+	>
+		<slot name="background" slot="background" />
+		<slot name="backgroundAnimation" slot="backgroundAnimation" />
+		<slot name="forehead" slot="forehead" />
+		<slot name="eyebrow" slot="eyebrow" />
+		<slot name="heading" slot="heading" />
+		<slot name="lead" slot="lead" />
+		<slot name="actions" slot="actions" />
+	</PageHead>
+
+	<slot slot="sidebarToggle" name="sidebarToggle" />
+	<slot slot="beforeMenu" name="beforeMenu" />
+	<slot slot="afterMenu" name="afterMenu" />
+	<slot slot="beforeActions" name="beforeActions" />
+	<slot slot="afterActions" name="afterActions" />
+	<slot slot="sidebar" name="sidebar" />
+	<slot slot="footer" name="footer" />
+	<slot slot="rail" name="rail" />
+	<slot slot="afterFooter" name="afterFooter" />
+
+	<slot />
+</IndexedLayout>

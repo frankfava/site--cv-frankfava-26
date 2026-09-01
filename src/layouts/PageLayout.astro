@@ -8,13 +8,14 @@ export interface Props extends BaseLayoutProps {
 	header?: HeaderProps;
 	footer?: FooterProps;
 	showSidebar?: boolean;
+	showFooter?: boolean;
 	/** Move the hero inside the content column, beside a sidebar that is full height from the first paint. */
 	fullHeight?: boolean;
 	footerInContent?: boolean;
 	showScrollTop?: boolean;
 }
 
-const { header, footer, showSidebar, fullHeight = false, footerInContent = true, showScrollTop = true, ...baseLayoutProps } = Astro.props;
+const { header, footer, showSidebar, showFooter = true, fullHeight = false, footerInContent = true, showScrollTop = true, ...baseLayoutProps } = Astro.props;
 
 const sidebar = await Astro.slots.render("sidebar");
 const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim();
@@ -49,7 +50,7 @@ const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim(
 					{fullHeight && <slot name="hero" />}
 					<slot />
 					{
-						footerInContent && (
+						footerInContent && showFooter && (
 							<slot name="footer">
 								<MainFooter {...footer} />
 							</slot>
@@ -60,7 +61,7 @@ const useSidebar = showSidebar && Astro.slots.has("sidebar") && !!sidebar?.trim(
 		</main>
 
 		{
-			!footerInContent && (
+			!footerInContent && showFooter && (
 				<div class:list={["px-5 pb-15 transition-[margin-left] duration-300 ease-[cubic-bezier(0.3,0.8,0.3,1)] sm:px-10.5 sm:pb-17.5"]}>
 					<slot name="footer">
 						<MainFooter {...footer} />
