@@ -1,7 +1,7 @@
 import { themeToggle } from "./themeToggle.js";
 import { skillsComponent } from "./skillsComponent.js";
 import { projectsComponent } from "./projectsComponent.js";
-import { workHistoryAccordion } from "./workHistoryAccordion.js";
+import { workHistoryAccordion } from "./collections/workHistoryAccordion.js";
 import { particleField } from "./backgrounds/particleField.js";
 import { orb } from "./backgrounds/orb.js";
 import { hologram } from "./backgrounds/hologram.js";

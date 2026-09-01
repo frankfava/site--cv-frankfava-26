@@ -1,0 +1,113 @@
+---
+/** Every role as a timeline of collapsible entries, most recent first. */
+
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+import { getWorkHistory, Manager, type WorkHistory } from "@/lib/collections/workHistory";
+import { dateFormatter } from "@/utils/datetime";
+import { cn } from "@/utils/class";
+
+export interface Props {
+	workHistory?: WorkHistory.Collection;
+	startOpen?: boolean;
+	showAchievements?: boolean;
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { workHistory: list = await getWorkHistory(), showAchievements = false, startOpen = true, class: className } = Astro.props;
+
+const formatDate = dateFormatter().monthAndYear();
+
+// The collection arrives in alphabetical id order, which buries the current role at the bottom.
+const roles = new Manager(list)
+	.sort()
+	._restructure()
+	.map((role) => {
+		const details = [{ title: "Responsibilities/Tasks", items: role.responsibilities ?? [] }, ...(showAchievements ? [{ title: "Achievements", items: role.achievements ?? [] }] : [])].filter(
+			({ items }) => !!items.length,
+		);
+
+		const showContent = !!details.length || !!role.skills.length;
+		const bodyId = `work-history-${role.id}`;
+
+		return {
+			...role,
+			details,
+			showContent,
+			bodyId,
+			headingId: `${bodyId}-heading`,
+			// Alpine only reaches rows that have something to collapse.
+			scope: showContent ? { "x-data": "workHistoryAccordion", "data-start-open": String(startOpen) } : {},
+			toggle: showContent ? { "@click": "toggle", "x-bind:aria-expanded": "open", "aria-controls": bodyId } : {},
+		};
+	});
+---
+
+<div class={cn("relative mt-4 grid border-s border-line text-ink-2", className)}>
+	{
+		roles.map(({ company, role, location, locationType, summary, startDate, endDate, skills, details, showContent, bodyId, headingId, scope, toggle }, i) => (
+			<>
+				<div class="ml-5">
+					<span class:list={["absolute -start-3 mt-4 flex size-6 items-center justify-center rounded-full ring-4 ring-ground", endDate ? "bg-accent" : "bg-good"]}>
+						<Icon name={endDate ? "ph:star" : "ph:star-fill"} class="size-3 text-white" />
+					</span>
+
+					<div class="px-4 pb-4" {...scope}>
+						<button type="button" class="flex w-full items-start justify-between gap-3 py-3 text-left" class:list={{ "cursor-default": !showContent }} {...toggle}>
+							<div class="grid grow gap-2">
+								<h3 id={headingId} class="text-xl font-semibold text-ink">
+									{role}
+								</h3>
+								<div class="font-semibold">
+									<div class="text-ink-3">{company}</div>
+									{(location || locationType) && (
+										<div class="text-sm font-normal text-ink">
+											{location && <span>{location}</span>}
+											{locationType && <span class:list={{ "ml-2": location }}>({locationType === "Office-First" ? "Hybrid - Office First" : locationType})</span>}
+										</div>
+									)}
+								</div>
+								<time class="flex gap-2 leading-none font-normal text-ink-3">
+									<span>{formatDate(startDate)}</span>
+									&dash;
+									<span>{endDate ? formatDate(endDate) : "Present"}</span>
+								</time>
+								{summary && <p class="m-0 mt-2 text-base font-normal text-ink">{summary}</p>}
+							</div>
+							{showContent && <Icon name="ph:caret-up-bold" class="size-5 shrink-0 transition" x-bind:class="caretClass" />}
+						</button>
+
+						{showContent && (
+							// Rendered closed so the panel cannot flash open before Alpine initialises.
+							<div id={bodyId} role="region" aria-labelledby={headingId} x-show="open" style={startOpen ? undefined : "display: none"}>
+								<div class="grid gap-3 text-ink-3">
+									{details.map(({ title, items }) => (
+										<div class="mt-2">
+											<div class="mb-1 font-semibold">{title}</div>
+											<ul class="ml-6 list-outside list-disc">
+												{items.map((item) => (
+													<li>{item}</li>
+												))}
+											</ul>
+										</div>
+									))}
+									{!!skills.length && (
+										<div class="mt-2">
+											<div class="mb-1 font-semibold">Skills</div>
+											<ul class="mt-2 flex flex-wrap gap-2 text-sm">
+												{skills.map((skill) => (
+													<li class="rounded border border-line px-2 py-1">{skill}</li>
+												))}
+											</ul>
+										</div>
+									)}
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
+				{i < roles.length - 1 && <div class="my-4 border-b border-line" />}
+			</>
+		))
+	}
+</div>
