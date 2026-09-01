@@ -22,7 +22,7 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 
 <Tag
 	href={href}
-	class={cn("block bg-surface p-4.5 text-left text-ink", className, {
+	class={cn("card block bg-surface text-left text-ink", className, {
 		"rounded-l-none border-l-3": borderHighlight,
 		"border-l-good": borderHighlight && accent === "good",
 		"border-l-bad": borderHighlight && accent === "bad",
@@ -32,7 +32,7 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 	{
 		card.eyebrow && (
 			<span
-				class={cn("mb-2 block eyebrow", {
+				class={cn("card--eyebrow mb-2 block eyebrow", {
 					"text-ink-3": !highlightEyebrow || !accent,
 					"text-good": highlightEyebrow && accent === "good",
 					"text-bad": highlightEyebrow && accent === "bad",
@@ -42,15 +42,15 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 			</span>
 		)
 	}
-	<h4 class="mb-1 text-base">{card.title}</h4>
-	{card.body && <p class="text-sm text-ink-2">{card.body}</p>}
+	<h4 class="card--title mb-1 text-base">{card.title}</h4>
+	{card.body && <p class="card--body text-sm text-ink-2">{card.body}</p>}
 	{
 		card.turn && (
-			<p class="mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
+			<p class="card--turn mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
 				{card.turnLead && <span class="font-semibold">{card.turnLead}</span>}
 				<span class="ml-1">{card.turn}</span>
 			</p>
 		)
 	}
-	{linkText && <span class="mt-3 block font-mono text-xs text-accent">{linkText}</span>}
+	{linkText && <span class="card--link mt-3 block font-mono text-xs text-accent">{linkText}</span>}
 </Tag>

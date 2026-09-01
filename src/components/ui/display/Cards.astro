@@ -56,7 +56,7 @@ const accentColor: (card: _Card) => Accent = typeof accentColorProp === "functio
 <div
 	style={`--column-width: ${columnWidth}`}
 	class={cn(
-		"grid grid-cols-1",
+		"cards grid grid-cols-1",
 		gridColumns(columnCount),
 		{
 			"gap-4": spaced,
@@ -74,7 +74,7 @@ const accentColor: (card: _Card) => Accent = typeof accentColorProp === "functio
 					highlightEyebrow,
 					borderHighlight,
 					accent: accentColor(card),
-					class: cn({
+					class: cn("p-4.5", {
 						"rounded-lg border border-line": spaced,
 						"transition-colors hover:bg-sunk": !spaced,
 						"transition-colors hover:border-accent": hoverBorder,
