@@ -1,0 +1,18 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import AchievementsList from "./_partials/AchievementsList.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Achievements",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "stacked", ...props, header }}>
+	<p>A quick list of notable achievements throughout my career from most to least recent.</p>
+	<AchievementsList splitByCompany />
+</ModuleWrapper>

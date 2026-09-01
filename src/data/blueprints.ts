@@ -13,9 +13,11 @@
 
 import type { BlueprintEntry } from "../lib/blueprints/types";
 import { entry as home } from "../blueprints/home";
+import { entry as experience } from "../blueprints/experience";
 
 export const blueprints: Record<string, BlueprintEntry> = {
 	home,
+	experience,
 };
 
 export const blueprintSlugs: string[] = Object.keys(blueprints);
