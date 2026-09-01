@@ -7,6 +7,7 @@ import { orb } from "./backgrounds/orb.js";
 import { hologram } from "./backgrounds/hologram.js";
 import { capabilityStore, capabilityPanel, capabilityRow, fitDial, CAPABILITY_STORE } from "./capability";
 import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, careerDoughnut, careerArc, CAREER_STORE } from "./career";
+import { pickerStore, picker, pickerItem, PICKER_STORE } from "./picker";
 
 export default (Alpine) => {
 	Alpine.data("themeToggle", themeToggle);
@@ -31,4 +32,8 @@ export default (Alpine) => {
 	Alpine.data("careerBar", careerBar);
 	Alpine.data("careerDoughnut", careerDoughnut);
 	Alpine.data("careerArc", careerArc);
+
+	Alpine.store(PICKER_STORE, pickerStore());
+	Alpine.data("picker", picker);
+	Alpine.data("pickerItem", pickerItem);
 };

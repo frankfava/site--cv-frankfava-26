@@ -1,0 +1,105 @@
+---
+/**
+ * Cards you choose between, above the one panel that answers the chosen card.
+ *
+ * Every panel is rendered, so all of them stay selectable text and reach the
+ * search index; only which one shows is decided on the client.
+ *
+ * A panel comes either from `panel`, a component handed each card, or from the
+ * slot named for that card's `cardKey`. The component is what a list of any
+ * length needs: Astro cannot take a slot name from a loop variable, so slots
+ * have to be written out one per card.
+ */
+import type { _Card } from "@/types";
+import Card from "./Card.astro";
+import { cardKey, gridColumns, type ColumnCount } from "./Cards.astro";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+/** A card may nest the card its tile shows, keeping the panel's own copy separate. */
+type PickerCard = _Card & { card?: _Card };
+
+export interface Props<T extends PickerCard = PickerCard> {
+	/** Names this picker, so several can share a page. */
+	key: string;
+	cards?: T[] | (() => Promise<T[]>);
+	/** Renders one card's panel. Receives the card. */
+	panel?: AstroComponentFactory;
+	columnCount?: ColumnCount;
+	columnWidth?: string;
+	/** Merged onto every tile, pressable or not. */
+	cardClass?: HTMLAttributes<"div">["class:list"];
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { key, cards = [], panel: Panel, columnCount = "auto", columnWidth = "222px", cardClass, class: className } = Astro.props;
+
+const cardsData: PickerCard[] = typeof cards === "function" ? await cards() : cards;
+
+const items = await Promise.all(
+	cardsData.map(async (data) => {
+		const itemKey = cardKey(data);
+		/** The tile shows the nested card where there is one, so the panel keeps its own copy. */
+		return { data, tile: data.card ?? data, itemKey, html: Astro.slots.has(itemKey) ? await Astro.slots.render(itemKey) : "" };
+	}),
+);
+
+/** Only a card with something behind it is worth pressing; the rest stay plain. */
+const options = Panel ? items : items.filter((item) => !!item.html);
+
+const opening = options[0]?.itemKey;
+
+const isOption = (itemKey: string) => options.some((option) => option.itemKey === itemKey);
+
+/** The question is asked, not announced, so it stays body text rather than a heading. */
+const cardBase = `picker--card rounded-lg border border-line px-4 py-3.5 [&_.eyebrow]:text-[0.7rem] [&_h4]:font-secondary [&_h4]:text-[0.94rem] [&_h4]:leading-snug [&_h4]:font-normal [&_.card--title]:before:content-['"'] [&_.card--title]:after:content-['"'] [&_.card--title]:italic`;
+---
+
+<div class={cn("flex flex-col gap-3", className)} x-data={opening ? "picker" : undefined} data-picker={opening ? key : undefined} data-key={opening}>
+	<div class={cn("grid grid-cols-1 gap-2", gridColumns(columnCount))} style={`--column-width: ${columnWidth}`}>
+		{
+			items.map((item) =>
+				isOption(item.itemKey) ? (
+					<Card
+						{...{
+							card: item.tile,
+							as: "button",
+							type: "button",
+							class: cn(
+								cardBase,
+								"flex cursor-pointer flex-col transition-colors hover:border-accent aria-pressed:border-accent aria-pressed:bg-accent-soft aria-pressed:[&_.eyebrow]:text-accent",
+								cardClass,
+							),
+							"x-data": "pickerItem",
+							"data-key": item.itemKey,
+							"x-on:click": "select",
+							"x-bind:aria-pressed": "pressed",
+						}}
+					/>
+				) : (
+					<Card {...{ card: item.tile, as: "div", class: cn(cardBase, cardClass) }} />
+				),
+			)
+		}
+	</div>
+
+	{
+		!!options.length && (
+			<div aria-live="polite">
+				{options.map((option) => (
+					<div
+						class="picker--panel rounded-lg border border-line bg-surface px-6 pt-5.5 pb-5 shadow-(--c-shadow)"
+						x-data="pickerItem"
+						data-key={option.itemKey}
+						x-show="shown"
+						x-bind:class="fadeClass"
+						style={option.itemKey === opening ? undefined : "display:none"}
+					>
+						{option.html ? <Fragment set:html={option.html} /> : Panel && <Panel {...option.data} />}
+					</div>
+				))}
+			</div>
+		)
+	}
+</div>

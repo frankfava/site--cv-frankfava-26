@@ -492,6 +492,21 @@ html {
 	}
 }
 
+/* ---------- picker ---------- */
+
+/* Alpine adds this class on a change of selection, so it is never a class
+   Tailwind can scan for. */
+.is-fading {
+	animation: fade-up 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+}
+
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
