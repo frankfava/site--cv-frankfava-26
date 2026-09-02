@@ -1,0 +1,57 @@
+[
+	{
+		"id": "sales-and-business-development",
+		"order": 10,
+		"title": "Sales and Business development",
+		"summary": "Self-employed mastery of B2B/B2C sales - 90%+ revenue from referrals; scaled to 160+ projects via freelancers.",
+		"icon": "ph:handshake-duotone",
+		"keywords": ["sales", "business-development", "b2b", "b2c", "referrals", "freelance"]
+	},
+	{
+		"id": "customer-service",
+		"order": 20,
+		"title": "Customer Service",
+		"summary": "Under-promise, over-deliver - clear communication and exceeding expectations build lasting customer trust.",
+		"icon": "ph:smiley-duotone",
+		"keywords": ["customer-service", "communication", "trust", "expectations"]
+	},
+	{
+		"id": "ability-to-lead",
+		"order": 30,
+		"title": "Ability to Lead",
+		"summary": "Bridging cross-functional teams and motivating people to do their best work, informed by years of coaching.",
+		"icon": "ph:compass-duotone",
+		"keywords": ["leadership", "cross-functional", "motivation", "coaching"]
+	},
+	{
+		"id": "team-player",
+		"order": 40,
+		"title": "Team Player",
+		"summary": "Adaptability, trust and shared goals - leading developers while collaborating with sales and design under deadline pressure.",
+		"icon": "ph:users-three-duotone",
+		"keywords": ["collaboration", "teamwork", "adaptability", "cross-functional"]
+	},
+	{
+		"id": "coaching-skills",
+		"order": 50,
+		"title": "Coaching Skills",
+		"summary": "5+ years guiding individuals and business owners to expand their internal map and drive performance through communication.",
+		"icon": "ph:lightbulb-duotone",
+		"keywords": ["coaching", "communication", "mindset", "personal-growth"]
+	},
+	{
+		"id": "project-management",
+		"order": 60,
+		"title": "Project Management",
+		"summary": "Goal-based delivery on time and budget - clear goals, accurate estimates, agile iteration, reusable foundations.",
+		"icon": "ph:kanban-duotone",
+		"keywords": ["project-management", "agile", "estimation", "delivery"]
+	},
+	{
+		"id": "languages",
+		"order": 70,
+		"title": "Languages",
+		"icon": "ph:translate-duotone",
+		"keywords": ["languages", "communication"]
+	}
+]

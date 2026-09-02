@@ -196,6 +196,24 @@ const career = defineCollection({
 	}),
 });
 
+/**
+ * Transferable Skills
+ *
+ * `summary` is optional because the language list lives in site config, and a
+ * copy of it here would be a second source for the same list. Entries without
+ * one have it resolved in `lib/collections/transferableSkills.ts`.
+ */
+const transferableSkills = defineCollection({
+	loader: file("src/data/transferableSkills.json"),
+	schema: z.object({
+		order: z.number().int().positive(),
+		title: z.string(),
+		summary: z.string().optional(),
+		icon: z.string().optional(),
+		keywords: z.array(z.string()).optional(),
+	}),
+});
+
 export const collections = {
 	skills,
 	projects,
@@ -203,4 +221,5 @@ export const collections = {
 	workHistory,
 	testimonials,
 	career,
+	transferableSkills,
 };

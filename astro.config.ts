@@ -88,6 +88,9 @@ export default defineConfig({
 				"src/data/career.json": {
 					CareerYearId: "id",
 				},
+				"src/data/transferableSkills.json": {
+					TransferableSkillId: "id",
+				},
 			},
 		}),
 		// Update `robots.txt` with `sitemap-index.xml

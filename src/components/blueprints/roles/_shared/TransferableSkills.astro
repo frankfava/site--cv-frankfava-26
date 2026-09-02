@@ -2,16 +2,14 @@
 import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
 import { Icon } from "astro-icon/components";
 import type { Role } from "@/lib/roles";
-import { getTransferableSkillById } from "@/utils/transferableSkills";
+import { getTransferableSkillsByIds } from "@/lib/collections/transferableSkills";
 import CapabilityRadar from "@/components/blueprints/shared/_partials/CapabilityRadar.astro";
 
 export interface Props extends _ModuleWrapper {}
 
 // Read by BlueprintSectionBuild - empty result hides the whole section.
 export async function resolve(role: Role | undefined) {
-	const featured = role?.featuredTransferableSkills ?? [];
-	if (featured.length === 0) return [];
-	return featured.map((id) => getTransferableSkillById(id)).filter((t): t is NonNullable<typeof t> => !!t);
+	return getTransferableSkillsByIds(role?.featuredTransferableSkills ?? []);
 }
 
 const props = Astro.props;

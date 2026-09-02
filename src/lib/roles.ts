@@ -1,6 +1,5 @@
-import type { CertificationId, SkillId } from "content:ids";
+import type { CertificationId, SkillId, TransferableSkillId } from "content:ids";
 import { getCollection } from "astro:content";
-import { getTransferableSkills } from "@/utils/transferableSkills";
 import type { BlueprintEntry } from "@/lib/blueprints";
 
 import { definition as solutionsArchitect, entry as solutionsArchitectEntry } from "@/blueprints/roles/solutions-architect";
@@ -77,7 +76,7 @@ export interface RoleDefinition {
 	/** Certifications to spotlight on this role page (refs into the certifications collection). */
 	featuredCertifications?: CertificationId[];
 	/** Transferable skills to spotlight on this role page (refs into the transferableSkills collection). */
-	featuredTransferableSkills?: string[];
+	featuredTransferableSkills?: TransferableSkillId[];
 	featuredCaseStudies?: string[];
 	/** Recruiter-facing "what I bring → what the role needs" bridges. */
 	mappings?: RoleMapping[];
@@ -112,16 +111,15 @@ export const onlyEnabledRoles = (roles: Role[]): Role[] => roles.filter(roleIsEn
 export const onlyVisibleRoles = (roles: Role[]): Role[] => roles.filter(roleIsVisible);
 
 /**
- * The featured arrays hold ids as plain strings, so nothing catches a stale one
- * and the section it feeds renders empty instead of failing. Existence only: a
- * project that is draft or unlisted is still a valid target.
+ * Projects and case studies are referenced by plain string, so nothing catches a
+ * stale id and the section it feeds renders empty instead of failing. Existence
+ * only: a project that is draft or unlisted is still a valid target.
  */
 export async function findBrokenFeaturedIds(): Promise<string[]> {
 	const projects = await getCollection("projects");
 	const byId = new Map(projects.map((project) => [project.id, project]));
-	const transferableIds = new Set(getTransferableSkills().map(({ id }) => id));
 
-	return DEFINITIONS.flatMap(({ slug, featuredProjects = [], featuredCaseStudies = [], featuredTransferableSkills = [] }) => [
+	return DEFINITIONS.flatMap(({ slug, featuredProjects = [], featuredCaseStudies = [] }) => [
 		...featuredProjects.filter((id) => !byId.has(id)).map((id) => `${slug}: featuredProjects "${id}" matches no project`),
 		...featuredCaseStudies
 			.map((id) => {
@@ -131,6 +129,5 @@ export async function findBrokenFeaturedIds(): Promise<string[]> {
 				return "";
 			})
 			.filter(Boolean),
-		...featuredTransferableSkills.filter((id) => !transferableIds.has(id)).map((id) => `${slug}: featuredTransferableSkills "${id}" matches no transferable skill`),
 	]);
 }
