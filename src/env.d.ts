@@ -52,6 +52,8 @@ declare namespace App {
 	interface Locals {
 		/** The active page's blueprint entry. */
 		blueprint?: import("@/lib/blueprints").BlueprintEntry;
+		/** Anchor ids of the current page's visible sections, so a link can tell an in-page target from an off-page one. */
+		roleAnchorIds?: string[];
 	}
 }
 

@@ -1,23 +1,29 @@
 ---
-import BlueprintLayout from "@/layouts/BlueprintLayout.astro";
-import { onlyEnabledRoles, ROLES } from "@/data/roleDefinitions";
-import type { BlueprintEntry } from "@/lib/blueprints";
+import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+import { onlyEnabledRoles, ROLES } from "@/data/roles";
+import { getRole } from "@/data/roleDefinitions";
 import { buildRolePageContext } from "@/utils/rolePageContext";
 
 export async function getStaticPaths() {
-	return onlyEnabledRoles(ROLES).map((role) => ({
-		params: { slug: role.slug },
-		props: { entry: role as BlueprintEntry },
-	}));
+	return onlyEnabledRoles(ROLES).map(({ slug }) => ({ params: { slug } }));
 }
 
-interface Props {
-	entry: BlueprintEntry;
-}
+const { slug } = Astro.params;
+// getStaticPaths only emits slugs the registry has, so the lookup cannot miss.
+const role = getRole(slug!)!;
 
-const { entry } = Astro.props;
-const { roleAnchorIds, metadata } = buildRolePageContext({ entry });
+const { roleAnchorIds, metadata } = buildRolePageContext({ entry: role });
 Astro.locals.roleAnchorIds = roleAnchorIds;
 ---
 
-<BlueprintLayout metadata={metadata} blueprint={entry} />
+<SubIndexedLayout
+	{...{
+		metadata,
+		blueprint: role,
+		head: {
+			eyebrow: "Role dossier",
+			backLink: { href: "/", text: "&larr; Back to the front page" },
+			actions: [{ text: "One-Pager", href: `/roles/${slug}/one-pager`, icon: "ph:file-pdf-duotone" }],
+		},
+	}}
+/>

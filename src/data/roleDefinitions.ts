@@ -1,11 +1,12 @@
 import type { CertificationId, SkillId } from "content:ids";
 import type { BlueprintEntry } from "@/lib/blueprints";
+import { getRoleBySlug } from "@/data/roles";
 
-import { definition as solutionsArchitect } from "@/blueprints/roles/solutions-architect";
-import { definition as forwardDeployedEngineer } from "@/blueprints/roles/forward-deployed-engineer";
-import { definition as technicalEvangelist } from "@/blueprints/roles/technical-evangelist";
-import { definition as seniorEngineer } from "@/blueprints/roles/senior-engineer";
-import { definition as engineeringManager } from "@/blueprints/roles/engineering-manager";
+import { definition as solutionsArchitect, entry as solutionsArchitectEntry } from "@/blueprints/roles/solutions-architect";
+import { definition as forwardDeployedEngineer, entry as forwardDeployedEngineerEntry } from "@/blueprints/roles/forward-deployed-engineer";
+import { definition as technicalEvangelist, entry as technicalEvangelistEntry } from "@/blueprints/roles/technical-evangelist";
+import { definition as seniorEngineer, entry as seniorEngineerEntry } from "@/blueprints/roles/senior-engineer";
+import { definition as engineeringManager, entry as engineeringManagerEntry } from "@/blueprints/roles/engineering-manager";
 
 /** A single CV-fact → role-requirement bridge for recruiters / hiring managers. */
 export interface RoleMapping {
@@ -86,6 +87,15 @@ export type Role = BlueprintEntry & RoleDefinition;
 
 const DEFINITIONS: RoleDefinition[] = [engineeringManager, solutionsArchitect, forwardDeployedEngineer, seniorEngineer, technicalEvangelist];
 
-export const roleDefinitions: Record<string, RoleDefinition> = Object.fromEntries(DEFINITIONS.map((d) => [d.slug, d]));
+const ENTRIES: BlueprintEntry[] = [engineeringManagerEntry, solutionsArchitectEntry, forwardDeployedEngineerEntry, seniorEngineerEntry, technicalEvangelistEntry];
 
-export const getRoleDefinition = (slug: string): RoleDefinition | undefined => roleDefinitions[slug];
+const definitionsBySlug: Record<string, RoleDefinition> = Object.fromEntries(DEFINITIONS.map((d) => [d.slug, d]));
+const entriesBySlug: Record<string, BlueprintEntry> = Object.fromEntries(ENTRIES.map((e) => [e.slug, e]));
+
+/** The registry is the identity source, so its title and copy win over the page entry's. */
+export function getRole(slug: string): Role | undefined {
+	const identity = getRoleBySlug(slug);
+	const entry = entriesBySlug[slug];
+	if (!identity || !entry) return undefined;
+	return { ...entry, ...definitionsBySlug[slug], ...identity };
+}
