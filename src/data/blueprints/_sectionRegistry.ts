@@ -46,7 +46,7 @@ export const beforeWeTalk: BlueprintComponent = {
 	title: "If it ends it, it's here. Everything else has an answer.",
 	mainMenuLabel: "Before we talk",
 	icon: "ph:warning-diamond-duotone",
-	description: "I would rather a real export constraint ended this now than in week three.",
+	description: "I would rather a real constraint ended this now than in week three.",
 	content: async () => import("@/components/blueprints/shared/Signals.astro"),
 };
 
