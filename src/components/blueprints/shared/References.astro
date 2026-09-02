@@ -1,0 +1,23 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { TESTIMONIALS } from "@/data/testimonials";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "References",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p class="text-lg">Word of mouth is part of any good marketing strategy, so here are Facebook reviews and testimonials from customers I worked with while freelancing under the name FLIC Sites.</p>
+
+	<p><strong>Please note:</strong> this CV is public, so I have not put my references' phone numbers on it. I'm happy to provide them after we've met.</p>
+
+	<div class="mt-10 gap-4 md:max-w-200 md:columns-2 xl:ml-0">
+		{TESTIMONIALS.map(({ name, src, width, height }) => <img class="mb-4 h-auto max-w-full rounded-lg" loading="lazy" src={src} alt={`Testimonial from ${name}`} width={width} height={height} />)}
+	</div>
+</ModuleWrapper>
