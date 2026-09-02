@@ -59,7 +59,7 @@
 			"label": "Product owner and part-time CTO for an vehicle asset management company"
 		},
 		"isFreelancing": true,
-		"startDate": "01 Sep 2022",
+		"startDate": "2022-09-01T00:00:00.000-02:00",
 		"summary": "In charge of development of medium-scale internal system.",
 		"responsibilities": [
 			"UX, Development, deployment, and improvement of a new internal system and its accompanying applications.",
@@ -89,7 +89,7 @@
 		"location": "Stockholm, Sweden",
 		"locationType": "Remote",
 		"isFreelancing": true,
-		"startDate": "01 Jul 2022",
+		"startDate": "2022-07-01T00:00:00.000-02:00",
 		"summary": "Developing and maintaining web applications using Laravel and VueJS. Collaborating with the team to implement new features and fix bugs.",
 		"responsibilities": [
 			"Delivering and deploying web applications for customers, optimizing for performance and scalability.",
