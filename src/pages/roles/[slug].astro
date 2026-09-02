@@ -1,11 +1,11 @@
 ---
 import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
-import { onlyEnabledRoles, ROLES } from "@/lib/roles";
-import { findBrokenFeaturedIds, getRole } from "@/lib/roles";
+import { findBrokenFeaturedIds, getRole, onlyEnabledRoles } from "@/lib/roles";
+import { ROLES } from "@/data/roles";
 import { buildRolePageContext } from "@/utils/rolePageContext";
 
 export async function getStaticPaths() {
-	const broken = await findBrokenFeaturedIds();
+	const broken = await findBrokenFeaturedIds(ROLES);
 	if (broken.length) throw new Error(`[roles] featured ids do not resolve:\n  ${broken.join("\n  ")}`);
 
 	return onlyEnabledRoles(ROLES).map(({ slug }) => ({ params: { slug } }));
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 // getStaticPaths only emits slugs the registry has, so the lookup cannot miss.
-const role = getRole(slug!)!;
+const role = getRole(ROLES, slug!)!;
 
 const { roleAnchorIds, metadata } = buildRolePageContext({ entry: role });
 Astro.locals.roleAnchorIds = roleAnchorIds;

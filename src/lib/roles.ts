@@ -2,12 +2,6 @@ import type { CertificationId, SkillId, TransferableSkillId } from "content:ids"
 import { getCollection } from "astro:content";
 import type { BlueprintEntry } from "@/lib/blueprints";
 
-import { definition as solutionsArchitect, entry as solutionsArchitectEntry } from "@/blueprints/roles/solutions-architect";
-import { definition as forwardDeployedEngineer, entry as forwardDeployedEngineerEntry } from "@/blueprints/roles/forward-deployed-engineer";
-import { definition as technicalEvangelist, entry as technicalEvangelistEntry } from "@/blueprints/roles/technical-evangelist";
-import { definition as seniorEngineer, entry as seniorEngineerEntry } from "@/blueprints/roles/senior-engineer";
-import { definition as engineeringManager, entry as engineeringManagerEntry } from "@/blueprints/roles/engineering-manager";
-
 /** A single CV-fact → role-requirement bridge for recruiters / hiring managers. */
 export interface RoleMapping {
 	/** What you bring (skill, project, experience). Optional `url` may
@@ -84,25 +78,19 @@ export interface RoleDefinition {
 	pitch?: PitchContent;
 }
 
-/** A role view = catalog entry merged with role-specific extras. Returned
- *  by `getRoleBySlug` / `ROLES` so consumers get one object with everything. */
+/** A role view = catalog entry merged with role-specific extras, so a consumer
+ *  gets identity, chrome and content as one object. */
 export type Role = BlueprintEntry & RoleDefinition;
 
-const DEFINITIONS: RoleDefinition[] = [engineeringManager, solutionsArchitect, forwardDeployedEngineer, seniorEngineer, technicalEvangelist];
-
-const ENTRIES: BlueprintEntry[] = [engineeringManagerEntry, solutionsArchitectEntry, forwardDeployedEngineerEntry, seniorEngineerEntry, technicalEvangelistEntry];
-
-const definitionsBySlug: Record<string, RoleDefinition> = Object.fromEntries(DEFINITIONS.map((d) => [d.slug, d]));
-const entriesBySlug: Record<string, BlueprintEntry> = Object.fromEntries(ENTRIES.map((e) => [e.slug, e]));
-
-export function getRole(slug: string): Role | undefined {
-	const entry = entriesBySlug[slug];
-	const definition = definitionsBySlug[slug];
-	if (!entry || !definition) return undefined;
-	return { ...entry, ...definition };
+/** The two halves a role module must export to be registered in the catalog. */
+export interface RoleModule {
+	entry: BlueprintEntry;
+	definition: RoleDefinition;
 }
 
-export const ROLES: Role[] = DEFINITIONS.map((d) => getRole(d.slug)).filter((role): role is Role => !!role);
+export const assembleRole = ({ entry, definition }: RoleModule): Role => ({ ...entry, ...definition });
+
+export const getRole = (roles: Role[], slug: string): Role | undefined => roles.find((role) => role.slug === slug);
 
 export const roleIsEnabled = (role: Role): boolean => role.enabled ?? true;
 export const roleIsVisible = (role: Role): boolean => roleIsEnabled(role) && !(role.hidden ?? false);
@@ -115,11 +103,11 @@ export const onlyVisibleRoles = (roles: Role[]): Role[] => roles.filter(roleIsVi
  * stale id and the section it feeds renders empty instead of failing. Existence
  * only: a project that is draft or unlisted is still a valid target.
  */
-export async function findBrokenFeaturedIds(): Promise<string[]> {
+export async function findBrokenFeaturedIds(roles: Role[]): Promise<string[]> {
 	const projects = await getCollection("projects");
 	const byId = new Map(projects.map((project) => [project.id, project]));
 
-	return DEFINITIONS.flatMap(({ slug, featuredProjects = [], featuredCaseStudies = [] }) => [
+	return roles.flatMap(({ slug, featuredProjects = [], featuredCaseStudies = [] }) => [
 		...featuredProjects.filter((id) => !byId.has(id)).map((id) => `${slug}: featuredProjects "${id}" matches no project`),
 		...featuredCaseStudies
 			.map((id) => {
