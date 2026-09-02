@@ -33,7 +33,7 @@ export const GET: APIRoute = async () => {
 			email: SOCIALS.email?.href?.replace("mailto:", ""),
 			phone: SOCIALS.phone?.href?.replace("tel:", ""),
 			url: String(SITE.getCanonical("/")),
-			image: ABOUT.getImage("profile_main"),
+			image: String(SITE.getCanonical(ABOUT.requireImage("bw", "the JSON Resume export"))),
 			location: {
 				address: ABOUT.location?.city,
 				city: ABOUT.location?.city,
