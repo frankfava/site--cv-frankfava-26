@@ -50,6 +50,7 @@
 	{
 		"id": "languages",
 		"order": 70,
+		"listed": false,
 		"title": "Languages",
 		"icon": "ph:translate-duotone",
 		"keywords": ["languages", "communication"]

@@ -1,0 +1,34 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { Icon } from "astro-icon/components";
+import { getTransferableSkills } from "@/lib/collections/transferableSkills";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const skills = (await getTransferableSkills()).filter(({ data }) => data.listed);
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Transferable Skills",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p class="text-lg">Each one below is something I still use in the work, not a line borrowed from an old job description.</p>
+
+	<ul class="mt-8 grid gap-4 md:grid-cols-2">
+		{
+			skills.map(({ data }) => (
+				<li class="flex items-start gap-3 rounded-md border border-line bg-surface p-4">
+					{data.icon && <Icon name={data.icon} class="size-7 shrink-0 text-accent" />}
+					<div class="grow">
+						<div class="leading-tight font-semibold">{data.title}</div>
+						{data.summary && <p class="m-0 mt-1 text-sm text-ink-3">{data.summary}</p>}
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</ModuleWrapper>

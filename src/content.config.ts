@@ -207,6 +207,9 @@ const transferableSkills = defineCollection({
 	loader: file("src/data/transferableSkills.json"),
 	schema: z.object({
 		order: z.number().int().positive(),
+		// Keeps a skill out of the general list without hiding it. A role naming
+		// it in `featuredTransferableSkills` still resolves it.
+		listed: z.boolean().optional().default(true),
 		title: z.string(),
 		summary: z.string().optional(),
 		icon: z.string().optional(),
