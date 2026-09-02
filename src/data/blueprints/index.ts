@@ -55,6 +55,21 @@ export const work = buildBlueprintEntry({
 	},
 });
 
+export const ai = buildBlueprintEntry({
+	slug: "ai",
+	title: "AI practice",
+	description: "The agentic tooling I run daily, the tools I have published, and what I actually use them for.",
+	blueprint: {
+		practice: sections.practice,
+		fullRecord: sections.fullRecord,
+	} as const satisfies BlueprintSchema,
+	config: {
+		// search: {
+		// 	atomics: { project: "practice"},
+		// },
+	},
+});
+
 export const experience = buildBlueprintEntry({
 	slug: "experience",
 	title: "Experience",
@@ -74,6 +89,7 @@ export const experience = buildBlueprintEntry({
 export const blueprints: Record<string, BlueprintEntry> = {
 	home,
 	work,
+	ai,
 	experience,
 };
 

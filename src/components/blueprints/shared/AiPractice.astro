@@ -1,0 +1,49 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import QuestionCard from "@/components/ui/display/QuestionCard.astro";
+import Cards from "@/components/ui/display/Cards.astro";
+import { tools } from "@/data/aiTools";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "AI practice",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>An AI-assisted developer is more productive and efficient than a traditional developer.</p>
+
+	<QuestionCard title="Do you use AI tools?" icon="ph:robot-duotone" iconClass="text-blue-500">
+		<p>Of course. <strong>Claude Code, Cursor</strong>, Lovable, GitHub Copilot and ChatGPT/Codex now play a significant role in my development process.</p>
+	</QuestionCard>
+
+	<QuestionCard title="How do you use them?" icon="ph:git-branch-duotone" iconClass="text-blue-500">
+		<p>
+			For problem-solving, architecture and solution decisions, and the programming workflow itself: writing code, debugging, refactoring and testing. They complement my expertise by
+			accelerating workflows, improving accuracy and enabling approaches I would not otherwise reach for.
+		</p>
+		<p>
+			Depending on the task, that means asking a question or generating a snippet, arguing out a design before any code exists, documenting an unfamiliar codebase, standing up an MVP, planning
+			the steps, or writing the code itself.
+		</p>
+		<p><strong>The result:</strong> I focus on making sure it gets done right, not just done. Faster, too.</p>
+	</QuestionCard>
+
+	<QuestionCard title="Will they replace developers?" icon="ph:seal-question-duotone" iconClass="text-blue-500">
+		<p>No. They have changed how engineers work and which tasks they do, but the two complement each other.</p>
+		<p>
+			The role is <strong>still to be a problem solver</strong>, thinking critically and creatively. We have shifted from being the builders who write the code to <strong
+				>the architects who design the solution and direct the work</strong
+			>.
+		</p>
+	</QuestionCard>
+
+	<div class="mt-6">
+		<h3 class="mb-3 text-lg">Featured tools I've built</h3>
+		<Cards {...{ cards: tools, columnCount: 2, hoverBorder: true, linkText: "Open →" }} />
+	</div>
+</ModuleWrapper>

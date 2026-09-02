@@ -1,0 +1,20 @@
+---
+/**
+ * A deeper page: nothing here is new writing. It is the content that used to sit
+ * further down the home page, relocated behind the front page's "full record" index.
+ */
+
+import { blueprints } from "@/data/blueprints";
+import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+
+const entry = blueprints.ai;
+
+const metadata = {
+	title: entry.title,
+	description: entry.description,
+};
+---
+
+<SubIndexedLayout {...{ metadata, blueprint: entry }}>
+	<Fragment slot="lead"> I have been running agentic systems in production daily since February 2026. Here is what that means in practice, and what I think it changes about the job. </Fragment>
+</SubIndexedLayout>

@@ -81,6 +81,16 @@ export const achievements: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/Achievements.astro"),
 };
 
+export const practice: BlueprintComponent = {
+	id: "practice",
+	eyebrow: "How I work with it",
+	title: "I build with it daily, and I run what I build",
+	mainMenuLabel: "AI practice",
+	icon: "ph:sparkle-duotone",
+	description: "Where AI sits in the work, the tools I have published, and what I think it does and does not change about the job.",
+	content: async () => import("@/components/blueprints/shared/AiPractice.astro"),
+};
+
 export const projects: BlueprintComponent = {
 	id: "projects",
 	eyebrow: "Portfolio",
@@ -120,6 +130,7 @@ export default {
 	roleDossiers,
 	history,
 	achievements,
+	practice,
 	projects,
 	skills,
 	fullRecord,
