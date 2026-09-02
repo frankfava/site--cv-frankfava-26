@@ -1,4 +1,5 @@
-import type { CareerMetric, CareerYear } from "@/data/career";
+import type { CareerMetric } from "@/data/careerSeries";
+import type { CareerYear } from "@/lib/collections/career";
 
 /** The series to average over, so this file does not reach into authored data. */
 type Series = readonly { key: CareerMetric }[];

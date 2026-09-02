@@ -1,5 +1,5 @@
 /** Which year the timeline is reading, shared by the chart and its read-out. */
-import { CAREER_SERIES } from "@/data/career";
+import { CAREER_SERIES } from "@/data/careerSeries";
 import { openingIndex, yearAverage } from "@/lib/career";
 import { CHART, chartX, chartY } from "./chart";
 

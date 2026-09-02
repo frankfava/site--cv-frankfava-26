@@ -1,11 +1,25 @@
 import { getCollection, getEntries, type CollectionEntry } from "astro:content";
 import type { CareerYearId } from "content:ids";
-import type { CareerYear } from "@/data/career";
+import type { CareerMetric } from "@/data/careerSeries";
 
 export namespace Career {
 	export type Entry = { id: CareerYearId } & Omit<CollectionEntry<"career">, "id">;
 	export type Collection = Entry[];
 }
+
+/**
+ * A collection entry flattened onto the year its id names, with `role` and
+ * `company` resolved - either the year's override or derived from `employers`.
+ */
+export type CareerYear = { year: number; role: string; company: string } & CollectionEntry<"career">["data"];
+
+/**
+ * A series key that is not an axis fails here rather than reading `undefined`
+ * into the average. The series list cannot see the schema from `data/`, so the
+ * two are held together on this side.
+ */
+type MustBeAnAxis<T extends keyof CareerYear["axes"]> = T;
+export type CareerAxis = MustBeAnAxis<CareerMetric>;
 
 type Employer = CollectionEntry<"workHistory">["data"];
 
