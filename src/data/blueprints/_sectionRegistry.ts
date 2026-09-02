@@ -80,7 +80,6 @@ export const achievements: BlueprintComponent = {
 	description: "Grouped by the company they belong to, so a claim always has a place attached to it.",
 	content: async () => import("@/components/blueprints/shared/Achievements.astro"),
 };
-
 export const fullRecord: BlueprintComponent = {
 	id: "full-record",
 	title: "The full record, one page at a time",
