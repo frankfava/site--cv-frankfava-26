@@ -11,10 +11,12 @@ export interface Props {
 	workHistory?: WorkHistory.Collection;
 	startOpen?: boolean;
 	showAchievements?: boolean;
+	/** An icon name for every marker, or "dot" for the plain ring marker. */
+	icon?: string;
 	class?: HTMLAttributes<"div">["class:list"];
 }
 
-const { workHistory: list = await getWorkHistory(), showAchievements = false, startOpen = true, class: className } = Astro.props;
+const { workHistory: list = await getWorkHistory(), showAchievements = false, startOpen = true, icon = "", class: className } = Astro.props;
 
 const formatDate = dateFormatter().monthAndYear();
 
@@ -48,9 +50,13 @@ const roles = new Manager(list)
 		roles.map(({ company, role, location, locationType, summary, startDate, endDate, skills, details, showContent, bodyId, headingId, scope, toggle }, i) => (
 			<>
 				<div class="ml-5">
-					<span class:list={["absolute -start-3 mt-4 flex size-6 items-center justify-center rounded-full ring-4 ring-ground", endDate ? "bg-accent" : "bg-good"]}>
-						<Icon name={endDate ? "ph:star" : "ph:star-fill"} class="size-3 text-white" />
-					</span>
+					{icon === "dot" ? (
+						<span class="absolute -inset-s-2 mt-5 size-4 rounded-full border-4 border-ink-3 bg-surface ring-4 ring-ground" />
+					) : (
+						<span class:list={["absolute -start-3 mt-4 flex size-6 items-center justify-center rounded-full ring-4 ring-ground", endDate ? "bg-accent" : "bg-good"]}>
+							<Icon name={icon || (endDate ? "ph:star" : "ph:star-fill")} class="size-3 text-white" />
+						</span>
+					)}
 
 					<div class="px-4 pb-4" {...scope}>
 						<button type="button" class="flex w-full items-start justify-between gap-3 py-3 text-left" class:list={{ "cursor-default": !showContent }} {...toggle}>
