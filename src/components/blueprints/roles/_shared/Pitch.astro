@@ -1,7 +1,5 @@
 ---
 import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
-import VCard from "@/components/ui/display/VCard.astro";
-import RoleHero from "@/components/blueprints/roles/_shared/RoleHero.astro";
 import { Icon } from "astro-icon/components";
 import type { Role } from "@/data/roleDefinitions";
 
@@ -22,11 +20,7 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<VCard slot="header" />
-
 	<Fragment>
-		<RoleHero />
-
 		{
 			pitch?.whyNow && (
 				<Fragment>

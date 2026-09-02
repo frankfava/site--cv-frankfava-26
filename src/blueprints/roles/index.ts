@@ -3,6 +3,7 @@ import { type BlueprintSchema } from "@/lib/blueprints";
 export const buildRoleStructure = (roleTitle: string) =>
 	({
 		brief: {
+			props: { showHeader: false },
 			title: roleTitle ?? "Why this role",
 			mainMenuLabel: "The Pitch",
 			icon: "ph:blueprint-duotone",
