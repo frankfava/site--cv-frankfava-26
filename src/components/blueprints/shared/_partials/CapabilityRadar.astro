@@ -1,6 +1,5 @@
 ---
 /** The capability radar. `showNeed` adds the role's dashed overlay, which only the interactive check has. */
-import { CAPABILITIES } from "@/data/capabilities";
 import { radar } from "@/alpine/capability/radar";
 import { cn } from "@/utils/class";
 
@@ -13,10 +12,14 @@ export interface Props {
 const { class: className, eyebrow = "Where I sit", showNeed = false } = Astro.props;
 ---
 
-<div class={cn("overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)}>
-	<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
-		<span class="eyebrow text-ink-3">{eyebrow}</span>
-	</div>
+<div class={cn(showNeed && "overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)}>
+	{
+		showNeed && (
+			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
+				<span class="eyebrow text-ink-3">{eyebrow}</span>
+			</div>
+		)
+	}
 
 	<div class="px-2 pt-3.5 pb-0.5">
 		<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label={showNeed ? "Radar comparing what your role needs against Frank's evidence" : "Radar of Frank's capabilities"}>
@@ -60,15 +63,6 @@ const { class: className, eyebrow = "Where I sit", showNeed = false } = Astro.pr
 					Where I sit
 				</span>
 			</div>
-		) : (
-			<dl class="grid gap-x-4 gap-y-1 px-4 pt-1.5 pb-3.5 text-sm sm:grid-cols-2">
-				{CAPABILITIES.map((cap) => (
-					<div class="flex gap-2">
-						<dt class="font-mono text-xs tracking-wider text-ink-3 uppercase">{cap.short}</dt>
-						<dd class="m-0 text-ink-2">{cap.label}</dd>
-					</div>
-				))}
-			</dl>
-		)
+		) : null
 	}
 </div>

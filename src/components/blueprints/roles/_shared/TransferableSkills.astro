@@ -26,9 +26,11 @@ const transferableSkills = await resolve(role);
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<CapabilityRadar class="mb-3.5 max-w-88" />
-
 	<ul class="grid gap-3 md:grid-cols-2">
+		<li class="rounded-md border border-gray-200 p-3 md:row-span-3">
+			<CapabilityRadar />
+		</li>
+
 		{
 			transferableSkills.map(({ data }) => (
 				<li class="flex items-start gap-3 rounded-md border border-gray-200 p-3">
