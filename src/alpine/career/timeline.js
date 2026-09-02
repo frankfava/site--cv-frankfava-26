@@ -2,7 +2,7 @@
 import { CAREER_STORE } from "./store.js";
 import { CHART } from "./chart";
 
-/** <div x-data="careerTimeline"> — owns the measuring and the scrubbing. */
+/** <div x-data="careerTimeline" data-years="[...]"> — owns the measuring and the scrubbing. */
 export function careerTimeline() {
 	return {
 		get store() {
@@ -10,6 +10,7 @@ export function careerTimeline() {
 		},
 
 		init() {
+			this.store.load(JSON.parse(this.$el.dataset.years));
 			this.measure();
 			// Observing the card, not the chart: an SVG is not a reliable resize target.
 			new ResizeObserver(() => this.measure()).observe(this.$el);

@@ -1,5 +1,5 @@
 /** Which year the timeline is reading, shared by the chart and its read-out. */
-import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX, yearAverage } from "@/data/career";
+import { CAREER_SERIES, openingIndex, yearAverage } from "@/data/career";
 import { CHART, chartX, chartY } from "./chart";
 
 export const CAREER_STORE = "career";
@@ -12,10 +12,16 @@ const LABEL_ROOM = 31;
 
 export function careerStore() {
 	return {
-		years: CAREER_YEARS,
-		index: CAREER_DEFAULT_INDEX,
+		years: [],
+		index: 0,
 		/** Rendered width of the chart. Label sizing keys off it. */
 		width: CHART.W,
+
+		/** Handed the years on `data-years`, since the collection cannot be read from the client. */
+		load(years) {
+			this.years = years;
+			this.index = openingIndex(years);
+		},
 
 		setIndex(value) {
 			this.index = Math.max(0, Math.min(this.years.length - 1, Number(value)));

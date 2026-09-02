@@ -5,7 +5,8 @@
  *
  * The viewBox matches the rendered width, so size, band and gap are plain pixels.
  */
-import { CAREER_SERIES, CAREER_YEARS, CAREER_DEFAULT_INDEX } from "@/data/career";
+import { CAREER_SERIES, openingIndex } from "@/data/career";
+import { getCareerYears } from "@/lib/collections/career";
 import { arcSpan } from "@/alpine/career/chart";
 import { cn } from "@/utils/class";
 
@@ -47,7 +48,8 @@ const centre = size / 2;
 /** The outer ring sits flush inside the box, so its stroke just touches the edge. */
 const outer = centre - band / 2;
 
-const opening = CAREER_YEARS[CAREER_DEFAULT_INDEX];
+const years = await getCareerYears();
+const opening = years[openingIndex(years)];
 const total = CAREER_SERIES.reduce((sum, series) => sum + opening[series.key], 0);
 
 /** Concentric rings work inwards; segments all sit on the outer one. */

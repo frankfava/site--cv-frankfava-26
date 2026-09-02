@@ -171,10 +171,32 @@ const testimonials = defineCollection({
 	}),
 });
 
+/**
+ * Career
+ *
+ * A per-year read of the work rather than a property of any one job, which is
+ * why it is keyed by year: the run is longer than the employment, some years
+ * have no employer, and some have two.
+ */
+const career = defineCollection({
+	loader: file("src/data/career.json"),
+	schema: z.object({
+		decisions: z.number().min(0).max(100),
+		customer: z.number().min(0).max(100),
+		code: z.number().min(0).max(100),
+		leadership: z.number().min(0).max(100),
+		role: z.string(),
+		company: z.string(),
+		note: z.string(),
+		employer: reference("workHistory").optional(),
+	}),
+});
+
 export const collections = {
 	skills,
 	projects,
 	certifications,
 	workHistory,
 	testimonials,
+	career,
 };
