@@ -1,0 +1,70 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { getSkills, Manager } from "@/lib/collections/skills";
+import { ABOUT } from "site:config";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Current situation",
+};
+
+const now = new Date();
+const yearsResident = now.getFullYear() - 2020;
+const yearsCoding = now.getFullYear() - 2005;
+
+const activeStack = new Manager(await getSkills())
+	.sort("proficiency", true)
+	.sort("relevance", true)
+	._restructure()
+	.filter(({ relevance }) => relevance?.some(({ key }) => key === "active_stack"))
+	.slice(0, 12)
+	.map(({ label }) => label);
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<div class="grid gap-2">
+		<div>
+			<h3 class="text-lg">Right to work in Sweden</h3>
+			<p>As an EU citizen and a permanent resident of Sweden for the past {yearsResident} years, this is not an issue.</p>
+		</div>
+
+		<div>
+			<h3 class="text-lg">Notice required, and when I can start</h3>
+			<p>{ABOUT.availability?.noticeRequired ?? "Minimal"} notice is required, and the sidebar carries the same figure wherever you are on the site.</p>
+		</div>
+
+		<div>
+			<h3 class="text-lg">How many years of development experience</h3>
+			<p>
+				I've been coding since 2005, so {yearsCoding} years, and my skills have grown as new technologies have emerged. I've always been interested in new technology, how it works, and what I can
+				use to bring an idea to life.
+			</p>
+		</div>
+
+		<div>
+			<h3 class="text-lg">Which programming languages I'm experienced in</h3>
+			<p>Like any seasoned engineer I understand the concepts that outlast a language — SOLID, test-driven design, the usual patterns — so I pick up new ones quickly and get proficient fast.</p>
+			<p><strong>Some of the technical skills I'm already proficient in:</strong> {activeStack.join(", ")}.</p>
+		</div>
+
+		<div>
+			<h3 class="text-lg">Salary expectations</h3>
+			<p>
+				I can't give a specific figure here, because it varies with the role's responsibilities and expectations. Compensation isn't the only factor I weigh, but it matters, and I'd expect a
+				fair and competitive offer that reflects the skills and experience I bring. Happy to discuss it.
+			</p>
+		</div>
+
+		<div>
+			<h3 class="text-lg">Office or remote</h3>
+			<p>
+				I need the flexibility of remote work, especially around visiting Australia, but I like the office too — collaborating and being among colleagues. A good workspace can make or break
+				the experience.
+			</p>
+		</div>
+	</div>
+</ModuleWrapper>

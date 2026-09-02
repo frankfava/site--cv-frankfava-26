@@ -110,6 +110,17 @@ export const certifications: BlueprintComponent = {
 	description: "Issued by someone other than me, and checkable.",
 	content: async () => import("@/components/blueprints/shared/Certifications.astro"),
 };
+
+//Hiring
+export const situation: BlueprintComponent = {
+	id: "situation",
+	eyebrow: "Availability",
+	title: "Where I am, what I am looking for, and when I can start",
+	mainMenuLabel: "Current situation",
+	icon: "ph:alarm-duotone",
+	description: "The questions that come up first in a screen, answered before you have to ask them.",
+	content: async () => import("@/components/blueprints/shared/Situation.astro"),
+};
 // How I Work
 export const self: BlueprintComponent = {
 	id: "self",
@@ -193,6 +204,11 @@ export default {
 	history,
 	achievements,
 	practice,
+	situation,
+	self,
+	learning,
+	tests,
+	references,
 	projects,
 	skills,
 	fullRecord,
