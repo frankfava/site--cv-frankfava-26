@@ -35,6 +35,10 @@ const projects = defineCollection({
 		// Keeps a project out of the general list without hiding it. Anything
 		// naming a project by id still resolves it, including its own page.
 		listed: z.boolean().optional().default(true),
+		tags: z
+			.array(z.enum(["ai-tool"]))
+			.optional()
+			.default([]),
 		order: z.number().optional(),
 		title: z.string(),
 		icon: z.string().optional(),

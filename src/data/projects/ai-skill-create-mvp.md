@@ -1,6 +1,7 @@
 ---
 draft: false
 featured: true
+tags: ["ai-tool"]
 order: 40
 title: "AI Skill: Create MVP"
 type : 'Personal Project'

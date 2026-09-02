@@ -1,6 +1,7 @@
 ---
 draft: false
 featured: true
+tags: ["ai-tool"]
 order: 50
 title: "Lovable Prompt Builder"
 type : 'Personal Project'
