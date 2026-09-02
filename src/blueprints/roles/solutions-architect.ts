@@ -72,63 +72,63 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Built + operate a self-hosted MCP server and custom Claude Code agents (Frankenverse)", url: "/#projects" },
+			from: { label: "Built + operate a self-hosted MCP server and custom Claude Code agents (Frankenverse)" },
 			to: "Architecting real AI / agentic solutions, not just advising on them",
 			note: "A production agentic system I run daily - MCP server, autonomous agents, orchestration, guardrails and evals - the exact concerns an AI-product engagement raises.",
 		},
 		{
-			from: { label: "Published a Claude Code skill (Create MVP) + a Lovable prompt builder", url: "/#projects" },
+			from: { label: "Published a Claude Code skill (Create MVP) + a Lovable prompt builder" },
 			to: "Packaging domain expertise as reusable AI tooling for customers",
 			note: "Turned my own delivery method into an agent skill, and shipped tools that help others build with AI.",
 		},
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)", url: "/#history" },
+			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
 			to: "Owning architecture under real-world constraints",
 			note: "Drove tech strategy, security and delivery for an internal asset-management platform now used across ~90% of Australia.",
 		},
 		{
-			from: { label: "Spear-headed 3 admin panels + data-ingestion delta system at SAVR", url: "/#history" },
+			from: { label: "Spear-headed 3 admin panels + data-ingestion delta system at SAVR" },
 			to: "Designing systems for performance and operability, not just features",
 			note: "Built operability tools for a regulated Stockholm fintech and re-architected ingestion to significantly improve performance.",
 		},
 		{
-			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team", url: "/#projects" },
+			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team" },
 			to: "Cross-vendor / partner-ecosystem credibility",
 			note: "Built a developer tool inside another vendor's platform that they ended up referencing in their own docs.",
 		},
 		{
-			from: { label: "Owned a digital agency (FLIC Sites, 160+ projects)", url: "/#history" },
+			from: { label: "Owned a digital agency (FLIC Sites, 160+ projects)" },
 			to: "Pre-sales experience defending architecture to non-technical buyers",
 			note: "Sold technical work to skeptical SMB owners against larger competitors.",
 		},
 		{
-			from: { label: "Production work across Laravel, Vue, React, Astro, FilamentPHP, HubSpot, WordPress", url: "/#technical" },
+			from: { label: "Production work across Laravel, Vue, React, Astro, FilamentPHP, HubSpot, WordPress" },
 			to: "Solution-shaping that isn't married to a single stack",
 		},
 		{
-			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm)", url: "/#history" },
+			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm)" },
 			to: "Mentoring, code reviews, and complex-project delivery in an agency context",
 		},
 		{
-			from: { label: "5 years as a professional coach + ongoing freelance customer work", url: "/#history" },
+			from: { label: "5 years as a professional coach + ongoing freelance customer work" },
 			to: "Translating between technical and non-technical stakeholders",
 		},
 		{
-			from: { label: "Was the account exec + engineer on 160+ agency deals", url: "/#business" },
+			from: { label: "Was the account exec + engineer on 160+ agency deals" },
 			to: "Partnering with account executives through the pre-sales motion",
 			note: "Qualified the real problem, sized the solution, and carried the technical conversation alongside the commercial one.",
 		},
 		{
-			from: { label: "Scoped → built → handed over across discovery to deployment", url: "/#project-management" },
+			from: { label: "Scoped → built → handed over across discovery to deployment" },
 			to: "Serving as technical advisor across the full adoption journey",
 			note: "Discovery, evaluation, PoC and deployment - owned end-to-end rather than thrown over a wall.",
 		},
 		{
-			from: { label: "Led the crypto-trading integration into a Stockholm fintech's stack", url: "/#history" },
+			from: { label: "Led the crypto-trading integration into a Stockholm fintech's stack" },
 			to: "Guiding architecture decisions and integration into a customer's existing tech stack",
 		},
 		{
-			from: { label: "Built evaluations and PoCs to prove an approach before commitment", url: "/#projects" },
+			from: { label: "Built evaluations and PoCs to prove an approach before commitment" },
 			to: "Helping customers evaluate frameworks against their specific use case",
 		},
 	],

@@ -50,37 +50,37 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team", url: "/#projects" },
+			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team" },
 			to: "Evidence of dev-tool DX impact at scale",
 			note: "Built a tool to speed up HubSpot module dev; HubSpot's own docs ended up referencing it.",
 		},
 		{
-			from: { label: "5 years as a personal coach (Relationships Revealed)", url: "/#history" },
+			from: { label: "5 years as a personal coach (Relationships Revealed)" },
 			to: "Ability to move people from confused → confident",
 			note: "The core skill of evangelism - done full-time before I ever wrote production code.",
 		},
 		{
-			from: { label: "Owned a digital agency for ~6 years (FLIC Sites, 160+ projects)", url: "/#history" },
+			from: { label: "Owned a digital agency for ~6 years (FLIC Sites, 160+ projects)" },
 			to: "Sales credibility with technical buyers",
 			note: "Sold on technical merit to skeptical SMB owners - the Lovable customer profile.",
 		},
 		{
-			from: { label: "Lead Developer at iGoMoon (Stockholm digital agency)", url: "/#history" },
+			from: { label: "Lead Developer at iGoMoon (Stockholm digital agency)" },
 			to: "Trusted technical voice in agency / partner ecosystems",
 			note: "Trained team, ran retros and code reviews, sat in on hiring.",
 		},
 		{
-			from: { label: "AI-native workflow: Claude Code + Cursor + custom skills", url: "#highlights" },
+			from: { label: "AI-native workflow: Claude Code + Cursor + custom skills" },
 			to: "Authentic, current familiarity with the AI-app-builder stack",
 			note: "Built and published `ai-skill--create-mvp` and `app--lovable-prompt-builder`.",
 		},
 		{
-			from: { label: "Senior Software Engineer at SAVR (Stockholm fintech)", url: "/#history" },
+			from: { label: "Senior Software Engineer at SAVR (Stockholm fintech)" },
 			to: "Production engineering credibility",
 			note: "Spear-headed three admin panels (FilamentPHP + Streamlit) and a high-performance ingestion delta system.",
 		},
 		{
-			from: { label: "Workshops, seminars and webinars (Relationships Revealed + iGoMoon)", url: "/#history" },
+			from: { label: "Workshops, seminars and webinars (Relationships Revealed + iGoMoon)" },
 			to: "Comfortable on stage, on camera, and in front of a live audience",
 		},
 	],

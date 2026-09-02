@@ -68,34 +68,34 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Part-time CTO embedded at National Auto Service (nearly 4 years, built + operated in prod)", url: "/#history" },
+			from: { label: "Part-time CTO embedded at National Auto Service (nearly 4 years, built + operated in prod)" },
 			to: "Working within customer systems to build and run production applications",
 			note: "Owned architecture, security and delivery for a platform now used across ~90% of Australia - and stayed to operate it.",
 		},
 		{
-			from: { label: "Shipped FilamentPHP + Streamlit tooling inside SAVR's stack", url: "/#history" },
+			from: { label: "Shipped FilamentPHP + Streamlit tooling inside SAVR's stack" },
 			to: "Delivering technical artifacts that meet customer requirements",
 			note: "Built production operability tools the data and customer-service teams use daily inside a regulated fintech.",
 		},
 		{
-			from: { label: "Was the freelancer customers called directly for 18 years", url: "/#customer-service" },
+			from: { label: "Was the freelancer customers called directly for 18 years" },
 			to: "White-glove, hands-on development support",
 		},
 		{
-			from: { label: "HubSpot FieldsJS: customer pain → open-source tool → adopted by HubSpot", url: "/#projects" },
+			from: { label: "HubSpot FieldsJS: customer pain → open-source tool → adopted by HubSpot" },
 			to: "Identifying and codifying repeatable deployment patterns, and feeding insight back to product/eng",
 			note: "A recurring delivery problem turned into a reusable artifact the vendor referenced in their own docs.",
 		},
 		{
-			from: { label: "Productized my delivery methodology as the Create MVP Claude skill", url: "/#projects" },
+			from: { label: "Productized my delivery methodology as the Create MVP Claude skill" },
 			to: "Building reusable artifacts (agent skills) for an AI-product context",
 		},
 		{
-			from: { label: "90%+ referral / repeat revenue over 18 years self-employed", url: "/#business" },
+			from: { label: "90%+ referral / repeat revenue over 18 years self-employed" },
 			to: "Building long-term customer relationships and surfacing new opportunities",
 		},
 		{
-			from: { label: "Pick up new stacks fast via SOLID, TDD and design patterns", url: "/#technical" },
+			from: { label: "Pick up new stacks fast via SOLID, TDD and design patterns" },
 			to: "Maintaining current capability and adapting to each customer's stack",
 		},
 	],

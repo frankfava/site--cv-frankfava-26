@@ -49,36 +49,36 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)", url: "/#history" },
+			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
 			to: "Owning architecture in production, not just shipping features",
 			note: "Drove tech strategy, security and delivery for an internal asset-management platform now used across ~90% of Australia.",
 		},
 		{
-			from: { label: "Designed and built a delta ingestion system at SAVR", url: "/#history" },
+			from: { label: "Designed and built a delta ingestion system at SAVR" },
 			to: "Performance engineering on real production constraints",
 			note: "Re-architected ingestion from full-source pulls to delta - significant performance improvement on a regulated Stockholm fintech.",
 		},
 		{
-			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team", url: "/#projects" },
+			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team" },
 			to: "Tool-builder mindset; reusable engineering across customer projects",
 			note: "Built a dev tool inside another vendor's platform that they ended up referencing in their own docs.",
 		},
 		{
-			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm digital agency)", url: "/#history" },
+			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm digital agency)" },
 			to: "Technical leadership - code reviews, mentoring, hiring",
 			note: "Trained junior developers, ran retros and code reviews, sat in on hiring rounds, contributed to coding standards.",
 		},
 		{
-			from: { label: "Production work across Laravel, Vue, React, Astro, FilamentPHP, HubSpot, WordPress", url: "/#technical" },
+			from: { label: "Production work across Laravel, Vue, React, Astro, FilamentPHP, HubSpot, WordPress" },
 			to: "Adaptable across stacks, not married to a single framework",
 		},
 		{
-			from: { label: "AI-native workflow: Claude Code + Cursor + published custom skills", url: "/#history" },
+			from: { label: "AI-native workflow: Claude Code + Cursor + published custom skills" },
 			to: "Modern engineering toolkit applied as a real practice",
 			note: "Built and published `ai-skill--create-mvp` and `app--lovable-prompt-builder`. AI as part of the toolkit, not a buzzword.",
 		},
 		{
-			from: { label: "18 years building - Sydney → Stockholm, agency → freelance → product", url: "/#history" },
+			from: { label: "18 years building - Sydney → Stockholm, agency → freelance → product" },
 			to: "Seasoned, picks up new tech quickly, ships on real deadlines",
 		},
 	],

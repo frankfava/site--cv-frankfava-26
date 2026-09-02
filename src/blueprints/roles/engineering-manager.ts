@@ -67,31 +67,31 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm digital agency)", url: "/#history" },
+			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm digital agency)" },
 			to: "Leading, mentoring and growing a team of engineers",
 			note: "Ran code reviews and retros, trained junior developers, and contributed to hiring, including the coding task used to screen candidates.",
 		},
 		{
-			from: { label: "Five years as a professional coach before I was a developer", url: "/#history" },
+			from: { label: "Five years as a professional coach before I was a developer" },
 			to: "The people-development core of engineering management",
 			note: "The 1:1s, feedback and career-growth work an EM lives on is my original profession.",
 		},
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)", url: "/#history" },
+			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
 			to: "Owning a team's technical direction, delivery and priorities",
 			note: "Set architecture, security and product strategy and stayed accountable for delivery on a platform now used across ~90% of Australia.",
 		},
 		{
-			from: { label: "Brought in, managed and trained a temporary dev team for larger builds", url: "/#history" },
+			from: { label: "Brought in, managed and trained a temporary dev team for larger builds" },
 			to: "Coordinating engineers and unblocking delivery under a deadline",
 		},
 		{
-			from: { label: "Multi-stack production work + Senior Software Engineer at SAVR", url: "/#technical" },
+			from: { label: "Multi-stack production work + Senior Software Engineer at SAVR" },
 			to: "Technical credibility to lead engineers, not just administer them",
 			note: "I can run an architecture discussion and review at a high bar, which is what earns a strong team's trust.",
 		},
 		{
-			from: { label: "AI-native workflow: daily Claude Code + Cursor, published custom skills", url: "/#history" },
+			from: { label: "AI-native workflow: daily Claude Code + Cursor, published custom skills" },
 			to: "Championing AI-assisted engineering within a team",
 			note: "First-hand practice with agentic coding tools, the exact capability the current wave of AI-forward EM roles asks a leader to bring.",
 		},
