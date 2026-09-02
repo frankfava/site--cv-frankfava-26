@@ -36,6 +36,8 @@ const projects = defineCollection({
 		title: z.string(),
 		icon: z.string().optional(),
 		role: z.string().optional(),
+		// `role` is the job title held; this is which job it was held in.
+		employer: reference("workHistory").optional(),
 		type: z.enum(["Customer Project", "Personal Project"]).default("Customer Project"),
 		summary: z.string().optional(),
 		startDate: z

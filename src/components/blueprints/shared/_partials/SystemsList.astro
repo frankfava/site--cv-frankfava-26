@@ -1,0 +1,38 @@
+---
+/** The still-running systems, one row each. */
+
+import { stillRunningSystems, type System } from "@/data/systems";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props {
+	systems?: System[];
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { systems = await stillRunningSystems(), class: className } = Astro.props;
+---
+
+<div class={cn("flex flex-col gap-2", className)}>
+	{
+		systems.map((system) => (
+			<article class="grid grid-cols-1 items-center gap-3.5 rounded-md border border-line bg-surface px-4 py-3.5 sm:grid-cols-[minmax(0,1fr)_auto]">
+				<div>
+					<div class="mb-1.5 flex items-center gap-2">
+						<i class={cn("size-1.5 flex-none rounded-full", system.live ? "bg-good" : "bg-ink-3")} />
+						<span class="font-mono text-xs tracking-wider text-ink-3 uppercase">{system.status}</span>
+					</div>
+					<h4 class="mb-1 text-base">{system.title}</h4>
+					<p class="text-sm text-ink-2">{system.body}</p>
+				</div>
+
+				<div class="text-left whitespace-nowrap sm:text-right">
+					<b class="block font-primary text-xl leading-none font-extrabold tracking-tight text-ink" style='font-variation-settings:"wdth" 88'>
+						{system.figure}
+					</b>
+					<small class="font-mono text-xs text-ink-3">{system.figureNote}</small>
+				</div>
+			</article>
+		))
+	}
+</div>

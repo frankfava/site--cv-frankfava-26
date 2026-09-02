@@ -1,7 +1,6 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
-import Callout from "@/components/ui/display/Callout.astro";
-import SystemsSplit from "./_partials/SystemsSplit.astro";
+import SystemsList from "./_partials/SystemsList.astro";
 
 export interface Props extends _ModuleWrapper {}
 
@@ -14,9 +13,5 @@ const header: _ModuleHeader = {
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<Callout title="How to read this" class="mt-0">
-		Left column outlived the engagement and is still in service. Right column is good work done inside someone else's system. A green dot means it's live today.
-	</Callout>
-
-	<SystemsSplit />
+	<SystemsList />
 </ModuleWrapper>

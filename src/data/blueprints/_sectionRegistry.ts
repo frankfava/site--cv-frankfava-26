@@ -22,12 +22,11 @@ export const trackRecord: BlueprintComponent = {
 
 export const stillRunning: BlueprintComponent = {
 	id: "still-running",
-	hidden: true,
 	eyebrow: "What's outlived me",
 	title: "The systems still running without me",
 	mainMenuLabel: "What's still running",
 	icon: "ph:hard-drives-duotone",
-	description: "There's a real difference between work I contributed to and systems I designed, shipped and stayed accountable for.",
+	description: "I designed these, shipped them, and I'm still the one who gets called.",
 	content: async () => import("@/components/blueprints/shared/StillRunning.astro"),
 };
 
