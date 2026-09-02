@@ -38,6 +38,23 @@ export const home = buildBlueprintEntry({
 	},
 });
 
+export const work = buildBlueprintEntry({
+	slug: "work",
+	title: "Work",
+	description: "Every project with the technologies, the constraints and what it produced.",
+	blueprint: {
+		projects: sections.projects,
+		skills: sections.skills,
+		fullRecord: sections.fullRecord,
+	} as const satisfies BlueprintSchema,
+	config: {
+		layout: { bay: "closed" },
+		// search: {
+		// 	atomics: { project: "projects", skill: "skills" },
+		// },
+	},
+});
+
 export const experience = buildBlueprintEntry({
 	slug: "experience",
 	title: "Experience",
@@ -56,6 +73,7 @@ export const experience = buildBlueprintEntry({
 
 export const blueprints: Record<string, BlueprintEntry> = {
 	home,
+	work,
 	experience,
 };
 

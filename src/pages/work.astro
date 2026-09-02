@@ -1,0 +1,19 @@
+---
+/**
+ * Work page.
+ */
+
+import { blueprints } from "@/data/blueprints";
+import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+
+const entry = blueprints.work;
+
+const metadata = {
+	title: entry.title,
+	description: entry.description,
+};
+---
+
+<SubIndexedLayout {...{ metadata, blueprint: entry }}>
+	<Fragment slot="lead">Projects, and the technologies behind them. Sold and built by me on all but a few.</Fragment>
+</SubIndexedLayout>
