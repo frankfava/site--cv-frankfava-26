@@ -3,6 +3,8 @@ import type { _Card } from "@/types";
 
 export interface Signal extends _Card {
 	ends?: boolean;
+	/** Keeps a signal off the page while its wording stays authored here. */
+	hidden?: boolean;
 }
 
 export async function signals(): Promise<Signal[]> {
@@ -14,8 +16,16 @@ export async function signals(): Promise<Signal[]> {
 		},
 		{
 			ends: true,
+			hidden: true,
 			title: "No Swedish security clearance",
 			body: "Säkerhetsklass 1–2 requires Swedish citizenship. I'm Australian and Italian, so it's legally closed to me.",
+		},
+		{
+			ends: false,
+			title: "I'm in Australia for weeks at a time, most years",
+			body: "My family is in Sydney and I go back for extended stretches, most often around Christmas.",
+			turnLead: "I work remotely while I'm there.",
+			turn: "I both enjoy and need that flexibility. The rest of the year I want the office - the environment, the collaborating, being amongst colleagues.",
 		},
 		{
 			ends: false,
