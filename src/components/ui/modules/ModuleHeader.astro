@@ -30,8 +30,8 @@ const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.
 				{title && <h2 class={cn("module--heading font-heading text-heading leading-tighter text-2xl font-semibold tracking-tighter lg:text-3xl", classes?.title)} set:html={title} />}
 
 				{subtitle && (
-					<div class={cn("module--subtitle mt-2 text-lg text-gray-500 dark:text-slate-400", classes?.subtitle)}>
-						{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0 text-gray-500" set:html={subtitle} />}
+					<div class={cn("module--subtitle mt-2 text-lg text-ink-3", classes?.subtitle)}>
+						{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0" set:html={subtitle} />}
 					</div>
 				)}
 				<slot name="afterHeader" />

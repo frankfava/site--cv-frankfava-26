@@ -33,7 +33,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:package-duotone",
 				title: "Tool-builder mindset",
-				body: 'Co-built <code class="bg-gray-100 px-1 rounded">@iGoMoon/hubspot-fields-js</code> - an open-source dev tool that the HubSpot core team adopted into their official Fields.JS docs. Productised my consulting methodology as a Claude Code skill. When repetition hurts, I build the tool.',
+				body: 'Co-built <code class="rounded bg-sunk px-1 text-ink">@iGoMoon/hubspot-fields-js</code> - an open-source dev tool that the HubSpot core team adopted into their official Fields.JS docs. Productised my consulting methodology as a Claude Code skill. When repetition hurts, I build the tool.',
 			},
 			{
 				icon: "ph:users-three-duotone",

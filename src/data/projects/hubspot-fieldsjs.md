@@ -12,7 +12,7 @@ caseStudy:
     problem: Building HubSpot CMS modules required developers to author module field configuration as raw JSON - a slow, error-prone, repetitive process across customer projects.
     solution: A JavaScript-authored workflow that compiles to the JSON HubSpot expects, dropping cleanly into existing build pipelines.
     build: |
-        Co-built and open-sourced as <code class="px-1 bg-gray-100 rounded">@iGoMoon/hubspot-fields-js</code>. Refined the developer experience based on actual customer-project usage at iGoMoon.
+        Co-built and open-sourced as <code class="rounded bg-sunk px-1 text-ink">@iGoMoon/hubspot-fields-js</code>. Refined the developer experience based on actual customer-project usage at iGoMoon.
     outcome: Adopted by the HubSpot core team and referenced from their official Fields.JS documentation. Cross-vendor / partner-ecosystem credibility - a developer tool inside another vendor's platform that they ended up endorsing.
 startDate: "Jan 2021"
 highlights: [
