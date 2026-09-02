@@ -91,6 +91,16 @@ export const practice: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/AiPractice.astro"),
 };
 
+
+export const certifications: BlueprintComponent = {
+	id: "certifications",
+	eyebrow: "Issued and verifiable",
+	title: "What I do hold, every one linked back to its issuer",
+	mainMenuLabel: "Certifications",
+	icon: "ph:ladder-duotone",
+	description: "Issued by someone other than me, and checkable.",
+	content: async () => import("@/components/blueprints/shared/Certifications.astro"),
+};
 export const projects: BlueprintComponent = {
 	id: "projects",
 	eyebrow: "Portfolio",

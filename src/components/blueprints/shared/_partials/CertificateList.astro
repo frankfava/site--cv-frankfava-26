@@ -1,0 +1,67 @@
+---
+/** Every certification as a card, most recently issued first. */
+
+import type { HTMLAttributes } from "astro/types";
+import ConditionalLink from "@/components/ui/display/ConditionalLink.astro";
+import Button from "@/components/ui/input/Button.astro";
+import { getCertifications, Manager, type Certifications } from "@/lib/collections/certifications";
+import { dateFormatter } from "@/utils/datetime";
+import { cn } from "@/utils/class";
+
+export interface Props {
+	certifications?: Certifications.Collection;
+	columns?: 1 | 2;
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { certifications: list = await getCertifications(), columns = 2, class: className } = Astro.props;
+
+const formatDate = dateFormatter().monthAndYear();
+
+const certificates = new Manager(list).sort("issueDate")._restructure();
+---
+
+<div class={cn("grid gap-2", { "xl:grid-cols-2": columns === 2 }, className)}>
+	{
+		certificates.map(({ certificate, issuer, ranking, icon, issueDate, expiryDate, credentialId, credentialLink }) => (
+			<div class="flex gap-4 rounded border border-line p-5">
+				{icon && <img src={icon} width="60" height="60" alt={issuer} loading="lazy" class="max-h-[45px] w-auto min-w-[45px] rounded-md" />}
+
+				<div class="grow">
+					<ConditionalLink href={credentialLink}>
+						<h3 class="flex flex-col flex-wrap gap-1 text-xl font-normal text-ink sm:flex-row sm:gap-3 md:items-center">
+							<span class="font-semibold">{certificate}</span>
+							{ranking && <span class="text-base md:text-inherit">({ranking})</span>}
+						</h3>
+					</ConditionalLink>
+					{issuer && <div class="text-ink-2">{issuer}</div>}
+
+					{(credentialId || issueDate) && (
+						<div class="mt-3 text-ink-3">
+							{issueDate && (
+								<div>
+									<span>Issued {formatDate(issueDate)}</span>
+									{expiryDate && <span> &middot; Expires {formatDate(expiryDate)}</span>}
+								</div>
+							)}
+							{credentialId && <div class="text-sm break-all">Credential ID: {credentialId}</div>}
+						</div>
+					)}
+
+					{credentialLink && (
+						<Button
+							{...{
+								href: credentialLink,
+								target: "_blank",
+								text: "Show credential",
+								variant: "primaryOutline",
+								icon: "ph:arrow-square-out-duotone",
+								class: "mt-3 rounded-[25px] px-3 py-2 md:px-5",
+							}}
+						/>
+					)}
+				</div>
+			</div>
+		))
+	}
+</div>

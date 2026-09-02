@@ -1,0 +1,17 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import CertificateList from "./_partials/CertificateList.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Certifications",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<CertificateList columns={2} />
+</ModuleWrapper>
