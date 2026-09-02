@@ -86,6 +86,22 @@ export const experience = buildBlueprintEntry({
 	},
 });
 
+
+export const credentials = buildBlueprintEntry({
+	slug: "practicalities",
+	title: "Credentials",
+	description: "What I have, what I don't, and every credential linked back to the issuer.",
+	blueprint: {
+		education: sections.education,
+		certifications: sections.certifications,
+		fullRecord: sections.fullRecord,
+	} as const satisfies BlueprintSchema,
+	config: {
+		// search: {
+		// 	atomics: { certification: "certifications" },
+		// },
+	},
+});
 export const blueprints: Record<string, BlueprintEntry> = {
 	home,
 	work,
