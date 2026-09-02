@@ -165,7 +165,7 @@ export const learning: BlueprintComponent = {
 };
 
 // Personality Tests
-export const tests: BlueprintComponent = {
+export const personalityTests: BlueprintComponent = {
 	id: "tests",
 	eyebrow: "An outside read",
 	title: "An outside read, explained rather than just scored",
@@ -232,7 +232,7 @@ export default {
 	languages,
 	self,
 	learning,
-	tests,
+	personalityTests,
 	references,
 	projects,
 	skills,
