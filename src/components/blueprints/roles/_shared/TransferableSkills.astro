@@ -26,21 +26,23 @@ const transferableSkills = await resolve(role);
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<ul class="grid gap-3 md:grid-cols-2">
-		<li class="rounded-md border border-gray-200 p-3 md:row-span-3">
+	<div class="grid gap-5 md:grid-cols-3">
+		<div class="md:col-span-1">
 			<CapabilityRadar />
-		</li>
+		</div>
 
-		{
-			transferableSkills.map(({ data }) => (
-				<li class="flex items-start gap-3 rounded-md border border-gray-200 p-3">
-					{data.icon && <Icon name={data.icon} class="size-6 shrink-0 text-primary-700" />}
-					<div class="grow">
-						<div class="leading-tight font-semibold">{data.title}</div>
-						{data.summary && <p class="m-0 text-sm text-gray-500">{data.summary}</p>}
-					</div>
-				</li>
-			))
-		}
-	</ul>
+		<ul class="grid content-start gap-3 md:col-span-2">
+			{
+				transferableSkills.map(({ data }) => (
+					<li class="flex items-start gap-3 rounded-md border border-gray-200 p-3">
+						{data.icon && <Icon name={data.icon} class="size-6 shrink-0 text-primary-700" />}
+						<div class="grow">
+							<div class="leading-tight font-semibold">{data.title}</div>
+							{data.summary && <p class="m-0 text-sm text-gray-500">{data.summary}</p>}
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
 </ModuleWrapper>

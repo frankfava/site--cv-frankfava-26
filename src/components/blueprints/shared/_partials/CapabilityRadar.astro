@@ -1,5 +1,6 @@
 ---
 /** The capability radar. `showNeed` adds the role's dashed overlay, which only the interactive check has. */
+import { CAPABILITIES } from "@/data/capabilities";
 import { radar } from "@/alpine/capability/radar";
 import { cn } from "@/utils/class";
 
@@ -63,6 +64,15 @@ const { class: className, eyebrow = "Where I sit", showNeed = false } = Astro.pr
 					Where I sit
 				</span>
 			</div>
-		) : null
+		) : (
+			<dl class="mt-1 grid gap-1 px-1 text-sm">
+				{CAPABILITIES.map((cap) => (
+					<div class="flex gap-2">
+						<dt class="w-24 shrink-0 font-mono text-xs tracking-wider text-ink-3 uppercase">{cap.short}</dt>
+						<dd class="m-0 text-ink-2">{cap.label}</dd>
+					</div>
+				))}
+			</dl>
+		)
 	}
 </div>
