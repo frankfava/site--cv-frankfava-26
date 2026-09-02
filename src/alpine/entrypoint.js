@@ -1,5 +1,4 @@
 import { themeToggle } from "./themeToggle.js";
-import { skillsComponent } from "./skillsComponent.js";
 import { workHistoryAccordion } from "./collections/workHistoryAccordion.js";
 import { particleField } from "./backgrounds/particleField.js";
 import { orb } from "./backgrounds/orb.js";
@@ -8,11 +7,11 @@ import { capabilityStore, capabilityPanel, capabilityRow, fitDial, CAPABILITY_ST
 import { careerStore, careerTimeline, careerYearLabel, careerDot, careerBar, careerDoughnut, careerArc, CAREER_STORE } from "./career";
 import { pickerStore, picker, pickerItem, PICKER_STORE } from "./picker";
 import { projectsStore, projectList, projectRow, projectSkill, PROJECTS_STORE } from "./projects";
+import { skillsStore, skillList, skillCard, skillFacet, skillPanel, SKILLS_STORE } from "./skills";
 
 export default (Alpine) => {
 	Alpine.data("themeToggle", themeToggle);
 
-	Alpine.data("skillsComponent", skillsComponent);
 	Alpine.data("workHistoryAccordion", workHistoryAccordion);
 
 	Alpine.data("particleField", particleField);
@@ -40,4 +39,10 @@ export default (Alpine) => {
 	Alpine.data("projectList", projectList);
 	Alpine.data("projectRow", projectRow);
 	Alpine.data("projectSkill", projectSkill);
+
+	Alpine.store(SKILLS_STORE, skillsStore());
+	Alpine.data("skillList", skillList);
+	Alpine.data("skillCard", skillCard);
+	Alpine.data("skillFacet", skillFacet);
+	Alpine.data("skillPanel", skillPanel);
 };

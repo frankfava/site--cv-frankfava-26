@@ -1,0 +1,19 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import SkillsList from "./_partials/SkillsList.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Technical skills",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "stacked", isFullWidth: true, ...props, header }}>
+	<p>Most of the technical skills I'm familiar with. To help you cut the list down there's a search box, a proficiency filter and a keyword filter.</p>
+
+	<SkillsList title="Skills" class="mt-8" />
+</ModuleWrapper>

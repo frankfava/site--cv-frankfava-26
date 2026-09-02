@@ -90,6 +90,17 @@ export const projects: BlueprintComponent = {
 	description: "Filter by the technology you care about. Each entry carries the context, what it had to work around, and what it produced.",
 	content: async () => import("@/components/blueprints/shared/Projects.astro"),
 };
+
+export const skills: BlueprintComponent = {
+	id: "skills",
+	eyebrow: "What I build with",
+	title: "The technologies behind them",
+	mainMenuLabel: "Technical skills",
+	icon: "ph:brackets-curly",
+	description: "Searchable and filterable by proficiency, because a list this long is only useful if you can cut it down to what your role needs.",
+	content: async () => import("@/components/blueprints/shared/TechnicalSkills.astro"),
+};
+
 export const fullRecord: BlueprintComponent = {
 	id: "full-record",
 	title: "The full record, one page at a time",
@@ -110,5 +121,6 @@ export default {
 	history,
 	achievements,
 	projects,
+	skills,
 	fullRecord,
 } as const satisfies BlueprintSchema;
