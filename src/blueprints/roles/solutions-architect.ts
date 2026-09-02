@@ -3,7 +3,7 @@ import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
 
-export const blueprint = buildBlueprint(buildRoleStructure("Solutions Architect"));
+export const blueprint = buildBlueprint(buildRoleStructure("AI Solutions Architect"));
 
 export const entry: BlueprintEntry = {
 	slug: "solutions-architect",
@@ -28,7 +28,7 @@ export const definition: RoleDefinition = {
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After 18 years building - the last few freelance, including nearly 4 years owning the architecture and product roadmap as part-time CTO at <a href="/#history">National Auto Service</a> - I'm moving deliberately into Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
+				`After 18 years building - the last few freelance, including nearly 4 years owning the architecture and product roadmap as part-time CTO at <a href="/#history">National Auto Service</a> - I'm moving deliberately into AI Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
 				`Concretely, that means partnering with an account executive to translate a customer's goals into an architecture they'll commit to - serving as the technical advisor across the whole adoption journey, from discovery and evaluation through to deployment, keeping business objectives and technical implementation pointed at the same target the entire way.`,
 			],
 		},

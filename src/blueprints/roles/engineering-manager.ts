@@ -62,7 +62,7 @@ export const definition: RoleDefinition = {
 				{ from: "Trained juniors and built the hiring screen at iGoMoon", to: "hiring, onboarding, and raising the bar of a team." },
 				{ from: "Part-time CTO owning delivery at National Auto Service", to: "owning a team's priorities, delivery health and technical direction." },
 				{ from: "Brought in and managed a temporary dev team through larger builds", to: "coordinating and unblocking engineers to hit a deadline." },
-				{ from: "18 years shipping multi-stack production code", to: "the technical credibility to lead engineers and earn their trust." },
+				{ from: "18 years building multi-stack code", to: "the technical credibility to lead engineers and earn their trust." },
 			],
 		},
 	},

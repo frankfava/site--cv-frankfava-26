@@ -79,7 +79,7 @@ export const definition: RoleDefinition = {
 			note: "Built production operability tools the data and customer-service teams use daily inside a regulated fintech.",
 		},
 		{
-			from: { label: "Was the freelancer customers called directly for 18 years" },
+			from: { label: "Was the freelancer customers called directly, for most of a decade" },
 			to: "White-glove, hands-on development support",
 		},
 		{
@@ -92,7 +92,7 @@ export const definition: RoleDefinition = {
 			to: "Building reusable artifacts (agent skills) for an AI-product context",
 		},
 		{
-			from: { label: "90%+ referral / repeat revenue over 18 years self-employed" },
+			from: { label: "90%+ referral / repeat revenue over a decade self-employed" },
 			to: "Building long-term customer relationships and surfacing new opportunities",
 		},
 		{
