@@ -1,0 +1,47 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Obstacles",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>
+		I promised you honesty, so here are a few things that may be a dealbreaker. You won't see this on most CVs, but I have no interest in wasting your time or mine if we're not a match, so I would
+		rather lay it out.
+	</p>
+
+	<ul class="ml-8 list-outside list-disc space-y-4">
+		<li>
+			<strong>Limited corporate experience</strong>
+			<p>
+				I've run my own business for most of my professional life, so I don't have the structure and conventions that come from years of employment. The flip side: I've had to develop the full
+				stack of skills — delivery, sales, customer service, project management, leading teams, self-motivation under pressure — without anyone else doing them for me.
+			</p>
+		</li>
+		<li>
+			<strong>Swedish is at a basic level</strong>
+			<p>
+				I understand a lot of Swedish but pronunciation has always been a struggle, so English is the most effective way to work with me. Sweden is forgiving here — most workplaces operate in
+				English without issue.
+			</p>
+		</li>
+		<li>
+			<strong>No university degree</strong>
+			<p>Eighteen years of the work instead, and it hasn't held me back. If it's a hard requirement for the role, I'm not your candidate.</p>
+		</li>
+		<li>
+			<strong>Travel to Australia</strong>
+			<p>
+				My family is in Sydney, so I travel back for extended stretches each year, most often around Christmas and the Australian summer. I'm fully comfortable working remotely, so as long as
+				there's flexibility around that, this shouldn't be an issue.
+			</p>
+		</li>
+	</ul>
+</ModuleWrapper>

@@ -121,6 +121,17 @@ export const situation: BlueprintComponent = {
 	description: "The questions that come up first in a screen, answered before you have to ask them.",
 	content: async () => import("@/components/blueprints/shared/Situation.astro"),
 };
+
+export const obstacles: BlueprintComponent = {
+	id: "obstacles",
+	eyebrow: "The honest list",
+	title: "The things that could be a dealbreaker",
+	mainMenuLabel: "What could be a problem",
+	icon: "ph:barricade-duotone",
+	description: "I would rather a real constraint ended this now than in week three.",
+	content: async () => import("@/components/blueprints/shared/Obstacles.astro"),
+};
+
 // How I Work
 export const self: BlueprintComponent = {
 	id: "self",
@@ -204,7 +215,10 @@ export default {
 	history,
 	achievements,
 	practice,
+	education,
+	certifications,
 	situation,
+	obstacles,
 	self,
 	learning,
 	tests,
