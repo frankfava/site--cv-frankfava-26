@@ -1,8 +1,6 @@
 /**
- * Four problems I have actually been handed, each bodyed with the real
+ * Problems I have actually been handed, each answered with the real
  * engagement rather than a hypothetical.
- *
- * The card is the question; everything below `eyebrow` is the body panel.
  */
 import type { _Card } from "@/types";
 
@@ -50,7 +48,7 @@ export const SCENARIOS: Scenario[] = [
 		},
 		eyebrow: "SAVR · closing project, 2026",
 		title: "The symptom was throughput. The cause was that nobody had asked what changed since last time.",
-		body: "The existing pipeline re-pulled entire eyebrows on every run and was buckling. A faster full pull buys you six months; moving to delta changes the shape of the problem. In a regulated market correctness and auditability come before speed, and taking load off the upstream systems mattered as much as our own numbers. I left something the next engineer could reason about, which is the actual point of the exercise.",
+		body: "The existing pipeline re-pulled entire source on every run and was buckling. A faster full pull buys you six months; moving to delta changes the shape of the problem. In a regulated market correctness and auditability come before speed, and taking load off the upstream systems mattered as much as our own numbers. I left something the next engineer could reason about, which is the actual point of the exercise.",
 		proof: [
 			{ figure: "Full to delta", note: "pipeline rebuilt" },
 			{ figure: "4", note: "systems left running" },
