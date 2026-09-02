@@ -50,25 +50,25 @@ export function careerStore() {
 		},
 
 		dotY(key) {
-			return chartY(this.year[key]);
+			return chartY(this.year.axes[key]);
 		},
 
 		barWidth(key) {
-			return `${this.year[key]}%`;
+			return `${this.year.axes[key]}%`;
 		},
 
 		get total() {
-			return CAREER_SERIES.reduce((sum, series) => sum + this.year[series.key], 0);
+			return CAREER_SERIES.reduce((sum, series) => sum + this.year.axes[series.key], 0);
 		},
 
 		/** What the centre of the doughnut reads. */
 		get average() {
-			return yearAverage(this.year);
+			return yearAverage(CAREER_SERIES, this.year);
 		},
 
 		/** Segmented variant: this series' share of the year. */
 		shareOf(key) {
-			return this.total ? this.year[key] / this.total : 0;
+			return this.total ? this.year.axes[key] / this.total : 0;
 		},
 
 		/** How far round the ring this series starts. */

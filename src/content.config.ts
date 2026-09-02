@@ -185,14 +185,25 @@ const testimonials = defineCollection({
 const career = defineCollection({
 	loader: file("src/data/career.json"),
 	schema: z.object({
-		decisions: z.number().min(0).max(100),
-		customer: z.number().min(0).max(100),
-		code: z.number().min(0).max(100),
-		leadership: z.number().min(0).max(100),
-		role: z.string(),
-		company: z.string(),
+		// The four measures, together, so the metric names are declared once and a
+		// series list can be checked against them.
+		axes: z.object({
+			decisions: z.number().min(0).max(100),
+			customer: z.number().min(0).max(100),
+			code: z.number().min(0).max(100),
+			leadership: z.number().min(0).max(100),
+		}),
+		// Zero, one or two: a year can predate any employment, or span the handover
+		// between two. Follows the year's own `company` line rather than raw date
+		// overlap, which counts long-running side engagements into every later year.
+		employers: z.array(reference("workHistory")).optional().default([]),
+		// Overrides. Both are derived from `employers` when absent, so a year
+		// carries one only where the derivation cannot reach it: 2009 has no
+		// employer to derive from, and two `workHistory` company names are
+		// written in a form this read-out does not use.
+		role: z.string().optional(),
+		company: z.string().optional(),
 		note: z.string(),
-		employer: reference("workHistory").optional(),
 	}),
 });
 

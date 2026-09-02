@@ -51,7 +51,7 @@ const outer = centre - band / 2;
 
 const years = await getCareerYears();
 const opening = years[openingIndex(years)];
-const total = CAREER_SERIES.reduce((sum, series) => sum + opening[series.key], 0);
+const total = CAREER_SERIES.reduce((sum, series) => sum + opening.axes[series.key], 0);
 
 /** Concentric rings work inwards; segments all sit on the outer one. */
 const radiusFor = (index: number) => (variant === "segments" ? outer : outer - index * (band + gap));
@@ -61,9 +61,9 @@ let before = 0;
 const arcs = CAREER_SERIES.map((series, i) => {
 	const radius = radiusFor(i);
 	const circumference = 2 * Math.PI * radius;
-	const { drawn, rest } = arcSpan({ variant, value: opening[series.key], total, circumference, gap });
+	const { drawn, rest } = arcSpan({ variant, value: opening.axes[series.key], total, circumference, gap });
 	const dashoffset = variant === "segments" ? -circumference * before : 0;
-	before += variant === "segments" ? opening[series.key] / total : 0;
+	before += variant === "segments" ? opening.axes[series.key] / total : 0;
 
 	return { ...series, radius, dasharray: `${drawn} ${rest}`, dashoffset };
 });
@@ -108,8 +108,8 @@ const arcs = CAREER_SERIES.map((series, i) => {
 				{CAREER_SERIES.map((series) => (
 					<div class="border-l-2 pl-2" style={`border-color:${series.color}`}>
 						<dt class="font-mono text-[10px] leading-tight tracking-wider text-ink-3 uppercase">{series.label}</dt>
-						<dd class="font-medium text-ink tab" x-text={`year.${series.key}`}>
-							{opening[series.key]}
+						<dd class="font-medium text-ink tab" x-text={`year.axes.${series.key}`}>
+							{opening.axes[series.key]}
 						</dd>
 					</div>
 				))}

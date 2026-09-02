@@ -1,7 +1,10 @@
-import { CAREER_SERIES, type CareerYear } from "@/data/career";
+import type { CareerMetric, CareerYear } from "@/data/career";
 
-export function yearAverage(year: CareerYear): number {
-	return Math.round(CAREER_SERIES.reduce((sum, series) => sum + year[series.key], 0) / CAREER_SERIES.length);
+/** The series to average over, so this file does not reach into authored data. */
+type Series = readonly { key: CareerMetric }[];
+
+export function yearAverage(series: Series, year: CareerYear): number {
+	return Math.round(series.reduce((sum, { key }) => sum + year.axes[key], 0) / series.length);
 }
 
 /** The year the read-out opens on, named rather than positioned so inserting a year cannot move it. */

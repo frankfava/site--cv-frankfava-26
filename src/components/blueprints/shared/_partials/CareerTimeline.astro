@@ -36,7 +36,7 @@ const count = years.length;
 const gridlines = [0, 25, 50, 75, 100].map((value) => ({ value, y: chartY(value) }));
 
 const shapes = CAREER_SERIES.map((series) => {
-	const line = years.map((year, i) => `${i ? "L" : "M"}${chartX(i, count).toFixed(1)} ${chartY(year[series.key]).toFixed(1)}`).join(" ");
+	const line = years.map((year, i) => `${i ? "L" : "M"}${chartX(i, count).toFixed(1)} ${chartY(year.axes[series.key]).toFixed(1)}`).join(" ");
 	return {
 		...series,
 		line,
@@ -46,7 +46,7 @@ const shapes = CAREER_SERIES.map((series) => {
 });
 
 /** Derived rather than measured, so it is drawn apart from the four series. */
-const trendLine = years.map((year, i) => `${i ? "L" : "M"}${chartX(i, count).toFixed(1)} ${chartY(yearAverage(year)).toFixed(1)}`).join(" ");
+const trendLine = years.map((year, i) => `${i ? "L" : "M"}${chartX(i, count).toFixed(1)} ${chartY(yearAverage(CAREER_SERIES, year)).toFixed(1)}`).join(" ");
 
 /** Every third year, plus the last. Which survive at a given width is decided on the client. */
 const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => year.year % 3 === 0 || year.i === count - 1);
@@ -124,7 +124,7 @@ const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => yea
 					<circle
 						r="4.5"
 						cx={chartX(openingAt, count)}
-						cy={chartY(opening[series.key])}
+						cy={chartY(opening.axes[series.key])}
 						fill={series.color}
 						stroke="var(--c-surface)"
 						stroke-width="2"
@@ -176,14 +176,14 @@ const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => yea
 						<div>
 							<div class="mb-1.5 flex justify-between gap-2.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
 								<span>{series.label}</span>
-								<b class="font-medium text-ink tab" x-text={`year.${series.key}`}>
-									{opening[series.key]}
+								<b class="font-medium text-ink tab" x-text={`year.axes.${series.key}`}>
+									{opening.axes[series.key]}
 								</b>
 							</div>
 							<div class="h-1.5 overflow-hidden rounded-full bg-sunk">
 								<i
 									class="block h-full rounded-full transition-[width] duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)]"
-									style={`background:${series.color};width:${opening[series.key]}%`}
+									style={`background:${series.color};width:${opening.axes[series.key]}%`}
 									x-data="careerBar"
 									data-series={series.key}
 									x-bind:style="style"

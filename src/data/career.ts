@@ -1,35 +1,20 @@
 /**
- * The four things a year of work is measured on here, and the arithmetic over
- * them. Client-safe on purpose: the Alpine store imports this, so it must not
- * reach for the content collection.
+ * The four things a year of work is measured on. Client-safe: the Alpine store
+ * imports this, so the only thing it may take from `astro:content` is a type.
  */
-export interface CareerYear {
-	year: number;
-	/** How much of the deciding was mine. */
-	decisions: number;
-	/** How close the customer sat. */
-	customer: number;
-	/** How much of the week went on code. */
-	code: number;
-	/** Accountable for someone else's growth or output. */
-	leadership: number;
-	role: string;
-	company: string;
-	note: string;
-}
+import type { CollectionEntry } from "astro:content";
 
-export interface CareerSeries {
-	key: "decisions" | "customer" | "code" | "leadership";
-	label: string;
-	/** Shared by the chart line, the legend and the read-out bar. */
-	color: string;
-}
-
-export const CAREER_SERIES: CareerSeries[] = [
+export const CAREER_SERIES = [
 	{ key: "decisions", label: "Decision rights", color: "var(--c-accent)" },
 	{ key: "customer", label: "Customer-facing", color: "var(--c-cyan)" },
 	{ key: "code", label: "Hands-on coding", color: "var(--c-ink-3)" },
 	{ key: "leadership", label: "Leadership responsibility", color: "var(--c-warn)" },
-];
+] as const satisfies readonly { key: keyof CareerYear["axes"]; label: string; color: string }[];
 
-/** The four series averaged: one number for how much of a year's work suited me. */
+export type CareerMetric = (typeof CAREER_SERIES)[number]["key"];
+
+/**
+ * A collection entry flattened onto the year its id names, with `role` and
+ * `company` resolved - either the year's override or derived from `employers`.
+ */
+export type CareerYear = { year: number; role: string; company: string } & CollectionEntry<"career">["data"];
