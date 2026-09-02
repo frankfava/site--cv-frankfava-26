@@ -1,0 +1,65 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Strengths and failure modes",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>Technical skills can be learnt. Attitude matters more.</p>
+
+	<h3 class="mb-3 text-lg">How I would describe myself</h3>
+
+	<ul class="mb-6 ml-6 list-outside list-disc space-y-2">
+		<li>I'm an outspoken and genuine Aussie bloke. I like a good chat, and good times with good people.</li>
+		<li>I'd rather succeed together than alone, but I'll walk alone if I must.</li>
+		<li>I set ambitious goals, sometimes biting off more than I can chew, but once I commit I get obsessively focused on getting there.</li>
+		<li>I hold high expectations of myself and others, and I get <a href="#learning">impatient for results</a>, always looking for a better way.</li>
+		<li>I speak plainly and directly rather than dance around a problem, which can read as blunt or prickly if I deliver it badly.</li>
+		<li>It takes me a while to get comfortable in a new situation. Once I am, I take command and drive it home.</li>
+		<li>I can come across as insensitive or overly competitive in pursuit of the goal. I work with urgency, and that can create stress for people around me.</li>
+		<li>I'm slow to spot the weaknesses that are costing me, because I lose touch with how I'm feeling while I'm focused on the task.</li>
+	</ul>
+
+	<div id="culture" class="mb-6 rounded border border-line bg-sunk p-5">
+		<p class="m-0 font-semibold">I fit best into a culture that values excellence and drives performance.</p>
+	</div>
+
+	<div id="biggest-strengths" class="mb-6 scroll-mt-[150px] rounded border border-line bg-sunk p-5">
+		<h3 class="mb-3 text-lg">My biggest strengths</h3>
+
+		<ul class="ml-6 list-outside list-disc space-y-2">
+			<li>I'm transparent about what I can do. If I don't know how, I'll go and find out.</li>
+			<li>My <a href="#learning">curiosity</a> keeps me moving — an internal drive to learn how things work, how they should work, and how to improve them.</li>
+			<li>Once I'm set on a purpose I find a way. It doesn't always go to plan, but the important goal gets met.</li>
+			<li>
+				I innovate and systemise in response. One of my <a href="#biggest-weaknesses">biggest weaknesses</a> is losing interest in repeated work, so when a task is going to keep coming back I build
+				a tool or a template for it. Over time that saves countless hours.
+			</li>
+		</ul>
+	</div>
+
+	<div id="biggest-weaknesses" class="mb-6 scroll-mt-[150px] rounded border border-line bg-sunk p-5">
+		<h3 class="mb-3 text-lg">My biggest weaknesses</h3>
+		<ul class="ml-6 list-outside list-disc space-y-2">
+			<li>
+				I get bored easily, the other side of that <a href="#learning">curiosity</a>, because I'm impatient for results. I respond by either pushing harder than I should or pulling back to
+				recharge on something else.
+			</li>
+			<li>
+				I need a <a href="#learning">problem to solve</a> or a purpose to apply myself to, or I go distant doing the same work over and over — though <a href="#biggest-strengths"
+					>I have a useful response to that</a
+				>.
+			</li>
+			<li>I set ambitious goals and sometimes bite off more than I can chew. With proper planning, team support and clear communication, the result still lands.</li>
+		</ul>
+	</div>
+
+	<p class="mt-6 text-lg">For an outside view, including <a href="#how-to-get-best-from-me">how to get the best from me</a>, see the <a href="#tests">personality tests</a>.</p>
+</ModuleWrapper>
