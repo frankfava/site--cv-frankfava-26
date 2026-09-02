@@ -64,7 +64,7 @@ export async function buildPersonJsonLd() {
 		"@type": "Person",
 		name: ABOUT.name,
 		jobTitle: ABOUT.focuses.join(", "),
-		image: getCanonical(ABOUT.getImage("avatar")),
+		image: getCanonical(ABOUT.requireImage("avatar", "the Person JSON-LD")),
 		hasOccupation: ABOUT.focuses.map((title) => ({
 			"@type": "Occupation",
 			name: title,

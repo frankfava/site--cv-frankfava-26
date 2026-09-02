@@ -51,6 +51,7 @@ export namespace Config {
 			focuses: string[];
 			locationFull: string;
 			getImage: (name: string) => string | undefined;
+			requireImage: (name: string, wantedBy: string) => string;
 			nationality: About.Nationality[];
 			linguistics: Omit<About.Linguistics, "languages"> & {
 				languages: About.Language[];

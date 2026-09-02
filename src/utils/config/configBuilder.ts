@@ -146,6 +146,14 @@ export function addUtils(config: Config.Complete) {
 			}
 			return image.url;
 		},
+		requireImage: (name: string, wantedBy: string): string => {
+			const url = about.getImage(name);
+			if (!url) {
+				const configured = about.profileImages?.map((img) => img.name).join(", ") || "none";
+				throw new Error(`Profile image "${name}" is not configured, wanted by ${wantedBy}. Configured images: ${configured}.`);
+			}
+			return url;
+		},
 	};
 
 	// Sidebar
