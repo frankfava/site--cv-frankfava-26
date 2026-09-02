@@ -1,13 +1,13 @@
 import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
-import type { RoleDefinition } from "@/data/roleDefinitions";
+import type { RoleDefinition } from "@/lib/roles";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Solutions Architect"));
 
 export const entry: BlueprintEntry = {
 	slug: "solutions-architect",
-	title: "Solutions Architect",
+	title: "AI Solutions Architect",
 	description:
 		"Why I'd be a great AI Solutions Architect - designing and building real AI/agentic solutions, pre-sales partnership with account executives, technical advisor across the adoption journey, architectural ownership, and a multi-stack track record.",
 	blueprint,
@@ -18,6 +18,7 @@ export const entry: BlueprintEntry = {
 };
 
 export const definition: RoleDefinition = {
+	summary: "The first technical voice a customer hears. Discovery, demos, architecture, business case.",
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "ASTRO", "TYPESCRIPT", "REACT", "AWS", "DOCKER", "CLAUDE", "API", "POSTGRESQL", "FILAMENTPHP"],
 	featuredProjects: ["lovable-output-analyser", "ai-skill-create-mvp", "savr-admin-panels", "lovable-prompt-builder", "savr-delta-system", "nas", "hubspot-fieldsjs"],

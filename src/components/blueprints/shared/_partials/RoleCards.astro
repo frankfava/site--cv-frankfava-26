@@ -1,7 +1,7 @@
 ---
 /** Registry roles as cards, each linking to its role page. */
 import Cards, { type Props as CardsProps } from "@/components/ui/display/Cards.astro";
-import { getRoleBySlug, onlyVisibleRoles, roleIsVisible, ROLES } from "@/data/roles";
+import { getRole, onlyVisibleRoles, roleIsVisible, ROLES } from "@/lib/roles";
 import type { _Card } from "@/types";
 
 export interface Props extends Omit<CardsProps, "cards"> {
@@ -12,7 +12,7 @@ const { roles = onlyVisibleRoles(ROLES), ...cardProps }: Props = Astro.props;
 
 /** Visibility stays the registry's call, so a named role that is off still drops out. */
 const cards = roles.flatMap<_Card>(({ slug, eyebrow }) => {
-	const role = getRoleBySlug(slug);
+	const role = getRole(slug);
 	if (!role || !roleIsVisible(role)) return [];
 	return { key: role.slug, eyebrow, title: role.title, body: role.summary, link: { href: `/roles/${role.slug}` } };
 });

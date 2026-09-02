@@ -2,7 +2,6 @@ import type { CertificationId, SkillId } from "content:ids";
 import { getCollection } from "astro:content";
 import { getTransferableSkills } from "@/utils/transferableSkills";
 import type { BlueprintEntry } from "@/lib/blueprints";
-import { getRoleBySlug } from "@/data/roles";
 
 import { definition as solutionsArchitect, entry as solutionsArchitectEntry } from "@/blueprints/roles/solutions-architect";
 import { definition as forwardDeployedEngineer, entry as forwardDeployedEngineerEntry } from "@/blueprints/roles/forward-deployed-engineer";
@@ -64,10 +63,13 @@ export interface PitchContent {
  * everything here is recruiter-facing content unique to the role page.
  */
 export interface RoleDefinition {
+	/** Disabled means no page is built. Hidden means the page exists but nothing lists it. */
 	enabled?: boolean;
 	hidden?: boolean;
 	/** The role slug. */
 	slug: string;
+	/** The one line that introduces the role wherever it is listed. */
+	summary: string;
 	/** Skills to spotlight on this role page (refs into the skills collection). */
 	featuredSkills?: SkillId[];
 	/** Projects to spotlight on this role page (refs into the projects collection). */
@@ -94,13 +96,20 @@ const ENTRIES: BlueprintEntry[] = [engineeringManagerEntry, solutionsArchitectEn
 const definitionsBySlug: Record<string, RoleDefinition> = Object.fromEntries(DEFINITIONS.map((d) => [d.slug, d]));
 const entriesBySlug: Record<string, BlueprintEntry> = Object.fromEntries(ENTRIES.map((e) => [e.slug, e]));
 
-/** The registry is the identity source, so its title and copy win over the page entry's. */
 export function getRole(slug: string): Role | undefined {
-	const identity = getRoleBySlug(slug);
 	const entry = entriesBySlug[slug];
-	if (!identity || !entry) return undefined;
-	return { ...entry, ...definitionsBySlug[slug], ...identity };
+	const definition = definitionsBySlug[slug];
+	if (!entry || !definition) return undefined;
+	return { ...entry, ...definition };
 }
+
+export const ROLES: Role[] = DEFINITIONS.map((d) => getRole(d.slug)).filter((role): role is Role => !!role);
+
+export const roleIsEnabled = (role: Role): boolean => role.enabled ?? true;
+export const roleIsVisible = (role: Role): boolean => roleIsEnabled(role) && !(role.hidden ?? false);
+
+export const onlyEnabledRoles = (roles: Role[]): Role[] => roles.filter(roleIsEnabled);
+export const onlyVisibleRoles = (roles: Role[]): Role[] => roles.filter(roleIsVisible);
 
 /**
  * The featured arrays hold ids as plain strings, so nothing catches a stale one

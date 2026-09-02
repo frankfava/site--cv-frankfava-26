@@ -1,7 +1,7 @@
 import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
-import type { RoleDefinition } from "@/data/roleDefinitions";
+import type { RoleDefinition } from "@/lib/roles";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Engineering Manager"));
 
@@ -18,6 +18,7 @@ export const entry: BlueprintEntry = {
 };
 
 export const definition: RoleDefinition = {
+	summary: "Coaching was my first profession, not a second skill. Interim or fixed term suits me best.",
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "TYPESCRIPT", "AWS", "DOCKER", "CLAUDE", "API", "POSTGRESQL", "FILAMENTPHP"],
 	featuredProjects: ["nas", "savr-admin-panels", "ai-skill-create-mvp"],

@@ -1,7 +1,7 @@
 import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
-import type { RoleDefinition } from "@/data/roleDefinitions";
+import type { RoleDefinition } from "@/lib/roles";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Forward Deployed Engineer"));
 
@@ -18,6 +18,7 @@ export const entry: BlueprintEntry = {
 };
 
 export const definition: RoleDefinition = {
+	summary: "Embedded with the customer, owning the technical call from first conversation to production.",
 	hidden: false,
 	slug: entry.slug,
 	featuredSkills: ["CLAUDE", "LARAVEL", "PHP", "VUEJS", "REACT", "ASTRO", "TYPESCRIPT", "AWS", "DOCKER", "API", "POSTGRESQL", "FILAMENTPHP"],

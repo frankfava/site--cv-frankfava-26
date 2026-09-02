@@ -1,7 +1,7 @@
 import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
-import type { RoleDefinition } from "@/data/roleDefinitions";
+import type { RoleDefinition } from "@/lib/roles";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Technical Evangelist"));
 
@@ -18,6 +18,7 @@ export const entry: BlueprintEntry = {
 
 export const definition: RoleDefinition = {
 	enabled: false,
+	summary: "Coaching, sales, and a decade of hands-on engineering.",
 	slug: entry.slug,
 	featuredSkills: ["CLAUDE", "GPT", "ASTRO", "REACT", "TYPESCRIPT", "TAILWIND", "LARAVEL", "GITHUB"],
 	featuredProjects: ["hubspot-fieldsjs", "lovable-output-analyser", "ai-skill-create-mvp", "lovable-prompt-builder", "this-cv"],

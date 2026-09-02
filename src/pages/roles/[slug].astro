@@ -1,7 +1,7 @@
 ---
 import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
-import { onlyEnabledRoles, ROLES } from "@/data/roles";
-import { findBrokenFeaturedIds, getRole } from "@/data/roleDefinitions";
+import { onlyEnabledRoles, ROLES } from "@/lib/roles";
+import { findBrokenFeaturedIds, getRole } from "@/lib/roles";
 import { buildRolePageContext } from "@/utils/rolePageContext";
 
 export async function getStaticPaths() {
