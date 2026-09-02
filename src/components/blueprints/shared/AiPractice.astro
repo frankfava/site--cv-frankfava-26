@@ -1,12 +1,18 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
 import QuestionCard from "@/components/ui/display/QuestionCard.astro";
-import Cards from "@/components/ui/display/Cards.astro";
-import { tools } from "@/data/aiTools";
+import ProjectCard from "@/components/ui/display/ProjectCard.astro";
+import { gridColumns } from "@/components/ui/display/Cards.astro";
+import { cn } from "@/utils/class";
+import { getCollection } from "astro:content";
 
 export interface Props extends _ModuleWrapper {}
 
 const props = Astro.props;
+
+const tools = (await getCollection("projects", ({ data }) => !data.draft && data.featured && data.tags.includes("ai-tool")))
+	.sort((a, b) => (a.data.order ?? Number.POSITIVE_INFINITY) - (b.data.order ?? Number.POSITIVE_INFINITY) || a.data.title.localeCompare(b.data.title))
+	.map(({ id, data }) => ({ id, title: data.title, summary: data.summary, type: data.type, startDate: data.startDate, duration: data.duration, demoUrl: data.demoUrl, repoUrl: data.repoUrl }));
 
 const header: _ModuleHeader = {
 	...props.header,
@@ -44,6 +50,8 @@ const header: _ModuleHeader = {
 
 	<div class="mt-6">
 		<h3 class="mb-3 text-lg">Featured tools I've built</h3>
-		<Cards {...{ cards: tools, columnCount: 2, hoverBorder: true, linkText: "Open →" }} />
+		<div class={cn("grid grid-cols-1 gap-4", gridColumns(2))}>
+			{tools.map((tool) => <ProjectCard {...tool} />)}
+		</div>
 	</div>
 </ModuleWrapper>

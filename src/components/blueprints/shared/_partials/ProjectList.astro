@@ -5,9 +5,8 @@ import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
-import ConditionalLink from "@/components/ui/display/ConditionalLink.astro";
+import ProjectCard from "@/components/ui/display/ProjectCard.astro";
 import { Manager as SkillsManager } from "@/lib/collections/skills";
-import { dateFormatter, formatDuration, rangeToMonths } from "@/utils/datetime";
 import { cn } from "@/utils/class";
 
 export interface Props {
@@ -29,8 +28,6 @@ const {
 	showSearchBar = true,
 	class: className,
 } = Astro.props;
-
-const formatDate = dateFormatter().monthAndYear();
 
 type Project = {
 	id: CollectionEntry<"projects">["id"];
@@ -156,79 +153,24 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 			<div class="grid auto-rows-min gap-3">
 				{
 					projects.map(({ id, title: name, type, showLink, summary, demoUrl, repoUrl, startDate, duration, skills: used, highlights }) => (
-						<div x-data="projectRow" data-id={id} x-show="shown" class="grid gap-3 rounded-md border border-line bg-surface p-4 shadow-md">
-							<div>
-								<h3 class="text-lg font-semibold text-ink">
-									<ConditionalLink href={showLink ? `/projects/${id}` : undefined} class="flex items-center gap-2">
-										{name}
-										{showLink && (
-											<span>
-												<Icon name="ph:arrow-fat-line-right-duotone" class="size-5" />
-											</span>
-										)}
-									</ConditionalLink>
-								</h3>
-								<p class="m-0 text-ink-3">{summary}</p>
-							</div>
-
-							<div class="flex flex-col flex-wrap text-ink-3 md:flex-row md:gap-3">
-								<div>
-									<strong>Start date:</strong> {formatDate(startDate)}
-								</div>
-								<div>
-									<strong>Type:</strong> {type}
-								</div>
-								{duration !== undefined && (
-									<div>
-										<strong>Duration:</strong> {formatDuration(duration ?? rangeToMonths(startDate, new Date()))}
-									</div>
-								)}
-							</div>
-
-							{(demoUrl || repoUrl) && (
-								<div class="flex flex-wrap gap-2">
-									{demoUrl && (
-										<a href={demoUrl} target="_blank" rel="noopener">
-											Demo
-										</a>
-									)}
-									{repoUrl && (
-										<a href={repoUrl} target="_blank" rel="noopener">
-											Source
-										</a>
-									)}
-								</div>
+						<ProjectCard
+							{...{ id, title: name, summary, type, startDate, duration, demoUrl, repoUrl, highlights, showLink, skills: used }}
+							x-data="projectRow"
+							data-id={id}
+							x-show="shown"
+							skill={(entry) => (
+								<li
+									x-data="projectSkill"
+									data-id={entry.id}
+									data-label={entry.label}
+									{...{ "@click": "toggle", "x-bind:class": "chipClass" }}
+									class="inline-flex cursor-pointer items-center gap-1 rounded border px-2 py-1"
+								>
+									<Icon name={entry.icon} class="size-5" />
+									<span>{entry.label}</span>
+								</li>
 							)}
-
-							{!!highlights?.length && (
-								<div class="text-ink-2">
-									<div class="mb-1 font-semibold">Highlights</div>
-									<ul class="ml-6 list-outside list-disc space-y-1">
-										{highlights.map((highlight) => (
-											<li set:html={highlight} />
-										))}
-									</ul>
-								</div>
-							)}
-
-							{!!used.length && (
-								<ul class="mt-2 flex flex-wrap gap-2 text-sm">
-									{used.map(({ id: skillId, icon, label }) => (
-										<li
-											x-data="projectSkill"
-											data-id={skillId}
-											data-label={label}
-											@click="toggle"
-											x-bind:class="chipClass"
-											class="inline-flex cursor-pointer items-center gap-1 rounded border px-2 py-1"
-										>
-											<Icon name={icon} class="size-5" />
-											<span>{label}</span>
-										</li>
-									))}
-								</ul>
-							)}
-						</div>
+						/>
 					))
 				}
 			</div>

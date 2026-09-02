@@ -1,0 +1,111 @@
+---
+/** One project. Its own surface and copy, no layout and no opinion on what wraps it. */
+import type { CollectionEntry } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
+import type { AstroVNode } from "astro/jsx-runtime";
+import { Icon } from "astro-icon/components";
+import ConditionalLink from "./ConditionalLink.astro";
+import { dateFormatter, formatDuration, rangeToMonths } from "@/utils/datetime";
+import { cn } from "@/utils/class";
+
+export type ProjectCardSkill = { id: string; icon?: string; label: string };
+
+export interface Props {
+	id: CollectionEntry<"projects">["id"];
+	title: string;
+	summary?: string;
+	type?: string;
+	startDate: Date;
+	duration?: number | string | null;
+	demoUrl?: string;
+	repoUrl?: string;
+	highlights?: string[];
+	showLink?: boolean;
+	skills?: ProjectCardSkill[];
+	/** Overrides one chip, for callers that wire it to filtering this component knows nothing about. */
+	skill?: (skill: ProjectCardSkill) => AstroVNode;
+	class?: HTMLAttributes<"div">["class:list"];
+	[key: string]: unknown;
+}
+
+const { id, title, summary, type, startDate, duration, demoUrl, repoUrl, highlights = [], showLink = false, skills = [], skill, class: className, ...rest } = Astro.props;
+
+const formatDate = dateFormatter().monthAndYear();
+---
+
+<div {...rest} class={cn("grid gap-3 rounded-md border border-line bg-surface p-4 shadow-md", className)}>
+	<div>
+		<h3 class="text-lg font-semibold text-ink">
+			<ConditionalLink href={showLink ? `/projects/${id}` : undefined} class="flex items-center gap-2">
+				{title}
+				{
+					showLink && (
+						<span>
+							<Icon name="ph:arrow-fat-line-right-duotone" class="size-5" />
+						</span>
+					)
+				}
+			</ConditionalLink>
+		</h3>
+		<p class="m-0 text-ink-3">{summary}</p>
+	</div>
+
+	<div class="flex flex-col flex-wrap text-ink-3 md:flex-row md:gap-3">
+		<div><strong>Start date:</strong> {formatDate(startDate)}</div>
+		<div><strong>Type:</strong> {type}</div>
+		{
+			duration !== undefined && (
+				<div>
+					<strong>Duration:</strong> {formatDuration(duration ?? rangeToMonths(startDate, new Date()))}
+				</div>
+			)
+		}
+	</div>
+
+	{
+		(demoUrl || repoUrl) && (
+			<div class="flex flex-wrap gap-2">
+				{demoUrl && (
+					<a href={demoUrl} target="_blank" rel="noopener">
+						Demo
+					</a>
+				)}
+				{repoUrl && (
+					<a href={repoUrl} target="_blank" rel="noopener">
+						Source
+					</a>
+				)}
+			</div>
+		)
+	}
+
+	{
+		!!highlights?.length && (
+			<div class="text-ink-2">
+				<div class="mb-1 font-semibold">Highlights</div>
+				<ul class="ml-6 list-outside list-disc space-y-1">
+					{highlights.map((highlight) => (
+						<li set:html={highlight} />
+					))}
+				</ul>
+			</div>
+		)
+	}
+
+	{
+		!!skills.length && (
+			<ul class="mt-2 flex flex-wrap gap-2 text-sm">
+				{skills.map((entry) =>
+					skill ? (
+						skill(entry)
+					) : (
+						<li class="inline-flex items-center gap-1 rounded border px-2 py-1">
+							<Icon name={entry.icon} class="size-5" />
+							<span>{entry.label}</span>
+						</li>
+					),
+				)}
+			</ul>
+		)
+	}
+</div>
