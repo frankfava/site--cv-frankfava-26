@@ -1,0 +1,34 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Education",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>
+		I was always told that <strong>"doing it is the best education"</strong>, and so while my formal education is limited, my real education has come from learning <strong>on the job</strong>.
+		That has served me well, because it is real-world experience. The risk is delivering when I don't already know how — and whenever a project handed me something I couldn't do, I spent the time
+		to learn it.
+	</p>
+
+	<div class="my-6 rounded border border-line bg-sunk p-5">
+		<p>A quick overview of my <u>formal education</u>:</p>
+
+		<ul class="ml-6 list-outside list-disc space-y-2">
+			<li>Completed a 12 month traineeship as the network administrator for a high school.</li>
+			<li>Attended the International Coaching Institute (ICI) via remote learning to get started in coaching.</li>
+		</ul>
+	</div>
+
+	<p>
+		I'm a continuous learner who likes understanding and solving problems, so spare time usually goes on a new skill or sharpening an existing one. Listing every course, tutorial and book would be
+		a long and tedious list; the technical and transferable skills I've picked up along the way are what this CV is made of.
+	</p>
+</ModuleWrapper>

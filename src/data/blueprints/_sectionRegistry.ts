@@ -91,6 +91,15 @@ export const practice: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/AiPractice.astro"),
 };
 
+export const education: BlueprintComponent = {
+	id: "education",
+	eyebrow: "Formal education",
+	title: "No degree, and eighteen years of the work instead",
+	mainMenuLabel: "Education",
+	icon: "ph:graduation-cap-duotone",
+	description: "Nobody who has hired me has needed one, including a regulated fintech and a part-time CTO seat. If it is a hard requirement, that is a real filter and it is better found now.",
+	content: async () => import("@/components/blueprints/shared/Education.astro"),
+};
 
 export const certifications: BlueprintComponent = {
 	id: "certifications",
