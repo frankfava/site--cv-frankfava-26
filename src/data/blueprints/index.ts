@@ -100,7 +100,7 @@ export const howIWork = buildBlueprintEntry({
 });
 
 export const credentials = buildBlueprintEntry({
-	slug: "practicalities",
+	slug: "credentials",
 	title: "Credentials",
 	description: "What I have, what I don't, and every credential linked back to the issuer.",
 	blueprint: {
