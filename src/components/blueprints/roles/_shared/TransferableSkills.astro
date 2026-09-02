@@ -1,0 +1,52 @@
+---
+import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
+import { Icon } from "astro-icon/components";
+import type { Role } from "@/data/roleDefinitions";
+import { getTransferableSkillById } from "@/utils/transferableSkills";
+import { blueprint as mainBlueprint } from "@/blueprints/mainPage";
+
+export interface Props extends _ModuleWrapper {}
+
+// Read by BlueprintSectionBuild - empty result hides the whole section.
+export async function resolve(role: Role | undefined) {
+	const featured = role?.featuredTransferableSkills ?? [];
+	if (featured.length === 0) return [];
+	return featured.map((id) => getTransferableSkillById(id)).filter((t): t is NonNullable<typeof t> => !!t);
+}
+
+const props = Astro.props;
+const role = Astro.locals.blueprint as Role;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Transferable Skills",
+};
+
+const transferableSkills = await resolve(role);
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<div slot="afterHeader" class="mt-3">
+		<a
+			href={`/${mainBlueprint.transferable.href}`}
+			class="inline-flex items-center gap-2 rounded-md bg-primary-700 px-2 py-1.5 text-xs font-semibold whitespace-nowrap text-white! hover:bg-black focus:ring-4 focus:ring-primary-300 focus:outline-none print:hidden"
+			data-no-print
+		>
+			<Icon name={mainBlueprint.transferable.icon} class="size-4" />
+			View All
+		</a>
+	</div>
+	<ul class="grid gap-3 md:grid-cols-2">
+		{
+			transferableSkills.map(({ data }) => (
+				<li class="flex items-start gap-3 rounded-md border border-gray-200 p-3">
+					{data.icon && <Icon name={data.icon} class="size-6 shrink-0 text-primary-700" />}
+					<div class="grow">
+						<div class="leading-tight font-semibold">{data.title}</div>
+						{data.summary && <p class="m-0 text-sm text-gray-500">{data.summary}</p>}
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</ModuleWrapper>

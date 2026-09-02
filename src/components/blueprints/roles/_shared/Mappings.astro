@@ -1,0 +1,61 @@
+---
+import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
+import ConditionalLink from "@/components/ui/display/ConditionalLink.astro";
+import { Icon } from "astro-icon/components";
+import type { Role, RoleMapping } from "@/data/roleDefinitions";
+
+export interface Props extends _ModuleWrapper {}
+
+// Read by BlueprintSectionBuild - empty result hides the whole section.
+export async function resolve(role: Role | undefined): Promise<RoleMapping[]> {
+	return role?.mappings ?? [];
+}
+
+const props = Astro.props;
+const role = Astro.locals.blueprint as Role;
+const roleAnchorIds = new Set((Astro.locals.roleAnchorIds ?? []) as string[]);
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "How my background maps to what the role asks for",
+	subtitle: props.header?.subtitle || "Specific examples - each line connects something I've done to something this role calls for.",
+};
+
+const mappings = await resolve(role);
+
+// Resolve in-page anchors against this role's section IDs; otherwise treat
+// `#foo` as a home-page anchor (`/#foo`). External / absolute URLs pass through.
+const resolveHref = (href?: string) => {
+	if (!href) return undefined;
+	if (!href.startsWith("#")) return href;
+	const anchor = href.slice(1);
+	return roleAnchorIds.has(anchor) ? href : `/${href}`;
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<div class="mt-4 grid gap-3 md:grid-cols-2">
+		{
+			mappings.map(({ from, to, note }) => (
+				<div class="border border-gray-200 bg-gray-50 p-4">
+					<div class="font-semibold text-primary-700">
+						<ConditionalLink href={resolveHref(from.url)}>
+							{from.label}
+							{from.url && (
+								<span class="ml-1">
+									<Icon name="ph:arrow-fat-line-right-duotone" class="inline size-4" />
+								</span>
+							)}
+						</ConditionalLink>
+					</div>
+					<div class="my-2 flex items-center gap-2 text-sm text-gray-500">
+						<Icon name="ph:arrow-down-duotone" class="size-4" />
+						<span class="tracking-wide uppercase">maps to</span>
+					</div>
+					<div class="font-semibold">{to}</div>
+					{note && <p class="m-0 mt-2 text-sm text-gray-600">{note}</p>}
+				</div>
+			))
+		}
+	</div>
+</ModuleWrapper>

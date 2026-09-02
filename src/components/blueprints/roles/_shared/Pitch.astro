@@ -1,0 +1,90 @@
+---
+import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
+import VCard from "@/components/ui/display/VCard.astro";
+import RoleHero from "@/components/blueprints/roles/_shared/RoleHero.astro";
+import { Icon } from "astro-icon/components";
+import type { Role } from "@/data/roleDefinitions";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+const role = Astro.locals.blueprint as Role;
+const pitch = role.pitch;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || `Why I'd be a great ${role.title}`,
+};
+
+const whyNowTitle = pitch?.whyNow?.title ?? `Why ${role.title}, why now`;
+const whatTranslatesTitle = pitch?.whatTranslates?.title ?? "What translates";
+const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.title} role specifically.`;
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<VCard slot="header" />
+
+	<Fragment>
+		<RoleHero />
+
+		{
+			pitch?.whyNow && (
+				<Fragment>
+					<h3 class="mb-2 text-xl font-semibold">{whyNowTitle}</h3>
+					{pitch.whyNow.paragraphs.map((p) => (
+						<p set:html={p} />
+					))}
+				</Fragment>
+			)
+		}
+
+		{pitch?.lead && <p class="text-lg font-semibold" set:html={pitch.lead} />}
+
+		{
+			pitch?.pillars && pitch.pillars.length > 0 && (
+				<div class="my-6 grid gap-3">
+					{pitch.pillars.map((pillar) => (
+						<div class="flex gap-4 border border-gray-200 bg-gray-50 p-4">
+							<Icon name={pillar.icon} class="mt-1 size-8 min-h-8 min-w-8" />
+							<div>
+								<div class="text-lg font-bold">{pillar.title}</div>
+								<p class="m-0" set:html={pillar.body} />
+							</div>
+						</div>
+					))}
+				</div>
+			)
+		}
+
+		{
+			pitch?.whatTranslates && (
+				<Fragment>
+					<h3 class="mt-10 mb-3 text-xl font-semibold">{whatTranslatesTitle}</h3>
+					<ul class="ml-6 list-outside list-disc space-y-2">
+						{pitch.whatTranslates.bullets.map(({ from, to }) => (
+							<li>
+								<strong set:html={from} /> → <span set:html={to} />
+							</li>
+						))}
+					</ul>
+				</Fragment>
+			)
+		}
+
+		<p class="mt-8">{curatedNote}</p>
+
+		<hr class="mt-10 border-gray-200" />
+
+		<a
+			href="/"
+			class="my-6 flex items-center gap-4 border border-gray-200 bg-gray-50 p-4 text-sm text-inherit! hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:text-primary-700 focus:ring-4 focus:ring-gray-100 focus:outline-none print:hidden"
+		>
+			<div class="grow">
+				<div class="text-xl font-bold">Full Version of this CV</div>
+				<p class="m-0 font-normal">
+					Please note, this is only a summarised version of my full CV. For the full picture, the <span class="font-semibold">complete CV</span> is one click away.
+				</p>
+			</div>
+		</a>
+	</Fragment>
+</ModuleWrapper>

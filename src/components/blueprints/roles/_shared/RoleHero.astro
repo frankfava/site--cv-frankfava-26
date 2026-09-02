@@ -1,0 +1,45 @@
+---
+import BrandChip from "@/components/blueprints/roles/_shared/BrandChip.astro";
+import { getCurrentPath, getPermalink } from "@/utils/permalinks";
+import type { Role } from "@/data/roleDefinitions";
+import { Icon } from "astro-icon/components";
+
+// RoleHero only renders inside a role blueprint
+const role = Astro.locals.blueprint as Role;
+const branding = Astro.locals.roleBranding;
+
+const basePath = getCurrentPath(Astro.url).replace(branding ? `/${branding.key}` : "", "");
+const onePagerPermalink = getPermalink(basePath + `/one-pager` + (branding ? `/${branding.key}` : ""));
+---
+
+<header class="@container/role-hero mb-8 border-b border-gray-200 pb-6">
+	{
+		branding && (
+			<div class="mb-3 flex items-center gap-2">
+				<BrandChip branding={branding} linkToIndex={true} />
+				<a
+					href={`/brands/${branding.key}`}
+					style={branding.accent ? `--accent:${branding.accent};` : undefined}
+					class="inline-flex font-semibold text-primary hover:text-(--accent) focus:ring-4 focus:ring-primary-300 focus:outline-none"
+					data-no-print
+				>
+					<Icon name="ph:arrow-circle-right-duotone" class="size-8 text-(--accent)" />
+					<span class="sr-only">{branding.company} Index Page</span>
+				</a>
+			</div>
+		)
+	}
+	<div class="flex flex-col gap-4 @3xl/role-hero:flex-row @3xl/role-hero:items-end @3xl/role-hero:justify-between">
+		<h1 class="text-3xl leading-tight font-bold lg:text-5xl">{role.title}</h1>
+		<div>
+			<a
+				href={onePagerPermalink}
+				class="inline-flex items-center gap-2 rounded-md bg-primary-700 px-4 py-2 text-sm font-semibold whitespace-nowrap text-white! hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 focus:outline-none print:hidden"
+				data-no-print
+			>
+				<Icon name="ph:file-pdf-duotone" class="size-5" />
+				One-Pager
+			</a>
+		</div>
+	</div>
+</header>
