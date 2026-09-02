@@ -80,6 +80,16 @@ export const achievements: BlueprintComponent = {
 	description: "Grouped by the company they belong to, so a claim always has a place attached to it.",
 	content: async () => import("@/components/blueprints/shared/Achievements.astro"),
 };
+
+export const projects: BlueprintComponent = {
+	id: "projects",
+	eyebrow: "Portfolio",
+	title: "Every project, with the constraint it actually had",
+	mainMenuLabel: "Projects",
+	icon: "ph:desktop",
+	description: "Filter by the technology you care about. Each entry carries the context, what it had to work around, and what it produced.",
+	content: async () => import("@/components/blueprints/shared/Projects.astro"),
+};
 export const fullRecord: BlueprintComponent = {
 	id: "full-record",
 	title: "The full record, one page at a time",
@@ -99,5 +109,6 @@ export default {
 	roleDossiers,
 	history,
 	achievements,
+	projects,
 	fullRecord,
 } as const satisfies BlueprintSchema;

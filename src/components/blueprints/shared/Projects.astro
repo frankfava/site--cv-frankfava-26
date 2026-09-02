@@ -1,0 +1,22 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import ProjectList from "./_partials/ProjectList.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Projects",
+};
+---
+
+<ModuleWrapper {...{ forceLayout: "stacked", isFullWidth: true, ...props, header }}>
+	<p>
+		<strong>Please note:</strong> confidentiality agreements limit what I can show for past projects. Rather than source code, I detail the technologies used and the challenges met along the way. If
+		a particular project interests you, we can talk about it.
+	</p>
+
+	<ProjectList title="Projects" class="mt-8" />
+</ModuleWrapper>

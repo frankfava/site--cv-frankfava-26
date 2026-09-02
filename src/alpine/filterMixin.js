@@ -25,7 +25,7 @@ export function createFilterMixin({ sectionId, beforeToggle, beforeClear, clearM
 				beforeClear.call(this);
 			}
 			Object.entries(clearMap).forEach(([key, resetValue]) => {
-				this[key] = typeof resetValue === "function" ? resetValue() : resetValue;
+				this[key] = typeof resetValue === "function" ? resetValue.call(this) : resetValue;
 			});
 		},
 	};
