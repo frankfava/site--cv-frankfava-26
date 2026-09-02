@@ -10,17 +10,12 @@ import { cn } from "@/utils/class";
 
 export type ProjectCardSkill = { id: string; icon?: string; label: string };
 
-export interface Props {
-	id: CollectionEntry<"projects">["id"];
-	title: string;
-	summary?: string;
-	type?: string;
-	startDate: Date;
-	duration?: number | string | null;
-	demoUrl?: string;
-	repoUrl?: string;
-	highlights?: string[];
+type Project = CollectionEntry<"projects">;
+
+export interface Props extends Pick<Project["data"], "title" | "summary" | "type" | "startDate" | "duration" | "demoUrl" | "repoUrl" | "highlights"> {
+	id: Project["id"];
 	showLink?: boolean;
+	/** Resolved, so not the schema's `reference("skills")` array. */
 	skills?: ProjectCardSkill[];
 	/** Overrides one chip, for callers that wire it to filtering this component knows nothing about. */
 	skill?: (skill: ProjectCardSkill) => AstroVNode;
