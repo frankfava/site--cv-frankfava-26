@@ -72,13 +72,5 @@ export async function destinations(): Promise<Destination[]> {
 				href: "/one-pager",
 			},
 		},
-		{
-			eyebrow: "No interface",
-			title: "Plain version",
-			body: "Same content, everything stripped out.",
-			link: {
-				href: "/simple",
-			},
-		},
 	];
 }
