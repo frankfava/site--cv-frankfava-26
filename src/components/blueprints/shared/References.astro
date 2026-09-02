@@ -22,7 +22,9 @@ const header: _ModuleHeader = {
 	<div class="mx-auto mt-10 gap-4 md:max-w-200 md:columns-2">
 		{
 			testimonials.map(({ data: { name, src, width, height } }) => (
-				<img class="mb-4 h-auto max-w-full rounded-lg" loading="lazy" src={src} alt={`Testimonial from ${name}`} width={width} height={height} />
+				<a class="mb-4 block break-inside-avoid" href={src} target="_blank" rel="noopener" aria-label={`Open the review from ${name} at full size`}>
+					<img class="h-auto max-w-full rounded-lg" loading="lazy" src={src} alt={`Testimonial from ${name}`} width={width} height={height} />
+				</a>
 			))
 		}
 	</div>
