@@ -1,0 +1,55 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Learning and problem-solving",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<h3 class="mb-3 text-lg">Curiosity-driven learning</h3>
+
+	<p>
+		I've always had an insatiable curiosity about how things work. I wanted to understand how people thought and behaved and how to influence positive change, so I became a coach. I found myself
+		running a business for the first time, so I learnt what I could about sales, customer service and leadership. When I got curious about how websites work, that's when I started programming.
+	</p>
+
+	<p>When something interests me — something I can strive to master — I drive myself forward with a compulsion to learn as much as I can. That commitment is what gets me up a steep curve.</p>
+
+	<p>
+		<span class="text-bad">It can be draining</span>, though. I'm always pushing to the next level, looking for the next project to apply myself to. It makes me highly effective, and it can get
+		chaotic.
+	</p>
+
+	<p>
+		<strong>If I don't know how to do something, I can learn how.</strong> That simple philosophy is why I'm proficient across areas a traditional path might never have covered.
+	</p>
+
+	<hr class="my-8 border-line" />
+
+	<h3 class="mb-3 text-lg">Solving problems</h3>
+
+	<p>
+		I have always loved solving problems, whether that's an issue as a coach, a digital solution for a customer, fixing a car or a woodworking project. There is always a logical reason you're
+		facing a given challenge. Once I understand how it works, the obstacle disappears and the solution becomes clear.
+	</p>
+
+	<p>
+		Defining the problem is the most important part, but doing the work to solve it is a different job — one that usually needs invention and a creative angle. As long as the end goal stays clear
+		and properly defined, there are several ways to reach it.
+	</p>
+
+	<p class="font-semibold">My four steps to solving a problem</p>
+
+	<ol class="ml-6 list-outside list-decimal space-y-1">
+		<li><strong>Clearly define the problem.</strong> What is point A, the starting position.</li>
+		<li><strong>Define a clear criteria for success.</strong> What is point B, and precisely what are you trying to achieve.</li>
+		<li><strong>Understand the problem.</strong> Dig into what is causing the gap, step by step, to find the difference that makes the difference.</li>
+		<li><strong>Implement a solution.</strong> Give it your best go, and if it doesn't meet the success criteria, return to step one and repeat.</li>
+	</ol>
+</ModuleWrapper>
