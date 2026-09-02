@@ -1,0 +1,66 @@
+---
+import SwitchCase from "@/components/ui/display/SwitchCase.astro";
+import type { TransferableSkillMeta } from "@/utils/transferableSkills";
+
+export const meta: TransferableSkillMeta = {
+	title: "Ability to Lead",
+	summary: "Bridging cross-functional teams and motivating people to do their best work, informed by years of coaching.",
+	icon: "ph:compass-duotone",
+	featured: true,
+	order: 30,
+	keywords: ["leadership", "cross-functional", "motivation", "coaching"],
+};
+
+interface Props {
+	only?: string;
+}
+const { only } = Astro.props;
+---
+
+<SwitchCase value={only}>
+	<Fragment slot="card">
+		<p>
+			Leadership goes beyond management—it's about guiding others to see opportunities they might have missed and enabling them to do their best work. By fostering strong relationships, clear
+			communication, and acting as a bridge between cross-functional teams, I've helped prioritize tasks and turn user needs into actionable technical solutions. Inspired by leadership
+			principles from books like <em>Creating Magic</em> by Lee Cockerell, I emphasize motivating teams by letting them excel at what they do best. My coaching experience has honed my ability to understand
+			individual motivations, provide the right encouragement, and help teams overcome challenges while fostering personal and professional growth.
+		</p>
+	</Fragment>
+
+	<Fragment slot="default">
+		<p>
+			Leadership is NOT management. Much like coaching, leadership means showing others opportunities they couldn't see before. Having a <strong
+				>big-picture view allows you to guide others</strong
+			>. Building relationships that foster clear communication, and acting as a <strong>single point of engagement</strong> has allowed me to work side-by-side with cross-functional teams, helping
+			the team prioritise and translating user needs and business insights into technical solutions.
+		</p>
+		<p>
+			My favourite Leadership book is <em>Creating Magic</em> by Lee Cockerell, a fantastic book about Disney resort company culture, why the customer is at the heart of everything that is done and
+			how that is reinforced throughout the culture by every single employee doing what they do best.
+		</p>
+		<p>
+			I took that to heart to <strong>motivating and building strong teams</strong> that are able to do the work by letting them do what they did best. Within my own business, during sub-contracting,
+			and while employed.
+		</p>
+		<p>
+			The coaching skills I refined throughout my coaching business prepared me the most though, giving me the awareness to elicit how people are feeling and how to motivate them properly so the
+			whole team can shine. It's incredibly useful to know how different people need to be communicated to and what they need to be motivated. Being a coach means that you not only <strong
+				>speak up when someone isn't living up to their potential but also when they are in danger of hitting the wall</strong
+			>, no matter the challenge, you are there to cheer them on so they grow in their personal lives and careers.
+		</p>
+		<p>Take a look at my work history for more specific details on when I have led others.</p>
+
+		<div class="mt-6 rounded border border-gray-200 bg-gray-50 p-5">
+			<h3 class="mb-3 text-lg">My Leadership Style</h3>
+			<p>
+				<strong>People over process.</strong> The best work comes from trusting people to own their day-to-day and giving them the room to do it well.
+			</p>
+			<p>
+				I think of it like managing a football side. The manager never touches the ball on match day. You pick the right players, drill the patterns in training, set the shape and the plan,
+				then trust them to read the game and make their own calls in the moment. You can't run onto the pitch and take the shot yourself, and you wouldn't want to. The real work happens during
+				the week: the coaching, the clarity, the belief. Come game day you stay on the sideline and let them play.
+			</p>
+			<p>Set the direction, grow the people, clear what's in their way, then trust them on the ball.</p>
+		</div>
+	</Fragment>
+</SwitchCase>

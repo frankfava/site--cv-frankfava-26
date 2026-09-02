@@ -1,0 +1,51 @@
+---
+import SwitchCase from "@/components/ui/display/SwitchCase.astro";
+import type { TransferableSkillMeta } from "@/utils/transferableSkills";
+
+export const meta: TransferableSkillMeta = {
+	title: "Team Player",
+	summary: "Adaptability, trust and shared goals - leading developers while collaborating with sales and design under deadline pressure.",
+	icon: "ph:users-three-duotone",
+	featured: true,
+	order: 40,
+	keywords: ["collaboration", "teamwork", "adaptability", "cross-functional"],
+};
+
+interface Props {
+	only?: string;
+}
+const { only } = Astro.props;
+---
+
+<SwitchCase value={only}>
+	<Fragment slot="card">
+		<p>
+			While competition can inspire excellence, collaboration is far more powerful, enabling teams to achieve more together than they could individually. My experience managing and being part of
+			teams has shown me the value of adaptability, trust, and shared goals in navigating challenges and ambiguity. As a lead developer at a digital agency startup, I balanced multiple roles,
+			guiding a team of developers and working closely with sales and design teams to ensure smooth project completion. I simplified complex ideas for stakeholders, designed reusable tools for
+			efficiency, and aligned projects with time and budget constraints to deliver quality results.
+		</p>
+	</Fragment>
+	<Fragment slot="default">
+		<p class="text-lg">Collaboration is more powerful than Competition</p>
+
+		<p>
+			Although I enjoy a healthy amount of competition, it's only useful if it pushes the team members to bring out their best and collaborate further. I have both managed and been a part of
+			teams, and the one thing I've learnt is that <strong>the whole is greater than the sum of its parts</strong>.... together we can do more than we can apart.
+		</p>
+
+		<p>Being adaptable and working through ambiguity is essential, trusting your team member to do their part and helping them to reach your shared goal is a must.</p>
+
+		<div class="mt-6 rounded border border-gray-200 bg-gray-50 p-5">
+			<h3 class="mb-3 text-lg">Adapting to what the team needs</h3>
+			<p>
+				For 12 months, (2016 - 2017) I sub-contracted to a digital agency startup (8 team members) as their lead developer. I was in charge of a small team of developers, working closely with
+				the sales and design team to manage deliveries and as a result, I had to wear many 'hats' to ensure smooth completion.
+			</p>
+			<p>
+				I was required to show the design team what was possible within the timeframe and designated budget, create tools and templates the team could use to complete the project with quality
+				code, and deliver clear results to the directors and customers in a concise way, without overcomplicating it with technical terminology.
+			</p>
+		</div>
+	</Fragment>
+</SwitchCase>

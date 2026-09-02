@@ -1,0 +1,61 @@
+---
+import SwitchCase from "@/components/ui/display/SwitchCase.astro";
+import type { TransferableSkillMeta } from "@/utils/transferableSkills";
+
+export const meta: TransferableSkillMeta = {
+	title: "Sales and Business development",
+	summary: "Self-employed mastery of B2B/B2C sales - 90%+ revenue from referrals; scaled to 160+ projects via freelancers.",
+	icon: "ph:handshake-duotone",
+	featured: true,
+	order: 10,
+	keywords: ["sales", "business-development", "b2b", "b2c", "referrals", "freelance"],
+};
+
+interface Props {
+	only?: string;
+}
+const { only } = Astro.props;
+---
+
+<SwitchCase value={only}>
+	<Fragment slot="card">
+		<p>
+			Being self-employed has required mastering sales, both in B2C and B2B contexts, to sustain and grow my business. From 2010 to 2014, as a personal coach, I balanced emotion and logic to
+			demonstrate the value of my services without a clear ROI. Since 2014, freelancing as a developer shifted my focus to understanding business needs and delivering tailored solutions, such as
+			websites, e-commerce stores, or SaaS platforms, that provided measurable ROI. Exceptional customer service and quality work have led to over 90% of my sales coming through referrals and
+			repeat business. As demand grew, I scaled by hiring freelancers, managing and delegating work to complete over 160 projects between 2014 and 2019, and many more since.
+		</p>
+	</Fragment>
+
+	<Fragment slot="default">
+		<p>
+			Freelancing and being self-employed has meant that sales aptitude has been critical to remaining in business. Sure... I could have outsourced it in order to drive business in, but such a
+			core part of the business should never be outsourced.
+		</p>
+
+		<p>
+			From 2010 to 2014, whilst personal coaching, <strong>B2C sales was required</strong>, understanding how my service could help on the prospect in their personal life. This meant there was
+			not always a clear quantitative ROI, and it was based on how much value they would receive. This meant needing to balance emotion and logic in order to reach a successful sale.
+		</p>
+
+		<p>
+			Since 2014, while freelancing as a developer, this <strong>shifted to B2B sales</strong>. Understanding what was needed within the prospects business, and connecting that to the solution
+			that would deliver a specific ROI for them. Many times this was a simple website, an e-commerce store or creating a SaaS platform; and it was a prerequisite to discover not only what was
+			important to them (e.g., analytics for certain stages of their sales funnel), but also deliver a solution that was competitively priced but didn't compromise on the quality.
+		</p>
+
+		<p class="my-10 text-lg font-semibold">
+			After delivering a quality product and giving great customer service, I found that more and more business came to me through word-of-mouth referrals from satisfied clients who came to know
+			me as a trusted advisor and passed on my details to colleagues and friends. In fact, <strong
+				>over 90% of the sales I have made, have been from word-of-mouth and repeat business from existing customers</strong
+			>.
+		</p>
+
+		<p>
+			As more customers and larger projects came my way, I was in need of help... I was running out of time to do everything. From here I hired freelancers to sub-contract some of the work to,
+			needing me to manage and delegate work to them. This of course, came with its own challenges but doing so allowed me to take on more and bigger projects <strong
+				>completing over 160 projects from 2014 - 2019</strong
+			> and many more since.
+		</p>
+	</Fragment>
+</SwitchCase>
