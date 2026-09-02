@@ -1,0 +1,19 @@
+---
+/**
+ * How I work page.
+ */
+
+import { blueprints } from "@/data/blueprints";
+import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+
+const entry = blueprints.howIWork;
+
+const metadata = {
+	title: entry.title,
+	description: entry.description,
+};
+---
+
+<SubIndexedLayout {...{ metadata, blueprint: entry }}>
+	<Fragment slot="lead">Strengths, failure modes, and three external reads of the same person, explained rather than just scored.</Fragment>
+</SubIndexedLayout>

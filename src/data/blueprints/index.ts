@@ -86,6 +86,18 @@ export const experience = buildBlueprintEntry({
 	},
 });
 
+export const howIWork = buildBlueprintEntry({
+	slug: "how-i-work",
+	title: "How I work",
+	description: "Strengths, failure modes, and my MBTI, DISC and Enneagram results explained plainly.",
+	blueprint: {
+		self: sections.self,
+		learning: sections.learning,
+		personalityTests: sections.personalityTests,
+		references: sections.references,
+		fullRecord: sections.fullRecord,
+	} as const satisfies BlueprintSchema,
+});
 
 export const credentials = buildBlueprintEntry({
 	slug: "practicalities",
