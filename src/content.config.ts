@@ -156,8 +156,6 @@ const workHistory = defineCollection({
 const testimonials = defineCollection({
 	loader: file("src/data/testimonials.json"),
 	schema: z.object({
-		// Position in the two-column layout. Authored, because the columns are
-		// balanced by eye against the screenshot heights below.
 		order: z.number().int().positive(),
 		name: z.string(),
 		src: z.string(),
