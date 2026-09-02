@@ -184,6 +184,16 @@ export const references: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/References.astro"),
 };
 
+export const transferableSkills: BlueprintComponent = {
+	id: "transferable-skills",
+	eyebrow: "Self-employed",
+	title: "Working for myself meant doing every part of the job",
+	mainMenuLabel: "Transferable skills",
+	icon: "ph:lightbulb-filament-duotone",
+	description: "Selling it, delivering it and coaching through it all happened alongside the code, not before it.",
+	content: async () => import("@/components/blueprints/shared/TransferableSkills.astro"),
+};
+
 export const projects: BlueprintComponent = {
 	id: "projects",
 	eyebrow: "Portfolio",
@@ -233,6 +243,7 @@ export default {
 	learning,
 	personalityTests,
 	references,
+	transferableSkills,
 	projects,
 	skills,
 	fullRecord,

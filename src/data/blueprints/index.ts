@@ -94,6 +94,7 @@ export const howIWork = buildBlueprintEntry({
 		self: sections.self,
 		learning: sections.learning,
 		personalityTests: sections.personalityTests,
+		transferableSkills: sections.transferableSkills,
 		references: sections.references,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintSchema,
