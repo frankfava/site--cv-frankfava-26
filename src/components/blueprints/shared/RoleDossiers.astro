@@ -9,7 +9,7 @@ const props = Astro.props;
 
 const header: _ModuleHeader = {
 	...props.header,
-	title: props.header?.title || "Role dossiers",
+	title: props.header?.title || "Role pages",
 };
 
 const roles = [
@@ -23,5 +23,5 @@ const roles = [
 <ModuleWrapper {...{ ...props, header }}>
 	<Callout title="How to read this" class="mt-0"> Each answer is a real engagement, not a hypothetical. The figures underneath are what that engagement produced. </Callout>
 
-	<RoleCards {...{ roles, columnCount: 4, hoverBorder: true, linkText: "Open dossier →" }} />
+	<RoleCards {...{ roles, columnCount: 4, hoverBorder: true, linkText: "Open role page →" }} />
 </ModuleWrapper>

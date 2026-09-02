@@ -21,11 +21,10 @@ export const home = buildBlueprintEntry({
 	blueprint: {
 		capability: sections.capability,
 		trackRecord: sections.trackRecord,
-		stillRunning: sections.stillRunning,
-		yourProblem: sections.yourProblem,
-		beforeWeTalk: sections.beforeWeTalk,
 		roleDossiers: sections.roleDossiers,
+		beforeWeTalk: sections.beforeWeTalk,
 		fullRecord: sections.fullRecord,
+		yourProblem: sections.yourProblem,
 	} as const satisfies BlueprintSchema,
 	config: {
 		// search: {
@@ -43,6 +42,7 @@ export const work = buildBlueprintEntry({
 	title: "Work",
 	description: "Every project with the technologies, the constraints and what it produced.",
 	blueprint: {
+		stillRunning: sections.stillRunning,
 		projects: sections.projects,
 		skills: sections.skills,
 		fullRecord: sections.fullRecord,

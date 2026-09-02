@@ -32,11 +32,11 @@ export const stillRunning: BlueprintComponent = {
 
 export const yourProblem: BlueprintComponent = {
 	id: "your-problem",
-	eyebrow: "Your problem",
+	eyebrow: "Recognise any of these",
 	title: "Tell me which of these sounds like your week",
-	mainMenuLabel: "Your problem",
+	mainMenuLabel: "Problems I've been handed",
 	icon: "ph:crosshair-duotone",
-	description: "Four problems I have actually been handed. Pick the closest and I will show you how it went.",
+	description: "Every one of these landed on my desk. Pick the closest and I will show you how it went.",
 	content: async () => import("@/components/blueprints/shared/Scenarios.astro"),
 };
 
@@ -53,9 +53,9 @@ export const beforeWeTalk: BlueprintComponent = {
 export const roleDossiers: BlueprintComponent = {
 	id: "role-dossiers",
 	eyebrow: "Forward this",
-	title: "Four versions of the same evidence, one per role",
+	title: "Each role gets the same evidence in a different order",
 	description: "Same evidence, reordered for the role it is aimed at, each with a one-page version you can forward.",
-	mainMenuLabel: "Which version to send",
+	mainMenuLabel: "Role pages",
 	icon: "ph:paper-plane-tilt-duotone",
 	content: async () => import("@/components/blueprints/shared/RoleDossiers.astro"),
 };
