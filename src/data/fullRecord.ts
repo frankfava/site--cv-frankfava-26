@@ -6,9 +6,9 @@ import type { _Card } from "@/types";
 export interface Destination extends _Card {}
 
 export async function destinations(): Promise<Destination[]> {
-	// Drafts never reach the page these link to, so counting the whole
-	// collection would advertise projects that are not there.
-	const [projects, certifications, work] = await Promise.all([getCollection("projects", ({ data }) => !data.draft), getCollection("certifications"), createWorkHistoryManager()]);
+	// This count sits on the card linking to the list, so it has to match what
+	// the list actually shows.
+	const [projects, certifications, work] = await Promise.all([getCollection("projects", ({ data }) => !data.draft && data.listed), getCollection("certifications"), createWorkHistoryManager()]);
 
 	const careerStart = work.earliestStart();
 

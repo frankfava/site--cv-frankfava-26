@@ -39,7 +39,7 @@ type Project = {
 } & Omit<CollectionEntry<"projects">["data"], "skills">;
 
 const projects: Project[] = allProjects
-	.filter(({ data }) => !data.draft)
+	.filter(({ data }) => !data.draft && data.listed)
 	.map((project) => {
 		const skills = SkillsManager.sortSkills(allSkills)
 			.filter((skill) => (project.data.skills ?? []).map((s) => s.id).includes(skill.id))
