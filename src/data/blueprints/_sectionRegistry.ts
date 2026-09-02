@@ -132,6 +132,16 @@ export const obstacles: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/Obstacles.astro"),
 };
 
+export const languages: BlueprintComponent = {
+	id: "languages",
+	eyebrow: "Working language",
+	title: "English works, Swedish is basic",
+	mainMenuLabel: "Language",
+	icon: "ph:translate-duotone",
+	description: "Worth stating plainly, because for some teams it is the whole answer.",
+	content: async () => import("@/components/blueprints/shared/Languages.astro"),
+};
+
 // How I Work
 export const self: BlueprintComponent = {
 	id: "self",
@@ -219,6 +229,7 @@ export default {
 	certifications,
 	situation,
 	obstacles,
+	languages,
 	self,
 	learning,
 	tests,

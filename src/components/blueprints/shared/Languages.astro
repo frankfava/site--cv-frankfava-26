@@ -1,0 +1,20 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import LanguageList from "./_partials/LanguageList.astro";
+import { ABOUT } from "site:config";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Language",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>{ABOUT.linguistics.summary}</p>
+
+	<LanguageList linguistics={ABOUT.linguistics} columns={2} class="mt-5" />
+</ModuleWrapper>

@@ -1,0 +1,43 @@
+---
+/** Each working language with a five-step fluency rating. */
+
+import type { HTMLAttributes } from "astro/types";
+import type { ABOUT } from "site:config";
+import { Icon } from "astro-icon/components";
+import { cn } from "@/utils/class";
+
+export interface Props {
+	linguistics: typeof ABOUT.linguistics;
+	columns?: 1 | 2;
+	class?: HTMLAttributes<"div">["class:list"];
+}
+
+const { linguistics, columns = 2, class: className } = Astro.props;
+
+/** Most to least fluent, so a language's index gives it a score out of five. */
+const RANKINGS = ["Native", "Fluent", "Conversational", "Elementary", "Beginner"];
+
+const languages = linguistics.languages.map((language) => ({
+	...language,
+	score: RANKINGS.length - RANKINGS.findIndex((rank) => rank === language.fluency),
+}));
+---
+
+<div class={cn("grid gap-5", { "lg:grid-cols-2": columns === 2 }, className)}>
+	{
+		languages.map(({ language, fluency, description, score }) => (
+			<div>
+				<div class="text-lg text-ink">
+					<strong>{language}</strong>
+					{fluency && <span class="text-ink-3"> &ndash; {fluency}</span>}
+				</div>
+				<span class="mt-2 flex gap-1">
+					{RANKINGS.map((_rank, i) => (
+						<Icon name={i < score ? "ph:star-fill" : "ph:star"} class="size-8 text-accent" />
+					))}
+				</span>
+				{description && <div class="mt-2 text-sm text-ink-2">{description}</div>}
+			</div>
+		))
+	}
+</div>
