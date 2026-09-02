@@ -84,7 +84,7 @@ const currentPath = getCurrentPath(Astro.url);
 			dark: isDark,
 			"shadow-[0_5px_10px_0_rgba(0,0,0,0.3)]": addShadow,
 		},
-		"top-0 z-70! flex w-full flex-col bg-header font-secondary text-page print:hidden",
+		"top-0 z-50! flex w-full flex-col bg-header font-secondary text-page print:hidden",
 	]}
 	{...isSticky ? { "data-sticky-header": true } : {}}
 	{...shrinkHeader ? { "data-shrink-header": true } : {}}
