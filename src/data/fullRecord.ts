@@ -1,7 +1,4 @@
-/**
- * Where the rest of the CV went. Nothing was cut in the redesign, it moved to a
- * page of its own, and this is the list of those pages.
- */
+/** The deeper pages, as cards. */
 import { getCollection } from "astro:content";
 import { createWorkHistoryManager } from "@/lib/collections/workHistory";
 import type { _Card } from "@/types";

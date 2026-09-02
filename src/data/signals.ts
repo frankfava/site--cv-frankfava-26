@@ -1,7 +1,4 @@
-/**
- * Where the rest of the CV went. Nothing was cut in the redesign, it moved to a
- * page of its own, and this is the list of those pages.
- */
+/** What ends a conversation, and what has an answer. */
 import type { _Card } from "@/types";
 
 export interface Signal extends _Card {
