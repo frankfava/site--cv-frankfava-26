@@ -1,6 +1,6 @@
 /**
- * One home for blueprints: the shapes, the engine that assembles them, the
- * catalog of registered ones, and the search-feature merge that reads it.
+ * One home for the blueprint machinery: the shapes, the engine that assembles
+ * them, and the page-shell config they carry.
  *
  * `schema` and `builder` are separate because the engine's two classes call
  * each other and must stay together, while the data shapes reference nothing -
@@ -11,4 +11,3 @@ export type { AssembledBlueprint, AssembledSection, BlueprintComponent, Blueprin
 export { BlueprintBuilder, BlueprintSection, buildBlueprint, buildBlueprintEntry } from "./builder";
 export type { ParsedBlueprint } from "./builder";
 export type { BlueprintConfig, BlueprintEntry } from "./types";
-export { blueprints, blueprintSlugs } from "@/data/blueprints";
