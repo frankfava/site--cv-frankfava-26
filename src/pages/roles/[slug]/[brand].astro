@@ -1,0 +1,37 @@
+---
+import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+import { brandRoles, findUnservedBrands, getBrandRole } from "@/lib/brands";
+import { findBrokenFeaturedIds } from "@/lib/roles";
+import { BRANDS } from "@/data/brands";
+import { ROLES } from "@/data/roles";
+import { buildRolePageContext } from "@/utils/rolePageContext";
+
+export async function getStaticPaths() {
+	const unserved = findUnservedBrands(BRANDS, ROLES);
+	if (unserved.length) throw new Error(`[brands] role references do not resolve:\n  ${unserved.join("\n  ")}`);
+
+	const served = brandRoles(BRANDS, ROLES);
+	const broken = await findBrokenFeaturedIds(served.map(({ role }) => role));
+	if (broken.length) throw new Error(`[brands] featured ids do not resolve:\n  ${broken.join("\n  ")}`);
+
+	return served.map(({ brand, role }) => ({ params: { slug: role.slug, brand: brand.key } }));
+}
+
+const { slug, brand } = Astro.params;
+// getStaticPaths only emits pairs the registry serves, so the lookup cannot miss.
+const { brand: served, role } = getBrandRole(BRANDS, ROLES, brand!, slug!)!;
+
+const { roleAnchorIds, metadata } = buildRolePageContext({ entry: role, company: served.company });
+Astro.locals.roleAnchorIds = roleAnchorIds;
+---
+
+<SubIndexedLayout
+	{...{
+		metadata,
+		blueprint: role,
+		head: {
+			eyebrow: "Role page",
+			backLink: { href: `/roles/${slug}`, text: "&larr; Back to the role page" },
+		},
+	}}
+/>

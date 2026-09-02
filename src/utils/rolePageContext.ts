@@ -14,11 +14,11 @@ export function collectAnchorIds(sections: AssembledBlueprint, acc: string[] = [
 	return acc;
 }
 
-export function buildRolePageContext({ entry }: { entry: BlueprintEntry }) {
+export function buildRolePageContext({ entry, company }: { entry: BlueprintEntry; company?: string }) {
 	return {
 		roleAnchorIds: collectAnchorIds(entry.blueprint.assemble()),
 		metadata: {
-			title: `${METADATA?.title?.default} - ${entry.title}`,
+			title: `${METADATA?.title?.default} - ${entry.title}${company ? ` (${company})` : ""}`,
 			description: entry.description,
 			ignoreTitleTemplate: true,
 		},
