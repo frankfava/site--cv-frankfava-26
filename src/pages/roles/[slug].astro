@@ -1,10 +1,13 @@
 ---
 import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
 import { onlyEnabledRoles, ROLES } from "@/data/roles";
-import { getRole } from "@/data/roleDefinitions";
+import { findBrokenFeaturedIds, getRole } from "@/data/roleDefinitions";
 import { buildRolePageContext } from "@/utils/rolePageContext";
 
 export async function getStaticPaths() {
+	const broken = await findBrokenFeaturedIds();
+	if (broken.length) throw new Error(`[roles] featured ids do not resolve:\n  ${broken.join("\n  ")}`);
+
 	return onlyEnabledRoles(ROLES).map(({ slug }) => ({ params: { slug } }));
 }
 

@@ -1,4 +1,6 @@
 import type { CertificationId, SkillId } from "content:ids";
+import { getCollection } from "astro:content";
+import { getTransferableSkills } from "@/utils/transferableSkills";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import { getRoleBySlug } from "@/data/roles";
 
@@ -98,4 +100,28 @@ export function getRole(slug: string): Role | undefined {
 	const entry = entriesBySlug[slug];
 	if (!identity || !entry) return undefined;
 	return { ...entry, ...definitionsBySlug[slug], ...identity };
+}
+
+/**
+ * The featured arrays hold ids as plain strings, so nothing catches a stale one
+ * and the section it feeds renders empty instead of failing. Existence only: a
+ * project that is draft or unlisted is still a valid target.
+ */
+export async function findBrokenFeaturedIds(): Promise<string[]> {
+	const projects = await getCollection("projects");
+	const byId = new Map(projects.map((project) => [project.id, project]));
+	const transferableIds = new Set(getTransferableSkills().map(({ id }) => id));
+
+	return DEFINITIONS.flatMap(({ slug, featuredProjects = [], featuredCaseStudies = [], featuredTransferableSkills = [] }) => [
+		...featuredProjects.filter((id) => !byId.has(id)).map((id) => `${slug}: featuredProjects "${id}" matches no project`),
+		...featuredCaseStudies
+			.map((id) => {
+				const project = byId.get(id);
+				if (!project) return `${slug}: featuredCaseStudies "${id}" matches no project`;
+				if (!project.data.caseStudy) return `${slug}: featuredCaseStudies "${id}" has no caseStudy block`;
+				return "";
+			})
+			.filter(Boolean),
+		...featuredTransferableSkills.filter((id) => !transferableIds.has(id)).map((id) => `${slug}: featuredTransferableSkills "${id}" matches no transferable skill`),
+	]);
 }
