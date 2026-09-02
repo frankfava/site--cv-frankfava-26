@@ -120,7 +120,7 @@ export function skillFacet() {
 			return store(this).isActive(this.facet, this.value);
 		},
 		get tagClass() {
-			return this.active ? "border-accent bg-accent text-white" : "border-line bg-sunk text-ink-2";
+			return this.active ? "border-accent/40 bg-accent-soft text-accent" : "border-line bg-sunk text-ink-3";
 		},
 		get count() {
 			return store(this).relevanceCount(this.value);

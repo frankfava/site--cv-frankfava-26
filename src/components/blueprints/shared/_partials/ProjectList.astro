@@ -123,7 +123,7 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 	<div class="flex flex-col gap-6 xl:flex-row">
 		<div class="w-full xl:w-1/4 xl:border-r xl:border-line xl:pr-6">
 			<div class="grid gap-4 xl:sticky" x-bind:class="stickyClass">
-				<div class="rounded-md border border-line p-4 shadow-md">
+				<div class="rounded-md border border-line bg-surface p-4 shadow-md">
 					<div class="mb-2 text-lg">
 						<span class="font-bold">Filter by skill</span>
 						<span x-show="hasSkillFilters" style="display: none" class="ml-1" x-text="skillsCountLabel"></span>
@@ -156,7 +156,7 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 			<div class="grid auto-rows-min gap-3">
 				{
 					projects.map(({ id, title: name, type, showLink, summary, demoUrl, repoUrl, startDate, duration, skills: used, highlights }) => (
-						<div x-data="projectRow" data-id={id} x-show="shown" class="grid gap-3 rounded-md border border-line p-4 shadow-md">
+						<div x-data="projectRow" data-id={id} x-show="shown" class="grid gap-3 rounded-md border border-line bg-surface p-4 shadow-md">
 							<div>
 								<h3 class="text-lg font-semibold text-ink">
 									<ConditionalLink href={showLink ? `/projects/${id}` : undefined} class="flex items-center gap-2">

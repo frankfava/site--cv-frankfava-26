@@ -106,7 +106,7 @@ const panels = [
 					panels
 						.filter(({ key }) => filters.includes(key))
 						.map(({ key, label }) => (
-							<div x-data="skillPanel" data-panel={key} class="rounded-md border border-line p-4 shadow-md">
+							<div x-data="skillPanel" data-panel={key} class="rounded-md border border-line bg-surface p-4 shadow-md">
 								<button
 									type="button"
 									@click="toggle"
@@ -185,7 +185,7 @@ const panels = [
 
 				{
 					filters.includes("cv") && (
-						<div x-data="skillPanel" data-panel="cv" x-show="showCvFilter" style="display: none" class="rounded-md border border-line p-4 shadow-md">
+						<div x-data="skillPanel" data-panel="cv" x-show="showCvFilter" style="display: none" class="rounded-md border border-line bg-surface p-4 shadow-md">
 							<button
 								type="button"
 								@click="toggle"
@@ -214,7 +214,7 @@ const panels = [
 			<div class="grid auto-rows-min gap-3 lg:grid-cols-2 lg:pr-4 lg:pb-6 @min-[1475px]/skills:grid-cols-3">
 				{
 					skills.map(({ id, label, icon, proficiency, yrsExperience, relevance: tags, note, keywords, usedForCv }) => (
-						<div x-data="skillCard" data-id={id} x-show="shown" class="rounded-md border border-line p-4 shadow-md lg:p-6">
+						<div x-data="skillCard" data-id={id} x-show="shown" class="rounded-md border border-line bg-surface p-4 shadow-md lg:p-6">
 							<div class="grid gap-2">
 								<div class="flex w-full flex-wrap items-center gap-3">
 									{icon && (
@@ -236,8 +236,7 @@ const panels = [
 											data-facet="proficiency"
 											data-value={proficiency.key}
 											@click="toggle"
-											x-bind:class="tagClass"
-											class="cursor-pointer rounded-full border px-3 py-1 text-xs font-semibold capitalize"
+											class="cursor-pointer rounded-full border border-line bg-sunk px-3 py-1 text-xs font-semibold text-ink-2 capitalize"
 										>
 											{proficiency.label}
 										</span>
