@@ -82,6 +82,12 @@ export default defineConfig({
 				"src/data/workHistory.json": {
 					WorkHistoryId: "id",
 				},
+				"src/data/testimonials.json": {
+					TestimonialId: "id",
+				},
+				"src/data/career.json": {
+					CareerYearId: "id",
+				},
 			},
 		}),
 		// Update `robots.txt` with `sitemap-index.xml
