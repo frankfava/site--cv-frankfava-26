@@ -1,7 +1,8 @@
 ---
 /** Four series across the whole career, scrubbable, with a read-out for the year under the cursor. */
 
-import { CAREER_SERIES, openingIndex, yearAverage } from "@/data/career";
+import { CAREER_SERIES } from "@/data/career";
+import { openingIndex, yearAverage } from "@/lib/career";
 import { getCareerYears } from "@/lib/collections/career";
 import { CHART, chartX, chartY } from "@/alpine/career/chart";
 import CareerDoughnut, { type Props as DoughnutProps } from "./CareerDoughnut.astro";

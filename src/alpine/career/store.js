@@ -1,5 +1,6 @@
 /** Which year the timeline is reading, shared by the chart and its read-out. */
-import { CAREER_SERIES, openingIndex, yearAverage } from "@/data/career";
+import { CAREER_SERIES } from "@/data/career";
+import { openingIndex, yearAverage } from "@/lib/career";
 import { CHART, chartX, chartY } from "./chart";
 
 export const CAREER_STORE = "career";
