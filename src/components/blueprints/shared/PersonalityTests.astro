@@ -1,0 +1,74 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import Button from "@/components/ui/input/Button.astro";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Personality tests",
+};
+
+const CRYSTAL = "https://www.crystalknows.com/p/6729bd52-0db8-4401-8dfe-d48702818b3f";
+const PERSONALITY_MAX = "https://personalitymax.com/report/?pt=68-32-63-68&mi=57-83-60-80-20-73-87-73&ls=74-38-79&bh=55&name_key=d124266ec2";
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>Two external profiles, for a more quantitative view.</p>
+
+	<p>
+		If you know the <a href="https://www.crystalknows.com/myers-briggs-test" target="_blank" rel="noopener">Myers-Briggs Type Indicator</a>, <a
+			href="https://www.crystalknows.com/disc-personality-test"
+			target="_blank"
+			rel="noopener">DISC</a
+		> or the <a href="https://www.crystalknows.com/enneagram-test" target="_blank" rel="noopener">Enneagram</a>, these will mean more to you. Either way they are somebody else's read on my
+		strengths and weaknesses, rather than mine.
+	</p>
+
+	<div class="my-10 grid gap-8 lg:grid-cols-2 lg:gap-3">
+		<div>
+			<h3 class="mb-2 text-lg"><strong>Test 1:</strong> Crystal Knows</h3>
+			<Button {...{ href: CRYSTAL, target: "_blank", text: "See my results at crystalknows.com", variant: "primary", icon: "ph:arrow-square-out-duotone", class: "mb-5 px-3 py-2" }} />
+			<p>
+				Detail on my <strong>MBTI</strong> (<a href="https://hubspot.crystalknows.com/personality-type/entj/strengths" target="_blank" rel="noopener">ENTJ, the Visionary</a>), <strong
+					>DISC</strong
+				>
+				(<a href="https://www.crystalknows.com/disc/d-personality-type" target="_blank" rel="noopener">D, the Captain</a>) and <strong>Enneagram</strong> (<a
+					href="https://www.crystalknows.com/enneagram/type-3"
+					target="_blank"
+					rel="noopener">Type 3, the Performer</a
+				>).
+			</p>
+		</div>
+
+		<div>
+			<h3 class="mb-2 text-lg"><strong>Test 2:</strong> Personality Max</h3>
+			<Button {...{ href: PERSONALITY_MAX, target: "_blank", text: "See my results at personalitymax.com", variant: "primary", icon: "ph:arrow-square-out-duotone", class: "mb-5 px-3 py-2" }} />
+			<p>
+				Detail on my <strong>MBTI</strong> (<a href={`${PERSONALITY_MAX}#your-personality-type`} target="_blank" rel="noopener">ENTJ, the Chief</a>), <strong>Multiple Intelligences</strong> (<a
+					href={`${PERSONALITY_MAX}#your-multiple-intelligences`}
+					target="_blank"
+					rel="noopener">top two: intrapersonal and logical</a
+				>), <strong>Learning Styles</strong> (<a href={`${PERSONALITY_MAX}#your-learning-styles`} target="_blank" rel="noopener">primarily kinesthetic, by doing</a>) and
+				<strong>Left vs Right Brain</strong> (<a href={`${PERSONALITY_MAX}#your-brain-hemispheres`} target="_blank" rel="noopener">55% logical, 45% abstract</a>).
+			</p>
+		</div>
+	</div>
+
+	<hr class="mb-6 border-line" />
+
+	<p class="text-lg">So what does all that actually mean?</p>
+
+	<div id="how-to-get-best-from-me" class="scroll-mt-[150px] rounded border border-line bg-sunk p-5">
+		<h3 class="mb-3 text-lg">How I work best, and how you get the best from me</h3>
+		<ul class="ml-6 list-outside list-disc space-y-2">
+			<li>I work best in a results-driven environment. I need a goal to work towards.</li>
+			<li>Give me the goal and let me run with it.</li>
+			<li>Some healthy competition drives my performance.</li>
+			<li>Put me on a team, so I can help the people around me hit their goals.</li>
+			<li>Recognition and reward for what gets accomplished matter.</li>
+		</ul>
+	</div>
+</ModuleWrapper>
