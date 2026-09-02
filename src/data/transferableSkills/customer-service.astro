@@ -1,5 +1,4 @@
 ---
-import SwitchCase from "@/components/ui/display/SwitchCase.astro";
 import type { TransferableSkillMeta } from "@/utils/transferableSkills";
 
 export const meta: TransferableSkillMeta = {
@@ -10,63 +9,4 @@ export const meta: TransferableSkillMeta = {
 	order: 20,
 	keywords: ["customer-service", "communication", "trust", "expectations"],
 };
-
-interface Props {
-	only?: string;
-}
-const { only } = Astro.props;
 ---
-
-<SwitchCase value={only}>
-	<Fragment slot="card">
-		<p>
-			Exceptional customer service is the cornerstone of a successful business. By focusing on meeting and exceeding customer needs, businesses can build lasting loyalty and trust. Throughout my
-			career, I’ve learned that technical skills alone aren’t enough—clear communication and understanding the broader context of each task are key differentiators. My approach to customer
-			service is simple yet effective: "Under Promise, Over Deliver." By consistently exceeding expectations and solving potential problems before they arise, I’ve earned customer admiration and
-			built enduring relationships.
-		</p>
-	</Fragment>
-	<Fragment slot="default">
-		<p>
-			Customer service is the secret to good business. By focusing on others and serving their needs... the business will continue to grow because customers will keep coming back for more,
-			knowing their needs will be met.
-		</p>
-
-		<p>
-			Great customer service has been crucial to my career path. Being technically proficient isn't enough, but understanding what the job requires and being able to clearly communicate with
-			everyone involved is the difference that makes all the difference.
-		</p>
-
-		<p>
-			<strong>What's the best way to deliver great customer service?</strong> Simple: <strong>"Under Promise, Over Deliver"</strong> It is the surest possible way to delight those around you. Go above
-			and beyond and solve problems that the customer has not even encountered yet and you will receive loyalty and admiration from them.
-		</p>
-
-		<figure class="mx-auto mt-6 max-w-2xl">
-			<figcaption class="mb-2 text-center text-sm text-gray-500 dark:text-gray-400">Here's just one of the customers from my digital agency "FLIC Sites"</figcaption>
-			<a href="/images/testimonials/Jo Murray - wide.jpg" data-pswp-width="703" data-pswp-height="198" target="_blank">
-				<img class="h-auto max-w-full rounded-lg" src="/images/testimonials/Jo Murray - wide.jpg" alt="Jo Murray" loading="lazy" width="703" height="198" />
-			</a>
-		</figure>
-
-		<p class="mt-2 text-center">You can see more reviews from my happy customers in the "References" section.</p>
-
-		<div class="mt-6 rounded border border-gray-200 bg-gray-50 p-5">
-			<h3 class="mb-3 text-lg">Relationships create relationships</h3>
-			<p>
-				In 2018, I was referred to a prospective client, I was unaware of the scope of the potential project and was just asked to "take care of them". Just as with any prospective customer,
-				my first priority is to establish a connection, learn more about their needs and give them valuable information for their goal (even if that eventually means that I don't receive the
-				work). I spoke only to ask questions and prompt the prospect to tell me about what an outstanding outcome would look like for their business.
-			</p>
-			<p>
-				The project was to create a full featured website for an established business with a built in membership portal that was also easy for their team to manage and maintain. By the end of
-				the conversation, I had enough information to present a proposal and quote to them. Once the proposal was discussed internally, I received an email within a week so we could
-				immediately begin.
-			</p>
-			<p>
-				This same client would continue to return for additional work and ongoing maintenance. When I moved to Sweden, the client wanted to keep me on, so they joined up with my new employer
-				for continued maintenance, and now that I'm freelancing once again, the client and I still work together to this day.
-			</p>
-		</div>
-	</Fragment>
-</SwitchCase>

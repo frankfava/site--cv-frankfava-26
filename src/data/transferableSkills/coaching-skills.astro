@@ -1,5 +1,4 @@
 ---
-import SwitchCase from "@/components/ui/display/SwitchCase.astro";
 import type { TransferableSkillMeta } from "@/utils/transferableSkills";
 
 export const meta: TransferableSkillMeta = {
@@ -10,27 +9,4 @@ export const meta: TransferableSkillMeta = {
 	order: 50,
 	keywords: ["coaching", "communication", "mindset", "personal-growth"],
 };
-
-interface Props {
-	only?: string;
-}
-const { only } = Astro.props;
 ---
-
-<SwitchCase value={only}>
-	<Fragment slot="card">
-		<p>
-			During 5 years as a relationship coach, I guided individuals and business owners to build sustainable relationships by enhancing communication skills and shifting perspectives. This
-			included conducting seminars, managing group dynamics, and influencing mindsets to drive meaningful change and performance. Coaching taught me that everyone has an "internal map" of the
-			world, and growth requires courage to expand beyond its edges. Helping others navigate this process has been as rewarding as my own continual learning.
-		</p>
-	</Fragment>
-
-	<Fragment slot="default">
-		<p>
-			During 5 years as a relationship coach, I consulted individuals and business owners on communication, change management, and driving performance by shifting mindset rather than surface
-			actions. I also ran trainings and seminars, giving me the ability to lead a room, read multiple inputs at once, and move people from point A to B - skills that translate directly to
-			leading teams and stakeholder conversations. Whether it was a team leader burning out or a business owner stuck, the work was always about unlocking what was already there.
-		</p>
-	</Fragment>
-</SwitchCase>
