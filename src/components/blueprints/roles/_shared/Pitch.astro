@@ -38,7 +38,7 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 			pitch?.pillars && pitch.pillars.length > 0 && (
 				<div class="my-6 grid gap-3">
 					{pitch.pillars.map((pillar) => (
-						<div class="flex gap-4 border border-gray-200 bg-gray-50 p-4">
+						<div class="flex gap-4 border border-line bg-surface p-4">
 							<Icon name={pillar.icon} class="mt-1 size-8 min-h-8 min-w-8" />
 							<div>
 								<div class="text-lg font-bold">{pillar.title}</div>
@@ -67,11 +67,11 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 
 		<p class="mt-8">{curatedNote}</p>
 
-		<hr class="mt-10 border-gray-200" />
+		<hr class="mt-10 border-line" />
 
 		<a
 			href="/"
-			class="my-6 flex items-center gap-4 border border-gray-200 bg-gray-50 p-4 text-sm text-inherit! hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:text-primary-700 focus:ring-4 focus:ring-gray-100 focus:outline-none print:hidden"
+			class="my-6 flex items-center gap-4 border border-line bg-surface p-4 text-sm text-inherit! hover:bg-sunk hover:text-accent focus:z-10 focus:text-accent focus:ring-4 focus:ring-line focus:outline-none print:hidden"
 		>
 			<div class="grow">
 				<div class="text-xl font-bold">Full Version of this CV</div>

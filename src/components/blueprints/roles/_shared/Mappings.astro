@@ -37,8 +37,8 @@ const resolveHref = (href?: string) => {
 	<div class="mt-4 grid gap-3 md:grid-cols-2">
 		{
 			mappings.map(({ from, to, note }) => (
-				<div class="border border-gray-200 bg-gray-50 p-4">
-					<div class="font-semibold text-primary-700">
+				<div class="border border-line bg-surface p-4">
+					<div class="font-semibold text-accent">
 						<ConditionalLink href={resolveHref(from.url)}>
 							{from.label}
 							{from.url && (
@@ -48,12 +48,12 @@ const resolveHref = (href?: string) => {
 							)}
 						</ConditionalLink>
 					</div>
-					<div class="my-2 flex items-center gap-2 text-sm text-gray-500">
+					<div class="my-2 flex items-center gap-2 text-sm text-ink-3">
 						<Icon name="ph:arrow-down-duotone" class="size-4" />
 						<span class="tracking-wide uppercase">maps to</span>
 					</div>
 					<div class="font-semibold">{to}</div>
-					{note && <p class="m-0 mt-2 text-sm text-gray-600">{note}</p>}
+					{note && <p class="m-0 mt-2 text-sm text-ink-3">{note}</p>}
 				</div>
 			))
 		}

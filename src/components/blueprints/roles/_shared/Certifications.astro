@@ -31,7 +31,7 @@ const certifications = await resolve(role);
 	<div slot="afterHeader" class="mt-3">
 		<a
 			href="/credentials#certifications"
-			class="inline-flex items-center gap-2 rounded-md bg-primary-700 px-2 py-1.5 text-xs font-semibold whitespace-nowrap text-white! hover:bg-black focus:ring-4 focus:ring-primary-300 focus:outline-none print:hidden"
+			class="inline-flex items-center gap-2 rounded-md bg-accent px-2 py-1.5 text-xs font-semibold whitespace-nowrap text-white! hover:bg-black focus:ring-4 focus:ring-accent focus:outline-none print:hidden"
 			data-no-print
 		>
 			<Icon name="ph:ladder-duotone" class="size-4" />
@@ -41,7 +41,7 @@ const certifications = await resolve(role);
 	<ul class="grid gap-3 md:grid-cols-2">
 		{
 			certifications.map(({ data }) => (
-				<li class="flex items-start gap-3 rounded-md border border-gray-200 p-3">
+				<li class="flex items-start gap-3 rounded-md border border-line bg-surface p-3">
 					{data.icon && <Image src={data.icon as string} width={48} height={48} alt={data.issuer} class="size-9 shrink-0 rounded-full" />}
 					<div class="grow">
 						<div class="leading-tight font-semibold">
@@ -50,7 +50,7 @@ const certifications = await resolve(role);
 								{data.credentialLink && <Icon name="ph:arrow-square-out-duotone" class="ml-1 inline size-4" />}
 							</ConditionalLink>
 						</div>
-						<div class="flex flex-wrap gap-x-2 text-sm text-gray-500">
+						<div class="flex flex-wrap gap-x-2 text-sm text-ink-3">
 							<span>{data.issuer}</span>
 							{data.ranking && <span>· {data.ranking}</span>}
 						</div>

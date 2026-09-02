@@ -33,23 +33,23 @@ const studies = await resolve(role);
 			studies.map((p) => {
 				const cs = p.data.caseStudy!;
 				return (
-					<div class="rounded border border-gray-200">
-						<div class="flex items-center gap-3 border-b border-gray-200 bg-gray-50 p-4">
-							{p.data.icon && <Icon name={p.data.icon} class="size-8 min-h-8 min-w-8 text-primary-700" />}
+					<div class="overflow-hidden rounded border border-line bg-surface">
+						<div class="flex items-center gap-3 border-b border-line bg-surface p-4">
+							{p.data.icon && <Icon name={p.data.icon} class="size-8 min-h-8 min-w-8 text-accent" />}
 							<div>
 								<h3 class="m-0 text-xl font-bold">{p.data.title}</h3>
-								{p.data.role && <div class="text-sm text-gray-600">{p.data.role}</div>}
+								{p.data.role && <div class="text-sm text-ink-3">{p.data.role}</div>}
 							</div>
 						</div>
 						<dl class="grid gap-x-4 gap-y-3 p-4 text-sm sm:grid-cols-[110px_1fr]">
-							<dt class="font-semibold tracking-wide text-gray-700 uppercase">Problem</dt>
+							<dt class="font-semibold tracking-wide text-ink-2 uppercase">Problem</dt>
 							<dd class="m-0">{cs.problem}</dd>
-							<dt class="font-semibold tracking-wide text-gray-700 uppercase">Solution</dt>
+							<dt class="font-semibold tracking-wide text-ink-2 uppercase">Solution</dt>
 							<dd class="m-0">{cs.solution}</dd>
-							<dt class="font-semibold tracking-wide text-gray-700 uppercase">Build</dt>
+							<dt class="font-semibold tracking-wide text-ink-2 uppercase">Build</dt>
 							<dd class="m-0" set:html={cs.build} />
-							<dt class="font-semibold tracking-wide text-gray-700 uppercase">Outcome</dt>
-							<dd class="m-0 font-semibold text-gray-900">{cs.outcome}</dd>
+							<dt class="font-semibold tracking-wide text-ink-2 uppercase">Outcome</dt>
+							<dd class="m-0 font-semibold text-ink">{cs.outcome}</dd>
 						</dl>
 					</div>
 				);
