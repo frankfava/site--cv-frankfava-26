@@ -3,6 +3,7 @@ import ModuleWrapper, { type _ModuleHeader, type _ModuleWrapper } from "@/compon
 import { Icon } from "astro-icon/components";
 import type { Role } from "@/data/roleDefinitions";
 import { getTransferableSkillById } from "@/utils/transferableSkills";
+import CapabilityRadar from "@/components/blueprints/shared/_partials/CapabilityRadar.astro";
 
 export interface Props extends _ModuleWrapper {}
 
@@ -25,6 +26,8 @@ const transferableSkills = await resolve(role);
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
+	<CapabilityRadar class="mb-3.5 max-w-88" />
+
 	<ul class="grid gap-3 md:grid-cols-2">
 		{
 			transferableSkills.map(({ data }) => (

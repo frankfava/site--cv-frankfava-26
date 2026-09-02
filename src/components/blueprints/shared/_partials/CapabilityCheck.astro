@@ -1,7 +1,7 @@
 ---
 /** The capability check: the sliders, and the radar they redraw. */
 import { CAPABILITIES } from "@/data/capabilities";
-import { radar } from "@/alpine/capability/radar";
+import CapabilityRadar from "./CapabilityRadar.astro";
 import { cn } from "@/utils/class";
 
 export interface Props {
@@ -63,40 +63,6 @@ const { class: className } = Astro.props;
 			</div>
 		</div>
 
-		<div class="overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)">
-			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
-				<span class="eyebrow text-ink-3">Your role vs me</span>
-			</div>
-
-			<div class="px-2 pt-3.5 pb-0.5">
-				<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label="Radar comparing what your role needs against Frank's evidence">
-					{radar.rings.map((d) => <path d={d} fill="none" stroke="var(--c-line)" stroke-width="1" />)}
-					{
-						radar.spokes.map((spoke) => (
-							<>
-								<line x1={radar.cx} y1={radar.cy} x2={spoke.x2} y2={spoke.y2} stroke="var(--c-line)" stroke-width="1" />
-								<text x={spoke.labelX} y={spoke.labelY} text-anchor={spoke.anchor} fill="var(--c-ink-3)" font-size="10.5" letter-spacing=".4">
-									{spoke.label}
-								</text>
-							</>
-						))
-					}
-					<path d={radar.mineShape} stroke="var(--c-good)" fill="color-mix(in srgb, var(--c-good) 16%, transparent)" stroke-width="2" stroke-linejoin="round"></path>
-					<path
-						d={radar.yoursShape}
-						x-bind:d="yoursShape"
-						stroke="var(--c-accent)"
-						fill="color-mix(in srgb, var(--c-accent) 12%, transparent)"
-						stroke-width="2"
-						stroke-linejoin="round"
-						stroke-dasharray="5 4"></path>
-				</svg>
-			</div>
-
-			<div class="flex flex-wrap gap-4 px-4 pt-0.5 pb-3.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">
-				<span class="flex items-center gap-1.5"><i class="h-1 w-4 rounded-xs bg-accent"></i>What you need</span>
-				<span class="flex items-center gap-1.5"><i class="h-1 w-4 rounded-xs bg-good"></i>Where I sit</span>
-			</div>
-		</div>
+		<CapabilityRadar eyebrow="Your role vs me" showNeed />
 	</div>
 </div>
