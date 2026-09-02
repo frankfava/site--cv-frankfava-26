@@ -1,0 +1,82 @@
+[
+	{
+		"id": "jo-murray",
+		"order": 1,
+		"name": "Jo Murray",
+		"src": "/images/testimonials/Jo Murray.jpg",
+		"width": 382,
+		"height": 248
+	},
+	{
+		"id": "kylie-snowley-noden",
+		"order": 2,
+		"name": "Kylie Snowley-Noden",
+		"src": "/images/testimonials/Kylie Snowley-Noden.jpg",
+		"width": 382,
+		"height": 232
+	},
+	{
+		"id": "adam-bridgford",
+		"order": 3,
+		"name": "Adam Bridgford",
+		"src": "/images/testimonials/Adam Bridgford.jpg",
+		"width": 382,
+		"height": 470
+	},
+	{
+		"id": "tom-cartwright",
+		"order": 4,
+		"name": "Tom Cartwright",
+		"src": "/images/testimonials/Tom Cartwright.jpg",
+		"width": 382,
+		"height": 248
+	},
+	{
+		"id": "vanessa-medling",
+		"order": 5,
+		"name": "Vanessa Medling",
+		"src": "/images/testimonials/Vanessa Medling.jpg",
+		"width": 382,
+		"height": 232
+	},
+	{
+		"id": "harry-mcgowan",
+		"order": 6,
+		"name": "Harry McGowan",
+		"src": "/images/testimonials/Harry McGowan.jpg",
+		"width": 382,
+		"height": 177
+	},
+	{
+		"id": "marc-miles",
+		"order": 7,
+		"name": "Marc Miles",
+		"src": "/images/testimonials/Marc Miles.jpg",
+		"width": 382,
+		"height": 249
+	},
+	{
+		"id": "jade-varley",
+		"order": 8,
+		"name": "Jade Varley",
+		"src": "/images/testimonials/Jade Varley.jpg",
+		"width": 382,
+		"height": 230
+	},
+	{
+		"id": "patti-williams",
+		"order": 9,
+		"name": "Patti Williams",
+		"src": "/images/testimonials/Patti Williams.jpg",
+		"width": 382,
+		"height": 253
+	},
+	{
+		"id": "sandra-karamitelios",
+		"order": 10,
+		"name": "Sandra Karamitelios",
+		"src": "/images/testimonials/Sandra Karamitelios.jpg",
+		"width": 382,
+		"height": 578
+	}
+]

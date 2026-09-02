@@ -1,10 +1,12 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
-import { TESTIMONIALS } from "@/data/testimonials";
+import { getCollection } from "astro:content";
 
 export interface Props extends _ModuleWrapper {}
 
 const props = Astro.props;
+
+const testimonials = (await getCollection("testimonials")).sort((a, b) => a.data.order - b.data.order);
 
 const header: _ModuleHeader = {
 	...props.header,
@@ -18,6 +20,10 @@ const header: _ModuleHeader = {
 	<p><strong>Please note:</strong> this CV is public, so I have not put my references' phone numbers on it. I'm happy to provide them after we've met.</p>
 
 	<div class="mx-auto mt-10 gap-4 md:max-w-200 md:columns-2">
-		{TESTIMONIALS.map(({ name, src, width, height }) => <img class="mb-4 h-auto max-w-full rounded-lg" loading="lazy" src={src} alt={`Testimonial from ${name}`} width={width} height={height} />)}
+		{
+			testimonials.map(({ data: { name, src, width, height } }) => (
+				<img class="mb-4 h-auto max-w-full rounded-lg" loading="lazy" src={src} alt={`Testimonial from ${name}`} width={width} height={height} />
+			))
+		}
 	</div>
 </ModuleWrapper>

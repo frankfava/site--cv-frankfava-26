@@ -146,9 +146,32 @@ const workHistory = defineCollection({
 	}),
 });
 
+/**
+ * Testimonials
+ *
+ * Facebook reviews from the FLIC Sites freelancing years. Screenshots rather
+ * than transcribed text, because the point is that they are someone else's
+ * words in someone else's account, not a quote I typed.
+ */
+const testimonials = defineCollection({
+	loader: file("src/data/testimonials.json"),
+	schema: z.object({
+		// Position in the two-column layout. Authored, because the columns are
+		// balanced by eye against the screenshot heights below.
+		order: z.number().int().positive(),
+		name: z.string(),
+		src: z.string(),
+		// Intrinsic pixel size of the screenshot, so the column reserves the
+		// right space before the lazy-loaded image arrives.
+		width: z.number().int().positive(),
+		height: z.number().int().positive(),
+	}),
+});
+
 export const collections = {
 	skills,
 	projects,
 	certifications,
 	workHistory,
+	testimonials,
 };
