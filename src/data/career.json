@@ -8,7 +8,6 @@
 			"leadership": 5
 		},
 		"employers": ["patrician-brothers"],
-		"company": "Patrician Brothers, Blacktown · Sydney",
 		"note": "Twelve-month traineeship keeping a school's network alive. First paid technical job."
 	},
 	{
@@ -165,7 +164,6 @@
 			"leadership": 55
 		},
 		"employers": ["cool-company", "nas"],
-		"company": "Cool Company AB / National Auto Service",
 		"note": "Went independent and picked up NAS. The technology call became entirely mine: architecture, security, roadmap."
 	},
 	{
