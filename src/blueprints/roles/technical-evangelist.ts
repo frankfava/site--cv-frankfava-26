@@ -11,7 +11,7 @@ export const entry: BlueprintEntry = {
 	description: "Why I'd be a great Technical Evangelist - coaching, sales, and a decade of hands-on engineering.",
 	blueprint,
 	config: {
-		search: { enabled: false },
+		// search: { enabled: false },
 		layout: { showSidebar: false, showFooter: true },
 	},
 };

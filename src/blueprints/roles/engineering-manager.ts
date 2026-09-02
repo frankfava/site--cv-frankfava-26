@@ -12,7 +12,7 @@ export const entry: BlueprintEntry = {
 		"Why I'd be a great Engineering Manager: coaching as the core skill, a track record leading and growing engineers, ownership of technical direction and delivery, and the technical credibility to lead from the front.",
 	blueprint,
 	config: {
-		search: { enabled: false },
+		// search: { enabled: false },
 		layout: { showSidebar: false, showFooter: true },
 	},
 };

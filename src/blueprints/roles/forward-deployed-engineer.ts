@@ -12,7 +12,7 @@ export const entry: BlueprintEntry = {
 		"Why I'd be a great Forward Deployed Engineer - post-sales delivery embedded in customer systems, shipping technical artifacts, white-glove support, and codifying repeatable deployment patterns back into product.",
 	blueprint,
 	config: {
-		search: { enabled: false },
+		// search: { enabled: false },
 		layout: { showSidebar: false, showFooter: true },
 	},
 };

@@ -11,7 +11,7 @@ export const entry: BlueprintEntry = {
 	description: "Why I'd be a great Senior Engineer - multi-stack production depth, tool-builder mindset, and technical leadership.",
 	blueprint,
 	config: {
-		search: { enabled: false },
+		// search: { enabled: false },
 		layout: { showSidebar: false, showFooter: true },
 	},
 };

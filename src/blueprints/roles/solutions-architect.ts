@@ -12,7 +12,7 @@ export const entry: BlueprintEntry = {
 		"Why I'd be a great AI Solutions Architect - designing and building real AI/agentic solutions, pre-sales partnership with account executives, technical advisor across the adoption journey, architectural ownership, and a multi-stack track record.",
 	blueprint,
 	config: {
-		search: { enabled: false },
+		// search: { enabled: false },
 		layout: { showSidebar: false, showFooter: true },
 	},
 };
