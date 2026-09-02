@@ -23,21 +23,25 @@ const languages = linguistics.languages.map((language) => ({
 }));
 ---
 
-<div class={cn("grid gap-5", { "lg:grid-cols-2": columns === 2 }, className)}>
-	{
-		languages.map(({ language, fluency, description, score }) => (
-			<div>
-				<div class="text-lg text-ink">
-					<strong>{language}</strong>
-					{fluency && <span class="text-ink-3"> &ndash; {fluency}</span>}
+<div>
+	{linguistics.summary && <p class="mb-4 text-ink-2">{linguistics.summary}</p>}
+
+	<div class={cn("grid gap-5", { "lg:grid-cols-2": columns === 2 }, className)}>
+		{
+			languages.map(({ language, fluency, description, score }) => (
+				<div>
+					<div class="text-lg text-ink">
+						<strong>{language}</strong>
+						{fluency && <span class="text-ink-3"> &ndash; {fluency}</span>}
+					</div>
+					<span class="mt-2 flex gap-1">
+						{RANKINGS.map((_rank, i) => (
+							<Icon name={i < score ? "ph:star-fill" : "ph:star"} class="size-8 text-accent" />
+						))}
+					</span>
+					{description && <div class="mt-2 text-sm text-ink-2">{description}</div>}
 				</div>
-				<span class="mt-2 flex gap-1">
-					{RANKINGS.map((_rank, i) => (
-						<Icon name={i < score ? "ph:star-fill" : "ph:star"} class="size-8 text-accent" />
-					))}
-				</span>
-				{description && <div class="mt-2 text-sm text-ink-2">{description}</div>}
-			</div>
-		))
-	}
+			))
+		}
+	</div>
 </div>
