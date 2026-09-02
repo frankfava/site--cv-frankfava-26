@@ -6,7 +6,7 @@
  * is the source of truth used by:
  *   - the dynamic search-index endpoint (`/api/search-index/[blueprintSlug].json`)
  *   - `Search.astro` to fetch the right scoped index
- *   - role landing pages (which derive their slugs from `ROLES` in `@/utils/roles.ts`)
+ *   - role landing pages (which derive their slugs from `ROLES` in `@/data/roles`)
  *
  * Every blueprint file (static or role) exports its own `entry`.
  */
