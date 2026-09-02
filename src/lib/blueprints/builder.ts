@@ -11,6 +11,7 @@
 import { slugify, toKebabCase } from "@/utils/str";
 import type { Link } from "@/types";
 import type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintSchema, NestedKeys } from "./schema";
+import type { BlueprintEntry, BlueprintEntryPartial } from "./types";
 
 export type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintSchema } from "./schema";
 
@@ -332,4 +333,12 @@ export class BlueprintSection {
  *  layout chrome) lives on the catalog `BlueprintEntry`, not here. */
 export function buildBlueprint<T extends BlueprintSchema>(structure: T): BlueprintProxy<T> {
 	return BlueprintBuilder.createProxyFromStructure(structure);
+}
+
+export function buildBlueprintEntry(entry: BlueprintEntryPartial): BlueprintEntry {
+	return {
+		...entry,
+		slug: entry.slug ?? slugify(toKebabCase(entry.title)),
+		blueprint: entry.blueprint instanceof BlueprintBuilder ? entry.blueprint : buildBlueprint(entry.blueprint),
+	};
 }

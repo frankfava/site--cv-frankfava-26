@@ -46,3 +46,8 @@ export type BlueprintEntry = {
 	/** Page-shell config (search, layout). Optional. */
 	config?: BlueprintConfig;
 };
+
+export type BlueprintEntryPartial = Omit<BlueprintEntry, "blueprint" | "slug"> & {
+	slug?: string;
+	blueprint: BlueprintBuilder<BlueprintSchema> | BlueprintSchema;
+};

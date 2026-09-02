@@ -8,7 +8,7 @@
  */
 
 export type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintSchema, NestedKeys } from "./schema";
-export { BlueprintBuilder, BlueprintSection, buildBlueprint } from "./builder";
+export { BlueprintBuilder, BlueprintSection, buildBlueprint, buildBlueprintEntry } from "./builder";
 export type { ParsedBlueprint } from "./builder";
 export type { BlueprintConfig, BlueprintEntry } from "./types";
 export { blueprints, blueprintSlugs } from "@/data/blueprints";
