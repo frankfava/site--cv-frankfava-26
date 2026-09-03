@@ -16,6 +16,7 @@ export interface Props {
 	showCount?: boolean;
 	showSearchBar?: boolean;
 	showLinks?: boolean;
+	allowFullscreen?: boolean;
 	class?: HTMLAttributes<"div">["class:list"];
 }
 
@@ -26,6 +27,7 @@ const {
 	showLinks = true,
 	showCount = true,
 	showSearchBar = true,
+	allowFullscreen = false,
 	class: className,
 } = Astro.props;
 
@@ -92,15 +94,19 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 					</>
 				)
 			}
-			<button
-				type="button"
-				x-show="!isFullscreen"
-				@click="openFullscreen"
-				x-bind:aria-label="fullscreenLabel"
-				class="ml-auto cursor-pointer rounded-md p-2 text-ink-3 transition-colors hover:bg-sunk hover:text-ink print:hidden"
-			>
-				<Icon name="ph:arrows-out-simple" class="size-5" />
-			</button>
+			{
+				allowFullscreen && (
+					<button
+						type="button"
+						x-show="!isFullscreen"
+						@click="openFullscreen"
+						x-bind:aria-label="fullscreenLabel"
+						class="ml-auto cursor-pointer rounded-md p-2 text-ink-3 transition-colors hover:bg-sunk hover:text-ink print:hidden"
+					>
+						<Icon name="ph:arrows-out-simple" class="size-5" />
+					</button>
+				)
+			}
 		</div>
 
 		{
