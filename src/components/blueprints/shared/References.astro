@@ -1,12 +1,12 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
-import { getCollection } from "astro:content";
+import { getTestimonials } from "@/lib/collections/testimonials";
 
 export interface Props extends _ModuleWrapper {}
 
 const props = Astro.props;
 
-const testimonials = (await getCollection("testimonials")).sort((a, b) => a.data.order - b.data.order);
+const testimonials = await getTestimonials();
 
 const header: _ModuleHeader = {
 	...props.header,
