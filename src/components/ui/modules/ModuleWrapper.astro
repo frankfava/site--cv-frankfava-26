@@ -1,26 +1,19 @@
 ---
 import type { HTMLTag } from "astro/types";
-import type { _Module, _ModuleHeader } from "@/types";
+import type { _Module } from "@/types";
 import { cn } from "@/utils/class";
 
 export type { _ModuleHeader } from "@/types";
 
 import ModuleHeader from "./ModuleHeader.astro";
 
-export interface _ModuleWrapper extends _Module {
-	class?: string;
-	isFullWidth?: boolean;
-	forceLayout?: "stacked" | "side";
-	flip?: boolean;
-	showHeader?: boolean;
-	header?: _ModuleHeader;
-}
+export interface _ModuleWrapper extends _Module {}
 
 export interface Props extends _ModuleWrapper {
 	["as"]?: HTMLTag;
 }
 
-const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class: className, classes = {}, showHeader = true, flip, header } = Astro.props;
+const { id, bg, forceLayout, isFullWidth, isDark = false, as = "section", class: className, classes = {}, showHeader = true, flip, header, contentWidth } = Astro.props;
 
 const WrapperTag = as;
 
@@ -29,7 +22,13 @@ const useLayout = forceLayout !== undefined ? forceLayout : "stacked";
 const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
 ---
 
-<WrapperTag class={cn("module module--wrapper relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", className, classes?.wrapper)} {...id ? { id } : {}}>
+<WrapperTag
+	{...{
+		id,
+		class: cn("module module--wrapper relative scroll-mt-[calc(var(--header-height)+18px)] border-t border-line-2", className, classes?.wrapper),
+		...(contentWidth ? { style: `--content-width: var(--breakpoint-${contentWidth});` } : {}),
+	}}
+>
 	<div class="bg-inset pointer-events-none absolute inset-0" aria-hidden="true">
 		<slot name="bg">
 			{bg ? <div class:list={bg} /> : <div class:list={[{ "bg-dark dark:bg-transparent": isDark }]} />}

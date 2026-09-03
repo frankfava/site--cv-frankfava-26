@@ -1,3 +1,4 @@
+import type { Breakpoint } from "@/assets/js/_theme.generated";
 import type { HTMLAttributes } from "astro/types";
 import type { App } from "site:config";
 
@@ -32,9 +33,16 @@ export interface Link extends Omit<HTMLAttributes<"a">, "slot"> {
 /** Base Module */
 export interface _Module {
 	id?: string;
+	class?: HTMLAttributes<any>["class:list"];
+	classes?: Partial<Record<"wrapper" | "container" | "content" | "body", HTMLAttributes<any>["class:list"]>>;
 	isDark?: boolean;
 	bg?: string;
-	classes?: Partial<Record<"wrapper" | "container" | "content" | "body", HTMLAttributes<any>["class:list"]>>;
+	isFullWidth?: boolean;
+	forceLayout?: "stacked" | "side";
+	flip?: boolean;
+	showHeader?: boolean;
+	header?: _ModuleHeader;
+	contentWidth?: Breakpoint;
 }
 
 /** Module Header */
