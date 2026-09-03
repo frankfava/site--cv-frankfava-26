@@ -1,0 +1,29 @@
+---
+import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
+import { stockholmArrival, stockholmYears } from "@/lib/spans";
+import { inWords } from "@/utils/number";
+import { ABOUT } from "site:config";
+
+export interface Props extends _ModuleWrapper {}
+
+const props = Astro.props;
+
+const arrival = new Intl.DateTimeFormat("en", { month: "long", year: "numeric" }).format(stockholmArrival());
+
+const header: _ModuleHeader = {
+	...props.header,
+	title: props.header?.title || "Quick intro",
+};
+---
+
+<ModuleWrapper {...{ ...props, header }}>
+	<p>My name is Francesco, but Frank is preferred. I'm {ABOUT.age}, born and raised in sunny Sydney, and I live in Stockholm now with my wife, Josefin.</p>
+
+	<p>I moved here in {arrival} and have built a life over the {inWords(stockholmYears())} years since, with new family and friends.</p>
+
+	<p>
+		I've worked for myself, and I've worked for other people. There were jobs along the way that had nothing to do with either — I've been a barista, <strong
+			>which means I make great coffee</strong
+		>{" "}(crucial in any modern workplace).
+	</p>
+</ModuleWrapper>

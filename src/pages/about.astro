@@ -1,12 +1,12 @@
 ---
 /**
- * How I work page.
+ * About me page.
  */
 
 import { blueprints } from "@/data/blueprints";
 import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
 
-const entry = blueprints.howIWork;
+const entry = blueprints.about;
 
 const metadata = {
 	title: entry.title,
@@ -15,5 +15,5 @@ const metadata = {
 ---
 
 <SubIndexedLayout {...{ metadata, blueprint: entry }}>
-	<Fragment slot="lead">Strengths, failure modes, and three external reads of the same person, explained rather than just scored.</Fragment>
+	<Fragment slot="lead">Who I am, how I behave when the work goes badly, and what happens when someone else does the scoring.</Fragment>
 </SubIndexedLayout>

@@ -21,6 +21,19 @@ export function fullYearsBetween(start: Date, end: Date = new Date()): number {
 	return beforeAnniversary ? elapsed - 1 : elapsed;
 }
 
+/** The arrival in Stockholm. Not a role, so the collection does not carry it. */
+const STOCKHOLM_ARRIVAL = new Date("2019-11-01T00:00:00.000Z");
+
+/** Whole years living in Stockholm. */
+export function stockholmYears(): number {
+	return fullYearsBetween(STOCKHOLM_ARRIVAL);
+}
+
+/** The month of the move, for copy that names it instead of counting from it. */
+export function stockholmArrival(): Date {
+	return new Date(STOCKHOLM_ARRIVAL);
+}
+
 /** Where the working life starts: the earliest role on the record. */
 export function careerStart(): Date {
 	return new Date(Math.min(...[...startDates.values()].map(Number)));

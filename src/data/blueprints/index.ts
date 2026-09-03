@@ -44,9 +44,10 @@ export const work = buildBlueprintEntry({
 	title: "Work",
 	description: "Every project with the technologies, the constraints and what it produced.",
 	blueprint: {
-		stillRunning: sections.stillRunning,
 		projects: sections.projects,
+		stillRunning: sections.stillRunning,
 		skills: sections.skills,
+		references: sections.references,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintSchema,
 	config: {
@@ -88,16 +89,16 @@ export const experience = buildBlueprintEntry({
 	},
 });
 
-export const howIWork = buildBlueprintEntry({
-	slug: "how-i-work",
-	title: "How I work",
-	description: "Strengths, failure modes, and my MBTI, DISC and Enneagram results explained plainly.",
+export const about = buildBlueprintEntry({
+	slug: "about",
+	title: "About me",
+	description: "Who I am, how I behave under pressure, what I'm still learning, and what the personality tests make of me.",
 	blueprint: {
+		quickIntro: sections.quickIntro,
 		self: sections.self,
 		learning: sections.learning,
 		personalityTests: sections.personalityTests,
 		transferableSkills: sections.transferableSkills,
-		references: sections.references,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintSchema,
 });
@@ -124,7 +125,7 @@ export const blueprints: Record<string, BlueprintEntry> = {
 	work,
 	ai,
 	experience,
-	howIWork,
+	about,
 	credentials,
 };
 

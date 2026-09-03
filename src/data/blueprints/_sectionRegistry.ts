@@ -122,7 +122,17 @@ export const languages: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/Languages.astro"),
 };
 
-// How I Work
+// About me
+export const quickIntro: BlueprintComponent = {
+	id: "quick-intro",
+	eyebrow: "Quick Intro",
+	title: "Sydney to Stockholm",
+	mainMenuLabel: "Quick intro",
+	icon: "ph:hand-waving-duotone",
+	description: "Where I'm from, where I landed, and the jobs that had nothing to do with any of it.",
+	content: async () => import("@/components/blueprints/shared/QuickIntro.astro"),
+};
+
 export const self: BlueprintComponent = {
 	id: "self",
 	eyebrow: "Strengths and failure modes",
