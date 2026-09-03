@@ -1,4 +1,4 @@
-import { type BlueprintSchema, type BlueprintComponent } from "@/lib/blueprints";
+import { type BlueprintComponentSchema, type BlueprintComponent } from "@/lib/blueprints";
 import { careerYears, roleCount } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 
@@ -234,4 +234,4 @@ export default {
 	projects,
 	skills,
 	fullRecord,
-} as const satisfies BlueprintSchema;
+} as const satisfies BlueprintComponentSchema;

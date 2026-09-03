@@ -40,7 +40,7 @@ export interface BlueprintConfig {
 export type BlueprintEntry = {
 	slug: string;
 	title: string;
-	blueprint: BlueprintBuilder<BlueprintSchema>;
+	blueprint: BlueprintBuilder<BlueprintSchema<unknown>>;
 	/** Narrative blurb used for `<head>` metadata. */
 	description?: string;
 	/** Page-shell config (search, layout). Optional. */
@@ -49,5 +49,5 @@ export type BlueprintEntry = {
 
 export type BlueprintEntryPartial = Omit<BlueprintEntry, "blueprint" | "slug"> & {
 	slug?: string;
-	blueprint: BlueprintBuilder<BlueprintSchema> | BlueprintSchema;
+	blueprint: BlueprintBuilder<BlueprintSchema<unknown>> | BlueprintSchema<unknown>;
 };

@@ -1,4 +1,4 @@
-import { type BlueprintSchema } from "@/lib/blueprints";
+import { type BlueprintComponentSchema } from "@/lib/blueprints";
 
 export const buildRoleStructure = (roleTitle: string) =>
 	({
@@ -51,4 +51,4 @@ export const buildRoleStructure = (roleTitle: string) =>
 			description: "End-to-end engagements: problem → solution → build → outcome.",
 			content: async () => import("@/components/roles/_shared/CaseStudies.astro"),
 		},
-	}) as const satisfies BlueprintSchema;
+	}) as const satisfies BlueprintComponentSchema;

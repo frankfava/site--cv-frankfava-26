@@ -2,32 +2,44 @@
  * Assembling a blueprint: the builder, the section, and the proxies that let a
  * structure be walked by key.
  *
- * The two classes call each other - `BlueprintBuilder` creates sections via
- * `BlueprintSection.createProxy`, and the section calls back - so they stay in
- * one module. Splitting them would turn a type-only relationship into a real
- * circular import. The data shapes live in `./types`.
+ * Each pair calls the other - a builder creates sections via the section's
+ * `createProxy`, and the section calls back - so they stay in one module.
+ * Splitting them would turn a type-only relationship into a real circular
+ * import. The data shapes live in `./schema`.
+ *
+ * The part pair is what every medium shares. The screen pair extends it with
+ * nesting and the chrome a page is navigated by.
  */
 
 import { slugify, toKebabCase } from "@/utils/str";
 import type { Link } from "@/types";
-import type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintSchema, NestedKeys } from "./schema";
+import type { AssembledBlueprint, AssembledSection, BlueprintPart, BlueprintSchema, NestedKeys, SectionData } from "./schema";
 import type { BlueprintEntry, BlueprintEntryPartial } from "./types";
 
-export type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintSchema } from "./schema";
+export type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintComponentSchema, BlueprintPart, BlueprintSchema, SectionData } from "./schema";
 
 /** Parsed Blueprint Schema */
 export type ParsedBlueprint = BlueprintSectionProxy[];
 
-/** */
-type BlueprintProxy<T extends BlueprintSchema> = BlueprintBuilder<T> & Record<NestedKeys<T>, BlueprintSectionProxy>;
+/** A part walked by key: the section, with its own data readable off it. */
+export type BlueprintPartProxy<D extends BlueprintPart<unknown>> = BlueprintPartSection<D> & D;
 
 /** */
-type BlueprintSectionProxy = BlueprintSection & BlueprintComponent;
+type BlueprintProxy<T extends BlueprintSchema<unknown>> = BlueprintBuilder<T> & Record<NestedKeys<T>, BlueprintSectionProxy>;
 
-/** Build Blueprint from schema */
-export class BlueprintBuilder<T extends BlueprintSchema> {
-	private cache: Map<string, BlueprintSectionProxy>;
-	private parsedSections: ParsedBlueprint;
+/** */
+type BlueprintSectionProxy = BlueprintSection & SectionData;
+
+/**
+ * Walk a structure of parts by key.
+ *
+ * A part is a leaf, so this caches what it parses and nothing else. A medium
+ * that nests overrides the two protected hooks rather than reimplementing the
+ * walk.
+ */
+export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends BlueprintPartSection<any> = BlueprintPartProxy<BlueprintPart>> {
+	protected cache: Map<string, S>;
+	protected parsedSections: S[];
 
 	constructor(structure: T) {
 		this.parsedSections = this.parseSections(structure);
@@ -35,50 +47,23 @@ export class BlueprintBuilder<T extends BlueprintSchema> {
 		this.buildCache(this.parsedSections);
 	}
 
-	/** Static method to create proxied instance */
-	static createProxyFromStructure<T extends BlueprintSchema>(structure: T): BlueprintProxy<T> {
-		const builder = new BlueprintBuilder(structure);
-		return BlueprintBuilder.createProxy(builder);
+	/** Build one section. The hook a nesting medium overrides. */
+	protected createSection(key: string, section: BlueprintPart<unknown>): S {
+		return proxySection(new BlueprintPartSection({ ...section, id: key })) as unknown as S;
 	}
 
-	/** Static method to create proxied instance */
-	static createProxy<T extends BlueprintSchema>(builder: BlueprintBuilder<T>): BlueprintProxy<T> {
-		return new Proxy(builder, {
-			get: (target: BlueprintBuilder<T>, prop: string | symbol) => {
-				if (prop in target) {
-					return target[prop as keyof typeof target];
-				}
-				const section = target.getByKey(prop as NestedKeys<T>) as BlueprintSectionProxy;
-				if (section) {
-					return target.parseSection(section.key, section?.getData());
-				}
-				return undefined;
-			},
-		}) as BlueprintProxy<T>;
+	/** Parse schema */
+	protected parseSections(structure: BlueprintSchema<unknown>): S[] {
+		return Object.entries(structure).map(([key, section]) => this.createSection(key, section));
 	}
 
-	/** Cache all sections */
-	private buildCache(sections: ParsedBlueprint): void {
-		sections.forEach((section) => {
-			this.cache.set(section.key, section);
-			if ((section.sections ?? []).length > 0) {
-				this.buildCache((section.sections ?? []) as ParsedBlueprint);
-			}
-		});
-	}
-
-	/** Recursively parse schema */
-	private parseSections(structure: BlueprintSchema): ParsedBlueprint {
-		return Object.entries(structure).map(([key, section]) => this.parseSection(key, section));
-	}
-
-	/** Parse Section to BlueprintSection */
-	private parseSection(key: string, section: BlueprintComponent): BlueprintSectionProxy {
-		return BlueprintSection.createProxy(new BlueprintSection({ ...section, id: key }));
+	/** Cache all sections. The hook a nesting medium overrides. */
+	protected buildCache(sections: S[]): void {
+		sections.forEach((section) => this.cache.set(section.key, section));
 	}
 
 	/** Get a section by key */
-	getByKey<K extends NestedKeys<T>>(key: K): BlueprintSectionProxy {
+	getByKey<K extends NestedKeys<T>>(key: K): S {
 		return this.cache.get(key as string)!;
 	}
 
@@ -88,8 +73,47 @@ export class BlueprintBuilder<T extends BlueprintSchema> {
 	}
 
 	/** Gets the parsed schema */
-	getBlueprint(): ParsedBlueprint {
+	getBlueprint(): S[] {
 		return this.parsedSections;
+	}
+}
+
+/** Build a screen Blueprint from a schema */
+export class BlueprintBuilder<T extends BlueprintSchema<unknown>> extends BlueprintPartBuilder<T, BlueprintSectionProxy> {
+	/** Static method to create proxied instance */
+	static createProxyFromStructure<T extends BlueprintSchema<unknown>>(structure: T): BlueprintProxy<T> {
+		const builder = new BlueprintBuilder(structure);
+		return BlueprintBuilder.createProxy(builder);
+	}
+
+	/** Static method to create proxied instance */
+	static createProxy<T extends BlueprintSchema<unknown>>(builder: BlueprintBuilder<T>): BlueprintProxy<T> {
+		return new Proxy(builder, {
+			get: (target: BlueprintBuilder<T>, prop: string | symbol) => {
+				if (prop in target) {
+					return target[prop as keyof typeof target];
+				}
+				const section = target.getByKey(prop as NestedKeys<T>);
+				if (section) {
+					return target.createSection(section.key, section.getData());
+				}
+				return undefined;
+			},
+		}) as BlueprintProxy<T>;
+	}
+
+	protected override createSection(key: string, section: BlueprintPart<unknown>): BlueprintSectionProxy {
+		return BlueprintSection.createProxy(new BlueprintSection({ ...(section as SectionData), id: key }));
+	}
+
+	/** Nested sections are keyed alongside their parents, so a lookup reaches them. */
+	protected override buildCache(sections: ParsedBlueprint): void {
+		sections.forEach((section) => {
+			this.cache.set(section.key, section);
+			if ((section.sections ?? []).length > 0) {
+				this.buildCache((section.sections ?? []) as ParsedBlueprint);
+			}
+		});
 	}
 
 	/** Gets all direct children of a blueprint section */
@@ -201,29 +225,75 @@ export class BlueprintBuilder<T extends BlueprintSchema> {
 	}
 }
 
-/** Blueprint Section */
-export class BlueprintSection {
-	private data: BlueprintComponent;
-	readonly key: string;
-	readonly sections?: BlueprintSection[];
+/**
+ * Read a section's own data straight off the section.
+ *
+ * Shared by both pairs rather than inherited: a static cannot be narrowed on
+ * the way down, and the screen pair needs its own return type.
+ */
+function proxySection<D extends BlueprintPart<unknown>, S extends BlueprintPartSection<any>>(section: S): S & D {
+	return new Proxy(section, {
+		get(target: S, prop: PropertyKey) {
+			if (prop in target) {
+				return target[prop as keyof S];
+			}
+			const data = target.getData() as Record<PropertyKey, unknown>;
+			if (prop in data) {
+				return data[prop];
+			}
+			return undefined;
+		},
+	}) as S & D;
+}
 
-	constructor(data: BlueprintComponent) {
+/**
+ * A section, in the terms every medium shares.
+ *
+ * It is a leaf: it holds its own data and answers for it. Nesting, chrome and
+ * anything a page is navigated by belong to the medium that has them.
+ */
+export class BlueprintPartSection<D extends BlueprintPart<unknown> = BlueprintPart<unknown>> {
+	protected data: D;
+	readonly key: string;
+
+	constructor(data: D) {
 		this.data = {
-			showInSidebar: data.showInSidebar ?? true,
-			// showInSearch: data.showInSearch ?? true,
 			...data,
 			description: data.description || "",
-			mainMenuLabel: data.mainMenuLabel || data.title,
 			id: slugify(toKebabCase(data.id || data.title)),
 		};
 
-		this.data.href = `#${this.data.id}`;
-
 		this.key = data.id || "";
+	}
+
+	/** Get the raw data */
+	getData(): D {
+		return this.data;
+	}
+
+	/** Get a value from the data */
+	get<K extends keyof D>(key: K): D[K] {
+		return this.data[key];
+	}
+}
+
+/** A section on an indexed screen page: chrome, and the sections nested under it. */
+export class BlueprintSection extends BlueprintPartSection<SectionData> {
+	readonly sections?: BlueprintSection[];
+
+	constructor(data: SectionData) {
+		super({
+			showInSidebar: data.showInSidebar ?? true,
+			// showInSearch: data.showInSearch ?? true,
+			...data,
+			mainMenuLabel: data.mainMenuLabel || data.title,
+		});
+
+		this.data.href = `#${this.data.id}`;
 
 		// If content is a nested schema and not a function or string then parse the sections
 		if (data.content instanceof Object && !(data.content instanceof Function)) {
-			this.sections = Object.entries(data.content as BlueprintSchema).map(([key, section]) =>
+			this.sections = Object.entries(data.content as Record<string, SectionData>).map(([key, section]) =>
 				BlueprintSection.createProxy(
 					new BlueprintSection({
 						...section,
@@ -239,28 +309,7 @@ export class BlueprintSection {
 
 	/** Static method to create proxied instance */
 	static createProxy(section: BlueprintSection): BlueprintSectionProxy {
-		return new Proxy(section, {
-			get(target: BlueprintSection, prop: PropertyKey) {
-				if (prop in target) {
-					return target[prop as keyof BlueprintSection];
-				}
-				if (prop in target.data) {
-					const key = prop as keyof BlueprintComponent;
-					return target.data[key];
-				}
-				return undefined;
-			},
-		}) as BlueprintSectionProxy;
-	}
-
-	/** Get the raw data */
-	getData(): BlueprintComponent {
-		return this.data;
-	}
-
-	/** Get a value from the data */
-	get<K extends keyof BlueprintComponent>(key: K): BlueprintComponent[K] {
-		return this.data[key];
+		return proxySection<SectionData, BlueprintSection>(section);
 	}
 
 	/** Get sections */
@@ -316,7 +365,11 @@ export class BlueprintSection {
 
 /** Build a blueprint from a schema. Cross-cutting metadata (search scoping,
  *  layout chrome) lives on the catalog `BlueprintEntry`, not here. */
-export function buildBlueprint<T extends BlueprintSchema>(structure: T): BlueprintProxy<T> {
+export function buildParts<T extends BlueprintSchema>(structure: T): BlueprintPartBuilder<T> {
+	return new BlueprintPartBuilder(structure);
+}
+
+export function buildBlueprint<T extends BlueprintSchema<unknown>>(structure: T): BlueprintProxy<T> {
 	return BlueprintBuilder.createProxyFromStructure(structure);
 }
 

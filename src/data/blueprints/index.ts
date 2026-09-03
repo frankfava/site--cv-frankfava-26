@@ -11,7 +11,7 @@
  * Every blueprint file (static or role) exports its own `entry`.
  */
 
-import { buildBlueprintEntry, type BlueprintEntry, type BlueprintSchema } from "@/lib/blueprints";
+import { buildBlueprintEntry, type BlueprintEntry, type BlueprintComponentSchema } from "@/lib/blueprints";
 import * as sections from "./_sectionRegistry";
 import { careerYears } from "@/lib/spans";
 import { inWords } from "@/utils/number";
@@ -27,7 +27,7 @@ export const home = buildBlueprintEntry({
 		beforeWeTalk: sections.beforeWeTalk,
 		fullRecord: sections.fullRecord,
 		yourProblem: sections.yourProblem,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 	config: {
 		// search: {
 		// 	atomics: {
@@ -49,7 +49,7 @@ export const work = buildBlueprintEntry({
 		skills: sections.skills,
 		references: sections.references,
 		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 	config: {
 		layout: { bay: "closed" },
 		// search: {
@@ -65,7 +65,7 @@ export const ai = buildBlueprintEntry({
 	blueprint: {
 		practice: sections.practice,
 		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 	config: {
 		// search: {
 		// 	atomics: { project: "practice"},
@@ -81,7 +81,7 @@ export const experience = buildBlueprintEntry({
 		history: sections.history,
 		achievements: sections.achievements,
 		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 	config: {
 		// search: {
 		// 	atomics: { role: "history" },
@@ -100,7 +100,7 @@ export const about = buildBlueprintEntry({
 		personalityTests: sections.personalityTests,
 		transferableSkills: sections.transferableSkills,
 		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 });
 
 export const credentials = buildBlueprintEntry({
@@ -112,7 +112,7 @@ export const credentials = buildBlueprintEntry({
 		certifications: sections.certifications,
 		languages: sections.languages,
 		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
+	} as const satisfies BlueprintComponentSchema,
 	config: {
 		// search: {
 		// 	atomics: { certification: "certifications" },
