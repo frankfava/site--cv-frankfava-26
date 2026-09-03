@@ -182,19 +182,6 @@ export class BlueprintBuilder<T extends BlueprintSchema> {
 		return BlueprintBuilder.assemble(this.parsedSections);
 	}
 
-	/** Get all bookmarked sections */
-	getBookmarkedSections(): BlueprintSectionProxy[] {
-		const cache = Array.from(this.cache.values());
-
-		let bookmarks: BlueprintSectionProxy[] = [];
-		for (const section of cache) {
-			if (section.getData().bookmark) {
-				bookmarks.push(section);
-			}
-		}
-		return bookmarks;
-	}
-
 	/** Get Parent Sections */
 	getParentSections(): BlueprintSectionProxy[] {
 		const cache = Array.from(this.cache.values());
@@ -208,7 +195,7 @@ export class BlueprintBuilder<T extends BlueprintSchema> {
 		return parents;
 	}
 
-	/** Get all bookmarked sections recursively */
+	/** Get all sidebar sections recursively */
 	getSidebarSections(): ParsedBlueprint {
 		return this.filter((d) => !!d.showInSidebar);
 	}
@@ -224,11 +211,9 @@ export class BlueprintSection {
 		this.data = {
 			showInSidebar: data.showInSidebar ?? true,
 			// showInSearch: data.showInSearch ?? true,
-			bookmark: !!data.bookmark,
 			...data,
 			description: data.description || "",
 			mainMenuLabel: data.mainMenuLabel || data.title,
-			bookmarkDesc: data.bookmarkDesc || "",
 			id: slugify(toKebabCase(data.id || data.title)),
 		};
 

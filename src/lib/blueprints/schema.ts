@@ -21,9 +21,7 @@ export interface BlueprintComponent {
 	icon: string;
 	content: Record<string, Omit<BlueprintComponent, "hidden">> | string | (() => Promise<object>);
 	mainMenuLabel?: string;
-	bookmarkDesc?: string;
 	showInSidebar?: boolean;
-	bookmark?: boolean;
 	href?: string;
 	hidden?: boolean;
 	props?: _ModuleWrapper;
