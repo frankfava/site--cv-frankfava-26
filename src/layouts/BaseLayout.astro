@@ -17,17 +17,19 @@ import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	metadata?: MetaData;
+	language?: typeof I18N.language;
+	textDirection?: typeof I18N.textDirection;
 	htmlClass?: HTMLAttributes<"html">["class:list"];
-	colorMode?: "light" | "dark";
 	bodyClass?: HTMLAttributes<"body">["class:list"];
+	colorMode?: "light" | "dark";
 }
 
-const { metadata = {}, htmlClass = "", bodyClass = "", colorMode } = Astro.props;
+const { metadata = {}, language: languageProp = "", textDirection: textDirectionProp = "", htmlClass = "", bodyClass = "", colorMode = "light" } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class:list={[htmlClass, colorMode === "dark" && "dark"]}>
+<html lang={languageProp ?? language} dir={textDirectionProp ?? textDirection} class:list={[htmlClass, colorMode === "dark" && "dark"]}>
 	<head>
 		<Favicons />
 		<MetaTags {...metadata} />

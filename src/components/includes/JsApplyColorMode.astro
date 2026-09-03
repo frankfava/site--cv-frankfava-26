@@ -3,7 +3,7 @@ import { THEME } from "site:config";
 
 interface Props {
 	/** The palette this page pins itself to, whatever the visitor prefers. */
-	locked?: "light" | "dark";
+	locked?: typeof Astro.locals.colorMode;
 }
 
 const { locked } = Astro.props;
