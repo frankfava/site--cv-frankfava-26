@@ -1,6 +1,6 @@
 ---
 import ModuleWrapper from "@/components/ui/modules/ModuleWrapper.astro";
-import type { AssembledSection } from "@/lib/blueprints";
+import { isAsyncLoader, type AssembledSection } from "@/lib/blueprints";
 import type { AstroInstance, MarkdownInstance } from "astro";
 
 export interface Props {
@@ -10,9 +10,8 @@ export interface Props {
 const { section } = Astro.props;
 
 let output: AstroInstance | MarkdownInstance<Record<string, any>> | undefined = undefined;
-const isAsync = (fn: unknown): fn is (...args: unknown[]) => Promise<unknown> => typeof fn === "function" && fn.constructor?.name === "AsyncFunction";
 
-if (isAsync(section.content)) {
+if (isAsyncLoader(section.content)) {
 	// Import the md or astro
 	const module = (await section.content()) as AstroInstance | MarkdownInstance<Record<string, any>>;
 

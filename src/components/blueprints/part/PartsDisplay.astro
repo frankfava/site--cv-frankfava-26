@@ -1,0 +1,12 @@
+---
+import PartBuild from "./PartBuild.astro";
+import type { AssembledPart } from "@/lib/blueprints";
+
+export interface Props {
+	sheet: AssembledPart[];
+}
+
+const { sheet } = Astro.props;
+---
+
+{sheet.map((section) => <PartBuild section={section} />)}

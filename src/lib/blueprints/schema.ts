@@ -53,6 +53,21 @@ export type BlueprintComponentSchema = Record<string, BlueprintComponent>;
 /** What a screen section holds once built: a part, plus the chrome it was given. */
 export type SectionData = BlueprintPart<ComponentContent> & Partial<Omit<BlueprintComponent, keyof BlueprintPart>>;
 
+/**
+ * A part ready for display: inert data, with nothing a renderer has to call.
+ *
+ * The screen's `AssembledSection` is a sibling rather than an extension - it
+ * folds the title into a `header` for the wrapper, so it has no top-level one.
+ */
+export interface AssembledPart {
+	id: string;
+	title: string;
+	description?: string;
+	eyebrow?: string;
+	content: PartContent;
+	hidden: boolean;
+}
+
 /** Blueprint for display */
 export type AssembledBlueprint = AssembledSection[];
 

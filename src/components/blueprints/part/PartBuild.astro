@@ -1,0 +1,21 @@
+---
+import { isVisible, loadPart, type AssembledPart } from "@/lib/blueprints";
+
+export interface Props {
+	section: AssembledPart;
+}
+
+const { section } = Astro.props;
+
+const part = await loadPart(section.content);
+const isHidden = section.hidden || !(await isVisible(part));
+---
+
+{
+	!isHidden && (
+		<section class="print:break-inside-avoid">
+			<h2 class="mb-[1.8mm] font-mono text-[0.68rem]/[1.05] font-medium tracking-[0.11em] text-ink-3 uppercase">{section.title}</h2>
+			{part ? <part.default /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
+		</section>
+	)
+}

@@ -13,10 +13,10 @@
 
 import { slugify, toKebabCase } from "@/utils/str";
 import type { Link } from "@/types";
-import type { AssembledBlueprint, AssembledSection, BlueprintPart, BlueprintSchema, NestedKeys, SectionData } from "./schema";
+import type { AssembledBlueprint, AssembledPart, AssembledSection, BlueprintPart, BlueprintSchema, NestedKeys, PartContent, SectionData } from "./schema";
 import type { BlueprintEntry, BlueprintEntryPartial } from "./types";
 
-export type { AssembledBlueprint, AssembledSection, BlueprintComponent, BlueprintComponentSchema, BlueprintPart, BlueprintSchema, SectionData } from "./schema";
+export type { AssembledBlueprint, AssembledPart, AssembledSection, BlueprintComponent, BlueprintComponentSchema, BlueprintPart, BlueprintSchema, PartContent, SectionData } from "./schema";
 
 /** Parsed Blueprint Schema */
 export type ParsedBlueprint = BlueprintSectionProxy[];
@@ -75,6 +75,26 @@ export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends 
 	/** Gets the parsed schema */
 	getBlueprint(): S[] {
 		return this.parsedSections;
+	}
+
+	/** Filter parts */
+	filter(predicate: (part: S) => boolean): S[] {
+		return this.parsedSections.filter(predicate);
+	}
+
+	/** Map parts */
+	map(predicate: (part: S) => S): S[] {
+		return this.parsedSections.map(predicate);
+	}
+
+	/** Every part the structure does not hide */
+	getVisibleParts(): S[] {
+		return this.filter((part) => !part.get("hidden"));
+	}
+
+	/** Assemble every part into inert display data */
+	assembleParts(): AssembledPart[] {
+		return this.parsedSections.map((section) => section.assemblePart());
 	}
 }
 
@@ -181,13 +201,13 @@ export class BlueprintBuilder<T extends BlueprintSchema<unknown>> extends Bluepr
 			});
 	}
 
-	/** Filter blueprint */
-	filter(predicate: (section: BlueprintSectionProxy) => boolean): ParsedBlueprint {
+	/** Filter blueprint, recursing into nested sections */
+	override filter(predicate: (section: BlueprintSectionProxy) => boolean): ParsedBlueprint {
 		return BlueprintBuilder.filter(this.parsedSections, predicate);
 	}
 
-	/** Map blueprint */
-	map(predicate: (section: BlueprintSectionProxy) => BlueprintSectionProxy): ParsedBlueprint {
+	/** Map blueprint, recursing into nested sections */
+	override map(predicate: (section: BlueprintSectionProxy) => BlueprintSectionProxy): ParsedBlueprint {
 		return BlueprintBuilder.map(this.parsedSections, predicate);
 	}
 
@@ -274,6 +294,18 @@ export class BlueprintPartSection<D extends BlueprintPart<unknown> = BlueprintPa
 	/** Get a value from the data */
 	get<K extends keyof D>(key: K): D[K] {
 		return this.data[key];
+	}
+
+	/** Map the data to inert display data */
+	assemblePart(): AssembledPart {
+		return {
+			id: this.data.id || "",
+			title: this.data.title,
+			description: this.data.description,
+			eyebrow: this.data.eyebrow,
+			content: this.data.content as PartContent,
+			hidden: !!this.data.hidden,
+		};
 	}
 }
 
