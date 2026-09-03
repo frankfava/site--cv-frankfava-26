@@ -42,7 +42,7 @@ export async function destinations(): Promise<Destination[]> {
 			title: "How I work",
 			body: "Strengths, failure modes, and my MBTI, DISC and Enneagram results explained plainly.",
 			link: {
-				href: "/how-i-work",
+				href: "/about",
 			},
 		},
 		{
