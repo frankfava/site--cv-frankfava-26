@@ -19,6 +19,7 @@
 		"id": "ability-to-lead",
 		"order": 30,
 		"title": "Ability to Lead",
+		"subject": "Leadership",
 		"summary": "Bridging cross-functional teams and motivating people to do their best work, informed by years of coaching.",
 		"icon": "ph:compass-duotone",
 		"keywords": ["leadership", "cross-functional", "motivation", "coaching"]
@@ -27,6 +28,7 @@
 		"id": "team-player",
 		"order": 40,
 		"title": "Team Player",
+		"subject": "Team Collaboration",
 		"summary": "Adaptability, trust and shared goals - leading developers while collaborating with sales and design under deadline pressure.",
 		"icon": "ph:users-three-duotone",
 		"keywords": ["collaboration", "teamwork", "adaptability", "cross-functional"]
@@ -35,6 +37,7 @@
 		"id": "coaching-skills",
 		"order": 50,
 		"title": "Coaching Skills",
+		"subject": "Coaching",
 		"summary": "5+ years guiding individuals and business owners to expand their internal map and drive performance through communication.",
 		"icon": "ph:lightbulb-duotone",
 		"keywords": ["coaching", "communication", "mindset", "personal-growth"]

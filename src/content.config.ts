@@ -222,6 +222,11 @@ const transferableSkills = defineCollection({
 		// it in `featuredTransferableSkills` still resolves it.
 		listed: z.boolean().optional().default(true),
 		title: z.string(),
+		// The field of knowledge the entry names. `title` reads as a card
+		// heading on the page, which is not what a structured-data consumer
+		// wants from `knowsAbout` or a skill name. Carried only where the two
+		// differ; the exports fall back to `title`.
+		subject: z.string().optional(),
 		summary: z.string().optional(),
 		icon: z.string().optional(),
 		keywords: z.array(z.string()).optional(),
