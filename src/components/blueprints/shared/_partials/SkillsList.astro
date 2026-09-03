@@ -12,6 +12,7 @@ export interface Props {
 	skills?: Skills.Collection;
 	filters?: ("proficiency" | "cv" | "keywords" | "relevance")[];
 	filterToggles?: { proficiency?: boolean; keywords?: boolean; cv?: boolean; relevance?: boolean };
+	allowFullscreen?: boolean;
 	class?: HTMLAttributes<"div">["class:list"];
 }
 
@@ -20,6 +21,7 @@ const {
 	skills: list = await getSkills(),
 	filters = ["relevance", "proficiency", "cv", "keywords"],
 	filterToggles = { relevance: true, proficiency: true, cv: false, keywords: true },
+	allowFullscreen = false,
 	class: className,
 } = Astro.props;
 
@@ -78,15 +80,19 @@ const panels = [
 				<span x-show="isFiltered" style="display: none" class="rounded bg-white px-1.5 text-xs font-bold text-accent">!</span>
 			</button>
 
-			<button
-				type="button"
-				x-show="!isFullscreen"
-				@click="openFullscreen"
-				x-bind:aria-label="fullscreenLabel"
-				class="cursor-pointer rounded-md p-2 text-ink-3 transition-colors hover:bg-sunk hover:text-ink xl:ml-auto print:hidden"
-			>
-				<Icon name="ph:arrows-out-simple" class="size-5" />
-			</button>
+			{
+				allowFullscreen && (
+					<button
+						type="button"
+						x-show="!isFullscreen"
+						@click="openFullscreen"
+						x-bind:aria-label="fullscreenLabel"
+						class="cursor-pointer rounded-md p-2 text-ink-3 transition-colors hover:bg-sunk hover:text-ink xl:ml-auto print:hidden"
+					>
+						<Icon name="ph:arrows-out-simple" class="size-5" />
+					</button>
+				)
+			}
 		</div>
 
 		<div class="w-full xl:w-3/4 xl:pr-5">
