@@ -7,6 +7,7 @@ import { getCareerYears } from "@/lib/collections/career";
 import { CHART, chartX, chartY } from "@/alpine/career/chart";
 import CareerDoughnut, { type Props as DoughnutProps } from "./CareerDoughnut.astro";
 import { cn } from "@/utils/class";
+import type { Link } from "@/types";
 
 export interface Props {
 	/** How the selected year's four numbers read: as bars, or as a ring with their average. */
@@ -17,10 +18,12 @@ export interface Props {
 	trend?: boolean;
 	/** What that averaged line is called in the legend. */
 	trendLabel?: string;
+	/** Link. */
+	link?: Link;
 	class?: string;
 }
 
-const { readout = "bars", doughnut, trend = false, trendLabel = "Match", class: className } = Astro.props;
+const { readout = "bars", doughnut, trend = false, trendLabel = "Match", link, class: className } = Astro.props;
 
 /** Only a ring with its key beside it needs the wider track. Both spelled out so Tailwind sees them. */
 const wideReadout = readout !== "bars" && doughnut?.showKey !== false;
@@ -55,6 +58,16 @@ const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => yea
 <div class={cn("overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)", className)} x-data="careerTimeline" data-years={JSON.stringify(years)}>
 	<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
 		<span class="eyebrow text-ink-3">{first} &ndash; {last} &middot; drag to read a year</span>
+		{
+			link && (
+				<a
+					class="ml-auto cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase transition-colors hover:border-accent hover:text-accent aria-pressed:border-accent aria-pressed:bg-accent-soft aria-pressed:text-accent"
+					href={link.href}
+				>
+					{link.text}
+				</a>
+			)
+		}
 	</div>
 
 	<div class="relative px-4.5 pt-4 pb-1.5">
