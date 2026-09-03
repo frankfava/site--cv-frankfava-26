@@ -142,7 +142,10 @@ function initSidebar() {
 
 	// Close Sidebar Nav on Escape
 	attachEvent([document], "keydown", (e) => {
-		if (e.key === "Escape") sidebar.close();
+		if (e.key === "Escape") {
+			const open = sidebar.isOpen();
+			open ? sidebar.close() : sidebar.open();
+		}
 	});
 
 	// Close Sidebar Nav on mobile change
