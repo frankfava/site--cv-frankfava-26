@@ -2,6 +2,7 @@ import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
+import { careerYears, yearsIn } from "@/lib/spans";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Forward Deployed Engineer"));
 
@@ -29,7 +30,7 @@ export const definition: RoleDefinition = {
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After 18 years building - much of it embedded directly in customers' systems as a freelancer and part-time CTO - Forward Deployed Engineer is the role I've effectively been doing without the title. It's the post-sales half of the work I love: not pitching the solution, but moving into the customer's environment and making it real.`,
+				`After ${careerYears()} years building - much of it embedded directly in customers' systems as a freelancer and part-time CTO - Forward Deployed Engineer is the role I've effectively been doing without the title. It's the post-sales half of the work I love: not pitching the solution, but moving into the customer's environment and making it real.`,
 				`An FDE lands after the deal is signed and owns the gap between "great product" and "working in production for <em>this</em> customer." That's been my whole career: parachute into an unfamiliar codebase or business, build the thing that actually fits, and stay until it sticks.`,
 			],
 		},
@@ -38,7 +39,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:wrench-duotone",
 				title: "Building production systems inside customer environments",
-				body: "Years building and operating production software inside other people's systems and constraints - most notably nearly 4 years as part-time CTO at National Auto Service, owning the platform end to end. Not prototypes handed over a wall; systems I shipped, ran, and kept alive.",
+				body: `Years building and operating production software inside other people's systems and constraints - most notably ${yearsIn("nas")} years as part-time CTO at National Auto Service, owning the platform end to end. Not prototypes handed over a wall; systems I shipped, ran, and kept alive.`,
 			},
 			{
 				icon: "ph:package-duotone",
@@ -69,7 +70,7 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Part-time CTO embedded at National Auto Service (nearly 4 years, built + operated in prod)" },
+			from: { label: `Part-time CTO embedded at National Auto Service (${yearsIn("nas")} years, built + operated in prod)` },
 			to: "Working within customer systems to build and run production applications",
 			note: "Owned architecture, security and delivery for a platform now used across ~90% of Australia - and stayed to operate it.",
 		},

@@ -2,6 +2,8 @@ import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
+import { careerYears, yearsIn } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Senior Engineer"));
 
@@ -17,14 +19,14 @@ export const entry: BlueprintEntry = {
 };
 
 export const definition: RoleDefinition = {
-	summary: "Eighteen years of it, and genuinely good, but I'm moving toward the customer, not away.",
+	summary: `${inWords(careerYears(), "Sentence")} years of it, and genuinely good, but I'm moving toward the customer, not away.`,
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "TYPESCRIPT", "ASTRO", "POSTGRESQL", "DOCKER", "API", "CLAUDE", "FILAMENTPHP", "TERRAFORM"],
 	featuredProjects: ["nas", "hubspot-fieldsjs", "ai-skill-create-mvp"],
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],
 	featuredTransferableSkills: ["ability-to-lead", "project-management", "team-player", "coaching-skills"],
 	pitch: {
-		lead: "18 years building, multi-stack, with the last decade in modern web. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion system that significantly improved performance. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.",
+		lead: `${careerYears()} years building, multi-stack, with the last decade in modern web. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion system that significantly improved performance. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.`,
 		pillars: [
 			{
 				icon: "ph:hammer-duotone",
@@ -39,7 +41,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:users-three-duotone",
 				title: "Technical leadership where it counts",
-				body: "Lead Full-stack Developer at iGoMoon - ran code reviews, retros, hiring panels, and trained junior developers. Part-time CTO at National Auto Service for nearly 4 years - owned architecture, security, and delivery for a platform now used across ~90% of Australia.",
+				body: `Lead Full-stack Developer at iGoMoon - ran code reviews, retros, hiring panels, and trained junior developers. Part-time CTO at National Auto Service for ${yearsIn("nas")} years - owned architecture, security, and delivery for a platform now used across ~90% of Australia.`,
 			},
 			{
 				icon: "ph:sparkle-duotone",
@@ -50,7 +52,7 @@ export const definition: RoleDefinition = {
 	},
 	mappings: [
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
+			from: { label: `Part-time CTO at National Auto Service (${yearsIn("nas")} years)` },
 			to: "Owning architecture in production, not just shipping features",
 			note: "Drove tech strategy, security and delivery for an internal asset-management platform now used across ~90% of Australia.",
 		},
@@ -79,7 +81,7 @@ export const definition: RoleDefinition = {
 			note: "Built and published `ai-skill--create-mvp` and `app--lovable-prompt-builder`. AI as part of the toolkit, not a buzzword.",
 		},
 		{
-			from: { label: "18 years building - Sydney → Stockholm, agency → freelance → product" },
+			from: { label: `${careerYears()} years building - Sydney → Stockholm, agency → freelance → product` },
 			to: "Seasoned, picks up new tech quickly, ships on real deadlines",
 		},
 	],

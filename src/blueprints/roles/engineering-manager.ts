@@ -2,6 +2,8 @@ import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
+import { careerYears, yearsIn } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Engineering Manager"));
 
@@ -28,7 +30,7 @@ export const definition: RoleDefinition = {
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After 18 years building software, Engineering Manager is where my two careers meet. Before I was a developer I spent five years as a professional coach. Management isn't a pivot away from what I'm good at. It's the thread that has run through every engineering role I've had, from training juniors to owning delivery as a part-time CTO, made the main job.`,
+				`After ${careerYears()} years building software, Engineering Manager is where my two careers meet. Before I was a developer I spent five years as a professional coach. Management isn't a pivot away from what I'm good at. It's the thread that has run through every engineering role I've had, from training juniors to owning delivery as a part-time CTO, made the main job.`,
 				`Concretely: I've led and grown developers, run code reviews and retros, contributed to hiring, and owned the technical direction and delivery of production systems as a part-time CTO. The move into EM makes the people-and-delivery half of that work the centre of the role, while staying close enough to the code to keep a team's trust.`,
 			],
 		},
@@ -47,12 +49,12 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:blueprint-duotone",
 				title: "Owning technical direction and delivery",
-				body: "Part-time CTO at National Auto Service for nearly four years. Owned architecture, security, sprint delivery and product strategy for a platform now used across ~90% of Australia. I set the direction and stayed accountable for what shipped, not just for my own diffs.",
+				body: `Part-time CTO at National Auto Service for ${inWords(yearsIn("nas"))} years. Owned architecture, security, sprint delivery and product strategy for a platform now used across ~90% of Australia. I set the direction and stayed accountable for what shipped, not just for my own diffs.`,
 			},
 			{
 				icon: "ph:sparkle-duotone",
 				title: "Technically credible, and AI-native",
-				body: "18 years and multi-stack (Laravel, Vue, React, Astro), most recently Senior Software Engineer at SAVR. Daily Claude Code + Cursor user who's published AI tooling. I lead from technical credibility, and I know where AI genuinely helps a team ship and where it doesn't.",
+				body: `${careerYears()} years and multi-stack (Laravel, Vue, React, Astro), most recently Senior Software Engineer at SAVR. Daily Claude Code + Cursor user who's published AI tooling. I lead from technical credibility, and I know where AI genuinely helps a team ship and where it doesn't.`,
 			},
 		],
 		whatTranslates: {
@@ -62,7 +64,7 @@ export const definition: RoleDefinition = {
 				{ from: "Trained juniors and built the hiring screen at iGoMoon", to: "hiring, onboarding, and raising the bar of a team." },
 				{ from: "Part-time CTO owning delivery at National Auto Service", to: "owning a team's priorities, delivery health and technical direction." },
 				{ from: "Brought in and managed a temporary dev team through larger builds", to: "coordinating and unblocking engineers to hit a deadline." },
-				{ from: "18 years building multi-stack code", to: "the technical credibility to lead engineers and earn their trust." },
+				{ from: `${careerYears()} years building multi-stack code`, to: "the technical credibility to lead engineers and earn their trust." },
 			],
 		},
 	},
@@ -78,7 +80,7 @@ export const definition: RoleDefinition = {
 			note: "The 1:1s, feedback and career-growth work an EM lives on is my original profession.",
 		},
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
+			from: { label: `Part-time CTO at National Auto Service (${yearsIn("nas")} years)` },
 			to: "Owning a team's technical direction, delivery and priorities",
 			note: "Set architecture, security and product strategy and stayed accountable for delivery on a platform now used across ~90% of Australia.",
 		},

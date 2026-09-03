@@ -5,6 +5,8 @@
 
 import { blueprints } from "@/data/blueprints";
 import SubIndexedLayout from "@/layouts/SubIndexedLayout.astro";
+import { careerStart, roleCount } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 const entry = blueprints.experience;
 
@@ -15,5 +17,5 @@ const metadata = {
 ---
 
 <SubIndexedLayout {...{ metadata, blueprint: entry }}>
-	<Fragment slot="lead">Nine roles since 2008, across two continents, in full and most recent first.</Fragment>
+	<Fragment slot="lead">{inWords(roleCount(), "Sentence")} roles since {careerStart().getFullYear()}, across two continents, in full and most recent first.</Fragment>
 </SubIndexedLayout>

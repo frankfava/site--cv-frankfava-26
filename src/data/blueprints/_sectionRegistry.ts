@@ -1,4 +1,6 @@
 import { type BlueprintSchema, type BlueprintComponent } from "@/lib/blueprints";
+import { careerYears, roleCount } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 export const capability: BlueprintComponent = {
 	id: "capability",
@@ -16,7 +18,7 @@ export const trackRecord: BlueprintComponent = {
 	mainMenuLabel: "Track record",
 	eyebrow: "Track record",
 	icon: "ph:chart-line-up-duotone",
-	description: "Nine roles across two continents, and eighteen years described by the shape of the work rather than the titles.",
+	description: `${inWords(roleCount(), "Sentence")} roles across two continents, and ${inWords(careerYears())} years described by the shape of the work rather than the titles.`,
 	content: async () => import("@/components/blueprints/shared/TrackRecord.astro"),
 };
 
@@ -63,7 +65,7 @@ export const roleDossiers: BlueprintComponent = {
 export const history: BlueprintComponent = {
 	id: "history",
 	eyebrow: "Every role",
-	title: "Nine roles, two continents, one thread",
+	title: `${inWords(roleCount(), "Sentence")} roles, two continents, one thread`,
 	mainMenuLabel: "The timeline",
 	icon: "ph:clock-countdown-fill",
 	description: "In full, most recent first. The short version of the same thing is the chart on the front page.",
@@ -93,7 +95,7 @@ export const practice: BlueprintComponent = {
 export const education: BlueprintComponent = {
 	id: "education",
 	eyebrow: "Formal education",
-	title: "No degree, and eighteen years of the work instead",
+	title: `No degree, and ${inWords(careerYears())} years of the work instead`,
 	mainMenuLabel: "Education",
 	icon: "ph:graduation-cap-duotone",
 	description: "Nobody who has hired me has needed one, including a regulated fintech and a part-time CTO seat. If it is a hard requirement, that is a real filter and it is better found now.",

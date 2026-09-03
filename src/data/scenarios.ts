@@ -3,6 +3,7 @@
  * engagement rather than a hypothetical.
  */
 import type { _Card } from "@/types";
+import { startYearOf, yearsIn } from "@/lib/spans";
 
 export interface Scenario extends _Card {
 	card: _Card;
@@ -16,13 +17,13 @@ export const SCENARIOS: Scenario[] = [
 			eyebrow: "Operations",
 			title: "Everything goes through phone calls. Our customers can't see anything themselves.",
 		},
-		eyebrow: "National Auto Service · 2022 to now",
+		eyebrow: `National Auto Service · ${startYearOf("nas")} to now`,
 		title: "I traced where the cash was getting stuck before I drew a single schema.",
 		body: "A customer brings a truck that needs work, NAS finds a mechanic, the mechanic reports back. All of it lived in phone calls and spreadsheets. What exists now is one domain model with three surfaces on it: internal operations, a customer portal and a contractor portal. I argued the security, integrity and roadmap decisions in front of a CEO measured on fleet uptime, not architecture, and I'm still the one who gets called when it breaks.",
 		proof: [
 			{ figure: "~90%", note: "of Australia covered" },
 			{ figure: "Cashflow", note: "measurably improved" },
-			{ figure: "4 yrs", note: "and still accountable" },
+			{ figure: `${yearsIn("nas")} yrs`, note: "and still accountable" },
 		],
 	},
 	{

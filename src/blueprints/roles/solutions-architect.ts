@@ -2,6 +2,7 @@ import { buildRoleStructure } from ".";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
+import { careerYears, yearsIn } from "@/lib/spans";
 
 export const blueprint = buildBlueprint(buildRoleStructure("AI Solutions Architect"));
 
@@ -28,7 +29,7 @@ export const definition: RoleDefinition = {
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After 18 years building - the last few freelance, including nearly 4 years owning the architecture and product roadmap as part-time CTO at <a href="/#history">National Auto Service</a> - I'm moving deliberately into AI Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
+				`After ${careerYears()} years building - the last few freelance, including ${yearsIn("nas")} years owning the architecture and product roadmap as part-time CTO at <a href="/#history">National Auto Service</a> - I'm moving deliberately into AI Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
 				`Concretely, that means partnering with an account executive to translate a customer's goals into an architecture they'll commit to - serving as the technical advisor across the whole adoption journey, from discovery and evaluation through to deployment, keeping business objectives and technical implementation pointed at the same target the entire way.`,
 			],
 		},
@@ -42,12 +43,12 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:blueprint-duotone",
 				title: "Architectural ownership, repeatedly",
-				body: "Part-time CTO for nearly 4 years at National Auto Service, spear-headed three admin panels and a high-throughput data-ingestion delta system at SAVR, and led the integration that put crypto trading into a Stockholm fintech. I've owned the call, not just the diff.",
+				body: `Part-time CTO for ${yearsIn("nas")} years at National Auto Service, spear-headed three admin panels and a high-throughput data-ingestion delta system at SAVR, and led the integration that put crypto trading into a Stockholm fintech. I've owned the call, not just the diff.`,
 			},
 			{
 				icon: "ph:money-wavy-duotone",
 				title: "Pre-sales credibility, partnering with the account team",
-				body: "Ran a digital agency for ~6 years (160+ projects, 1.1M+ SEK billed via Cool Company on a single recent stretch) where I was both the account exec and the engineer in the room. I've defended technical proposals against bigger competitors, talked customers out of bad ideas, and stood by what I shipped - exactly the technical air-cover an AE needs to move a deal.",
+				body: "Ran a digital agency for six years (160+ projects, 1.1M+ SEK billed via Cool Company on a single recent stretch) where I was both the account exec and the engineer in the room. I've defended technical proposals against bigger competitors, talked customers out of bad ideas, and stood by what I shipped - exactly the technical air-cover an AE needs to move a deal.",
 			},
 			{
 				icon: "ph:stack-duotone",
@@ -83,7 +84,7 @@ export const definition: RoleDefinition = {
 			note: "Turned my own delivery method into an agent skill, and shipped tools that help others build with AI.",
 		},
 		{
-			from: { label: "Part-time CTO at National Auto Service (nearly 4 years)" },
+			from: { label: `Part-time CTO at National Auto Service (${yearsIn("nas")} years)` },
 			to: "Owning architecture under real-world constraints",
 			note: "Drove tech strategy, security and delivery for an internal asset-management platform now used across ~90% of Australia.",
 		},

@@ -13,11 +13,13 @@
 
 import { buildBlueprintEntry, type BlueprintEntry, type BlueprintSchema } from "@/lib/blueprints";
 import * as sections from "./_sectionRegistry";
+import { careerYears } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 export const home = buildBlueprintEntry({
 	slug: "home",
 	title: "Frank Fava CV",
-	description: "The bridge between the customer and the system. Eighteen years of winning the work, designing it, building it, and still being the call when it breaks.",
+	description: `The bridge between the customer and the system. ${inWords(careerYears(), "Sentence")} years of winning the work, designing it, building it, and still being the call when it breaks.`,
 	blueprint: {
 		capability: sections.capability,
 		trackRecord: sections.trackRecord,

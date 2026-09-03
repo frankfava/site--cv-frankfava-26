@@ -1,4 +1,6 @@
 /** The capabilities the check compares. */
+import { careerYears, yearsIn } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 export interface Capability {
 	id: string;
 	label: string;
@@ -27,7 +29,7 @@ export const CAPABILITIES: Capability[] = [
 		short: "Architecture",
 		sits: 90,
 		defaultNeed: 70,
-		evidence: "Four years as the only technical voice at an asset-management company. One domain model, three surfaces.",
+		evidence: `${inWords(yearsIn("nas"), "Sentence")} years as the only technical voice at an asset-management company. One domain model, three surfaces.`,
 	},
 	{
 		id: "ai",
@@ -43,7 +45,7 @@ export const CAPABILITIES: Capability[] = [
 		short: "Hands-on",
 		sits: 88,
 		defaultNeed: 60,
-		evidence: "Eighteen years. Most recently a crypto trading integration in a regulated fintech.",
+		evidence: `${inWords(careerYears(), "Sentence")} years. Most recently a crypto trading integration in a regulated fintech.`,
 	},
 	{
 		id: "lead",

@@ -1,5 +1,7 @@
 /** What ends a conversation, and what has an answer. */
 import type { _Card } from "@/types";
+import { careerYears, roleCount, yearsIn } from "@/lib/spans";
+import { inWords } from "@/utils/number";
 
 export interface Signal extends _Card {
 	ends?: boolean;
@@ -32,7 +34,7 @@ export async function signals(): Promise<Signal[]> {
 			title: "No university degree",
 			body: "I don't have one.",
 			turnLead: "And it hasn't been the gate.",
-			turn: "Eighteen years and nine roles hired on evidence, including a regulated fintech and a part-time CTO seat. The work is the qualification, and it's all on this site.",
+			turn: `${inWords(careerYears(), "Sentence")} years and ${inWords(roleCount())} roles hired on evidence, including a regulated fintech and a part-time CTO seat. The work is the qualification, and it's all on this site.`,
 		},
 		{
 			ends: false,
@@ -52,7 +54,7 @@ export async function signals(): Promise<Signal[]> {
 			ends: false,
 			title: "My CTO title is part-time, at a small company",
 			body: "Sixty hours a month, not a full-time seat at scale.",
-			turnLead: "Four years, sole technical voice, still the call when it breaks.",
+			turnLead: `${inWords(yearsIn("nas"), "Sentence")} years, sole technical voice, still the call when it breaks.`,
 			turn: "Accountability and duration are the proof here, not headcount.",
 		},
 	].map((signal) => ({ ...signal, eyebrow: signal.ends ? "Ends it" : "Answered" }));
