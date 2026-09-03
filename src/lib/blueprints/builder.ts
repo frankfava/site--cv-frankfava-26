@@ -305,6 +305,7 @@ export class BlueprintPartSection<D extends BlueprintPart<unknown> = BlueprintPa
 			eyebrow: this.data.eyebrow,
 			content: this.data.content as PartContent,
 			hidden: !!this.data.hidden,
+			props: this.data?.props ?? {},
 		};
 	}
 }

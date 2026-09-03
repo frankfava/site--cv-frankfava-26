@@ -26,6 +26,7 @@ export interface BlueprintPart<C = PartContent> {
 	eyebrow?: string;
 	content: C;
 	hidden?: boolean;
+	props?: Record<PropertyKey, unknown>;
 }
 
 /** A blueprint stated in parts. */
@@ -35,7 +36,7 @@ export type BlueprintSchema<C = PartContent> = Record<string, BlueprintPart<C>>;
  * A part on an indexed screen page. Everything it adds is chrome the page is
  * navigated by, which is why it stops at the edge of the browser.
  */
-export interface BlueprintComponent extends Omit<BlueprintPart<unknown>, "content"> {
+export interface BlueprintComponent extends Omit<BlueprintPart<unknown>, "content" | "props"> {
 	icon: string;
 	content: Record<string, Omit<BlueprintComponent, "hidden">> | PartContent;
 	mainMenuLabel?: string;
@@ -66,6 +67,7 @@ export interface AssembledPart {
 	eyebrow?: string;
 	content: PartContent;
 	hidden: boolean;
+	props?: Record<PropertyKey, unknown>;
 }
 
 /** Blueprint for display */
@@ -81,6 +83,7 @@ export interface AssembledSection extends _ModuleWrapper {
 	content: PartContent;
 	hidden: boolean;
 	sections: AssembledBlueprint;
+	props?: _ModuleWrapper;
 }
 
 /** Utility to get all section keys */
