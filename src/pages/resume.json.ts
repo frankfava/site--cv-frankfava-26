@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { METADATA, ABOUT, SITE, SOCIALS } from "site:config";
+import { getTestimonials } from "@/lib/collections/testimonials";
+import { getTransferableSkills } from "@/lib/collections/transferableSkills";
 
 export const prerender = true;
 
@@ -10,6 +12,9 @@ const dateToIso = (value?: string | Date) => {
 	return Number.isNaN(date.getTime()) ? undefined : date.toISOString().slice(0, 10);
 };
 
+// The export is read off this site, so every URL in it has to be absolute.
+const absoluteUrl = (url?: string) => (url === undefined ? undefined : /^[a-z][a-z0-9+.-]*:/i.test(url) ? url : String(SITE.getCanonical(url)));
+
 const stripHtml = (value = "") =>
 	value
 		.replace(/<[^>]*>/g, "")
@@ -17,7 +22,17 @@ const stripHtml = (value = "") =>
 		.trim();
 
 export const GET: APIRoute = async () => {
-	const [workHistory, skills, certifications, projects] = await Promise.all([getCollection("workHistory"), getCollection("skills"), getCollection("certifications"), getCollection("projects")]);
+	const [workHistory, skills, certifications, projects, testimonials, transferableSkills] = await Promise.all([
+		getCollection("workHistory"),
+		getCollection("skills"),
+		getCollection("certifications"),
+		getCollection("projects"),
+		getTestimonials(),
+		getTransferableSkills(),
+	]);
+
+	// A project references skills by id; the export carries what a reader can use.
+	const skillLabelById = new Map(skills.map((skill) => [skill.id, skill.data.label]));
 	const sortedWorkHistory = [...workHistory].sort((a, b) => {
 		const aDate = a.data.startDate instanceof Date ? a.data.startDate.getTime() : new Date(a.data.startDate).getTime();
 		const bDate = b.data.startDate instanceof Date ? b.data.startDate.getTime() : new Date(b.data.startDate).getTime();
@@ -54,11 +69,21 @@ export const GET: APIRoute = async () => {
 			summary: entry.data.summary,
 			highlights: [...(entry.data.responsibilities ?? []), ...(entry.data.achievements ?? [])].map((item) => stripHtml(item)),
 		})),
-		skills: skills.map((skill) => ({
-			name: skill.data.label,
-			level: skill.data.proficiency,
-			keywords: skill.data.keywords ?? [],
-		})),
+		skills: [
+			...skills.map((skill) => ({
+				name: skill.data.label,
+				level: skill.data.proficiency,
+				keywords: skill.data.keywords ?? [],
+			})),
+			// The non-technical half of the same claim. No `level`: these carry no
+			// proficiency, and the schema has no field for their summary.
+			...transferableSkills
+				.filter((skill) => skill.data.listed)
+				.map((skill) => ({
+					name: skill.data.subject ?? skill.data.title,
+					keywords: skill.data.keywords ?? [],
+				})),
+		],
 		certificates: certifications.map((cert) => ({
 			name: cert.data.certificate,
 			issuer: cert.data.issuer,
@@ -76,13 +101,20 @@ export const GET: APIRoute = async () => {
 				description: project.data.summary,
 				highlights: project.data.highlights ?? [],
 				startDate: dateToIso(project.data.startDate),
-				url: project.data.demoUrl ?? project.data.repoUrl,
-				keywords: (project.data.skills ?? []).map((skill) => String(skill)),
-				entity: project.data.type,
+				url: absoluteUrl(project.data.demoUrl ?? project.data.repoUrl),
+				keywords: (project.data.skills ?? []).map((skill) => skillLabelById.get(skill.id) ?? skill.id),
+				type: project.data.type,
 				roles: project.data.role ? [project.data.role] : [],
 			})),
+		// Each reference is a screenshot of a review in the reviewer's own account.
+		// `url` points at that, because the schema's `reference` field is read as
+		// the reviewer's own words and nothing here can honestly fill it.
+		references: testimonials.map((testimonial) => ({
+			name: testimonial.data.name,
+			url: absoluteUrl(testimonial.data.src),
+		})),
 		meta: {
-			canonical: "/resume.json",
+			canonical: absoluteUrl("/resume.json"),
 			version: "v1",
 		},
 	};
