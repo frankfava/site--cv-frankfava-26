@@ -48,12 +48,12 @@ export function capabilityStore() {
 			return this.capabilities.reduce((sum, c) => sum + this.needOf(c.id), 0);
 		},
 
-		get met() {
-			return this.capabilities.reduce((sum, c) => sum + Math.min(this.needOf(c.id), c.sits), 0);
-		},
-
 		get pct() {
-			return this.asked ? Math.round((this.met / this.asked) * 100) : 0;
+			const axes = this.capabilities.filter((c) => this.needOf(c.id) > 0);
+			if (!axes.length) return 0;
+
+			const covered = axes.reduce((sum, c) => sum + Math.min(c.sits, this.needOf(c.id)) / this.needOf(c.id), 0);
+			return Math.round((covered / axes.length) * 100);
 		},
 
 		get verdict() {
