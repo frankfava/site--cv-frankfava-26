@@ -15,6 +15,6 @@ const header: _ModuleHeader = {
 };
 ---
 
-<ModuleWrapper {...{ ...props, header }}>
-	<Picker {...{ key: "scenarios", cards: SCENARIOS, panel: ScenarioAnswer }} />
+<ModuleWrapper {...{ ...props, forceLayout: "stacked", header }}>
+	<Picker {...{ key: "scenarios", cards: SCENARIOS, columnCount: Math.ceil(SCENARIOS.length / 2), panel: ScenarioAnswer }} />
 </ModuleWrapper>
