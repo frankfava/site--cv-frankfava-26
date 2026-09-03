@@ -39,6 +39,10 @@ export function getBrandRole(brands: Brand[], roles: Role[], key: string, slug: 
 	return brandRoles(brands, roles).find(({ brand, role }) => brand.key === key && role.slug === slug);
 }
 
+/** Static siblings of `[brand]` under a role. A static segment outranks the
+ *  dynamic one, so a brand keyed like this is shadowed and never renders. */
+const RESERVED_KEYS = ["one-pager"];
+
 /**
  * A role map is hand-authored against slugs the catalog owns, so a rename or a
  * disabled role leaves a reference that quietly serves nothing. A brand with no
@@ -46,6 +50,7 @@ export function getBrandRole(brands: Brand[], roles: Role[], key: string, slug: 
  */
 export function findUnservedBrands(brands: Brand[], roles: Role[]): string[] {
 	return brands.flatMap((brand) => [
+		...(RESERVED_KEYS.includes(brand.key) ? [`${brand.key}: the route already belongs to a page of that name`] : []),
 		...Object.keys(brand.roles)
 			.filter((slug) => !getRole(roles, slug))
 			.map((slug) => `${brand.key}: "${slug}" matches no role`),

@@ -1,6 +1,6 @@
 /** Catalog of every company-flavoured variant of a role page. */
 
-import type { Brand } from "@/lib/brands";
+import type { Brand } from "@/lib/roles/brands";
 
 export const BRANDS: Brand[] = [
 	// {
