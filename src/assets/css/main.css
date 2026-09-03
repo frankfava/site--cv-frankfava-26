@@ -488,7 +488,7 @@ html {
 		}
 	}
 	.module--body .callout {
-		@apply max-w-220;
+		@apply max-w-200;
 	}
 }
 
