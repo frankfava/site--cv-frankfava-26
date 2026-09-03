@@ -4,7 +4,7 @@
  * imports it back.
  */
 
-import type { BlueprintBuilder } from "./builder";
+import type { BlueprintBuilder, BlueprintPartBuilder } from "./builder";
 import type { BlueprintSchema } from "./schema";
 
 /**
@@ -36,8 +36,17 @@ export interface BlueprintConfig {
 	};
 }
 
-/** Shape every catalog entry conforms to, regardless of source. */
-export type BlueprintEntry = {
+/** Shape every catalog entry conforms to, regardless of source or medium. */
+export type BlueprintPartEntry = {
+	blueprint: BlueprintPartBuilder<BlueprintSchema<unknown>>;
+};
+
+export type BlueprintPartEntryPartial = Omit<BlueprintPartEntry, "blueprint"> & {
+	blueprint: BlueprintPartBuilder<BlueprintSchema<unknown>> | BlueprintSchema<unknown>;
+};
+
+/** A catalog entry for the screen, which carries the chrome its page is built from. */
+export type BlueprintEntry = Omit<BlueprintPartEntry, "blueprint"> & {
 	slug: string;
 	title: string;
 	blueprint: BlueprintBuilder<BlueprintSchema<unknown>>;

@@ -69,6 +69,9 @@ export interface AssembledPart {
 }
 
 /** Blueprint for display */
+export type AssembledParts = AssembledPart[];
+
+/** Blueprint for display */
 export type AssembledBlueprint = AssembledSection[];
 
 /** Section ready for display */

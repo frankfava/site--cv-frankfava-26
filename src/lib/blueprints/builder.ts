@@ -14,7 +14,7 @@
 import { slugify, toKebabCase } from "@/utils/str";
 import type { Link } from "@/types";
 import type { AssembledBlueprint, AssembledPart, AssembledSection, BlueprintPart, BlueprintSchema, NestedKeys, PartContent, SectionData } from "./schema";
-import type { BlueprintEntry, BlueprintEntryPartial } from "./types";
+import type { BlueprintEntry, BlueprintEntryPartial, BlueprintPartEntry, BlueprintPartEntryPartial } from "./types";
 
 export type { AssembledBlueprint, AssembledPart, AssembledSection, BlueprintComponent, BlueprintComponentSchema, BlueprintPart, BlueprintSchema, PartContent, SectionData } from "./schema";
 
@@ -93,7 +93,7 @@ export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends 
 	}
 
 	/** Assemble every part into inert display data */
-	assembleParts(): AssembledPart[] {
+	assemble(): AssembledPart[] {
 		return this.parsedSections.map((section) => section.assemblePart());
 	}
 }
@@ -397,12 +397,19 @@ export class BlueprintSection extends BlueprintPartSection<SectionData> {
 
 /** Build a blueprint from a schema. Cross-cutting metadata (search scoping,
  *  layout chrome) lives on the catalog `BlueprintEntry`, not here. */
-export function buildParts<T extends BlueprintSchema>(structure: T): BlueprintPartBuilder<T> {
+export function buildParts<T extends BlueprintSchema<unknown>>(structure: T): BlueprintPartBuilder<T> {
 	return new BlueprintPartBuilder(structure);
 }
 
 export function buildBlueprint<T extends BlueprintSchema<unknown>>(structure: T): BlueprintProxy<T> {
 	return BlueprintBuilder.createProxyFromStructure(structure);
+}
+
+export function buildPartEntry(entry: BlueprintPartEntryPartial | BlueprintPartEntryPartial["blueprint"]): BlueprintPartEntry {
+	// A bare schema or builder stands in for an entry that carries nothing else.
+	const partial = entry instanceof BlueprintPartBuilder || !("blueprint" in entry) ? ({ blueprint: entry } as BlueprintPartEntryPartial) : entry;
+	const blueprint = partial.blueprint instanceof BlueprintPartBuilder ? partial.blueprint : buildParts(partial.blueprint as BlueprintSchema<unknown>);
+	return { ...partial, blueprint } as BlueprintPartEntry;
 }
 
 export function buildBlueprintEntry(entry: BlueprintEntryPartial): BlueprintEntry {

@@ -7,9 +7,21 @@
  * so a consumer that only needs a shape does not load the engine.
  */
 
-export type { AssembledBlueprint, AssembledPart, AssembledSection, BlueprintComponent, BlueprintComponentSchema, BlueprintPart, BlueprintSchema, NestedKeys, PartContent, SectionData } from "./schema";
-export { BlueprintBuilder, BlueprintPartBuilder, BlueprintPartSection, BlueprintSection, buildBlueprint, buildBlueprintEntry, buildParts } from "./builder";
+export type {
+	AssembledBlueprint,
+	AssembledPart,
+	AssembledSection,
+	AssembledParts,
+	BlueprintComponent,
+	BlueprintComponentSchema,
+	BlueprintPart,
+	BlueprintSchema,
+	NestedKeys,
+	PartContent,
+	SectionData,
+} from "./schema";
+export { BlueprintBuilder, BlueprintPartBuilder, BlueprintPartSection, BlueprintSection, buildBlueprint, buildBlueprintEntry, buildPartEntry, buildParts } from "./builder";
 export type { BlueprintPartProxy, ParsedBlueprint } from "./builder";
-export type { BlueprintConfig, BlueprintEntry } from "./types";
+export type { BlueprintConfig, BlueprintEntry, BlueprintPartEntry } from "./types";
 export { isAsyncLoader, isVisible, loadPart } from "./content";
 export type { PartModule } from "./content";

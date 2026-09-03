@@ -1,12 +1,21 @@
 ---
-import PartBuild from "./PartBuild.astro";
-import type { AssembledPart } from "@/lib/blueprints";
+import PartBuild, { type Props as PartBuildProps } from "./PartBuild.astro";
+import { type AssembledParts } from "@/lib/blueprints";
 
 export interface Props {
-	sheet: AssembledPart[];
+	sheet: AssembledParts;
+	sectionClass?: PartBuildProps["class"];
 }
 
-const { sheet } = Astro.props;
+const { sheet, sectionClass } = Astro.props;
 ---
 
-{sheet.map((section) => <PartBuild section={section} />)}
+{
+	!!sheet.length && (
+		<div class="mb-6 space-y-5">
+			{sheet.map((section) => (
+				<PartBuild {...{ section, class: sectionClass }} />
+			))}
+		</div>
+	)
+}
