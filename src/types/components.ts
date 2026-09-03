@@ -47,10 +47,13 @@ export interface _Module {
 
 /** Module Header */
 export interface _ModuleHeader {
-	title?: string;
-	subtitle?: string;
 	/** Short label above the title. */
 	eyebrow?: string;
+	title?: string;
+	subtitle?: string;
+	icon?: string;
+	iconPosition?: "eyebrow" | "title" | false;
+	iconPlacement?: "before" | "after";
 	classes?: Partial<Record<"container" | "title" | "subtitle" | "eyebrow" | "cta" | "ctaBtn" | string, HTMLAttributes<any>["class:list"]>>;
 	headerAlign?: "left" | "center" | "right";
 	stacked?: boolean;
@@ -69,8 +72,10 @@ export interface _CallToAction extends Omit<HTMLAttributes<"a">, "slot"> {
 export interface _Card {
 	/** Names the card's slot when it carries one. Falls back to a slug of the title. */
 	key?: string;
-	title: string;
 	eyebrow?: string;
+	eyebrowIcon?: string;
+	title: string;
+	titleIcon?: string;
 	body?: string;
 	turnLead?: string;
 	turn?: string;

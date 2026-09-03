@@ -484,11 +484,11 @@ html {
 	.module--header:not(.text-center) {
 		.module--heading,
 		.module--subtitle {
-			@apply max-w-200;
+			@apply max-w-220;
 		}
 	}
 	.module--body .callout {
-		@apply max-w-200;
+		@apply max-w-220;
 	}
 }
 

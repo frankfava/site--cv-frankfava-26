@@ -2,8 +2,20 @@
 import type { _ModuleHeader as Props } from "@/types";
 import Button from "@/components/ui/input/Button.astro";
 import { cn } from "@/utils/class";
+import Icon from "node_modules/astro-icon/components/Icon.astro";
 
-const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.render("subtitle"), eyebrow, headerAlign = "left", stacked = true, classes = {}, cta: callToAction } = Astro.props;
+const {
+	title = await Astro.slots.render("title"),
+	subtitle = await Astro.slots.render("subtitle"),
+	eyebrow,
+	icon,
+	iconPosition = "eyebrow",
+	iconPlacement = "before",
+	headerAlign = "left",
+	stacked = true,
+	classes = {},
+	cta: callToAction,
+} = Astro.props;
 ---
 
 {
@@ -26,8 +38,20 @@ const { title = await Astro.slots.render("title"), subtitle = await Astro.slots.
 				}}
 			>
 				<slot name="beforeHeader" />
-				{eyebrow && <span class={cn("mb-2 block eyebrow text-accent", classes?.eyebrow)}>{eyebrow}</span>}
-				{title && <h2 class={cn("module--heading font-heading text-heading leading-tighter text-2xl font-semibold tracking-tighter lg:text-3xl", classes?.title)} set:html={title} />}
+				{eyebrow && (
+					<span class={cn("mb-2 flex items-center gap-2 eyebrow text-accent", classes?.eyebrow)}>
+						{icon && iconPosition == "eyebrow" && iconPlacement == "before" && <Icon name={icon} class="size-4" />}
+						{eyebrow}
+						{icon && iconPosition == "eyebrow" && iconPlacement == "after" && <Icon name={icon} class="size-4" />}
+					</span>
+				)}
+				{title && (
+					<h2 class={cn("module--heading font-heading text-heading leading-tighter flex items-center gap-2 text-2xl font-semibold tracking-tighter lg:text-3xl", classes?.title)}>
+						{icon && iconPosition == "title" && iconPlacement == "before" && <Icon name={icon} class="size-8" />}
+						<Fragment set:html={title} />
+						{icon && iconPosition == "title" && iconPlacement == "after" && <Icon name={icon} class="size-8" />}
+					</h2>
+				)}
 
 				{subtitle && (
 					<div class={cn("module--subtitle mt-2 text-lg text-ink-3", classes?.subtitle)}>

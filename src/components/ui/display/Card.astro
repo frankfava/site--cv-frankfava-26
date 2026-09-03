@@ -3,6 +3,7 @@
 import type { _Card } from "@/types";
 import { cn } from "@/utils/class";
 import type { HTMLAttributes, HTMLTag } from "astro/types";
+import Icon from "node_modules/astro-icon/components/Icon.astro";
 
 export interface Props {
 	card: _Card;
@@ -32,17 +33,21 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 	{
 		card.eyebrow && (
 			<span
-				class={cn("card--eyebrow mb-2 block eyebrow", {
+				class={cn("card--eyebrow mb-2 flex items-center gap-2 eyebrow", {
 					"text-ink-3": !highlightEyebrow || !accent,
 					"text-good": highlightEyebrow && accent === "good",
 					"text-bad": highlightEyebrow && accent === "bad",
 				})}
 			>
-				{card.eyebrow}
+				{card.eyebrowIcon && <Icon name={card.eyebrowIcon} class="size-4" />}
+				<span>{card.eyebrow}</span>
 			</span>
 		)
 	}
-	<h4 class="card--title mb-1 text-base">{card.title}</h4>
+	<h4 class="card--title mb-1 flex items-center gap-2 text-base">
+		{card.titleIcon && <Icon name={card.titleIcon} class="mb-0.5 size-5" />}
+		<span>{card.title}</span>
+	</h4>
 	{card.body && <p class="card--body text-sm text-ink-2">{card.body}</p>}
 	{
 		card.turn && (

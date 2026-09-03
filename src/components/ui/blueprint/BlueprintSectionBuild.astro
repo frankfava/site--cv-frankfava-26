@@ -50,11 +50,11 @@ const isHidden = section.hidden || !(await checkResolve(section.content));
 					</ModuleWrapper>
 				)}
 				{section.sections.map((f) => (
-					<>{!f.hidden && <BlueprintSectionDisplay section={f} />}</>
+					<>{!f.hidden && <BlueprintSectionDisplay {...{ section: { ...f, forceLayout: "side" } }} />}</>
 				))}
 			</>
 		) : (
-			<>{!isHidden && <BlueprintSectionDisplay section={section} />}</>
+			<>{!isHidden && <BlueprintSectionDisplay {...{ section: { ...section, forceLayout: "side" } }} />}</>
 		)
 	}
 </>
