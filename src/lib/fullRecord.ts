@@ -54,14 +54,6 @@ export async function destinations(): Promise<Destination[]> {
 			},
 		},
 		{
-			eyebrow: "Rights and availability",
-			title: "Practicalities",
-			body: "Availability, rights, language and the questions that always come up first.",
-			link: {
-				href: "/practicalities",
-			},
-		},
-		{
 			eyebrow: "Printable",
 			title: "One-pager",
 			body: "The scannable version, for a fast skim or an ATS upload.",

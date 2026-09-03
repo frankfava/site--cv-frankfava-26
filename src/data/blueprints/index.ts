@@ -109,28 +109,12 @@ export const credentials = buildBlueprintEntry({
 	blueprint: {
 		education: sections.education,
 		certifications: sections.certifications,
-		fullRecord: sections.fullRecord,
-	} as const satisfies BlueprintSchema,
-	config: {
-		// search: {
-		// 	atomics: { certification: "certifications" },
-		// },
-	},
-});
-
-export const practicalities = buildBlueprintEntry({
-	slug: "practicalities",
-	title: "Practicalities",
-	description: "Availability, rights, language and the questions that always come up first.",
-	blueprint: {
-		situation: sections.situation,
-		obstacles: sections.obstacles,
 		languages: sections.languages,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintSchema,
 	config: {
 		// search: {
-		// 	atomics: { language: "languages" },
+		// 	atomics: { certification: "certifications" },
 		// },
 	},
 });
@@ -142,7 +126,6 @@ export const blueprints: Record<string, BlueprintEntry> = {
 	experience,
 	howIWork,
 	credentials,
-	practicalities,
 };
 
 export const blueprintSlugs: string[] = Object.keys(blueprints);

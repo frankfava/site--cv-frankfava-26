@@ -112,27 +112,6 @@ export const certifications: BlueprintComponent = {
 	content: async () => import("@/components/blueprints/shared/Certifications.astro"),
 };
 
-//Hiring
-export const situation: BlueprintComponent = {
-	id: "situation",
-	eyebrow: "Availability",
-	title: "Where I am, what I am looking for, and when I can start",
-	mainMenuLabel: "Current situation",
-	icon: "ph:alarm-duotone",
-	description: "The questions that come up first in a screen, answered before you have to ask them.",
-	content: async () => import("@/components/blueprints/shared/Situation.astro"),
-};
-
-export const obstacles: BlueprintComponent = {
-	id: "obstacles",
-	eyebrow: "The honest list",
-	title: "The things that could be a dealbreaker",
-	mainMenuLabel: "What could be a problem",
-	icon: "ph:barricade-duotone",
-	description: "The same list, with the detail that did not fit on the front page.",
-	content: async () => import("@/components/blueprints/shared/Obstacles.astro"),
-};
-
 export const languages: BlueprintComponent = {
 	id: "languages",
 	eyebrow: "Working language",
@@ -238,8 +217,6 @@ export default {
 	practice,
 	education,
 	certifications,
-	situation,
-	obstacles,
 	languages,
 	self,
 	learning,
