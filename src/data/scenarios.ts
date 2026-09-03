@@ -56,6 +56,21 @@ export const SCENARIOS: Scenario[] = [
 		],
 	},
 	{
+		key: "team",
+		card: {
+			eyebrow: "Team",
+			title: "Our juniors ship, but every project is built a different way.",
+		},
+		eyebrow: "iGoMoon · Stockholm agency, 2020 to 2022",
+		title: "I ran the reviews, then wrote the task we screened candidates with.",
+		body: "Six months in I was made lead developer, with a team of juniors to bring up. The code review became the training: retrospectives, workshops, and a written standard in the company knowledge base. I sat in with the CTO on hiring and wrote the coding task every candidate worked through, so they all met the same bar. And I built the KPI app the team tracked itself with, checked against the CFO's numbers.",
+		proof: [
+			{ figure: "6 mo", note: "to lead developer" },
+			{ figure: "Coding task", note: "used to screen candidates" },
+			{ figure: "KPI app", note: "built with the CFO" },
+		],
+	},
+	{
 		key: "presales",
 		card: {
 			eyebrow: "Pre-sales",

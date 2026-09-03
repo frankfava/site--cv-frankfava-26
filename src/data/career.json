@@ -65,6 +65,7 @@
 			"leadership": 55
 		},
 		"employers": ["relationships-revealed"],
+		"role": "Coaching, and building more",
 		"note": "Two careers at once, and the technical one was winning."
 	},
 	{
@@ -164,6 +165,7 @@
 			"leadership": 55
 		},
 		"employers": ["cool-company", "nas"],
+		"role": "Independent, then part-time CTO",
 		"note": "Went independent and picked up NAS. The technology call became entirely mine: architecture, security, roadmap."
 	},
 	{

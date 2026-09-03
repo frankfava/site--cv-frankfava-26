@@ -1,6 +1,5 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
-import Callout from "@/components/ui/display/Callout.astro";
 import RoleCards from "./_partials/RoleCards.astro";
 
 export interface Props extends _ModuleWrapper {}
@@ -13,15 +12,13 @@ const header: _ModuleHeader = {
 };
 
 const roles = [
-	{ slug: "solutions-architect", eyebrow: "Closest match" },
-	{ slug: "engineering-manager", eyebrow: "Where the signal is" },
+	{ slug: "engineering-manager", eyebrow: "Closest match" },
+	{ slug: "solutions-architect", eyebrow: "The other half of it" },
 	{ slug: "forward-deployed-engineer", eyebrow: "Same job, field org" },
 	{ slug: "senior-engineer", eyebrow: "Proven" },
 ];
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<Callout title="How to read this" class="mt-0"> Each answer is a real engagement, not a hypothetical. The figures underneath are what that engagement produced. </Callout>
-
 	<RoleCards {...{ roles, columnCount: 4, hoverBorder: true, linkText: "Open role page →" }} />
 </ModuleWrapper>

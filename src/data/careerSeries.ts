@@ -3,7 +3,7 @@
  * imports this, so it must stay free of anything that reaches the collection.
  */
 export const CAREER_SERIES = [
-	{ key: "decisions", label: "Decision rights", color: "var(--c-accent)" },
+	{ key: "decisions", label: "Decisions I owned", color: "var(--c-accent)" },
 	{ key: "customer", label: "Customer-facing", color: "var(--c-cyan)" },
 	{ key: "code", label: "Hands-on coding", color: "var(--c-ink-3)" },
 	{ key: "leadership", label: "Leadership responsibility", color: "var(--c-warn)" },

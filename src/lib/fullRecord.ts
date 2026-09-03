@@ -54,7 +54,7 @@ export async function destinations(): Promise<Destination[]> {
 			},
 		},
 		{
-			eyebrow: "Before we talk",
+			eyebrow: "Rights and availability",
 			title: "Practicalities",
 			body: "Availability, rights, language and the questions that always come up first.",
 			link: {

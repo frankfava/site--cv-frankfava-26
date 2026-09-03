@@ -12,11 +12,11 @@ export const capability: BlueprintComponent = {
 
 export const trackRecord: BlueprintComponent = {
 	id: "track-record",
-	title: "Eighteen years, described by the shape of the work rather than the titles",
+	title: "I'm usually both the person the customer talks to and the person who builds it",
 	mainMenuLabel: "Track record",
 	eyebrow: "Track record",
 	icon: "ph:chart-line-up-duotone",
-	description: "Nine roles across two continents, with one thread running through them: I am usually both the person the customer talks to and the person who builds it.",
+	description: "Nine roles across two continents, and eighteen years described by the shape of the work rather than the titles.",
 	content: async () => import("@/components/blueprints/shared/TrackRecord.astro"),
 };
 
@@ -32,8 +32,8 @@ export const stillRunning: BlueprintComponent = {
 
 export const yourProblem: BlueprintComponent = {
 	id: "your-problem",
-	eyebrow: "Recognise any of these",
-	title: "Tell me which of these sounds like your week",
+	eyebrow: "What landed on my desk",
+	title: "Which of these sounds like your week",
 	mainMenuLabel: "Problems I've been handed",
 	icon: "ph:crosshair-duotone",
 	description: "Every one of these landed on my desk. Pick the closest and I will show you how it went.",
@@ -127,7 +127,7 @@ export const obstacles: BlueprintComponent = {
 	title: "The things that could be a dealbreaker",
 	mainMenuLabel: "What could be a problem",
 	icon: "ph:barricade-duotone",
-	description: "I would rather a real constraint ended this now than in week three.",
+	description: "The same list, with the detail that did not fit on the front page.",
 	content: async () => import("@/components/blueprints/shared/Obstacles.astro"),
 };
 
@@ -220,7 +220,7 @@ export const fullRecord: BlueprintComponent = {
 	mainMenuLabel: "The full record",
 	eyebrow: "Go deeper",
 	icon: "ph:books-duotone",
-	description: "Nothing has been cut, it's just no longer in your way.",
+	description: "Each of these carries the detail a summary has to leave out.",
 	content: async () => import("@/components/blueprints/shared/FullRecord.astro"),
 };
 

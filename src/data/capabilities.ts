@@ -27,7 +27,7 @@ export const CAPABILITIES: Capability[] = [
 		short: "Architecture",
 		sits: 90,
 		defaultNeed: 70,
-		evidence: "Four years as the only technical voice at NAS. One domain model, three surfaces.",
+		evidence: "Four years as the only technical voice at an asset-management company. One domain model, three surfaces.",
 	},
 	{
 		id: "ai",
@@ -51,7 +51,7 @@ export const CAPABILITIES: Capability[] = [
 		short: "Leading",
 		sits: 78,
 		defaultNeed: 50,
-		evidence: "Five years a professional coach, ICI certified. Led at iGoMoon, managed contractors at NAS.",
+		evidence: "Lead developer within six months, training the juniors. I wrote the task we screened candidates with.",
 	},
 	{
 		id: "scale",
