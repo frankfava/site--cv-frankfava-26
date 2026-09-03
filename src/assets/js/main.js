@@ -1,5 +1,5 @@
 import { SIDEBAR } from "site:config";
-import { BREAKPOINTS } from "@/lib/_theme.generated";
+import { BREAKPOINTS } from "./_theme.generated";
 import { attachEvent, readStored, writeStored, clamp, scroll } from "./utils";
 
 /**

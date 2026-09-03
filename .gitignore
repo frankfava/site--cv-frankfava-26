@@ -4,7 +4,7 @@ dist/
 .astro/
 # generated tailwind theme
 src/assets/css/_theme.generated.css
-src/lib/_theme.generated.js
+src/assets/js/_theme.generated.ts
 
 # dependencies
 node_modules/

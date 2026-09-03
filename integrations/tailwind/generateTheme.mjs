@@ -40,6 +40,8 @@ const fontBase = Number(fontSize.basePx);
 const fontScale = Number(fontSize.scale);
 const headingSize = (mult) => Number(1 + fontScale * mult).toPrecision(2);
 
+const rootLines = [];
+
 /* ---------------------------------------------------------------- @theme -- */
 /* Only what does not vary by mode. */
 
@@ -72,6 +74,7 @@ themeLines.push("");
 const breakpoints = { sm: "540px", md: "768px", lg: "1024px", xl: "1280px", "2xl": "1536px", "3xl": "1920px", "4xl": "2560px" };
 
 for (const [name, value] of Object.entries(breakpoints)) {
+	rootLines.push(`	--breakpoint-${name}: ${value};`);
 	themeLines.push(`	--breakpoint-${name}: ${value};`);
 }
 
@@ -117,9 +120,20 @@ function modeVars(mode) {
    loaded and so cannot read the custom properties from the CSSOM. */
 
 const moduleLines = [];
-moduleLines.push(`export const BREAKPOINTS = ${JSON.stringify(breakpoints, null, "\t")};`);
-moduleLines.push("");
-moduleLines.push(`export const FONT_SIZE = ${JSON.stringify({ basePx: fontBase, scale: fontScale }, null, "\t")};`);
+
+moduleLines.push(
+	`export type Breakpoint = ${Object.keys(breakpoints)
+		.map((key) => `"${key}"`)
+		.join(" | ")};`,
+);
+moduleLines.push(`export const BREAKPOINTS : Record<Breakpoint, string> = ${JSON.stringify(breakpoints, null, "\t")};`);
+
+moduleLines.push(
+	`export type FontSize = ${Object.keys(fontSize)
+		.map((key) => `"${key}"`)
+		.join(" | ")};`,
+);
+moduleLines.push(`export const FONT_SIZE : Record<FontSize, number> = ${JSON.stringify({ basePx: fontBase, scale: fontScale }, null, "\t")};`);
 
 /* ---------------------------------------------------------------- write -- */
 
@@ -136,6 +150,8 @@ ${inlineLines.join("\n")}
 }
 
 :root {
+${rootLines.join("\n")}
+
 ${modeVars("light")}
 }
 
@@ -146,13 +162,13 @@ ${modeVars("dark")}
 
 const js = `${banner}
 
-${moduleLines.join("\n")}
+${moduleLines.join("\n\n")}
 `;
 
 writeFileSync(resolve(repoRoot, "src/assets/css/_theme.generated.css"), css, "utf8");
-writeFileSync(resolve(repoRoot, "src/lib/_theme.generated.js"), js, "utf8");
+writeFileSync(resolve(repoRoot, "src/assets/js/_theme.generated.ts"), js, "utf8");
 
-console.log(`[generateTheme] wrote src/assets/css/_theme.generated.css + src/lib/_theme.generated.js (${names.length} colours x ${MODES.length} modes)`);
+console.log(`[generateTheme] wrote src/assets/css/_theme.generated.css + src/assets/js/_theme.generated.ts (${names.length} colours x ${MODES.length} modes)`);
 
 function stripVarFallback(value) {
 	if (typeof value !== "string") return value;

@@ -10,7 +10,7 @@ import unusedImports from "eslint-plugin-unused-imports";
  * catches a class that renders differently from how it reads.
  */
 export default [
-	{ ignores: ["dist/", "build/", ".astro/", "node_modules/", "src/assets/css/_theme.generated.css", "src/lib/_theme.generated.js"] },
+	{ ignores: ["dist/", "build/", ".astro/", "node_modules/", "src/assets/css/_theme.generated.css", "src/assets/js/_theme.generated.js"] },
 
 	...astro.configs["flat/base"],
 
