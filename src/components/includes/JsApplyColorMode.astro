@@ -1,8 +1,15 @@
 ---
 import { THEME } from "site:config";
 
+interface Props {
+	/** The palette this page pins itself to, whatever the visitor prefers. */
+	locked?: "light" | "dark";
+}
+
+const { locked } = Astro.props;
+
 /** A locked theme needs no switcher, and the pre-paint script is the only thing here. */
-if (THEME.default?.endsWith(":only")) {
+if (locked || THEME.default?.endsWith(":only")) {
 	return;
 }
 ---

@@ -18,22 +18,23 @@ import type { HTMLAttributes } from "astro/types";
 export interface Props {
 	metadata?: MetaData;
 	htmlClass?: HTMLAttributes<"html">["class:list"];
+	colorMode?: "light" | "dark";
 	bodyClass?: HTMLAttributes<"body">["class:list"];
 }
 
-const { metadata = {}, htmlClass = "", bodyClass = "" } = Astro.props;
+const { metadata = {}, htmlClass = "", bodyClass = "", colorMode } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class:list={htmlClass}>
+<html lang={language} dir={textDirection} class:list={[htmlClass, colorMode === "dark" && "dark"]}>
 	<head>
 		<Favicons />
 		<MetaTags {...metadata} />
 		<Analytics />
 		<Fonts />
 		<CustomStyles />
-		<JsApplyColorMode />
+		<JsApplyColorMode locked={colorMode} />
 		<JsApplySidebarState />
 	</head>
 	<body id="top" class={cn(["bg-page text-base tracking-tight text-page antialiased", bodyClass])}>
