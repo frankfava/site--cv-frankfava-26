@@ -24,7 +24,7 @@ const certificates = new Manager(list).sort("issueDate")._restructure();
 <div class={cn("grid gap-2", { "xl:grid-cols-2": columns === 2 }, className)}>
 	{
 		certificates.map(({ certificate, issuer, ranking, icon, issueDate, expiryDate, credentialId, credentialLink }) => (
-			<div class="flex gap-4 rounded border border-line p-5">
+			<div class="flex gap-4 rounded border border-line bg-surface p-5">
 				{icon && <img src={icon} width="60" height="60" alt={issuer} loading="lazy" class="max-h-[45px] w-auto min-w-[45px] rounded-md" />}
 
 				<div class="grow">

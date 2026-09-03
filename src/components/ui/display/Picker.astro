@@ -53,7 +53,7 @@ const opening = options[0]?.itemKey;
 const isOption = (itemKey: string) => options.some((option) => option.itemKey === itemKey);
 
 /** The question is asked, not announced, so it stays body text rather than a heading. */
-const cardBase = `picker--card rounded-lg border border-line px-4 py-3.5 [&_.eyebrow]:text-[0.7rem] [&_h4]:font-secondary [&_h4]:text-[0.94rem] [&_h4]:leading-snug [&_h4]:font-normal [&_.card--title]:before:content-['"'] [&_.card--title]:after:content-['"'] [&_.card--title]:italic`;
+const cardBase = `picker--card rounded-lg border border-line px-4 py-3.5 [&_.eyebrow]:text-[0.7rem] [&_h4]:font-secondary [&_h4]:text-[0.94rem] [&_h4]:leading-snug [&_h4]:font-normal [&_.card--title>span]:before:content-['"'] [&_.card--title>span]:after:content-['"'] [&_.card--title>span]:italic`;
 ---
 
 <div class={cn("flex flex-col gap-3", className)} x-data={opening ? "picker" : undefined} data-picker={opening ? key : undefined} data-key={opening}>
