@@ -75,7 +75,7 @@ export const history: BlueprintComponent = {
 export const achievements: BlueprintComponent = {
 	id: "achievements",
 	eyebrow: "What came of it",
-	title: "What came of each of them",
+	title: "Notable Achievements",
 	mainMenuLabel: "Achievements",
 	icon: "ph:trophy-duotone",
 	description: "Grouped by the company they belong to, so a claim always has a place attached to it.",
@@ -94,21 +94,21 @@ export const practice: BlueprintComponent = {
 
 export const education: BlueprintComponent = {
 	id: "education",
-	eyebrow: "Formal education",
-	title: `No degree, and ${inWords(careerYears())} years of the work instead`,
+	eyebrow: `No degree, and ${careerYears()} years of the work instead`,
+	title: "Formal education",
 	mainMenuLabel: "Education",
 	icon: "ph:graduation-cap-duotone",
-	description: "Nobody who has hired me has needed one, including a regulated fintech and a part-time CTO seat. If it is a hard requirement, that is a real filter and it is better found now.",
+	description:
+		"Nobody who has hired me has needed a fromal degree, including a regulated fintech and a part-time CTO seat. If it is a hard requirement, that is a real filter and it is better found now.",
 	content: async () => import("@/components/blueprints/shared/Education.astro"),
 };
 
 export const certifications: BlueprintComponent = {
 	id: "certifications",
 	eyebrow: "Issued and verifiable",
-	title: "What I do hold, every one linked back to its issuer",
-	mainMenuLabel: "Certifications",
+	title: "Certifications",
 	icon: "ph:ladder-duotone",
-	description: "Issued by someone other than me, and checkable.",
+	description: "Certifications and Licenses from External Sources.",
 	content: async () => import("@/components/blueprints/shared/Certifications.astro"),
 };
 
@@ -139,7 +139,7 @@ export const self: BlueprintComponent = {
 	title: "How I would describe myself, including the parts that cost me",
 	mainMenuLabel: "Strengths and failure modes",
 	icon: "ph:brain-duotone",
-	description: "Written to be useful to whoever manages me, which means the weaknesses are in here too.",
+	description: "The bullets are unflattering in places, which is the point.",
 	content: async () => import("@/components/blueprints/shared/Self.astro"),
 };
 
@@ -156,10 +156,8 @@ export const learning: BlueprintComponent = {
 
 // Personality Tests
 export const personalityTests: BlueprintComponent = {
-	id: "tests",
 	eyebrow: "An outside read",
-	title: "An outside read, explained rather than just scored",
-	mainMenuLabel: "Personality tests",
+	title: "Personality tests",
 	icon: "ph:test-tube-duotone",
 	description: "MBTI, DISC and Enneagram, with what each one means for anyone who has not met them before.",
 	content: async () => import("@/components/blueprints/shared/PersonalityTests.astro"),
@@ -198,7 +196,7 @@ export const projects: BlueprintComponent = {
 export const skills: BlueprintComponent = {
 	id: "skills",
 	eyebrow: "What I build with",
-	title: "The technologies behind them",
+	title: "The technologies behind the work",
 	mainMenuLabel: "Technical skills",
 	icon: "ph:brackets-curly",
 	description: "Searchable and filterable by proficiency, because a list this long is only useful if you can cut it down to what your role needs.",

@@ -16,6 +16,7 @@ export async function destinations(): Promise<Destination[]> {
 		{
 			eyebrow: `${projects.length} projects`,
 			title: "Work",
+			titleIcon: "ph:lego-duotone",
 			body: "Every project with the technologies, the constraints and what it produced.",
 			link: {
 				href: "/work",
@@ -24,23 +25,26 @@ export async function destinations(): Promise<Destination[]> {
 		{
 			eyebrow: "Built and operated",
 			title: "AI practice",
+			titleIcon: "ph:sparkle-duotone",
 			body: "The agentic tooling I run daily, the three published tools, and what I actually use them for.",
 			link: {
 				href: "/ai",
 			},
 		},
 		{
-			eyebrow: `${work._get().length} roles${careerStart ? ` · ${careerStart.getFullYear()} →` : ""}`,
+			eyebrow: `${work._get().length} roles${careerStart ? ` · ${careerStart.getFullYear()} → Present` : ""}`,
 			title: "Experience",
+			titleIcon: "ph:calendar-star-duotone",
 			body: "The full timeline, every role, and the achievements attached to each of them.",
 			link: {
 				href: "/experience",
 			},
 		},
 		{
-			eyebrow: "Including the tests",
-			title: "How I work",
-			body: "Strengths, failure modes, and my MBTI, DISC and Enneagram results explained plainly.",
+			eyebrow: "Temperament",
+			title: "About me",
+			titleIcon: "ph:fingerprint-simple-duotone",
+			body: "Who I am, how I behave under pressure, what I'm still learning, and what the personality tests make of me.",
 			link: {
 				href: "/about",
 			},
@@ -48,6 +52,7 @@ export async function destinations(): Promise<Destination[]> {
 		{
 			eyebrow: `${certifications.length} certifications`,
 			title: "Credentials",
+			titleIcon: "ph:ladder-duotone",
 			body: "What I have, what I don't, and every credential linked back to the issuer.",
 			link: {
 				href: "/credentials",
@@ -56,6 +61,7 @@ export async function destinations(): Promise<Destination[]> {
 		{
 			eyebrow: "Printable",
 			title: "One-pager",
+			titleIcon: "ph:file-duotone",
 			body: "The scannable version, for a fast skim or an ATS upload.",
 			link: {
 				href: "/one-pager",
