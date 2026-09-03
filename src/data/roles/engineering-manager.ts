@@ -1,4 +1,4 @@
-import { buildRoleStructure } from ".";
+import { buildRoleStructure } from "../blueprints/role";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";

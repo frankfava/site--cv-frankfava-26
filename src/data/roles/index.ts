@@ -9,10 +9,10 @@
 import type { Role } from "@/lib/roles";
 import { assembleRole } from "@/lib/roles";
 
-import * as engineeringManager from "@/blueprints/roles/engineering-manager";
-import * as solutionsArchitect from "@/blueprints/roles/solutions-architect";
-import * as forwardDeployedEngineer from "@/blueprints/roles/forward-deployed-engineer";
-import * as seniorEngineer from "@/blueprints/roles/senior-engineer";
-import * as technicalEvangelist from "@/blueprints/roles/technical-evangelist";
+import * as engineeringManager from "@/data/roles/engineering-manager";
+import * as solutionsArchitect from "@/data/roles/solutions-architect";
+import * as forwardDeployedEngineer from "@/data/roles/forward-deployed-engineer";
+import * as seniorEngineer from "@/data/roles/senior-engineer";
+import * as technicalEvangelist from "@/data/roles/technical-evangelist";
 
 export const ROLES: Role[] = [engineeringManager, solutionsArchitect, forwardDeployedEngineer, seniorEngineer, technicalEvangelist].map(assembleRole);
