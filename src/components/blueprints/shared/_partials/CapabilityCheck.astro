@@ -18,7 +18,14 @@ const { class: className } = Astro.props;
 				<span class="eyebrow text-ink-3">What your role needs</span>
 				<button
 					type="button"
-					class="ml-auto cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase hover:border-accent hover:text-accent"
+					class="ml-auto cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase transition-colors hover:border-accent hover:text-accent aria-pressed:border-accent aria-pressed:bg-accent-soft aria-pressed:text-accent"
+					aria-pressed="false"
+					x-bind:aria-pressed="unison"
+					x-on:click="toggleUnison">Move together</button
+				>
+				<button
+					type="button"
+					class="cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase hover:border-accent hover:text-accent"
 					x-on:click="reset">Reset</button
 				>
 			</div>

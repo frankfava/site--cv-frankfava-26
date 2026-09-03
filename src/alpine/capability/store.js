@@ -18,6 +18,9 @@ export function capabilityStore() {
 		capabilities: CAPABILITIES,
 		need: Object.fromEntries(CAPABILITIES.map((c) => [c.id, c.defaultNeed])),
 
+		/** One lever for a role that wants everything at about the same level. */
+		unison: false,
+
 		find(id) {
 			return this.capabilities.find((c) => c.id === id);
 		},
@@ -27,8 +30,14 @@ export function capabilityStore() {
 			return Number(this.need[id]);
 		},
 
+		toggleUnison() {
+			this.unison = !this.unison;
+		},
+
 		setNeed(id, value) {
-			this.need[id] = Number(value);
+			const next = Number(value);
+			if (this.unison) return this.capabilities.forEach((c) => (this.need[c.id] = next));
+			this.need[id] = next;
 		},
 
 		reset() {

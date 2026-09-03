@@ -20,6 +20,14 @@ export function capabilityPanel() {
 			this.store.reset();
 		},
 
+		get unison() {
+			return this.store.unison;
+		},
+
+		toggleUnison() {
+			this.store.toggleUnison();
+		},
+
 		/** The only shape that moves; mine is drawn at build time. */
 		get yoursShape() {
 			return radarPath(this.store.capabilities.map((c) => this.store.needOf(c.id)));

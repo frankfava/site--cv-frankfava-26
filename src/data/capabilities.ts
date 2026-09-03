@@ -20,7 +20,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Customer-facing and pre-sales",
 		short: "Customer",
 		sits: 95,
-		defaultNeed: 70,
+		defaultNeed: 85,
 		evidence: "160+ projects sold and built. Account executive and engineer on every one.",
 	},
 	{
@@ -28,7 +28,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Owning the architecture",
 		short: "Architecture",
 		sits: 90,
-		defaultNeed: 70,
+		defaultNeed: 85,
 		evidence: `${inWords(yearsIn("nas"), "Sentence")} years as the only technical voice at an asset-management company. One domain model, three surfaces.`,
 	},
 	{
@@ -36,7 +36,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Agentic AI in production",
 		short: "Agentic AI",
 		sits: 85,
-		defaultNeed: 60,
+		defaultNeed: 85,
 		evidence: "Self-hosted MCP server, 12+ agents, unattended scheduled runs. I'm the on-call.",
 	},
 	{
@@ -44,7 +44,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Hands-on engineering",
 		short: "Hands-on",
 		sits: 88,
-		defaultNeed: 60,
+		defaultNeed: 85,
 		evidence: `${inWords(careerYears(), "Sentence")} years. Most recently a crypto trading integration in a regulated fintech.`,
 	},
 	{
@@ -52,7 +52,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Leading and coaching engineers",
 		short: "Leading",
 		sits: 78,
-		defaultNeed: 50,
+		defaultNeed: 85,
 		evidence: "Lead developer within six months, training the juniors. I wrote the task we screened candidates with.",
 	},
 	{
@@ -60,7 +60,7 @@ export const CAPABILITIES: Capability[] = [
 		label: "Architecture at enterprise scale",
 		short: "Enterprise",
 		sits: 38,
-		defaultNeed: 30,
+		defaultNeed: 85,
 		evidence: "My depth is owning systems end to end for small and mid-sized businesses.",
 	},
 ];
