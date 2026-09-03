@@ -57,6 +57,36 @@ export const SCENARIOS: Scenario[] = [
 		],
 	},
 	{
+		key: "enablement",
+		card: {
+			eyebrow: "Enablement",
+			title: "Our seniors know how to run a project. Nobody else does.",
+		},
+		eyebrow: "Create MVP · published Jan 2026",
+		title: "Writing the method down had never worked, so I shipped it as a tool that runs it.",
+		body: "Discovery, then planning, then implementation - the workflow I had used across 160+ client projects, encoded as a Claude Code skill anyone can run. State persists between sessions, so an engagement picks up where it stopped instead of starting again at a blank prompt. Six hours from method to published skill. The next tool I built, a prompt builder for Lovable, was built by running it, which is the only test that means anything: a method is real when it works without the person who wrote it.",
+		proof: [
+			{ figure: "6 hrs", note: "method to published skill" },
+			{ figure: "Resumable", note: "state survives the session" },
+			{ figure: "Built with itself", note: "the prompt builder, start to finish" },
+		],
+	},
+	{
+		key: "quality",
+		card: {
+			eyebrow: "Code quality",
+			title: "We're generating code faster than anyone can review it.",
+		},
+		eyebrow: "Lovable Output Analyser · May 2026",
+		title: "Writing the code stopped being the constraint. Trusting it became the constraint.",
+		body: "Point it at a GitHub repository and it ranks the codebase for maintainability and complexity. Two hours from idea to a deployed tool with a public demo and an open repo. The tool is small; the question behind it is not. Once generating code is cheap, the number worth having is no longer how fast it arrived, it is whether the next engineer can work in it.",
+		proof: [
+			{ figure: "2 hrs", note: "idea to deployed" },
+			{ figure: "Maintainability", note: "and complexity, ranked" },
+			{ figure: "Public", note: "live demo and open repo" },
+		],
+	},
+	{
 		key: "team",
 		card: {
 			eyebrow: "Team",
