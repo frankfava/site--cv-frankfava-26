@@ -10,6 +10,16 @@ import { PICKER_STORE } from "./store.js";
 
 const groupOf = (el) => el.closest("[data-picker]")?.dataset.picker;
 
+function isPartiallyInViewport(element, offset = 0) {
+	const rect = element.getBoundingClientRect();
+	return (
+		rect.top < (window.innerHeight || document.documentElement.clientHeight) + offset &&
+		rect.bottom > 0 &&
+		rect.left < (window.innerWidth || document.documentElement.clientWidth) + offset &&
+		rect.right > 0
+	);
+}
+
 /** <div x-data="picker" data-picker="scenarios" data-key="ops"> */
 export function picker() {
 	return {
@@ -32,6 +42,9 @@ export function pickerItem() {
 
 		select() {
 			this.$store[PICKER_STORE].select(this.group, this.key);
+			if (!isPartiallyInViewport(this.$refs.panelContainer, -100)) {
+				this.$refs.panelContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+			}
 		},
 
 		get shown() {
