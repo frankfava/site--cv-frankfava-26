@@ -32,6 +32,14 @@ export const CAPABILITIES: Capability[] = [
 		evidence: `${inWords(yearsIn("nas"), "Sentence")} years as the only technical voice at an asset-management company. One domain model, three surfaces.`,
 	},
 	{
+		id: "scale",
+		label: "Architecture at enterprise scale",
+		short: "Enterprise",
+		sits: 38,
+		defaultNeed: 85,
+		evidence: "My depth is owning systems end to end for small and mid-sized businesses.",
+	},
+	{
 		id: "ai",
 		label: "Agentic AI in production",
 		short: "Agentic AI",
@@ -54,13 +62,5 @@ export const CAPABILITIES: Capability[] = [
 		sits: 78,
 		defaultNeed: 85,
 		evidence: "Lead developer within six months, training the juniors. I wrote the task we screened candidates with.",
-	},
-	{
-		id: "scale",
-		label: "Architecture at enterprise scale",
-		short: "Enterprise",
-		sits: 38,
-		defaultNeed: 85,
-		evidence: "My depth is owning systems end to end for small and mid-sized businesses.",
 	},
 ];
