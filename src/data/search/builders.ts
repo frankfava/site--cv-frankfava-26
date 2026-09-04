@@ -1,10 +1,14 @@
 /**
- * Where the rows come from.
+ * What each kind of row is made of.
  *
  * One builder per atomic kind, each reading the population its landing section
- * renders, so a hit always has a row waiting for it when the page arrives.
- * Every one of them reaches `astro:content`, so nothing here may be imported
- * from anything the client loads.
+ * renders, so a hit always has a row waiting for it when the page arrives. What
+ * a row says about a skill or a role is authored here for this site, the way the
+ * sections and the index itself are; the engine that places them is in
+ * `@/lib/search`.
+ *
+ * Every builder reaches `astro:content`, so nothing here may be imported by
+ * anything the client loads.
  */
 
 import { getCollection } from "astro:content";
@@ -14,7 +18,7 @@ import { getCertifications } from "@/lib/collections/certifications";
 import { getSkills } from "@/lib/collections/skills";
 import { getTransferableSkills } from "@/lib/collections/transferableSkills";
 import { getWorkHistory } from "@/lib/collections/workHistory";
-import type { AtomicBuilder, AtomicKind, IconRenderer, SearchItem } from "./types";
+import type { AtomicBuilder, AtomicKind, IconRenderer, SearchItem } from "@/lib/search";
 
 /** What a row of each kind shows where its own data carries no usable icon. */
 export const ATOMIC_ICON: Record<AtomicKind, string> = {

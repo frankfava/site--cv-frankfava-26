@@ -13,8 +13,7 @@ import { experimental_AstroContainer } from "astro/container";
 import { Icon } from "astro-icon/components";
 
 import type { AssembledBlueprint, AssembledSection, BlueprintEntry } from "@/lib/blueprints";
-import { ATOMIC_BUILDERS, socialItems } from "./builders";
-import type { AtomicKind, IconRenderer, SearchIndexEntry, SearchItem } from "./types";
+import type { AtomicBuilder, AtomicKind, IconRenderer, SearchIndexEntry, SearchItem } from "./types";
 
 /** A section as the index needs it: what it is called, and where it is. */
 interface Placed {
@@ -178,8 +177,14 @@ function resolveAnchor(indexSlug: string, kind: AtomicKind, anchor: string, plac
 	return { url: `${entry.path}#${section.id}`, module: section.mainMenuLabel || (section.header?.title ?? ""), page: entry.title };
 }
 
+/** What sources the rows: a builder per atomic kind, and the off-site links. */
+export interface SearchSources {
+	atomics: Record<AtomicKind, AtomicBuilder>;
+	socials: (renderIcon: IconRenderer) => Promise<SearchItem[]>;
+}
+
 /** Every row of one index. */
-export async function buildSearchIndex(index: SearchIndexEntry, pages: BlueprintEntry[]): Promise<SearchItem[]> {
+export async function buildSearchIndex(index: SearchIndexEntry, pages: BlueprintEntry[], sources: SearchSources): Promise<SearchItem[]> {
 	const container = await experimental_AstroContainer.create();
 	const renderIcon = makeIconRenderer(container);
 	const placed = placeAllSections(pages);
@@ -205,9 +210,9 @@ export async function buildSearchIndex(index: SearchIndexEntry, pages: Blueprint
 		}),
 	);
 
-	const atomicRows = Object.entries(index.atomics ?? {}).map(([kind, anchor]) => ATOMIC_BUILDERS[kind as AtomicKind](renderIcon, resolveAnchor(index.slug, kind as AtomicKind, anchor, placed)));
+	const atomicRows = Object.entries(index.atomics ?? {}).map(([kind, anchor]) => sources.atomics[kind as AtomicKind](renderIcon, resolveAnchor(index.slug, kind as AtomicKind, anchor, placed)));
 
-	if (index.showSocials) atomicRows.push(socialItems(renderIcon));
+	if (index.showSocials) atomicRows.push(sources.socials(renderIcon));
 
 	return [...sectionRows, ...(await Promise.all(atomicRows)).flat()];
 }
