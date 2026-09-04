@@ -19,10 +19,10 @@ const capabilities = capabilitiesNamed(role?.featuredCapabilities);
 ---
 
 <OnePagerModule {...props}>
-	<div class={display === "radar" ? "grid gap-[5mm] sheet:grid-cols-[80mm_1fr] sheet:items-start" : "grid gap-[3mm]"}>
+	<div class={display === "radar" ? "grid grid-cols-[80mm_1fr] items-start gap-[5mm]" : "grid gap-[3mm]"}>
 		{
 			display === "radar" && (
-				<svg class="mx-auto block h-auto w-full max-w-[80mm]" viewBox={radar.viewBox} role="img" aria-label="Radar of where the evidence puts each capability">
+				<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label="Radar of where the evidence puts each capability">
 					{radar.rings.map((d) => (
 						<path d={d} fill="none" stroke="var(--color-line)" stroke-width="1" />
 					))}
