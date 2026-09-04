@@ -242,7 +242,10 @@ html {
 .site-logo {
 	@apply h-full;
 	img {
-		@apply h-full;
+		/* The size has to come from the layout, not from whatever pixels the
+		   image endpoint hands back. On paper every height above resolves to
+		   auto, so without a cap of its own the photo prints at its own size. */
+		@apply aspect-square h-full max-h-[inherit] w-auto object-cover;
 	}
 }
 
