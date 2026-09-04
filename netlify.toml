@@ -1,16 +1,16 @@
 [build]
-  publish = "dist"
-  command = "npm run build"
+publish = "dist"
+command = "npm run build"
 [build.processing.html]
-  pretty_urls = false
+pretty_urls = false
 [[headers]]
-  for = "/_astro/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+for = "/_astro/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
 [[headers]]
-  for = "https://fonts.bunny.net/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
+for = "https://fonts.bunny.net/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000"
 
 [build.environment]
 NODE_VERSION = "22"
@@ -25,8 +25,8 @@ NODE_VERSION = "22"
 ## (optional) Settings for Netlify Dev
 ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
 [dev]
- command = "npx astro dev" # Command to start your dev server
- port = 8888 # Port that the dev server will be listening on
- publish = "dist" # Folder with the static content for _redirect file
+command = "npx astro dev" # Command to start your dev server
+port = 8888               # Port that the dev server will be listening on
+publish = "dist"          # Folder with the static content for _redirect file
 
 ## more info on configuring this file: https://ntl.fyi/file-based-build-config

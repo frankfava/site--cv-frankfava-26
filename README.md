@@ -1,5 +1,7 @@
 # Frank Fava CV - Built 2026
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/983851cf-deb8-4200-9a1c-9f44054dbf82/deploy-status)](https://frankfava.netlify.app/)
+
 A comprehensive CV, build using Astro, AlpineJS and TailwindCSS.
 
 [https://frankfava.netlify.app/](https://frankfava.netlify.app/)
