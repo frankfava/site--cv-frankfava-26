@@ -20,7 +20,7 @@ const { title, description, backLink, class: className, ...hero } = Astro.props;
 
 <Hero {...hero} {title} {description} class={cn("dark", className)}>
 	<Fragment slot="forehead">
-		{backLink && <a href={backLink.href} class="mb-5.5 inline-block font-mono text-[0.76rem] tracking-[0.06em] text-[#a8a8bd] hover:text-white" set:html={backLink.text} />}
+		{backLink && <a href={backLink.href} class="mb-5.5 inline-block font-mono text-[0.76rem] tracking-[0.06em] text-[#a8a8bd] hover:text-white print:hidden" set:html={backLink.text} />}
 		<slot name="forehead" />
 	</Fragment>
 
