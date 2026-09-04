@@ -2,11 +2,13 @@
  * Catalog of every page-driving blueprint.
  *
  * Each entry maps a stable slug → an assembled `BlueprintBuilder`, plus any
- * cross-cutting page-shell config (search scoping, layout chrome). The slug
- * is the source of truth used by:
- *   - the dynamic search-index endpoint (`/api/search-index/[blueprintSlug].json`)
- *   - `Search.astro` to fetch the right scoped index
+ * cross-cutting page-shell config (which search index the page queries, layout
+ * chrome). The slug is the source of truth used by:
+ *   - the page's own route, unless the entry overrides it with `path`
  *   - role landing pages (which derive their slugs from `ROLES` in `@/data/roles`)
+ *
+ * Where a page's search rows land is stated in `@/data/search`, against the
+ * index each entry names below.
  *
  * Every blueprint file (static or role) exports its own `entry`.
  */
@@ -28,13 +30,9 @@ export const home = buildBlueprintEntry({
 		fullRecord: sections.fullRecord,
 		yourProblem: sections.yourProblem,
 	} as const satisfies BlueprintComponentSchema,
+	path: "/",
 	config: {
-		// search: {
-		// 	atomics: {
-		//		project: "still-running",
-		//		role: "track-record",
-		// 	},
-		// },
+		search: { index: "site" },
 		// layout: { showSidebar: false },
 	},
 });
@@ -51,10 +49,8 @@ export const work = buildBlueprintEntry({
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {
+		search: { index: "site" },
 		layout: { bay: "closed" },
-		// search: {
-		// 	atomics: { project: "projects", skill: "skills" },
-		// },
 	},
 });
 
@@ -67,9 +63,7 @@ export const ai = buildBlueprintEntry({
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {
-		// search: {
-		// 	atomics: { project: "practice"},
-		// },
+		search: { index: "site" },
 	},
 });
 
@@ -83,9 +77,7 @@ export const experience = buildBlueprintEntry({
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {
-		// search: {
-		// 	atomics: { role: "history" },
-		// },
+		search: { index: "site" },
 	},
 });
 
@@ -101,6 +93,9 @@ export const about = buildBlueprintEntry({
 		transferableSkills: sections.transferableSkills,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
+	config: {
+		search: { index: "site" },
+	},
 });
 
 export const credentials = buildBlueprintEntry({
@@ -114,9 +109,7 @@ export const credentials = buildBlueprintEntry({
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {
-		// search: {
-		// 	atomics: { certification: "certifications" },
-		// },
+		search: { index: "site" },
 	},
 });
 

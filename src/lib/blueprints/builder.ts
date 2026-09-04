@@ -416,9 +416,11 @@ export function buildPartEntry(entry: BlueprintPartEntryPartial | BlueprintPartE
 }
 
 export function buildBlueprintEntry(entry: BlueprintEntryPartial): BlueprintEntry {
+	const slug = entry.slug ?? slugify(toKebabCase(entry.title));
 	return {
 		...entry,
-		slug: entry.slug ?? slugify(toKebabCase(entry.title)),
+		slug,
+		path: entry.path ?? `/${slug}`,
 		blueprint: entry.blueprint instanceof BlueprintBuilder ? entry.blueprint : buildBlueprint(entry.blueprint),
 	};
 }

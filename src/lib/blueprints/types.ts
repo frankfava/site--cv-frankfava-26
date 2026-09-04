@@ -14,6 +14,17 @@ import type { BlueprintSchema } from "./schema";
  */
 export interface BlueprintConfig {
 	/**
+	 * Which search index this page's dialog queries, and whether it carries one
+	 * at all. Named rather than imported, so the search catalog stays free to
+	 * read the blueprints without either one importing the other.
+	 */
+	search?: {
+		/** Off on this page even where an index is named. */
+		enabled?: boolean;
+		/** A slug from the search catalog. A page naming none carries no search. */
+		index?: string;
+	};
+	/**
 	 * Per-blueprint chrome (sidebar / footer visibility, etc.) consumed by
 	 * `BlueprintLayout`. Page-level props at the call-site override these - the
 	 * blueprint just declares the *default* chrome for any page that renders it.
@@ -50,6 +61,8 @@ export type BlueprintEntry = Omit<BlueprintPartEntry, "blueprint"> & {
 	slug: string;
 	title: string;
 	blueprint: BlueprintBuilder<BlueprintSchema<unknown>>;
+	/** The route this blueprint is rendered at. Defaults to the slug. */
+	path?: string;
 	/** Narrative blurb used for `<head>` metadata. */
 	description?: string;
 	/** Page-shell config (search, layout). Optional. */
