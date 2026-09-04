@@ -91,6 +91,8 @@ export type AssembledBlueprint = AssembledSection[];
 export interface AssembledSection extends _ModuleWrapper {
 	id: string;
 	icon: string;
+	/** The section's short name, as the page is navigated by rather than as it reads in the heading. */
+	mainMenuLabel?: string;
 	content: PartContent;
 	hidden: boolean;
 	sections: AssembledBlueprint;

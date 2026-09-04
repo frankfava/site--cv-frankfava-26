@@ -373,6 +373,7 @@ export class BlueprintSection extends BlueprintPartSection<SectionData> {
 			...(this.data.props ?? {}),
 			id: this.data.id || "",
 			icon: this.data.icon || "",
+			mainMenuLabel: this.data.mainMenuLabel,
 			content: this.data.content as AssembledSection["content"],
 			sections: this.sections?.map((section) => section.assemble()) || [],
 			hidden: !!this.data.hidden,
