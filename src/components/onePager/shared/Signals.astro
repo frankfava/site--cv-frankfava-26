@@ -12,5 +12,11 @@ const filtered = (await signals()).filter((signal) => (ends !== undefined ? sign
 ---
 
 <OnePagerModule {...props}>
-	{!!filtered.length && <p class="text-[0.78rem]/[1.42] text-ink-2">{filtered.map((signal) => signal.title).join(" &middot; ")}. Everything else has an answer, and the answers are on the site.</p>}
+	{
+		!!filtered.length && (
+			<p class="text-[0.92rem]/[1.5] text-ink-2 sheet:text-[0.78rem]/[1.42]">
+				{filtered.map((signal) => signal.title).join(" &middot; ")}. Everything else has an answer, and the answers are on the site.
+			</p>
+		)
+	}
 </OnePagerModule>

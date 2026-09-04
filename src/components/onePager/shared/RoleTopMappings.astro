@@ -20,7 +20,7 @@ const topMappings = limit ? mappings.slice(0, limit) : mappings;
 		!!topMappings.length && (
 			<ul class="grid gap-[2mm]">
 				{topMappings.map(({ from, to, note }) => (
-					<li class="grid gap-[0.4mm] text-[0.8rem]">
+					<li class="grid gap-[0.4mm] text-[0.94rem] sheet:text-[0.8rem]">
 						<div class="flex flex-wrap items-center gap-x-[1.5mm]">
 							<span class="text-ink-2">{from.label}</span>
 							<b class="flex items-center gap-[1.5mm] text-ink">
@@ -28,7 +28,7 @@ const topMappings = limit ? mappings.slice(0, limit) : mappings;
 								{to}
 							</b>
 						</div>
-						{note && <p class="m-0 text-[0.7rem]/[1.3] text-ink-3">{note}</p>}
+						{note && <p class="m-0 text-[0.84rem]/[1.4] text-ink-3 sheet:text-[0.7rem]/[1.3]">{note}</p>}
 					</li>
 				))}
 			</ul>

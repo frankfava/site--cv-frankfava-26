@@ -25,11 +25,11 @@ const filtered = filters.filter((filter) => filter.value != undefined);
 <OnePagerModule {...{ ...props, showHeader: false }}>
 	{
 		!!filtered.length && (
-			<dl class="grid grid-cols-[repeat(auto-fit,minmax(31mm,1fr))] gap-[2.5mm] border-y border-line-2 py-[3mm]">
+			<dl class="grid grid-cols-1 gap-[2.5mm] border-y border-line-2 py-[3mm] sheet:grid-cols-[repeat(auto-fit,minmax(31mm,1fr))]">
 				{filtered.map((filter) => (
 					<div>
-						<dt class="mb-[1mm] font-mono text-[0.62rem] tracking-[0.08em] text-ink-3 uppercase">{filter.label}</dt>
-						<dd class="text-[0.85rem] font-semibold text-ink" set:html={filter.value} />
+						<dt class="mb-[1mm] font-mono text-[0.74rem] tracking-[0.08em] text-ink-3 uppercase sheet:text-[0.62rem]">{filter.label}</dt>
+						<dd class="text-base/[1.5] font-semibold text-ink sheet:text-[0.85rem]" set:html={filter.value} />
 					</div>
 				))}
 			</dl>

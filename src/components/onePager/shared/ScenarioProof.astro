@@ -15,14 +15,14 @@ const proofs = limit ? scenarios.slice(0, limit) : scenarios;
 <OnePagerModule {...props}>
 	{
 		!!proofs.length && (
-			<ul class="grid grid-cols-2 gap-x-[6mm] gap-y-[1.8mm] max-[620px]:grid-cols-1">
+			<ul class="grid grid-cols-1 gap-x-[6mm] gap-y-[1.8mm] sheet:grid-cols-2">
 				{proofs.map((entry) => (
 					<li class="grid gap-[0.6mm] border-l-2 border-accent pl-[3mm]">
-						<b class="text-[0.84rem] text-ink">{entry.claim}</b>
-						<span class="font-mono text-xs/[1.38] text-accent">
+						<b class="text-[0.98rem] text-ink sheet:text-[0.84rem]">{entry.claim}</b>
+						<span class="font-mono text-[0.88rem]/[1.45] text-accent sheet:text-xs/[1.38]">
 							{entry.figure.figure} <span class="text-ink-3">{entry.figure.note}</span>
 						</span>
-						<span class="text-[0.7rem]/[1.3] text-ink-3">{entry.where}</span>
+						<span class="text-[0.84rem]/[1.4] text-ink-3 sheet:text-[0.7rem]/[1.3]">{entry.where}</span>
 					</li>
 				))}
 			</ul>

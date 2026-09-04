@@ -42,10 +42,10 @@ const capabilities = capabilitiesNamed(role?.featuredCapabilities);
 			{
 				capabilities.map((capability) => (
 					<li class="grid gap-[0.4mm]">
-						<b class="text-[0.8rem] text-ink">
-							{capability.label} <span class="font-mono text-[0.7rem] font-medium text-accent">{capability.sits}/100</span>
+						<b class="text-[0.94rem] text-ink sheet:text-[0.8rem]">
+							{capability.label} <span class="font-mono text-[0.82rem] font-medium text-accent sheet:text-[0.7rem]">{capability.sits}/100</span>
 						</b>
-						<span class="text-[0.7rem]/[1.3] text-ink-3">{capability.evidence}</span>
+						<span class="text-[0.84rem]/[1.4] text-ink-3 sheet:text-[0.7rem]/[1.3]">{capability.evidence}</span>
 					</li>
 				))
 			}

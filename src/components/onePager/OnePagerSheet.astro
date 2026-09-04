@@ -27,10 +27,10 @@ const contact = SOCIALS.displayable();
 ---
 
 <div
-	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-4 font-secondary text-[0.95rem]/[1.55] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact] paper:p-8 sheet:text-[0.85rem]/[1.5]"
+	class="one-pager grid min-h-screen items-start justify-items-center bg-surface font-secondary text-[0.95rem]/[1.55] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact] paper:bg-sunk paper:p-8 sheet:text-[0.85rem]/[1.5]"
 >
 	<article
-		class="flex w-full max-w-full flex-col gap-4 border border-line bg-surface p-5 shadow-lg print:h-full print:w-auto print:gap-[3.4mm] print:overflow-visible print:border-0 print:p-0 print:shadow-none paper:h-(--sheet-h) paper:w-(--sheet-w) paper:overflow-scroll paper:p-[10mm_12mm]"
+		class="flex w-full max-w-full flex-col gap-4 bg-surface p-5 print:h-full print:w-auto print:gap-[3.4mm] print:overflow-visible print:p-0 paper:h-(--sheet-h) paper:w-(--sheet-w) paper:overflow-scroll paper:border paper:border-line paper:p-[10mm_12mm] paper:shadow-lg"
 	>
 		<header class="flex flex-col justify-center gap-1 border-b border-line pb-3">
 			<Logo class="mb-3 max-h-[15mm] w-full" titleClass="text-2xl">
@@ -41,9 +41,9 @@ const contact = SOCIALS.displayable();
 
 			{
 				!!contact.length && (
-					<ul class="flex flex-wrap text-ink-2">
+					<ul class="grid text-ink-2 sheet:flex sheet:flex-wrap">
 						{contact.map((entry) => (
-							<li class="not-first:before:px-[1.5mm] not-first:before:text-ink-3 not-first:before:content-['·']">
+							<li class="sheet:not-first:before:px-[1.5mm] sheet:not-first:before:text-ink-3 sheet:not-first:before:content-['·']">
 								<a href={entry.href}>{entry.text}</a>
 							</li>
 						))}
@@ -54,7 +54,7 @@ const contact = SOCIALS.displayable();
 			{
 				homeLink !== pathLink && (
 					<div class="mt-1">
-						<a href={getCanonical(onlinePath)} class="text-[0.9rem] text-accent">
+						<a href={getCanonical(onlinePath)} class="text-[1.05rem] text-accent sheet:text-[0.9rem]">
 							{getCanonical(onlinePath)}
 						</a>
 					</div>
@@ -80,7 +80,7 @@ const contact = SOCIALS.displayable();
 
 		{
 			(footnote || showHomeInFooter) && (
-				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.8rem] print:break-inside-avoid">
+				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.94rem] print:break-inside-avoid sheet:text-[0.8rem]">
 					{footnote && <span class="font-normal text-ink">{footnote}</span>}
 					{showHomeInFooter && <span class="ml-auto font-mono text-ink-2">{homeLink}</span>}
 				</footer>

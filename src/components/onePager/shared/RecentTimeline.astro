@@ -17,13 +17,13 @@ const recent = limit ? timeline.slice(0, limit) : timeline;
 		!!recent.length && (
 			<ul>
 				{recent.map((role) => (
-					<li class="grid grid-cols-[24mm_1fr] gap-x-[4mm] border-t border-line-2 py-[1.1mm] text-[0.82rem] first:border-t-0">
-						<span class="pt-[0.5mm] font-mono text-[0.7rem] whitespace-nowrap text-ink-3">
+					<li class="grid gap-x-[4mm] border-t border-line-2 py-[1.1mm] text-[0.96rem] first:border-t-0 sheet:grid-cols-[24mm_1fr] sheet:text-[0.82rem]">
+						<span class="pt-[0.5mm] font-mono text-[0.84rem] whitespace-nowrap text-ink-3 sheet:text-[0.7rem]">
 							{role.startDate.getFullYear()} &ndash; {role.endDate ? role.endDate.getFullYear() : "now"}
 						</span>
 						<span>
 							<b class="text-ink">{role.role}</b>
-							<span class="text-[0.78rem] text-ink-2 before:text-ink-3 before:content-['_·_']">{role.company}</span>
+							<span class="text-[0.92rem] text-ink-2 before:text-ink-3 before:content-['_·_'] sheet:text-[0.78rem]">{role.company}</span>
 						</span>
 					</li>
 				))}
