@@ -2,7 +2,7 @@ import { buildRoleStructure } from "../blueprints/role";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
-import { careerYears, yearsIn } from "@/lib/spans";
+import { careerYears, codingYears, yearsIn } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Senior Engineer"));
@@ -19,14 +19,15 @@ export const entry: BlueprintEntry = {
 };
 
 export const definition: RoleDefinition = {
-	summary: `${inWords(careerYears(), "Sentence")} years of it, and genuinely good, but I'm moving toward the customer, not away.`,
+	summary: `${inWords(codingYears(), "Sentence")} years of it, and genuinely good, but I'm moving toward the customer, not away.`,
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "TYPESCRIPT", "ASTRO", "POSTGRESQL", "DOCKER", "API", "CLAUDE", "FILAMENTPHP", "TERRAFORM"],
+	featuredCapabilities: ["code", "arch", "ai", "cust"],
 	featuredProjects: ["nas", "hubspot-fieldsjs", "ai-skill-create-mvp"],
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],
 	featuredTransferableSkills: ["ability-to-lead", "project-management", "team-player", "coaching-skills"],
 	pitch: {
-		lead: `${careerYears()} years building, multi-stack, with the last decade in modern web. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion system that significantly improved performance. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.`,
+		lead: `${codingYears()} years building, multi-stack. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion system that significantly improved performance. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.`,
 		pillars: [
 			{
 				icon: "ph:hammer-duotone",

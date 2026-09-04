@@ -23,6 +23,7 @@ export const definition: RoleDefinition = {
 	summary: "Coaching was my first profession, not a second skill. Interim or fixed term suits me best.",
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "TYPESCRIPT", "AWS", "DOCKER", "CLAUDE", "API", "POSTGRESQL", "FILAMENTPHP"],
+	featuredCapabilities: ["lead", "arch", "code", "ai"],
 	featuredProjects: ["nas", "savr-admin-panels", "ai-skill-create-mvp"],
 	featuredCaseStudies: ["nas", "savr-admin-panels"],
 	featuredCertifications: ["ici-cert-leadership", "ici-cert-coaching", "testdome-leadership", "testdome-people", "testdome-ai"],

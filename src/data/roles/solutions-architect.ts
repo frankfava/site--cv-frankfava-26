@@ -22,6 +22,7 @@ export const definition: RoleDefinition = {
 	summary: "The first technical voice a customer hears. Discovery, demos, architecture, business case.",
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "ASTRO", "TYPESCRIPT", "REACT", "AWS", "DOCKER", "CLAUDE", "API", "POSTGRESQL", "FILAMENTPHP"],
+	featuredCapabilities: ["cust", "arch", "ai", "code"],
 	featuredProjects: ["lovable-output-analyser", "ai-skill-create-mvp", "savr-admin-panels", "lovable-prompt-builder", "savr-delta-system", "nas", "hubspot-fieldsjs"],
 	featuredCaseStudies: ["savr-admin-panels", "savr-delta-system", "nas", "hubspot-fieldsjs"],
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],

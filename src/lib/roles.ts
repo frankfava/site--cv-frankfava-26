@@ -1,4 +1,5 @@
 import type { CertificationId, SkillId, TransferableSkillId } from "content:ids";
+import type { CapabilityId } from "@/data/capabilities";
 import { getCollection } from "astro:content";
 import type { BlueprintEntry } from "@/lib/blueprints";
 
@@ -65,6 +66,9 @@ export interface RoleDefinition {
 	summary: string;
 	/** Skills to spotlight on this role page (refs into the skills collection). */
 	featuredSkills?: SkillId[];
+	/** The capabilities this role is read on, strongest claim first. A role page
+	 *  argues from these; the whole set is the general one-pager's job. */
+	featuredCapabilities?: CapabilityId[];
 	/** Projects to spotlight on this role page (refs into the projects collection). */
 	featuredProjects?: string[];
 	/** Certifications to spotlight on this role page (refs into the certifications collection). */

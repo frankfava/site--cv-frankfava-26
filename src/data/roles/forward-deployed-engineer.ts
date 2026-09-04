@@ -23,6 +23,7 @@ export const definition: RoleDefinition = {
 	hidden: false,
 	slug: entry.slug,
 	featuredSkills: ["CLAUDE", "LARAVEL", "PHP", "VUEJS", "REACT", "ASTRO", "TYPESCRIPT", "AWS", "DOCKER", "API", "POSTGRESQL", "FILAMENTPHP"],
+	featuredCapabilities: ["cust", "code", "ai", "arch"],
 	featuredProjects: ["ai-skill-create-mvp", "hubspot-fieldsjs", "nas", "savr-admin-panels", "savr-delta-system", "lovable-output-analyser"],
 	featuredCaseStudies: ["nas", "savr-admin-panels", "hubspot-fieldsjs", "savr-delta-system"],
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],

@@ -1,5 +1,5 @@
 /** The capabilities the check compares. */
-import { careerYears, yearsIn } from "@/lib/spans";
+import { codingStart, yearsIn } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 export interface Capability {
 	id: string;
@@ -14,7 +14,7 @@ export interface Capability {
 	evidence: string;
 }
 
-export const CAPABILITIES: Capability[] = [
+export const CAPABILITIES = [
 	{
 		id: "cust",
 		label: "Customer-facing and pre-sales",
@@ -53,7 +53,7 @@ export const CAPABILITIES: Capability[] = [
 		short: "Hands-on",
 		sits: 88,
 		defaultNeed: 85,
-		evidence: `${inWords(careerYears(), "Sentence")} years. Most recently a crypto trading integration in a regulated fintech.`,
+		evidence: `Paid to write code since ${codingStart().getFullYear()}. Most recently a crypto trading integration in a regulated fintech.`,
 	},
 	{
 		id: "lead",
@@ -63,4 +63,16 @@ export const CAPABILITIES: Capability[] = [
 		defaultNeed: 85,
 		evidence: "Lead developer within six months, training the juniors. I wrote the task we screened candidates with.",
 	},
-];
+] as const satisfies readonly Capability[];
+
+export type CapabilityId = (typeof CAPABILITIES)[number]["id"];
+
+/**
+ * The ones named, in the order named. Naming none gives the whole set in its
+ * declared order, which is the order the radar takes its geometry from, so a
+ * caller states a priority without disturbing the array behind the shape.
+ */
+export function capabilitiesNamed(ids: readonly CapabilityId[] = []): readonly Capability[] {
+	if (!ids.length) return CAPABILITIES;
+	return ids.map((id) => CAPABILITIES.find((capability) => capability.id === id)).filter((capability) => !!capability);
+}
