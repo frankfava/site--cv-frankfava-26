@@ -7,6 +7,7 @@
  */
 
 import type { AstroInstance } from "astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import type { PartContent } from "./schema";
 
 /** A content module: the component, and the optional rule for its own visibility. */
@@ -14,9 +15,17 @@ export type PartModule = AstroInstance & { resolve?: (context?: unknown) => unkn
 
 export const isAsyncLoader = (fn: unknown): fn is () => Promise<unknown> => typeof fn === "function" && fn.constructor?.name === "AsyncFunction";
 
-/** Load a part's module, or nothing when its content is already markup. */
+/** Astro marks its own factories, so a component is told from a loader rather than guessed at. */
+export const isComponent = (value: unknown): value is AstroComponentFactory => typeof value === "function" && (value as { isAstroComponentFactory?: boolean }).isAstroComponentFactory === true;
+
+/** Load a part's module, or nothing when its content is markup or already a component. */
 export async function loadPart(content: PartContent): Promise<PartModule | undefined> {
 	return isAsyncLoader(content) ? ((await content()) as PartModule) : undefined;
+}
+
+/** The component a part renders, given directly or reached through its module. */
+export function partComponent(content: PartContent, mod?: PartModule): AstroComponentFactory | undefined {
+	return isComponent(content) ? content : mod?.default;
 }
 
 /**

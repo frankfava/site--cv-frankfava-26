@@ -1,5 +1,5 @@
 ---
-import { isVisible, loadPart, type AssembledPart } from "@/lib/blueprints";
+import { isVisible, loadPart, partComponent, type AssembledPart } from "@/lib/blueprints";
 import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
@@ -9,15 +9,16 @@ export interface Props {
 
 const { section, class: className } = Astro.props;
 
-const part = await loadPart(section.content);
-const isHidden = section.hidden || !(await isVisible(part));
+const mod = await loadPart(section.content);
+const Part = partComponent(section.content, mod);
+const isHidden = section.hidden || !(await isVisible(mod));
 ---
 
 {
 	!isHidden && (
 		<section class:list={className}>
 			<h2 class="mb-4 text-lg/[1.05]">{section.title}</h2>
-			{part ? <part.default {...section.props} /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
+			{Part ? <Part {...section.props} /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
 		</section>
 	)
 }

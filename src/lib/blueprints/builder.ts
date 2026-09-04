@@ -37,7 +37,7 @@ type BlueprintSectionProxy = BlueprintSection & SectionData;
  * that nests overrides the two protected hooks rather than reimplementing the
  * walk.
  */
-export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends BlueprintPartSection<any> = BlueprintPartProxy<BlueprintPart>> {
+export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends BlueprintPartSection<any> = BlueprintPartProxy<BlueprintPart>, A = AssembledPart> {
 	protected cache: Map<string, S>;
 	protected parsedSections: S[];
 
@@ -93,13 +93,14 @@ export class BlueprintPartBuilder<T extends BlueprintSchema<unknown>, S extends 
 	}
 
 	/** Assemble every part into inert display data */
-	assemble(): AssembledPart[] {
-		return this.parsedSections.map((section) => section.assemblePart());
+	assemble(): A[] {
+		// A medium assembles its own shape; the base only knows the part in it.
+		return this.parsedSections.map((section) => section.assemblePart()) as A[];
 	}
 }
 
 /** Build a screen Blueprint from a schema */
-export class BlueprintBuilder<T extends BlueprintSchema<unknown>> extends BlueprintPartBuilder<T, BlueprintSectionProxy> {
+export class BlueprintBuilder<T extends BlueprintSchema<unknown>> extends BlueprintPartBuilder<T, BlueprintSectionProxy, AssembledSection> {
 	/** Static method to create proxied instance */
 	static createProxyFromStructure<T extends BlueprintSchema<unknown>>(structure: T): BlueprintProxy<T> {
 		const builder = new BlueprintBuilder(structure);
@@ -222,7 +223,7 @@ export class BlueprintBuilder<T extends BlueprintSchema<unknown>> extends Bluepr
 	}
 
 	/** Assemble all Blueprint sections */
-	assemble(): AssembledBlueprint {
+	override assemble(): AssembledBlueprint {
 		return BlueprintBuilder.assemble(this.parsedSections);
 	}
 

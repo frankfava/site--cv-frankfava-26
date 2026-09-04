@@ -12,3 +12,20 @@ import { createComponent, renderComponent, type AstroComponentFactory } from "as
 /** Bound props win, so a caller cannot undo what was set here. */
 export const withProps = (Component: AstroComponentFactory, bound: Record<string, unknown>): AstroComponentFactory =>
 	createComponent(((result: any, props: any, slots: any) => renderComponent(result, "Bound", Component, { ...props, ...bound }, slots)) as any);
+
+/** The props a component factory accepts. */
+type PropsOf<T> = T extends (props: infer P, ...rest: never[]) => unknown ? P : never;
+
+/**
+ * A lazily imported component with some of its props already set, for the places
+ * that take a loader rather than a component - a part's `content`, say.
+ *
+ * The module is spread rather than replaced, so a part that also exports
+ * `resolve` keeps deciding its own visibility.
+ */
+export const withPropsAsync =
+	<M extends { default: AstroComponentFactory }>(loader: () => Promise<M>, bound: Partial<PropsOf<M["default"]>>) =>
+	async (): Promise<M> => {
+		const mod = await loader();
+		return { ...mod, default: withProps(mod.default, bound as Record<string, unknown>) };
+	};

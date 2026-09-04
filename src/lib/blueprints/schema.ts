@@ -7,10 +7,19 @@
  * of them, and moving them here would only reverse the dependency.
  */
 
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
 import type { _ModuleWrapper } from "@/components/ui/modules/ModuleWrapper.astro";
 
-/** Where a part's body comes from: rendered markup, or a component to load. */
-export type PartContent = string | (() => Promise<object>);
+/**
+ * Where a part's body comes from: rendered markup, a component, or a component
+ * to load.
+ *
+ * A loader defers the import to the render; a component given directly is
+ * already in the schema's own module graph, so reach for it only where the
+ * indirection is not earning anything.
+ */
+export type PartContent = string | AstroComponentFactory | (() => Promise<object>);
 
 /**
  * A section, in the terms every medium shares: what it is called, what it says,
@@ -26,7 +35,7 @@ export interface BlueprintPart<C = PartContent> {
 	eyebrow?: string;
 	content: C;
 	hidden?: boolean;
-	props?: Record<PropertyKey, unknown>;
+	props?: object;
 }
 
 /** A blueprint stated in parts. */
@@ -36,7 +45,7 @@ export type BlueprintSchema<C = PartContent> = Record<string, BlueprintPart<C>>;
  * A part on an indexed screen page. Everything it adds is chrome the page is
  * navigated by, which is why it stops at the edge of the browser.
  */
-export interface BlueprintComponent extends Omit<BlueprintPart<unknown>, "content" | "props"> {
+export interface BlueprintComponent extends Omit<BlueprintPart<unknown>, "content"> {
 	icon: string;
 	content: Record<string, Omit<BlueprintComponent, "hidden">> | PartContent;
 	mainMenuLabel?: string;
@@ -52,7 +61,7 @@ export type ComponentContent = BlueprintComponent["content"];
 export type BlueprintComponentSchema = Record<string, BlueprintComponent>;
 
 /** What a screen section holds once built: a part, plus the chrome it was given. */
-export type SectionData = BlueprintPart<ComponentContent> & Partial<Omit<BlueprintComponent, keyof BlueprintPart>>;
+export type SectionData = BlueprintPart<ComponentContent> & Partial<Omit<BlueprintComponent, keyof BlueprintPart>> & { props?: _ModuleWrapper };
 
 /**
  * A part ready for display: inert data, with nothing a renderer has to call.
@@ -67,7 +76,7 @@ export interface AssembledPart {
 	eyebrow?: string;
 	content: PartContent;
 	hidden: boolean;
-	props?: Record<PropertyKey, unknown>;
+	props?: object;
 }
 
 /** Blueprint for display */

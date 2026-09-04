@@ -23,5 +23,5 @@ export type {
 export { BlueprintBuilder, BlueprintPartBuilder, BlueprintPartSection, BlueprintSection, buildBlueprint, buildBlueprintEntry, buildPartEntry, buildParts } from "./builder";
 export type { BlueprintPartProxy, ParsedBlueprint } from "./builder";
 export type { BlueprintConfig, BlueprintEntry, BlueprintPartEntry } from "./types";
-export { isAsyncLoader, isVisible, loadPart } from "./content";
+export { isAsyncLoader, isComponent, isVisible, loadPart, partComponent } from "./content";
 export type { PartModule } from "./content";
