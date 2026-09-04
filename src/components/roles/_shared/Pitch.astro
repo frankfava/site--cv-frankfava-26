@@ -19,16 +19,16 @@ const whatTranslatesTitle = pitch?.whatTranslates?.title ?? "What translates";
 const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.title} role specifically.`;
 ---
 
-<ModuleWrapper {...{ ...props, header }}>
-	<Fragment>
+<ModuleWrapper {...{ ...props, contentWidth: "xl", header }}>
+	<div class="space-y-8">
 		{
 			pitch?.whyNow && (
-				<Fragment>
+				<div>
 					<h3 class="mb-2 text-xl font-semibold">{whyNowTitle}</h3>
 					{pitch.whyNow.paragraphs.map((p) => (
 						<p set:html={p} />
 					))}
-				</Fragment>
+				</div>
 			)
 		}
 
@@ -36,7 +36,7 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 
 		{
 			pitch?.pillars && pitch.pillars.length > 0 && (
-				<div class="my-6 grid gap-3">
+				<div class="grid gap-3">
 					{pitch.pillars.map((pillar) => (
 						<div class="flex gap-4 border border-line bg-surface p-4">
 							<Icon name={pillar.icon} class="mt-1 size-8 min-h-8 min-w-8" />
@@ -52,8 +52,8 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 
 		{
 			pitch?.whatTranslates && (
-				<Fragment>
-					<h3 class="mt-10 mb-3 text-xl font-semibold">{whatTranslatesTitle}</h3>
+				<div>
+					<h3 class="mb-2 text-xl font-semibold">{whatTranslatesTitle}</h3>
 					<ul class="ml-6 list-outside list-disc space-y-2">
 						{pitch.whatTranslates.bullets.map(({ from, to }) => (
 							<li>
@@ -61,17 +61,16 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 							</li>
 						))}
 					</ul>
-				</Fragment>
+				</div>
 			)
 		}
 
-		<p class="mt-8">{curatedNote}</p>
-
-		<hr class="mt-10 border-line" />
+		<hr class="border-line" />
+		{curatedNote && <p>{curatedNote}</p>}
 
 		<a
 			href="/"
-			class="my-6 flex items-center gap-4 border border-line bg-surface p-4 text-sm text-inherit! hover:bg-sunk hover:text-accent focus:z-10 focus:text-accent focus:ring-4 focus:ring-line focus:outline-none print:hidden"
+			class="flex items-center gap-4 border border-line bg-surface p-4 text-sm text-inherit! hover:bg-sunk hover:text-accent focus:z-10 focus:text-accent focus:ring-4 focus:ring-line focus:outline-none print:hidden"
 		>
 			<div class="grow">
 				<div class="text-xl font-bold">Full Version of this CV</div>
@@ -80,5 +79,5 @@ const curatedNote = pitch?.curatedNote ?? `This page is curated for the ${role.t
 				</p>
 			</div>
 		</a>
-	</Fragment>
+	</div>
 </ModuleWrapper>

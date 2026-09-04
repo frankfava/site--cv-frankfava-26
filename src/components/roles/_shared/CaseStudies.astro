@@ -26,9 +26,7 @@ const studies = await resolve(role);
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<p>End-to-end ownership: read the actual problem, agree the solution, build it, ship the outcome.</p>
-
-	<div class="my-8 grid gap-6">
+	<div class="grid gap-6">
 		{
 			studies.map((p) => {
 				const cs = p.data.caseStudy!;
