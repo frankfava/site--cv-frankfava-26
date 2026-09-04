@@ -187,7 +187,7 @@ const currentPath = getCurrentPath(Astro.url);
 								socialLinks: SOCIALS.toArray(),
 								showText: false,
 								class: "gap-1 lg:gap-2",
-								linkClass: ["rounded-md p-2"],
+								linkClass: ["rounded-md"],
 								iconClass: "w-6 h-6",
 							}}
 						/>
@@ -199,12 +199,11 @@ const currentPath = getCurrentPath(Astro.url);
 							{...{
 								variant: "single",
 								class: "rounded-md border-line p-2 text-ink-2 hover:border-accent hover:text-accent",
-								activeIconClass: "w-6 h-6 size-4",
-								linkClass: "rounded-md p-2",
+								linkClass: "rounded-md",
 								activeIcon: (option) => {
 									if (option.key === "dark") {
 										return (
-											<span x-show={`isActive('${option.key}')`} class={cn("toggle-icon flex size-6 items-center justify-center", option.activeIconClass)}>
+											<span x-show={`isActive('${option.key}')`} class={cn("toggle-icon flex size-4 items-center justify-center", option.activeIconClass)}>
 												<i class="block size-[50%] rounded-full bg-accent" />
 											</span>
 										);

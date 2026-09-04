@@ -21,7 +21,7 @@ const linkClassList = linkClass ? (typeof linkClass === "function" ? linkClass(l
 
 <a
 	class={cn(
-		"inline-flex items-center gap-x-2 rounded-lg border border-primary-100 bg-gray-100 p-2.5 text-sm text-primary-900 transition-colors duration-200 hover:border-accent-200 hover:bg-accent-100 hover:text-accent focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-primary-500 dark:bg-primary-600 dark:text-white dark:hover:border-primary-600 dark:hover:bg-primary-700 dark:hover:text-white dark:focus:ring-gray-700",
+		"inline-flex items-center gap-x-2 rounded-lg border border-primary-100 bg-gray-100 p-2 text-sm text-primary-900 transition-colors duration-200 hover:border-accent-200 hover:bg-accent-100 hover:text-accent focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-primary-500 dark:bg-primary-600 dark:text-white dark:hover:border-primary-600 dark:hover:bg-primary-700 dark:hover:text-white dark:focus:ring-gray-700",
 		linkClassList,
 		className,
 	)}
@@ -36,9 +36,9 @@ const linkClassList = linkClass ? (typeof linkClass === "function" ? linkClass(l
 			<Fragment set:html={content} />
 		) : (
 			<>
-				{icon && <Icon name={icon} class={cn("size-5", iconClass)} />}
+				{icon && <Icon name={icon} class={cn("size-4", iconClass)} />}
 				{showText && <Fragment set:html={label ?? text} />}
-				{suffixIcon && <Icon name={suffixIcon} class={cn("size-5", suffixIconClass ?? iconClass)} />}
+				{suffixIcon && <Icon name={suffixIcon} class={cn("size-4", suffixIconClass ?? iconClass)} />}
 			</>
 		)
 	}

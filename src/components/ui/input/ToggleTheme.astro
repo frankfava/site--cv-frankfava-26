@@ -63,7 +63,7 @@ const resolvedMenuIcon = typeof menuIcon === "function" ? Object.fromEntries(opt
 				{resolvedOptions.map((o) => (
 					<>
 						{typeof resolvedActiveIcon[o.key] === "string" ? (
-							<Icon x-show={`isActive('${o.key}')`} name={resolvedActiveIcon[o.key]} class={cn("toggle-icon size-6", o.key, activeIconClass)} />
+							<Icon x-show={`isActive('${o.key}')`} name={resolvedActiveIcon[o.key]} class={cn("toggle-icon size-4", o.key, activeIconClass)} />
 						) : (
 							<Fragment set:html={resolvedActiveIcon[o.key]} />
 						)}
