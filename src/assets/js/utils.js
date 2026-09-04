@@ -27,8 +27,9 @@ export const scroll = {
 	bottom: () => scroll.position().y + window.innerHeight,
 	max: () => document.documentElement.scrollHeight - document.documentElement.clientHeight,
 	atEnd: () => window.scrollY >= scroll.max() - 2,
-	intoView: (target) => {
-		target.scrollIntoView({ behavior: media.reducedMotion ? "instant" : "smooth" });
+	/** Pass "instant" where the distance makes an animation a ride rather than a cue. */
+	intoView: (target, behavior = media.reducedMotion ? "instant" : "smooth") => {
+		target.scrollIntoView({ behavior });
 	},
 	to: (offset = 0) => {
 		window.scrollTo({ top: offset, behavior: media.reducedMotion ? "instant" : "smooth" });

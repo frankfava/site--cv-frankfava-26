@@ -194,6 +194,16 @@ function initSidebarHeight() {
 }
 
 /**
+ * The fragment the page was opened at, read before anything can rewrite it.
+ *
+ * A page opened at an anchor is still at the top when the scroll spy takes its
+ * first pass, so the spy would otherwise erase the anchor from the URL before
+ * anything had scrolled to it.
+ */
+const openedAtHash = window.location.hash;
+let openingAnchorHandled = !openedAtHash;
+
+/**
  * Scroll Spy
  *
  * One read of where you are, feeding the index and rail links.
@@ -259,6 +269,9 @@ function initScrollSpy() {
 
 	// Safari throws past 100 replaceState calls in 30 seconds.
 	function writeHashWhenSettled(id) {
+		// The reading position does not own the URL until the anchor the page was
+		// opened at has been scrolled to.
+		if (!openingAnchorHandled) return;
 		clearTimeout(hashTimer);
 		hashTimer = setTimeout(() => history.replaceState(null, "", id ? `#${id}` : window.location.pathname), 150);
 	}
@@ -292,16 +305,31 @@ function jumpLinks() {
 }
 
 /**
- * Scroll page with hash
+ * Scroll to the anchor the page was opened at.
  */
 function handleUrlHash() {
-	if (window.location.hash) {
-		const target = document.querySelector(window.location.hash);
-		if (!target) return;
-		scroll.intoView(target);
-	} else {
+	if (!openedAtHash) {
 		scroll.to(0);
+		return;
 	}
+
+	const target = document.querySelector(openedAtHash);
+	if (!target) {
+		openingAnchorHandled = true;
+		return;
+	}
+
+	// Instant: the reader asked for this section, and animating the whole page to
+	// reach it is a ride rather than a cue.
+	const jump = () => scroll.intoView(target, "instant");
+
+	// Twice, because the text above the section reflows as the fonts land and
+	// carries the section with it. The first jump is what the reader sees; the
+	// second corrects it. Nothing here waits on a frame, which never comes in a
+	// tab that opens in the background.
+	jump();
+	openingAnchorHandled = true;
+	document.fonts?.ready.then(jump);
 }
 
 /**
