@@ -140,12 +140,14 @@ function childrenSummary(section: AssembledSection): string {
 /**
  * Every section the index covers, flattened and carrying its page.
  *
- * A hidden section is transparent rather than absent: it does not render, so it
- * is neither indexed nor treated as a parent, but its children still are.
+ * Two ways for a section to stay out, and they differ in what happens to its
+ * children. `hidden` does not render at all, so it is transparent: its children
+ * inherit its parent. `showInSearch: false` does render, so it stays the parent
+ * its children are found under - it is only the row that is not worth having.
  */
 function placeSections(entry: BlueprintEntry, sections: AssembledBlueprint, parent: AssembledSection | undefined, into: Placed[]): Placed[] {
 	for (const section of sections) {
-		if (!section.hidden) into.push({ section, entry, parent });
+		if (!section.hidden && section.showInSearch !== false) into.push({ section, entry, parent });
 		placeSections(entry, section.sections ?? [], section.hidden ? parent : section, into);
 	}
 	return into;

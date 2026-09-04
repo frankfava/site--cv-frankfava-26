@@ -205,6 +205,7 @@ export const skills: BlueprintComponent = {
 
 export const fullRecord: BlueprintComponent = {
 	id: "full-record",
+	showInSearch: false,
 	title: "The full record, one page at a time",
 	mainMenuLabel: "More information",
 	showInSidebar: false,

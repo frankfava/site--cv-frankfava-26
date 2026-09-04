@@ -51,6 +51,7 @@ export interface BlueprintComponent extends Omit<BlueprintPart<unknown>, "conten
 	content: Record<string, Omit<BlueprintComponent, "hidden">> | PartContent;
 	mainMenuLabel?: string;
 	showInSidebar?: boolean;
+	showInSearch?: boolean;
 	href?: string;
 	props?: _ModuleWrapper;
 }
@@ -95,6 +96,7 @@ export interface AssembledSection extends _ModuleWrapper {
 	mainMenuLabel?: string;
 	content: PartContent;
 	hidden: boolean;
+	showInSearch: boolean;
 	sections: AssembledBlueprint;
 	props?: _ModuleWrapper;
 }

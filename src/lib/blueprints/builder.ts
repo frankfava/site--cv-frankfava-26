@@ -319,7 +319,7 @@ export class BlueprintSection extends BlueprintPartSection<SectionData> {
 	constructor(data: SectionData) {
 		super({
 			showInSidebar: data.showInSidebar ?? true,
-			// showInSearch: data.showInSearch ?? true,
+			showInSearch: data.showInSearch ?? true,
 			...data,
 			mainMenuLabel: data.mainMenuLabel || data.title,
 		});
@@ -377,7 +377,7 @@ export class BlueprintSection extends BlueprintPartSection<SectionData> {
 			content: this.data.content as AssembledSection["content"],
 			sections: this.sections?.map((section) => section.assemble()) || [],
 			hidden: !!this.data.hidden,
-			// showInSearch: this.data.showInSearch ?? true,
+			showInSearch: this.data.showInSearch ?? true,
 			header: {
 				...((this.data.props ?? {})?.header ?? {}),
 				title: this.data.title,
