@@ -62,14 +62,46 @@ export interface SearchIndexEntry {
 /** Resolves an icon name to markup, or "" for a name that will not draw or costs too much. */
 export type IconRenderer = (name: string) => Promise<string>;
 
-/** Where an atomic kind lands, resolved from the index's anchor. */
+/**
+ * Where every row of one kind lands.
+ *
+ * Resolved once per build, and identical for every row of that kind. The index
+ * names a section id and nothing else; the build finds the single page it
+ * covers that renders that section, and this is the answer:
+ *
+ *   atomics: { role: "history" }  →  { url: "/experience#history",
+ *                                      module: "The timeline",
+ *                                      page: "Experience" }
+ *
+ * `module` and `page` are what a row reads beneath its title, which is how two
+ * things of different kinds with the same name are told apart - the "Laravel"
+ * skill on Work against the "Laravel" certification on Credentials.
+ */
 export interface AtomicTarget {
-	/** The full href: page path and anchor together. */
+	/** The page's path and the section's anchor, together. */
 	url: string;
-	/** The short name of the section landed on. */
+	/** The section's short name. */
 	module: string;
-	/** The title of the page landed on. */
+	/** The page's title. */
 	page: string;
+}
+
+/**
+ * What a builder says about one thing.
+ *
+ * Only what the thing knows about itself. Where it goes, what kind it is and
+ * what it falls back to for an icon are all known already.
+ */
+export interface RowDescription {
+	/** Unique within the kind. The kind is prefixed on the way out. */
+	id: string;
+	title: string;
+	/** The tail of the line beneath the title, after the breadcrumb. */
+	description?: string;
+	/** An iconify name. The kind's glyph stands in when it is absent or too costly to ship. */
+	icon?: string;
+	/** Everything a query should match on. Empty parts are dropped. */
+	body: (string | undefined)[];
 }
 
 /** Sources every row of one atomic kind, all landing on the same target. */
