@@ -12,8 +12,8 @@ const { class: className } = Astro.props;
 ---
 
 <div class={cn("text-left", className)} x-data="capabilityPanel">
-	<div class="grid grid-cols-1 items-start gap-3.5 xl:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
-		<div class="overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow)">
+	<div class="grid grid-cols-1 items-start gap-3.5 lg:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
+		<div class="order-2 overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow) lg:order-1">
 			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
 				<span class="eyebrow text-ink-3">What your role needs</span>
 				<button
@@ -70,6 +70,6 @@ const { class: className } = Astro.props;
 			</div>
 		</div>
 
-		<CapabilityRadar eyebrow="Your role vs me" showNeed />
+		<CapabilityRadar class="order-1 lg:order-2" eyebrow="Your role vs me" showNeed />
 	</div>
 </div>

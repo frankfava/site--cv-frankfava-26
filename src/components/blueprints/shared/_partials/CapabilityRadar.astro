@@ -22,7 +22,7 @@ const { class: className, eyebrow = "Where I sit", showNeed = false } = Astro.pr
 		)
 	}
 
-	<div class="px-2 pt-3.5 pb-0.5">
+	<div class="mx-auto max-w-120 px-2 pt-3.5 pb-0.5">
 		<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label={showNeed ? "Radar comparing what your role needs against Frank's evidence" : "Radar of Frank's capabilities"}>
 			{radar.rings.map((d) => <path d={d} fill="none" stroke="var(--c-line)" stroke-width="1" />)}
 			{
