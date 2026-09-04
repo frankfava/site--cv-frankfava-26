@@ -8,6 +8,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* The sheet's paper geometry is a screen affordance: a full A4 shown at true
+   size. A plain breakpoint would follow it onto the page, because a print
+   media width sits below `lg` and the printer already has its own page box. */
+@custom-variant paper (@media screen and (width >= 64rem));
+
+/* Wherever the sheet is laid out at a full A4 width - that preview, and every
+   printed page - so a column set holds on paper without a second declaration. */
+@custom-variant sheet {
+	@media screen and (width >= 64rem) {
+		@slot;
+	}
+	@media print {
+		@slot;
+	}
+}
+
 @theme {
 	--text-base--line-height: 1.625;
 }
