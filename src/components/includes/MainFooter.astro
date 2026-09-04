@@ -67,7 +67,7 @@ const currentPath = getCurrentPath(Astro.url);
 								socialLinks={Array.isArray(socialLinks) ? socialLinks : SOCIALS.toArray()}
 								showText={showSocialText}
 								showIcon={false || !showSocialText}
-								class="gap-2"
+								class="mt-4 justify-center gap-2 lg:mt-0 lg:justify-start"
 								linkClass={(link) => {
 									let out = showSocialText ? "border border-line rounded-md px-3.5 py-2.5 hover:border-accent hover:text-accent" : "bg-white rounded-md p-2";
 									if (link.label == "Email") {
