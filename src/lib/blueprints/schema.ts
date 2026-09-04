@@ -33,6 +33,7 @@ export interface BlueprintPart<C = PartContent> {
 	title: string;
 	description?: string;
 	eyebrow?: string;
+	icon?: string;
 	content: C;
 	hidden?: boolean;
 	props?: object;
@@ -74,6 +75,7 @@ export interface AssembledPart {
 	title: string;
 	description?: string;
 	eyebrow?: string;
+	icon?: string;
 	content: PartContent;
 	hidden: boolean;
 	props?: object;

@@ -122,7 +122,7 @@ const currentPath = getCurrentPath(Astro.url);
 					))
 			}
 			<a class="logo-link inline-flex items-center" href={currentPath == "/" ? "#top" : getHomePermalink()}>
-				{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} class="site-logo" />}
+				{Astro.slots.has("logo") && typeof logo == "string" && !!logo ? <Fragment set:html={logo} /> : <Logo showImage={true} />}
 			</a>
 		</div>
 		{

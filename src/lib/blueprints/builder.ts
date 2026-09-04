@@ -304,6 +304,7 @@ export class BlueprintPartSection<D extends BlueprintPart<unknown> = BlueprintPa
 			title: this.data.title,
 			description: this.data.description,
 			eyebrow: this.data.eyebrow,
+			icon: this.data.icon || "",
 			content: this.data.content as PartContent,
 			hidden: !!this.data.hidden,
 			props: this.data?.props ?? {},

@@ -4,21 +4,33 @@ import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	section: AssembledPart;
-	class?: HTMLAttributes<"section">["class:list"];
+	class?: HTMLAttributes<any>["class:list"];
 }
 
-const { section, class: className } = Astro.props;
+const { section: s, class: className } = Astro.props;
+const { props, content, ...section } = s;
 
-const mod = await loadPart(section.content);
-const Part = partComponent(section.content, mod);
+const mod = await loadPart(content);
+const Part = partComponent(content, mod);
 const isHidden = section.hidden || !(await isVisible(mod));
 ---
 
 {
-	!isHidden && (
-		<section class:list={className}>
-			<h2 class="mb-4 text-lg/[1.05]">{section.title}</h2>
-			{Part ? <Part {...section.props} /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
-		</section>
-	)
+	!isHidden &&
+		(Part ? (
+			<Part
+				{...{
+					...section,
+					...props,
+					id: section.id,
+					eyebrow: section.eyebrow,
+					title: section.title,
+					subtitle: section.description,
+					icon: section.icon,
+					class: className,
+				}}
+			/>
+		) : (
+			typeof content === "string" && <Fragment set:html={content} />
+		))
 }

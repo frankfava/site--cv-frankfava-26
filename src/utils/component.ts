@@ -24,8 +24,8 @@ type PropsOf<T> = T extends (props: infer P, ...rest: never[]) => unknown ? P : 
  * `resolve` keeps deciding its own visibility.
  */
 export const withPropsAsync =
-	<M extends { default: AstroComponentFactory }>(loader: () => Promise<M>, bound: Partial<PropsOf<M["default"]>>) =>
+	<M extends { default: AstroComponentFactory }>(loader: () => Promise<M>, bound?: Partial<PropsOf<M["default"]>>) =>
 	async (): Promise<M> => {
 		const mod = await loader();
-		return { ...mod, default: withProps(mod.default, bound as Record<string, unknown>) };
+		return { ...mod, default: withProps(mod.default, (bound ?? {}) as Record<string, unknown>) };
 	};
