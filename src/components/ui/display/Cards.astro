@@ -10,6 +10,10 @@ export const cardKey = (card: _Card) => card.key ?? slugify(card.title);
 
 export type ColumnCount = 1 | 2 | 3 | 4 | "auto";
 
+/** The grid carries classes for these counts only, so a count derived from a
+ *  list's length is brought into range rather than falling off the lookup. */
+export const columnsFor = (count: number): ColumnCount => (count >= 4 ? 4 : count >= 3 ? 3 : count >= 2 ? 2 : 1);
+
 /** Column classes for a card grid. `auto` fills to `--column-width`. */
 export const gridColumns = (columnCount: ColumnCount): string =>
 	({

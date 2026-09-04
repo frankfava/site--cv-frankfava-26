@@ -1,9 +1,10 @@
 ---
 import { THEME } from "site:config";
+import type { Props as LayoutProps } from "@/layouts/BaseLayout.astro";
 
 interface Props {
 	/** The palette this page pins itself to, whatever the visitor prefers. */
-	locked?: typeof Astro.locals.colorMode;
+	locked?: LayoutProps["colorMode"];
 }
 
 const { locked } = Astro.props;

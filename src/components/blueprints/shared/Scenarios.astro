@@ -4,6 +4,7 @@ import ScenarioAnswer from "@/components/blueprints/shared/_partials/ScenarioAns
 
 import { SCENARIOS } from "@/data/scenarios";
 import Picker from "@/components/ui/display/Picker.astro";
+import { columnsFor } from "@/components/ui/display/Cards.astro";
 
 export interface Props extends _ModuleWrapper {}
 
@@ -16,5 +17,5 @@ const header: _ModuleHeader = {
 ---
 
 <ModuleWrapper {...{ ...props, forceLayout: "stacked", header }}>
-	<Picker {...{ key: "scenarios", cards: SCENARIOS, columnCount: Math.ceil(SCENARIOS.length / 2), panel: ScenarioAnswer }} />
+	<Picker {...{ key: "scenarios", cards: SCENARIOS, columnCount: columnsFor(Math.ceil(SCENARIOS.length / 2)), panel: ScenarioAnswer }} />
 </ModuleWrapper>
