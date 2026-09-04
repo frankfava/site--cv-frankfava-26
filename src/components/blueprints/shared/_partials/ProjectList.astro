@@ -83,7 +83,13 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 
 	<div class="flex flex-col items-center gap-2 xl:flex-row xl:gap-6">
 		<div class="flex w-full items-center gap-2 text-xl xl:w-1/4">
-			<button type="button" @click="clearFilters" x-show="isFiltered" style="display: none" class="h-auto rounded-md bg-bad px-3 text-base text-white transition-colors hover:opacity-90">
+			<button
+				type="button"
+				@click="clearFilters"
+				x-show="isFiltered"
+				style="display: none"
+				class="h-auto rounded-md bg-bad px-3 text-base text-white transition-colors hover:opacity-90 dark:text-ground"
+			>
 				Clear
 			</button>
 			{

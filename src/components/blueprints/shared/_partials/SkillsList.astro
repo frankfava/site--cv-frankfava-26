@@ -63,7 +63,13 @@ const panels = [
 
 	<div class="flex flex-col items-center gap-2 xl:flex-row xl:gap-6">
 		<div class="flex w-full items-center gap-2 text-xl xl:w-1/4">
-			<button type="button" @click="clearFilters" x-show="isFiltered" style="display: none" class="h-auto rounded-md bg-bad px-3 text-base text-white transition-colors hover:opacity-90">
+			<button
+				type="button"
+				@click="clearFilters"
+				x-show="isFiltered"
+				style="display: none"
+				class="h-auto rounded-md bg-bad px-3 text-base text-white transition-colors hover:opacity-90 dark:text-ground"
+			>
 				Clear
 			</button>
 			<span x-text="totalSkillsLabel"></span>
@@ -73,11 +79,11 @@ const panels = [
 				type="button"
 				@click="toggleMobileFilters"
 				x-bind:aria-expanded="mobileFiltersOpen"
-				class="ml-auto flex items-center gap-2 rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-white xl:hidden print:hidden"
+				class="ml-auto flex items-center gap-2 rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-white xl:hidden dark:text-ground print:hidden"
 			>
 				<Icon name="ph:funnel-duotone" class="size-4" />
 				<span x-text="mobileFiltersLabel"></span>
-				<span x-show="isFiltered" style="display: none" class="rounded bg-white px-1.5 text-xs font-bold text-accent">!</span>
+				<span x-show="isFiltered" style="display: none" class="rounded bg-white px-1.5 text-xs font-bold text-accent dark:bg-ground">!</span>
 			</button>
 
 			{
