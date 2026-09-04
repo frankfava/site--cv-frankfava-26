@@ -13,24 +13,8 @@ import { experimental_AstroContainer } from "astro/container";
 import { Icon } from "astro-icon/components";
 
 import type { AssembledBlueprint, AssembledSection, BlueprintEntry } from "@/lib/blueprints";
-import { certificationItems } from "./builders/certification";
-import { languageItems } from "./builders/language";
-import { projectItems } from "./builders/project";
-import { roleItems } from "./builders/role";
-import { skillItems } from "./builders/skill";
-import { socialItems } from "./builders/social";
-import { transferableItems } from "./builders/transferable";
-import type { AtomicBuilder, IconRenderer } from "./builders/types";
-import type { AtomicKind, SearchIndexEntry, SearchItem } from "./types";
-
-const ATOMIC_BUILDERS: Record<AtomicKind, AtomicBuilder> = {
-	skill: skillItems,
-	project: projectItems,
-	role: roleItems,
-	certification: certificationItems,
-	language: languageItems,
-	transferable: transferableItems,
-};
+import { ATOMIC_BUILDERS, socialItems } from "./builders";
+import type { AtomicKind, IconRenderer, SearchIndexEntry, SearchItem } from "./types";
 
 /** A section as the index needs it: what it is called, and where it is. */
 interface Placed {
