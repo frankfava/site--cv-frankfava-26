@@ -14,7 +14,7 @@ export interface Props extends Socials.Link {
 
 const { class: className, showText = true, linkClass, iconClass, suffixIconClass, content = await Astro.slots.render("content"), ...link } = Astro.props;
 
-const { href, text, label, icon, suffixIcon, ...rest } = link;
+const { href, text, label, icon, suffixIcon, displayable: _displayable, ...rest } = link;
 
 const linkClassList = linkClass ? (typeof linkClass === "function" ? linkClass(link) : linkClass) : undefined;
 ---
