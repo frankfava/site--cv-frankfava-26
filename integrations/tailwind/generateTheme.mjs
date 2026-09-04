@@ -158,6 +158,15 @@ ${modeVars("light")}
 .dark {
 ${modeVars("dark")}
 }
+
+/* A sheet printed from dark mode still has to come out light, and the palette
+   is one place, so print re-declares the light values on the dark root rather
+   than restating a colour at every element that carries a token. */
+@media print {
+	.dark {
+${modeVars("light")}
+	}
+}
 `;
 
 const js = `${banner}
