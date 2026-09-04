@@ -5,6 +5,6 @@
  * `buildSearchIndex`, so nothing here reaches a collection.
  */
 
-export type { AtomicBuilder, AtomicKind, AtomicTarget, IconRenderer, RowDescription, SearchIndexEntry, SearchItem, SearchItemKind } from "./types";
+export type { AtomicBuilder, AtomicKind, AtomicTarget, IconRenderer, RowContext, RowDescription, SearchIndexEntry, SearchItem, SearchItemKind } from "./types";
 export { pagesInIndex, searchIndexFor } from "./registry";
-export { buildRows, FALLBACK_ICON } from "./rows";
+export { buildRows } from "./rows";

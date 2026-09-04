@@ -104,5 +104,14 @@ export interface RowDescription {
 	body: (string | undefined)[];
 }
 
+/** Everything every row of one kind shares: what it is, what it falls back to, and where it goes. */
+export interface RowContext {
+	kind: SearchItemKind;
+	/** Drawn where the thing offers no icon of its own, or one too costly to ship. */
+	fallbackIcon: string;
+	target: AtomicTarget;
+	renderIcon: IconRenderer;
+}
+
 /** Sources every row of one atomic kind, all landing on the same target. */
 export type AtomicBuilder = (renderIcon: IconRenderer, target: AtomicTarget) => Promise<SearchItem[]>;
