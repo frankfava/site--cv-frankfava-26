@@ -28,7 +28,7 @@ const content: string = Astro.slots.has("default") ? await Astro.slots.render("d
 	<div class={cn(classes?.container)}>
 		{
 			showHeader && (
-				<div class={cn("mb-4", classes?.header)}>
+				<div class={cn("mb-[2mm]", classes?.header)}>
 					{eyebrow && (
 						<span class={cn("mb-1 flex items-center gap-1 eyebrow text-accent", classes?.eyebrow)}>
 							{icon && <Icon name={icon} class="size-3" />}

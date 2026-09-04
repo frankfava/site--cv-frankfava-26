@@ -518,10 +518,15 @@ html {
 	margin: 10mm 12mm;
 }
 
+/* Full height down the ancestors is what gives the sheet a `100%` to resolve
+   against, so one page means the page box the margins above leave behind
+   rather than a viewport the printer never sees. */
+
 @media print {
 	html:has(.one-pager),
 	html:has(.one-pager) body {
 		background: #fff;
+		height: 100%;
 	}
 }
 

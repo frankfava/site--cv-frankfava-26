@@ -18,15 +18,17 @@ const topMappings = limit ? mappings.slice(0, limit) : mappings;
 <OnePagerModule {...props}>
 	{
 		!!topMappings.length && (
-			<ul class="grid gap-3">
+			<ul class="grid gap-[2mm]">
 				{topMappings.map(({ from, to, note }) => (
-					<li class="grid gap-1 rounded-md border border-gray-200 p-3">
-						<div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
-							<span class="text-gray-600">{from.label}</span>
-							<Icon name="ph:arrow-right-duotone" class="size-4 shrink-0 text-gray-400" />
-							<span class="font-semibold text-gray-900">{to}</span>
+					<li class="grid gap-[0.4mm] text-[0.8rem]">
+						<div class="flex flex-wrap items-center gap-x-[1.5mm]">
+							<span class="text-ink-2">{from.label}</span>
+							<b class="flex items-center gap-[1.5mm] text-ink">
+								<Icon name="ph:arrow-right-duotone" class="size-3 shrink-0 text-ink-3" />
+								{to}
+							</b>
 						</div>
-						{note && <p class="m-0 text-sm leading-snug text-gray-500">{note}</p>}
+						{note && <p class="m-0 text-[0.7rem]/[1.3] text-ink-3">{note}</p>}
 					</li>
 				))}
 			</ul>

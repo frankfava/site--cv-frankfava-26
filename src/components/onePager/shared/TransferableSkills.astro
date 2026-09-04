@@ -1,5 +1,6 @@
 ---
-import { getTransferableSkills } from "@/lib/collections/transferableSkills";
+import { getTransferableSkills, getTransferableSkillsByIds } from "@/lib/collections/transferableSkills";
+import { type Role } from "@/lib/roles";
 import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
 
 interface Props extends OnePagerProps {
@@ -8,7 +9,16 @@ interface Props extends OnePagerProps {
 
 const { limit, ...props } = Astro.props;
 
-const skills = (await getTransferableSkills()).filter(({ data }) => data.listed).map((skill) => skill.data.title);
+const role = Astro.locals.blueprint as Role;
+
+// A role names the ones that argue for it. Either way the run carries titles
+// and nothing else, so an entry the collection keeps out of a list has nothing
+// left to say here - its meaning lives in the summary a list drops.
+const featured = role?.featuredTransferableSkills?.length ? await getTransferableSkillsByIds(role.featuredTransferableSkills) : await getTransferableSkills();
+const entries = featured.filter(({ data }) => data.listed);
+
+// Titles read as card headings on the page; the sheet wants the field of knowledge.
+const skills = entries.map(({ data }) => data.subject ?? data.title);
 
 const transferable = limit ? skills.slice(0, limit) : skills;
 ---

@@ -17,7 +17,9 @@ const stack = (await createSkillsManager())
 	.when(
 		role,
 		(m) => m.filter((skill) => (role?.featuredSkills ?? []).includes(skill.id)),
-		(m) => m.requireRelevance("active_stack").sort("yrsExperience", true),
+		// Nothing curates the general sheet, so the data has to: what is in the
+		// stack now, has shipped, and is not the tooling around the work.
+		(m) => m.requireRelevance("active_stack").requireRelevance("shipped").excludeRelevance("peripheral").sort("yrsExperience", true),
 	)
 	._restructure();
 

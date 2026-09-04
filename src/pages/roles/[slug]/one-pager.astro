@@ -42,13 +42,11 @@ const metadata = {
 				},
 				mappings: {
 					title: "What I bring → what the role needs",
-					content: withPropsAsync(() => import("@/components/onePager/shared/RoleTopMappings.astro"), { limit: 1 }),
-					hidden: true,
+					content: withPropsAsync(() => import("@/components/onePager/shared/RoleTopMappings.astro"), { limit: 2 }),
 				},
 				projects: {
 					title: "Featured projects",
-					content: withPropsAsync(() => import("@/components/onePager/shared/RoleProjects.astro")),
-					hidden: true,
+					content: withPropsAsync(() => import("@/components/onePager/shared/RoleProjects.astro"), { limit: 1 }),
 				},
 				skills: {
 					title: "Featured skills",
@@ -56,7 +54,7 @@ const metadata = {
 				},
 				capabilities: {
 					title: "Capabilities",
-					content: withPropsAsync(() => import("@/components/onePager/shared/Capabilities.astro")),
+					content: withPropsAsync(() => import("@/components/onePager/shared/Capabilities.astro"), { display: "text" }),
 				},
 				transferable: {
 					title: "Transferable skills",
