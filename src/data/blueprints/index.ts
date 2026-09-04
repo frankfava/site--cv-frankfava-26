@@ -1,16 +1,16 @@
 /**
  * Catalog of every page-driving blueprint.
  *
- * Each entry maps a stable slug → an assembled `BlueprintBuilder`, plus any
- * cross-cutting page-shell config (which search index the page queries, layout
- * chrome). The slug is the source of truth used by:
- *   - the page's own route, unless the entry overrides it with `path`
- *   - role landing pages (which derive their slugs from `ROLES` in `@/data/roles`)
+ * Each entry maps a stable slug → an assembled `BlueprintBuilder`, plus the
+ * page-shell config that blueprint carries: the search index its dialog
+ * queries, and its layout chrome. The slug is the page's route unless `path`
+ * overrides it.
  *
- * Where a page's search rows land is stated in `@/data/search`, against the
- * index each entry names below.
+ * Search:
+ * - An entry naming no index carries no search. The indexes themselves live in
+ * `@/data/search`.
  *
- * Every blueprint file (static or role) exports its own `entry`.
+ * Every blueprint file exports its own `entry`.
  */
 
 import { buildBlueprintEntry, type BlueprintEntry, type BlueprintComponentSchema } from "@/lib/blueprints";
@@ -50,7 +50,6 @@ export const work = buildBlueprintEntry({
 	} as const satisfies BlueprintComponentSchema,
 	config: {
 		search: { index: "site" },
-		layout: { bay: "closed" },
 	},
 });
 
