@@ -7,7 +7,7 @@
  * overrides it.
  *
  * Search:
- * - An entry naming no index carries no search. The indexes themselves live in
+ * - An entry naming no index carries no search. The indicies themselves live in
  * `@/data/search`.
  *
  * Every blueprint file exports its own `entry`.

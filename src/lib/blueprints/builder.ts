@@ -356,7 +356,7 @@ export class BlueprintSection extends BlueprintPartSection<SectionData> {
 		return this.getSections().length > 0;
 	}
 
-	/** Negative indexes count back from the end. */
+	/** Negative indicies count back from the end. */
 	getSection(index: number): BlueprintSectionProxy | undefined {
 		const sections = this.getSections();
 		const section = sections.at(index);

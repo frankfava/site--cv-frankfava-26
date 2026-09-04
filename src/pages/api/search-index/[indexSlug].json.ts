@@ -10,18 +10,18 @@
 
 import type { APIRoute } from "astro";
 import { blueprints } from "@/data/blueprints";
-import { searchIndexes } from "@/data/search";
+import { searchIndicies } from "@/data/search";
 import { ATOMIC_BUILDERS, socialItems } from "@/data/search/builders";
 import { buildSearchIndex } from "@/lib/search/build";
 import { pagesInIndex } from "@/lib/search";
 
-export const getStaticPaths = () => Object.keys(searchIndexes).map((indexSlug) => ({ params: { indexSlug } }));
+export const getStaticPaths = () => Object.keys(searchIndicies).map((indexSlug) => ({ params: { indexSlug } }));
 
 export const GET: APIRoute = async ({ params }) => {
-	const index = searchIndexes[params.indexSlug!];
+	const index = searchIndicies[params.indexSlug!];
 	if (!index) return new Response(JSON.stringify([]), { status: 404, headers: { "Content-Type": "application/json" } });
 
-	const items = await buildSearchIndex(index, pagesInIndex(Object.values(blueprints), searchIndexes, index.slug), { atomics: ATOMIC_BUILDERS, socials: socialItems });
+	const items = await buildSearchIndex(index, pagesInIndex(Object.values(blueprints), searchIndicies, index.slug), { atomics: ATOMIC_BUILDERS, socials: socialItems });
 
 	return new Response(JSON.stringify(items), { headers: { "Content-Type": "application/json" } });
 };

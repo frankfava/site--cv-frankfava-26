@@ -17,7 +17,7 @@ import { destinations } from "@/lib/fullRecord";
 import type { Link } from "@/types";
 import Search from "@/components/ui/search/Search.astro";
 import SearchButton from "@/components/ui/search/SearchButton.astro";
-import { searchIndexes } from "@/data/search";
+import { searchIndicies } from "@/data/search";
 import { searchIndexFor } from "@/lib/search";
 
 export interface Props extends LayoutProps {
@@ -53,9 +53,7 @@ if (fullHeight != undefined) {
 
 const showFooter = entry?.config?.layout?.showFooter ?? showFooterProp;
 
-// A page carries search only where its blueprint names an index, which is what
-// keeps it off the pages that name none.
-const searchIndex = searchIndexFor(searchIndexes, entry);
+const searchIndex = searchIndexFor(searchIndicies, entry);
 
 const layoutProps: LayoutProps = {
 	...rest,

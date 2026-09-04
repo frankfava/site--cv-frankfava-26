@@ -29,6 +29,6 @@ export const site: SearchIndexEntry = {
 	showSocials: true,
 };
 
-export const searchIndexes: Record<string, SearchIndexEntry> = { site };
+export const searchIndicies: Record<string, SearchIndexEntry> = { site };
 
-export const searchIndexSlugs: string[] = Object.keys(searchIndexes);
+export const searchIndexSlugs: string[] = Object.keys(searchIndicies);
