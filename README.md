@@ -2,6 +2,8 @@
 
 A comprehensive CV, build using Astro, AlpineJS and TailwindCSS.
 
+[https://frankfava.netlify.app/](https://frankfava.netlify.app/)
+
 <details open>
 <summary>Table of Contents</summary>
 
@@ -34,7 +36,3 @@ You can create an optimized production build with:
 ```shell
 npm run build
 ```
-
-Now, your website is ready to be deployed. All generated files are located at
-`dist` folder, which you can deploy the folder to any hosting service you
-prefer.
