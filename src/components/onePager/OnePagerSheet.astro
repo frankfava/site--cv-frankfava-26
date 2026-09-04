@@ -24,7 +24,7 @@ const { eyebrow, subtitle, lead, footnote, showHomeInFooter, onlinePath = "", sh
 const homeLink = String(getCanonical("/", { removeProtocol: true }));
 const pathLink = getCanonical(onlinePath);
 
-const contact = SOCIALS.filter(([_, social]) => social?.displayable ?? true).toArray();
+const contact = SOCIALS.displayable();
 ---
 
 <div

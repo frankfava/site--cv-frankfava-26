@@ -17,6 +17,11 @@ export class SocialsManager {
 		return Object.values(this.get());
 	}
 
+	/** Links whose text a written-out list shows */
+	displayable(): Socials.Link[] {
+		return this.toArray().filter((link) => link.displayable !== false);
+	}
+
 	getPlatforms(): Socials.LinkKey[] {
 		return Object.keys(this.socials) as Socials.LinkKey[];
 	}
@@ -32,10 +37,9 @@ export class SocialsManager {
 		return new SocialsManager(this.socials);
 	}
 
-	/** Filter certification by predicate */
-	filter(predicate: ([key, item]: [Socials.LinkKey, Socials.Link]) => boolean): this {
-		this.socials = Object.fromEntries(Object.entries(this.socials).filter(predicate));
-		return this;
+	/** Narrow the platforms by predicate, leaving this manager untouched */
+	filter(predicate: ([key, item]: [Socials.LinkKey, Socials.Link]) => boolean): SocialsManager {
+		return new SocialsManager(Object.fromEntries(Object.entries(this.socials).filter(predicate)));
 	}
 
 	private mapPlatforms(socials: Socials.Links): Socials.Links {

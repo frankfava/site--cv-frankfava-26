@@ -12,8 +12,6 @@ export interface Props {
 }
 
 const { hideName, showLocation = true, showCitizenships = true, imgSize = 200, class: className } = Astro.props;
-
-const socials = SOCIALS.clone();
 ---
 
 <div class="mx-auto max-w-md border bg-primary-600 text-white 2xl:max-w-sm" class:list={className}>
@@ -45,20 +43,17 @@ const socials = SOCIALS.clone();
 		<slot name="beforeList" />
 		<ul class="flex flex-col gap-3">
 			{
-				socials
-					.filter(([k, _i]) => k !== "vcard")
-					.toArray()
-					.map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
-						<li class="flex items-center gap-3 hover:text-gray-300">
-							<Icon name={icon} class="size-6 min-h-6 min-w-6" />
-							<a href={href} aria-label={label} title={label} class:list={["font-normal text-white hover:text-gray-100", className]} target="_blank" set:html={text} {...rest} />
-							{suffixIcon && (
-								<span>
-									<Icon name={suffixIcon} class="size-5 min-h-5 min-w-5" />
-								</span>
-							)}
-						</li>
-					))
+				SOCIALS.displayable().map(({ href, icon, label, text, class: className, suffixIcon, ...rest }) => (
+					<li class="flex items-center gap-3 hover:text-gray-300">
+						<Icon name={icon} class="size-6 min-h-6 min-w-6" />
+						<a href={href} aria-label={label} title={label} class:list={["font-normal text-white hover:text-gray-100", className]} target="_blank" set:html={text} {...rest} />
+						{suffixIcon && (
+							<span>
+								<Icon name={suffixIcon} class="size-5 min-h-5 min-w-5" />
+							</span>
+						)}
+					</li>
+				))
 			}
 			{
 				showLocation && (
