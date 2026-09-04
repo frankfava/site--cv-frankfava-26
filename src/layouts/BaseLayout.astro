@@ -21,10 +21,11 @@ export interface Props {
 	textDirection?: typeof I18N.textDirection;
 	htmlClass?: HTMLAttributes<"html">["class:list"];
 	bodyClass?: HTMLAttributes<"body">["class:list"];
+	/** Pin the page to one palette. Left off, the visitor's choice applies and the switcher ships. */
 	colorMode?: "light" | "dark";
 }
 
-const { metadata = {}, language: languageProp = "", textDirection: textDirectionProp = "", htmlClass = "", bodyClass = "", colorMode = "light" } = Astro.props;
+const { metadata = {}, language: languageProp = "", textDirection: textDirectionProp = "", htmlClass = "", bodyClass = "", colorMode } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
