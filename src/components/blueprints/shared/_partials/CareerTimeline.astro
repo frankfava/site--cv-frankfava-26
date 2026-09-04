@@ -110,7 +110,7 @@ const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => yea
 						x={chartX(label.i, count)}
 						y={CHART.H - 11}
 						text-anchor="middle"
-						fill="var(--c-ink-3)"
+						fill="var(--c-ink-2)"
 						font-size="11"
 						x-data="careerYearLabel"
 						data-index={label.i}
@@ -153,10 +153,12 @@ const yearLabels = years.map((year, i) => ({ ...year, i })).filter((year) => yea
 		</svg>
 
 		<label class="sr-only" for="career-year">Year</label>
-		<input class="mt-1 block w-full accent-accent" id="career-year" type="range" min="0" max={count - 1} value={openingAt} step="1" x-bind:value="index" x-on:input="setIndex" />
+		<div class="mt-2 pr-[1%] pl-[3%] lg:mt-1">
+			<input class="block w-full accent-accent" id="career-year" type="range" min="0" max={count - 1} value={openingAt} step="1" x-bind:value="index" x-on:input="setIndex" />
+		</div>
 	</div>
 
-	<div class="flex flex-wrap gap-4.5 px-4.5 pt-1.5 pb-3">
+	<div class="hidden flex-wrap gap-4.5 px-4.5 pt-1.5 pb-3 lg:flex">
 		{
 			CAREER_SERIES.map((series) => (
 				<span class="flex items-center gap-1.5 font-mono text-xs font-medium tracking-wider text-ink-3 uppercase">

@@ -1,5 +1,5 @@
 /** Geometry for the career timeline: the line chart, and the read-out ring. */
-export const CHART = { W: 980, H: 260, LEFT: 40, RIGHT: 16, TOP: 14, BOTTOM: 32 };
+export const CHART = { W: 980, H: 280, LEFT: 40, RIGHT: 16, TOP: 0, BOTTOM: 32 };
 
 export function chartX(index: number, count: number): number {
 	return CHART.LEFT + (index * (CHART.W - CHART.LEFT - CHART.RIGHT)) / (count - 1);
