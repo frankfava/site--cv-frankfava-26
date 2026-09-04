@@ -27,7 +27,7 @@ const contact = SOCIALS.filter(([_, social]) => social?.displayable ?? true).toA
 ---
 
 <div
-	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-8 font-secondary text-[0.82rem]/[1.38] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]"
+	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-8 font-secondary text-[0.85rem]/[1.5] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]"
 >
 	<article
 		class="flex h-[297mm] w-[210mm] max-w-full flex-col gap-4 overflow-scroll border border-line bg-surface p-[10mm_12mm] shadow-lg print:min-h-screen print:w-auto print:gap-[3.4mm] print:overflow-visible print:border-0 print:p-0 print:shadow-none"
@@ -80,7 +80,7 @@ const contact = SOCIALS.filter(([_, social]) => social?.displayable ?? true).toA
 
 		{
 			(footnote || showHomeInFooter) && (
-				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.78rem] print:break-inside-avoid">
+				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.8rem] print:break-inside-avoid">
 					{footnote && <span class="font-normal text-ink">{footnote}</span>}
 					{showHomeInFooter && <span class="ml-auto font-mono text-ink-2">{homeLink}</span>}
 				</footer>
