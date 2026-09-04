@@ -16,8 +16,8 @@ const isHidden = section.hidden || !(await isVisible(part));
 {
 	!isHidden && (
 		<section class:list={className}>
-			<h2 class="mb-[1.8mm] font-mono text-[0.68rem]/[1.05] font-medium tracking-[0.11em] text-ink-3 uppercase">{section.title}</h2>
-			{part ? <part.default /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
+			<h2 class="mb-4 text-lg/[1.05]">{section.title}</h2>
+			{part ? <part.default {...section.props} /> : typeof section.content === "string" && <Fragment set:html={section.content} />}
 		</section>
 	)
 }

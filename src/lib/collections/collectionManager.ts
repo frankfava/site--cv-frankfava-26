@@ -22,12 +22,27 @@ export class CollectionManager<TId extends string, TData extends Record<string, 
 	}
 
 	filter(predicate: (item: TEntry) => boolean): this {
-		this.list = this.list.filter(predicate);
+		this.list = this.list.filter(predicate) as TEntry[];
+		return this;
+	}
+
+	map(callback: (item: TEntry) => unknown): this {
+		this.list = this.list.map(callback) as TEntry[];
 		return this;
 	}
 
 	_restructure(): TSanitised[] {
 		return this.list.map((item) => this.restructureItem(item));
+	}
+
+	/** Branch a chain on a condition. Every operation mutates, so the chain continues either way. */
+	when(condition: unknown, callback: (manager: this) => unknown, fallback: (manager: this) => unknown = () => undefined): this {
+		if (condition) {
+			callback(this);
+		} else {
+			fallback(this);
+		}
+		return this;
 	}
 
 	_getKeys(): TId[] {
