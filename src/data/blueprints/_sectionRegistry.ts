@@ -206,10 +206,11 @@ export const skills: BlueprintComponent = {
 export const fullRecord: BlueprintComponent = {
 	id: "full-record",
 	title: "The full record, one page at a time",
-	mainMenuLabel: "The full record",
+	mainMenuLabel: "More information",
+	showInSidebar: false,
 	eyebrow: "Go deeper",
 	icon: "ph:books-duotone",
-	description: "Each of these carries the detail a summary has to leave out.",
+	description: "Dive deeper into my work, my skills, my experience, and my certifications.",
 	content: async () => import("@/components/blueprints/shared/FullRecord.astro"),
 };
 

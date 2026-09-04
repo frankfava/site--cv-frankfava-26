@@ -13,6 +13,8 @@ import IndexRail from "@/components/shared/menu/IndexRail.astro";
 import Tagline from "@/components/shared/Tagline.astro";
 import Availability from "@/components/shared/Availability.astro";
 import PersonJsonLd from "@/components/shared/PersonJsonLd.astro";
+import { destinations } from "@/lib/fullRecord";
+import type { Link } from "@/types";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
@@ -57,6 +59,12 @@ const layoutProps: LayoutProps = {
 	footer: { showSocialText: true, ...footer },
 };
 
+const fullRecord: Link[] = (await destinations()).map((destination) => ({
+	text: destination.title,
+	icon: destination.titleIcon,
+	href: destination.link?.href ?? "",
+}));
+
 const _header = await Astro.slots.render("header");
 const _footer = await Astro.slots.render("footer");
 const _sidebarToggle = await Astro.slots.render("_sidebarToggle");
@@ -92,7 +100,7 @@ const _rail = await Astro.slots.render("rail");
 				<IndexBay
 					slot="sidebar"
 					{...{
-						navLinks: layoutProps.header?.links ?? [],
+						navLinks: layoutProps.header?.links ?? fullRecord,
 						links: contentLinks,
 						...sidebar,
 					}}

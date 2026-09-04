@@ -58,8 +58,6 @@ const showFit = useLinks.some((link) => link.href === "#capability");
 
 	{DISPLAY.showAvailability && <Availability {...ABOUT.availability} class="mx-auto" />}
 
-	{!!navLinks.length && <BayLinkCard {...{ title: "Links", id: "nav-links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
-
 	{
 		!!useLinks.length && (
 			<BayLinkCard {...{ title: "On this page", id: "index-nav", navClass: "toc", useNestedLinks, links: useLinks, lead: linkLeadType ?? "numbers" }}>
@@ -69,6 +67,8 @@ const showFit = useLinks.some((link) => link.href === "#capability");
 			</BayLinkCard>
 		)
 	}
+
+	{!!navLinks.length && <BayLinkCard {...{ title: "Links", id: "nav-links", links: navLinks as BayLinkCardProps["links"], lead: "numbers" }} />}
 
 	{showFit && <FitDial />}
 
