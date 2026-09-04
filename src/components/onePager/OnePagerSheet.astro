@@ -28,7 +28,7 @@ const contact = SOCIALS.displayable();
 ---
 
 <div
-	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-4 font-secondary text-[0.85rem]/[1.5] text-ink sm:p-8 print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]"
+	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-4 font-secondary text-[0.95rem]/[1.55] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact] paper:p-8 sheet:text-[0.85rem]/[1.5]"
 >
 	<ToggleTheme
 		{...{
@@ -38,64 +38,62 @@ const contact = SOCIALS.displayable();
 		}}
 	/>
 
-	<div class="sheet-frame">
-		<article
-			class="sheet flex h-[297mm] w-[210mm] flex-col gap-4 overflow-scroll border border-line bg-surface p-[10mm_12mm] shadow-lg print:h-full print:w-auto print:gap-[3.4mm] print:overflow-visible print:border-0 print:p-0 print:shadow-none"
-		>
-			<header class="flex flex-col justify-center gap-1 border-b border-line pb-3">
-				<Logo class="mb-3 max-h-[15mm] w-full" titleClass="text-2xl">
-					<p class="font-mono text-xs text-ink-2 uppercase">{subtitle}</p>
-				</Logo>
+	<article
+		class="flex w-full max-w-full flex-col gap-4 border border-line bg-surface p-5 shadow-lg print:h-full print:w-auto print:gap-[3.4mm] print:overflow-visible print:border-0 print:p-0 print:shadow-none paper:h-(--sheet-h) paper:w-(--sheet-w) paper:overflow-scroll paper:p-[10mm_12mm]"
+	>
+		<header class="flex flex-col justify-center gap-1 border-b border-line pb-3">
+			<Logo class="mb-3 max-h-[15mm] w-full" titleClass="text-2xl">
+				<p class="font-mono text-xs text-ink-2 uppercase">{subtitle}</p>
+			</Logo>
 
-				<p class="font-mono text-xs text-ink-2 uppercase">{eyebrow}</p>
-
-				{
-					!!contact.length && (
-						<ul class="flex flex-wrap text-ink-2">
-							{contact.map((entry) => (
-								<li class="not-first:before:px-[1.5mm] not-first:before:text-ink-3 not-first:before:content-['·']">
-									<a href={entry.href}>{entry.text}</a>
-								</li>
-							))}
-						</ul>
-					)
-				}
-
-				{
-					homeLink !== pathLink && (
-						<div class="mt-1">
-							<a href={getCanonical(onlinePath)} class="text-[0.9rem] text-accent">
-								{getCanonical(onlinePath)}
-							</a>
-						</div>
-					)
-				}
-			</header>
-
-			<p class="text-ink" set:html={lead} />
-
-			<slot>
-				{
-					sheet && (
-						<PartsDisplay
-							{...{
-								sheet: sheet.blueprint.assemble(),
-								sectionClass: "print:break-inside-avoid",
-								class: "space-y-6",
-							}}
-						/>
-					)
-				}
-			</slot>
+			<p class="font-mono text-xs text-ink-2 uppercase">{eyebrow}</p>
 
 			{
-				(footnote || showHomeInFooter) && (
-					<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.8rem] print:break-inside-avoid">
-						{footnote && <span class="font-normal text-ink">{footnote}</span>}
-						{showHomeInFooter && <span class="ml-auto font-mono text-ink-2">{homeLink}</span>}
-					</footer>
+				!!contact.length && (
+					<ul class="flex flex-wrap text-ink-2">
+						{contact.map((entry) => (
+							<li class="not-first:before:px-[1.5mm] not-first:before:text-ink-3 not-first:before:content-['·']">
+								<a href={entry.href}>{entry.text}</a>
+							</li>
+						))}
+					</ul>
 				)
 			}
-		</article>
-	</div>
+
+			{
+				homeLink !== pathLink && (
+					<div class="mt-1">
+						<a href={getCanonical(onlinePath)} class="text-[0.9rem] text-accent">
+							{getCanonical(onlinePath)}
+						</a>
+					</div>
+				)
+			}
+		</header>
+
+		<p class="text-ink" set:html={lead} />
+
+		<slot>
+			{
+				sheet && (
+					<PartsDisplay
+						{...{
+							sheet: sheet.blueprint.assemble(),
+							sectionClass: "print:break-inside-avoid",
+							class: "space-y-6",
+						}}
+					/>
+				)
+			}
+		</slot>
+
+		{
+			(footnote || showHomeInFooter) && (
+				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.8rem] print:break-inside-avoid">
+					{footnote && <span class="font-normal text-ink">{footnote}</span>}
+					{showHomeInFooter && <span class="ml-auto font-mono text-ink-2">{homeLink}</span>}
+				</footer>
+			)
+		}
+	</article>
 </div>

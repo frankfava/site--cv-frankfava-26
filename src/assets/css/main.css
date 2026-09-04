@@ -8,6 +8,34 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------- one-pager sheet geometry ---------- */
+
+/* One A4 page. This is where the sheet's dimensions live; everything
+   paper-sized reads them rather than restating a page size. */
+:root {
+	--sheet-w: 210mm;
+	--sheet-h: 297mm;
+}
+
+/* The paper mock-up is a screen affordance - a whole page shown at true size -
+   so it appears only once the viewport can hold one along with the surround it
+   sits on (`4rem`, the wrapper's `paper:p-8`). It is screen-only because a
+   print media width sits below A4 and the printer already has its own page
+   box. A media query cannot read a custom property, which is the one reason
+   `210mm` appears here as well as above. */
+@custom-variant paper (@media screen and (width >= calc(210mm + 4rem)));
+
+/* Wherever the sheet is laid out at a full A4 width - that mock-up, and every
+   printed page - so a column set holds on paper without a second declaration. */
+@custom-variant sheet {
+	@variant paper {
+		@slot;
+	}
+	@media print {
+		@slot;
+	}
+}
+
 @theme {
 	--text-base--line-height: 1.625;
 }
@@ -530,40 +558,6 @@ html {
 	html:has(.one-pager) body {
 		background: #fff;
 		height: 100%;
-	}
-}
-
-/* The sheet is a picture of A4 and never re-lays-out, so a screen narrower than
-   the page shrinks the whole thing: what the reader sees is what leaves the
-   printer. The frame takes the space the scaled sheet occupies, since a
-   transform leaves the layout box behind, and `tan(atan2())` is the one way CSS
-   divides a length by a length to reach the bare number a scale takes. */
-
-.one-pager .sheet-frame {
-	container-type: inline-size;
-	width: 100%;
-	max-width: 210mm;
-	aspect-ratio: 210 / 297;
-	/* The sheet still lays out at full size behind the scale, and a grid item
-	   takes its content as a floor, so the ratio only holds once that floor
-	   is lifted. */
-	overflow: hidden;
-}
-
-.one-pager .sheet {
-	transform-origin: top left;
-	scale: min(1, tan(atan2(100cqw, 210mm)));
-}
-
-/* On paper the page box is the frame, so the sheet is a child of the document
-   again and sits at its own size. */
-@media print {
-	.one-pager .sheet-frame {
-		display: contents;
-	}
-
-	.one-pager .sheet {
-		scale: 1;
 	}
 }
 
