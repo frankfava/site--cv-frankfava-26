@@ -25,9 +25,9 @@ export interface BlueprintConfig {
 		index?: string;
 	};
 	/**
-	 * Per-blueprint chrome (sidebar / footer visibility, etc.) consumed by
-	 * `BlueprintLayout`. Page-level props at the call-site override these - the
-	 * blueprint just declares the *default* chrome for any page that renders it.
+	 * Per-blueprint chrome (sidebar / footer visibility, etc.).
+	 * Page-level props at the call-site override these - the blueprint just
+	 * declares the *default* chrome for any page that renders it.
 	 */
 	layout?: {
 		showSidebar?: boolean;

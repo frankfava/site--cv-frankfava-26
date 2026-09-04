@@ -198,8 +198,6 @@ export async function buildSearchIndex(index: SearchIndexEntry, pages: Blueprint
 			return {
 				id: `${entry.slug}:${section.id}`,
 				url: `${entry.path}#${section.id}`,
-				// A section's heading is written to be read in place and runs to a
-				// sentence. The name the page is navigated by is what fits a row.
 				title: section.mainMenuLabel || heading,
 				description: section.header?.subtitle ?? "",
 				iconHtml: await renderIcon(section.icon),

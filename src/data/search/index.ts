@@ -1,10 +1,17 @@
 /**
  * Catalog of every search index.
  *
- * An index is a scope rather than a page. It states where its atomic rows land
- * and what its dialog says; the pages it covers are the blueprints that name it
- * in their own `config.search`, so a page's search is switched on and off where
- * the rest of that page's chrome is declared.
+ * An index is a scope, which can be applied to multiple pages via
+ * its blueprint's `config.search` property.
+ *
+ * An "Atomic" is a row in the search index. It is a single item that
+ * is searched and displayed. You define an atomic by providing a
+ * function that builds the row, defined in `src/data/search/builders.ts`.
+ *
+ * Define atomics below by setting the `atomics` property to an object with the
+ * atomic kind as the key and the anchor as the value. The anchor is the id of the
+ * section that the atomic will be added to. The section is defined in the blueprint,
+ * normally from the _sectionRegistry.ts file.
  */
 
 import type { SearchIndexEntry } from "@/lib/search";
@@ -12,10 +19,6 @@ import type { SearchIndexEntry } from "@/lib/search";
 /** The content pages, searched as one. */
 export const site: SearchIndexEntry = {
 	slug: "site",
-	// One anchor per kind, naming no page. The build resolves each against the
-	// pages this index covers and fails on anything but a single match, so a
-	// section that is renamed, dropped or repeated is caught rather than shipped
-	// as a link that lands in the wrong place.
 	atomics: {
 		skill: "skills",
 		project: "projects",

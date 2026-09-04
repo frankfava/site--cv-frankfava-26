@@ -1,11 +1,9 @@
 /**
  * One JSON file per search index, written at build.
  *
- * `getStaticPaths` enumerates the search catalog rather than the blueprint one,
- * because an index is a scope and a scope can span pages: the six content pages
- * share a single file, fetched once and reused as the visitor moves between
- * them. A page that names no index is served by nothing here, which is what
- * keeps the one-pagers and the role pages out.
+ * Each search index is generated on build as we the search catalog is
+ * enumerated by `getStaticPaths` which is populated by the index catalog
+ * that we defined in `src/data/search/index.ts`.
  */
 
 import type { APIRoute } from "astro";
