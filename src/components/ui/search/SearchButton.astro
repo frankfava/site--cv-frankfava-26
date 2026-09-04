@@ -1,0 +1,33 @@
+---
+import SocialLinkButton, { type Props as SocialLinkButtonProps } from "@/components/ui/social/SocialLinkButton.astro";
+import { Icon } from "astro-icon/components";
+
+export interface Props extends Omit<SocialLinkButtonProps, "href" | "text"> {
+	href?: string;
+	text?: string;
+	/** The bare glyph. Off, the button also carries its label and the key combo. */
+	plainIconOnly?: boolean;
+}
+
+const { icon = "ph:magnifying-glass", href = "#", text = "Search", showText = false, plainIconOnly = true, ...rest } = Astro.props;
+---
+
+<SocialLinkButton id="search-button" search-toggle {...{ href, icon, text, showText, ...rest }}>
+	{
+		!plainIconOnly && (
+			<Fragment slot="content">
+				<Icon name={icon} class="size-4" />
+				<span class="font-normal">{rest.label ?? text}</span>
+				<span class="flex items-center justify-center gap-x-1">
+					<kbd data-search-mod-key class="pointer-events-none rounded border border-line bg-sunk px-1.5 py-0.5 text-[0.9em] text-ink-3 select-none">
+						⌘
+					</kbd>{" "}
+					+{" "}
+					<kbd data-search-activation-key class="pointer-events-none rounded border border-line bg-sunk px-1.5 py-0.5 text-[0.9em] text-ink-3 select-none">
+						K
+					</kbd>
+				</span>
+			</Fragment>
+		)
+	}
+</SocialLinkButton>

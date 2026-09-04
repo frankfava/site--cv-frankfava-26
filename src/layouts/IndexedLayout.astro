@@ -15,6 +15,10 @@ import Availability from "@/components/shared/Availability.astro";
 import PersonJsonLd from "@/components/shared/PersonJsonLd.astro";
 import { destinations } from "@/lib/fullRecord";
 import type { Link } from "@/types";
+import Search from "@/components/ui/search/Search.astro";
+import SearchButton from "@/components/ui/search/SearchButton.astro";
+import { searchIndexes } from "@/data/search";
+import { searchIndexFor } from "@/lib/search";
 
 export interface Props extends LayoutProps {
 	blueprint?: BlueprintEntry;
@@ -48,6 +52,10 @@ if (fullHeight != undefined) {
 }
 
 const showFooter = entry?.config?.layout?.showFooter ?? showFooterProp;
+
+// A page carries search only where its blueprint names an index, which is what
+// keeps it off the pages that name none.
+const searchIndex = searchIndexFor(searchIndexes, entry);
 
 const layoutProps: LayoutProps = {
 	...rest,
@@ -86,6 +94,7 @@ const _rail = await Astro.slots.render("rail");
 
 	<Fragment slot="beforeActions">
 		{DISPLAY.showAvailability && <Availability {...ABOUT.availability} class="mr-3" />}
+		{searchIndex && <SearchButton />}
 		<slot name="beforeActions" />
 	</Fragment>
 	<slot name="afterActions" slot="afterActions" />
@@ -119,6 +128,7 @@ const _rail = await Astro.slots.render("rail");
 		<div class="scrim" aria-hidden="true" data-sidebar-scrim></div>
 		{useRail && (_rail?.trim() ? <Fragment set:html={_rail} /> : <IndexRail links={contentLinks} />)}
 		<slot name="afterFooter" />
+		{searchIndex && <Search index={searchIndex} />}
 		<PersonJsonLd />
 	</Fragment>
 </PageLayout>
