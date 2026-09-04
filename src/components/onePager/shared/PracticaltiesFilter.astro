@@ -1,0 +1,38 @@
+---
+import { ABOUT } from "site:config";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	filters?: { label: string; value: string }[];
+}
+
+const {
+	filters = [
+		{ label: "Based", value: (ABOUT.location?.city ? `${ABOUT.location.city} &middot; ` : "") + "Remote or hybrid" },
+		{ label: "Rights", value: ABOUT.workRights },
+		{
+			label: "Language",
+			value: ABOUT.linguistics.languages.map((language) => language.language + (language.fluency != "Native" ? ` (${language.fluency})` : "")).join(", "),
+		},
+		{ label: "Notice", value: ABOUT.availability?.noticeRequired },
+	],
+	...props
+} = Astro.props;
+
+const filtered = filters.filter((filter) => filter.value != undefined);
+---
+
+<OnePagerModule {...{ ...props, showHeader: false }}>
+	{
+		!!filtered.length && (
+			<dl class="grid grid-cols-[repeat(auto-fit,minmax(31mm,1fr))] gap-[2.5mm] border-y border-line-2 py-[3mm]">
+				{filtered.map((filter) => (
+					<div>
+						<dt class="mb-[1mm] font-mono text-[0.62rem] tracking-[0.08em] text-ink-3 uppercase">{filter.label}</dt>
+						<dd class="text-[0.85rem] font-semibold text-ink" set:html={filter.value} />
+					</div>
+				))}
+			</dl>
+		)
+	}
+</OnePagerModule>

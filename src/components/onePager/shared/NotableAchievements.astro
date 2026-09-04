@@ -1,0 +1,28 @@
+---
+import { getWorkHistory } from "@/lib/collections/workHistory";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {}
+
+const { ...props } = Astro.props;
+
+const workHistory = await getWorkHistory();
+const notableAchievements = workHistory
+	.flatMap((entry) => {
+		const positions = entry.data.featuredAchievements ?? [];
+		return positions.map((pos) => entry.data.achievements?.[pos - 1]).filter((a): a is string => !!a);
+	})
+	.slice(0, 5);
+---
+
+<OnePagerModule {...props}>
+	{
+		!!notableAchievements.length && (
+			<ul class="ml-4 list-outside list-disc space-y-2">
+				{notableAchievements.map((p) => (
+					<li set:html={p} />
+				))}
+			</ul>
+		)
+	}
+</OnePagerModule>

@@ -1,0 +1,33 @@
+---
+import { createWorkHistoryManager } from "@/lib/collections/workHistory";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	limit?: number;
+}
+
+const { limit, ...props } = Astro.props;
+
+const timeline = (await createWorkHistoryManager()).sort()._restructure();
+const recent = limit ? timeline.slice(0, limit) : timeline;
+---
+
+<OnePagerModule {...props}>
+	{
+		!!recent.length && (
+			<ul>
+				{recent.map((role) => (
+					<li class="grid grid-cols-[24mm_1fr] gap-x-[4mm] border-t border-line-2 py-[1.1mm] text-[0.82rem] first:border-t-0">
+						<span class="pt-[0.5mm] font-mono text-[0.7rem] whitespace-nowrap text-ink-3">
+							{role.startDate.getFullYear()} &ndash; {role.endDate ? role.endDate.getFullYear() : "now"}
+						</span>
+						<span>
+							<b class="text-ink">{role.role}</b>
+							<span class="text-[0.78rem] text-ink-2 before:text-ink-3 before:content-['_·_']">{role.company}</span>
+						</span>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</OnePagerModule>

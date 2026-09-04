@@ -1,0 +1,32 @@
+---
+import { type Role } from "@/lib/roles";
+import { getCollection } from "astro:content";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	limit?: number;
+}
+
+const { limit = 1, ...props } = Astro.props;
+
+const role = Astro.locals.blueprint as Role;
+
+const featuredProjects = role?.featuredProjects ?? [];
+const allProjects = await getCollection("projects");
+const projects = featuredProjects.map((id) => allProjects.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p);
+const topProjects = limit ? projects.slice(0, limit) : projects;
+---
+
+<OnePagerModule {...props}>
+	{
+		!!topProjects.length &&
+			topProjects.map(({ data }) => (
+				<div class="grid gap-3 rounded-md border border-gray-200 p-4">
+					<div>
+						<h4 class="m-0 mb-2 text-[1em] font-semibold text-primary-700">{data.title}</h4>
+						{data.summary && <p class="m-0 text-gray-500">{data.summary}</p>}
+					</div>
+				</div>
+			))
+	}
+</OnePagerModule>

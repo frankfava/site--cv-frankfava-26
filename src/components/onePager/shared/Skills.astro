@@ -1,0 +1,43 @@
+---
+import { type Role } from "@/lib/roles";
+import { createSkillsManager } from "@/lib/collections/skills";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props extends OnePagerProps {
+	limit?: number;
+	pills?: boolean;
+}
+
+const { limit, pills = true, ...props } = Astro.props;
+
+const role = Astro.locals.blueprint as Role;
+
+const stack = (await createSkillsManager())
+	.when(
+		role,
+		(m) => m.filter((skill) => (role?.featuredSkills ?? []).includes(skill.id)),
+		(m) => m.requireRelevance("active_stack").sort("yrsExperience", true),
+	)
+	._restructure();
+
+const skills = limit ? stack.slice(0, limit) : stack;
+---
+
+<OnePagerModule {...props}>
+	{
+		!!skills.length &&
+			(pills ? (
+				<ul class="grid gap-1 text-sm text-gray-600 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+					{skills.map(({ icon, label }) => (
+						<li class="inline-flex items-center gap-1 rounded border border-gray-200 bg-gray-100 px-2 py-1 text-sm">
+							{icon && <Icon name={icon} class="size-5" />}
+							<span>{label}</span>
+						</li>
+					))}
+				</ul>
+			) : (
+				<p class="text-[0.78rem]/[1.42] text-ink-2">{skills.map((skill) => skill.label).join(" · ")}</p>
+			))
+	}
+</OnePagerModule>

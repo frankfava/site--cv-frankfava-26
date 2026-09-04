@@ -1,0 +1,35 @@
+---
+import { type Role } from "@/lib/roles";
+import { Icon } from "astro-icon/components";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	limit?: number;
+}
+
+const { limit = 2, ...props } = Astro.props;
+
+const role = Astro.locals.blueprint as Role;
+
+const mappings = role?.mappings ?? [];
+const topMappings = limit ? mappings.slice(0, limit) : mappings;
+---
+
+<OnePagerModule {...props}>
+	{
+		!!topMappings.length && (
+			<ul class="grid gap-3">
+				{topMappings.map(({ from, to, note }) => (
+					<li class="grid gap-1 rounded-md border border-gray-200 p-3">
+						<div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+							<span class="text-gray-600">{from.label}</span>
+							<Icon name="ph:arrow-right-duotone" class="size-4 shrink-0 text-gray-400" />
+							<span class="font-semibold text-gray-900">{to}</span>
+						</div>
+						{note && <p class="m-0 text-sm leading-snug text-gray-500">{note}</p>}
+					</li>
+				))}
+			</ul>
+		)
+	}
+</OnePagerModule>

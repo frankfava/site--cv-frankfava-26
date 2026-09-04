@@ -1,0 +1,90 @@
+---
+/**
+ * The one-page version.
+ */
+import type { BlueprintPartEntry } from "@/lib/blueprints";
+import { SOCIALS } from "site:config";
+import { getCanonical } from "@/utils/permalinks";
+import PartsDisplay from "../blueprints/part/PartsDisplay.astro";
+import Logo from "../Logo.astro";
+
+interface Props {
+	eyebrow: string;
+	subtitle?: string;
+	lead: string;
+	footnote?: string;
+	showHomeInFooter?: boolean;
+	onlinePath?: string;
+	sheet?: BlueprintPartEntry;
+}
+
+const { eyebrow, subtitle, lead, footnote, showHomeInFooter, onlinePath = "", sheet } = Astro.props;
+
+const homeLink = String(getCanonical("/", { removeProtocol: true }));
+const pathLink = getCanonical(onlinePath);
+
+const contact = SOCIALS.filter(([_, social]) => social?.displayable ?? true).toArray();
+---
+
+<div
+	class="one-pager grid min-h-screen items-start justify-items-center bg-sunk p-8 font-secondary text-[0.82rem]/[1.38] text-ink print:block print:min-h-0 print:p-0 print:[-webkit-print-color-adjust:exact] print:[print-color-adjust:exact]"
+>
+	<article
+		class="flex h-[297mm] w-[210mm] max-w-full flex-col gap-4 overflow-scroll border border-line bg-surface p-[10mm_12mm] shadow-lg print:min-h-screen print:w-auto print:gap-[3.4mm] print:overflow-visible print:border-0 print:p-0 print:shadow-none"
+	>
+		<header class="flex flex-col justify-center gap-1 border-b border-line pb-3">
+			<Logo class="mb-3 max-h-[15mm] w-full" titleClass="text-2xl">
+				<p class="font-mono text-xs text-primary uppercase">{subtitle}</p>
+			</Logo>
+
+			<p class="font-mono text-xs text-primary uppercase">{eyebrow}</p>
+
+			{
+				!!contact.length && (
+					<ul class="flex flex-wrap text-ink-2">
+						{contact.map((entry) => (
+							<li class="not-first:before:px-[1.5mm] not-first:before:text-ink-3 not-first:before:content-['·']">
+								<a href={entry.href}>{entry.text}</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+
+			{
+				homeLink !== pathLink && (
+					<div class="mt-1">
+						<a href={getCanonical(onlinePath)} class="text-[0.9rem] text-secondary">
+							{getCanonical(onlinePath)}
+						</a>
+					</div>
+				)
+			}
+		</header>
+
+		<p class="text-ink" set:html={lead} />
+
+		<slot>
+			{
+				sheet && (
+					<PartsDisplay
+						{...{
+							sheet: sheet.blueprint.assemble(),
+							sectionClass: "print:break-inside-avoid",
+							class: "space-y-6",
+						}}
+					/>
+				)
+			}
+		</slot>
+
+		{
+			(footnote || showHomeInFooter) && (
+				<footer class="mt-auto flex flex-wrap items-end gap-[5mm] border-t border-line pt-2.5 text-[0.78rem] print:break-inside-avoid">
+					{footnote && <span class="font-normal text-ink">{footnote}</span>}
+					{showHomeInFooter && <span class="ml-auto font-mono text-ink-2">{homeLink}</span>}
+				</footer>
+			)
+		}
+	</article>
+</div>

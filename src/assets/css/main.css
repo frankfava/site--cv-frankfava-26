@@ -507,6 +507,24 @@ html {
 	}
 }
 
+/* ---------- one-pager ---------- */
+
+/* The page box and the paper the sheet sits on. Neither can be written as a
+   class on an element, and `:has` keeps the white to documents carrying a
+   sheet - the page tint would otherwise print as a grey band beneath one. */
+
+@page {
+	size: A4;
+	margin: 10mm 12mm;
+}
+
+@media print {
+	html:has(.one-pager),
+	html:has(.one-pager) body {
+		background: #fff;
+	}
+}
+
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

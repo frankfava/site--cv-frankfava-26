@@ -1,0 +1,59 @@
+---
+import type { _Module } from "@/types";
+import { cn } from "@/utils/class";
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+export type { _ModuleHeader } from "@/types";
+
+export interface _ModuleWrapper extends _Module {}
+
+export interface Props {
+	id?: string;
+	eyebrow?: string;
+	title?: string;
+	subtitle?: string;
+	icon?: string;
+	showHeader?: boolean;
+	class?: HTMLAttributes<any>["class:list"];
+	classes?: Partial<Record<"wrapper" | "header" | "title" | "subtitle" | "eyebrow" | string, HTMLAttributes<any>["class:list"]>>;
+}
+
+const { id, eyebrow, title = await Astro.slots.render("title"), subtitle = await Astro.slots.render("subtitle"), icon, showHeader = true, class: className, classes = {} } = Astro.props;
+
+const content: string = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+---
+
+<section {...{ id, class: cn("relative", className, classes?.wrapper) }}>
+	<div class={cn(classes?.container)}>
+		{
+			showHeader && (
+				<div class={cn("mb-4", classes?.header)}>
+					{eyebrow && (
+						<span class={cn("mb-1 flex items-center gap-1 eyebrow text-accent", classes?.eyebrow)}>
+							{icon && <Icon name={icon} class="size-3" />}
+							{eyebrow}
+						</span>
+					)}
+					<h2 class={cn("font-heading text-heading leading-tighter flex items-center gap-2 text-lg/[1.05] font-semibold tracking-tighter", classes?.title)}>
+						<Fragment set:html={title} />
+					</h2>
+					{subtitle && (
+						<div class={cn("mt-2 text-lg text-ink-3", classes?.subtitle)}>
+							{subtitle && Astro.slots.has("subtitle") ? <Fragment set:html={subtitle} /> : <p class="my-0" set:html={subtitle} />}
+						</div>
+					)}
+				</div>
+			)
+		}
+		{
+			!!content.trim() && (
+				<div class={cn(classes?.body)}>
+					<slot name="beforeContent" />
+					<Fragment set:html={content} />
+					<slot name="afterContent" />
+				</div>
+			)
+		}
+	</div>
+</section>

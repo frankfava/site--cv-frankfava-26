@@ -1,0 +1,16 @@
+---
+import { signals } from "@/data/signals";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	ends?: boolean;
+}
+
+const { ends = true, ...props } = Astro.props;
+
+const filtered = (await signals()).filter((signal) => (ends !== undefined ? signal.ends === ends : true) && !signal.hidden);
+---
+
+<OnePagerModule {...props}>
+	{!!filtered.length && <p class="text-[0.78rem]/[1.42] text-ink-2">{filtered.map((signal) => signal.title).join(" &middot; ")}. Everything else has an answer, and the answers are on the site.</p>}
+</OnePagerModule>

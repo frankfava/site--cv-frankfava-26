@@ -1,0 +1,32 @@
+---
+import { onlyVisibleRoles } from "@/lib/roles";
+import { ROLES } from "@/data/roles";
+import { getCanonical } from "@/utils/permalinks";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {}
+
+const { ...props } = Astro.props;
+
+const roleLinks = onlyVisibleRoles(ROLES).map((role) => ({
+	title: role.title,
+	url: getCanonical(`/roles/${role.slug}`),
+}));
+---
+
+<OnePagerModule {...props}>
+	<ul class="grid gap-2">
+		{
+			roleLinks.map((r) => (
+				<li class="overflow-hidden rounded border border-gray-200">
+					<div class="border-b border-gray-200 bg-gray-50 px-2.5 py-1 font-semibold">{r.title}</div>
+					<div class="px-2.5 py-1">
+						<a href={r.url} class="text-sm break-all">
+							{r.url}
+						</a>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</OnePagerModule>

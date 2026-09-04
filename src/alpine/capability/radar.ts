@@ -27,7 +27,7 @@ export function radarPath(values: number[]): string {
 /** What the radar draws at build time. */
 export const radar = {
 	...GEOMETRY,
-	viewBox: "0 0 360 296",
+	viewBox: "0 0 380 280",
 	rings: [0.25, 0.5, 0.75, 1].map((fraction) => radarPath(CAPABILITIES.map(() => fraction * 100))),
 	spokes: CAPABILITIES.map((cap, i) => {
 		const [x2, y2] = point(i, 100);

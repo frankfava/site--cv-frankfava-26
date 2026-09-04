@@ -1,0 +1,71 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import OnePagerSheet from "@/components/onePager/OnePagerSheet.astro";
+import { ABOUT } from "site:config";
+import { careerStart } from "@/lib/spans";
+import { onlyVisibleRoles } from "@/lib/roles";
+import { ROLES } from "@/data/roles";
+import { buildPartEntry } from "@/lib/blueprints";
+import { withPropsAsync } from "@/utils/component";
+
+const metadata = {
+	title: "One-pager",
+	description: "One page, for a fast skim or an ATS upload.",
+};
+---
+
+<BaseLayout metadata={metadata} colorMode="light">
+	<OnePagerSheet
+		{...{
+			eyebrow: ABOUT.focuses.slice(0, 4).join(" · "),
+			subtitle: ABOUT.location?.city,
+			lead: `Standing between a customer's problem and the system that fixes it since ${careerStart().getFullYear()}. Winning the work, designing it, building it, and still being the one called when it breaks years later. Now pointed at AI.`,
+			footnote: onlyVisibleRoles(ROLES)
+				.map((role) => role.title)
+				.join(" · "),
+			sheet: buildPartEntry({
+				practicalties: {
+					title: "Practicalties",
+					content: withPropsAsync(() => import("@/components/onePager/shared/PracticaltiesFilter.astro")),
+				},
+				skills: {
+					title: "Featured skills",
+					content: withPropsAsync(() => import("@/components/onePager/shared/Skills.astro"), { pills: false }),
+				},
+				capabilities: {
+					title: "Capabilities",
+					content: withPropsAsync(() => import("@/components/onePager/shared/Capabilities.astro")),
+				},
+				transferable: {
+					title: "Transferable skills",
+					content: withPropsAsync(() => import("@/components/onePager/shared/TransferableSkills.astro")),
+				},
+				roleLinks: {
+					title: "Hiring for one of these?",
+					content: withPropsAsync(() => import("@/components/onePager/shared/RoleLinks.astro")),
+					hidden: true,
+				},
+				proof: {
+					title: "Proof",
+					content: withPropsAsync(() => import("@/components/onePager/shared/ScenarioProof.astro"), { showHeader: false }),
+					hidden: true,
+				},
+				achievements: {
+					title: "Notable achievements",
+					content: withPropsAsync(() => import("@/components/onePager/shared/NotableAchievements.astro")),
+					hidden: true,
+				},
+				recent: {
+					title: "Recent",
+					content: withPropsAsync(() => import("@/components/onePager/shared/RecentTimeline.astro")),
+					hidden: true,
+				},
+				signals: {
+					title: "Probably not a fit if",
+					content: withPropsAsync(() => import("@/components/onePager/shared/Signals.astro")),
+					hidden: true,
+				},
+			}),
+		}}
+	/>
+</BaseLayout>

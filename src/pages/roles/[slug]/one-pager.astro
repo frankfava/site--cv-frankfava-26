@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import OnePagerSheet from "@/components/onePager/OnePagerSheet.astro";
+import { ABOUT } from "site:config";
+import { onlyEnabledRoles, type Role } from "@/lib/roles";
+import { ROLES } from "@/data/roles";
+import { buildPartEntry } from "@/lib/blueprints";
+import { withPropsAsync } from "@/utils/component";
+
+export async function getStaticPaths() {
+	return onlyEnabledRoles(ROLES).map((role) => ({
+		params: { slug: role.slug },
+		props: { role },
+	}));
+}
+
+export interface Props {
+	role: Role;
+}
+const { role } = Astro.props;
+
+Astro.locals.blueprint = role;
+
+const metadata = {
+	title: `One-pager - ${role.title}`,
+	description: role.summary,
+	ignoreTitleTemplate: true,
+};
+---
+
+<BaseLayout metadata={metadata} colorMode="light">
+	<OnePagerSheet
+		{...{
+			eyebrow: ABOUT.focuses.slice(0, 4).join(" · "),
+			subtitle: ABOUT.location?.city,
+			lead: role.pitch?.lead ?? role.summary,
+			onlinePath: `/roles/${role.slug}`,
+			sheet: buildPartEntry({
+				practicalties: {
+					title: "Practicalties",
+					content: withPropsAsync(() => import("@/components/onePager/shared/PracticaltiesFilter.astro")),
+				},
+				mappings: {
+					title: "What I bring → what the role needs",
+					content: withPropsAsync(() => import("@/components/onePager/shared/RoleTopMappings.astro"), { limit: 1 }),
+					hidden: true,
+				},
+				projects: {
+					title: "Featured projects",
+					content: withPropsAsync(() => import("@/components/onePager/shared/RoleProjects.astro")),
+					hidden: true,
+				},
+				skills: {
+					title: "Featured skills",
+					content: withPropsAsync(() => import("@/components/onePager/shared/Skills.astro"), { pills: false }),
+				},
+				capabilities: {
+					title: "Capabilities",
+					content: withPropsAsync(() => import("@/components/onePager/shared/Capabilities.astro")),
+				},
+				transferable: {
+					title: "Transferable skills",
+					content: withPropsAsync(() => import("@/components/onePager/shared/TransferableSkills.astro")),
+				},
+			}),
+		}}
+	/>
+</BaseLayout>

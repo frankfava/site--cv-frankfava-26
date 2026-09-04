@@ -1,0 +1,48 @@
+---
+import { radar } from "@/alpine/capability/radar";
+import { CAPABILITIES } from "@/data/capabilities";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+import { cn } from "@/utils/class";
+
+interface Props extends OnePagerProps {
+	display?: "radar" | "text";
+	stacked?: boolean;
+}
+
+const { display = "radar", stacked = true, ...props } = Astro.props;
+---
+
+<OnePagerModule {...props}>
+	<div class={display === "radar" ? "grid grid-cols-[80mm_1fr] items-start gap-[5mm]" : "grid gap-[3mm]"}>
+		{
+			display === "radar" && (
+				<svg class="block h-auto w-full" viewBox={radar.viewBox} role="img" aria-label="Radar of where the evidence puts each capability">
+					{radar.rings.map((d) => (
+						<path d={d} fill="none" stroke="var(--color-line)" stroke-width="1" />
+					))}
+					{radar.spokes.map((spoke) => (
+						<>
+							<line x1={radar.cx} y1={radar.cy} x2={spoke.x2} y2={spoke.y2} stroke="var(--color-line)" stroke-width="1" />
+							<text x={spoke.labelX} y={spoke.labelY} text-anchor={spoke.anchor} fill="var(--color-ink-3)" font-size="12" letter-spacing=".4">
+								{spoke.label}
+							</text>
+						</>
+					))}
+					<path d={radar.mineShape} stroke="var(--color-accent)" fill="color-mix(in srgb, var(--color-accent) 16%, transparent)" stroke-width="2" stroke-linejoin="round" />
+				</svg>
+			)
+		}
+		<ul class={cn("grid gap-x-[5mm] gap-y-[1.6mm]", stacked ? "grid-cols-1" : "grid-cols-2")}>
+			{
+				CAPABILITIES.map((capability) => (
+					<li class="grid gap-[0.4mm]">
+						<b class="text-[0.8rem] text-ink">
+							{capability.label} <span class="font-mono text-[0.7rem] font-medium text-accent">{capability.sits}/100</span>
+						</b>
+						<span class="text-[0.7rem]/[1.3] text-ink-3">{capability.evidence}</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</OnePagerModule>

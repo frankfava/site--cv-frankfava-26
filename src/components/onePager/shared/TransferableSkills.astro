@@ -1,0 +1,18 @@
+---
+import { getTransferableSkills } from "@/lib/collections/transferableSkills";
+import OnePagerModule, { type Props as OnePagerProps } from "../OnePagerModule.astro";
+
+interface Props extends OnePagerProps {
+	limit?: number;
+}
+
+const { limit, ...props } = Astro.props;
+
+const skills = (await getTransferableSkills()).filter(({ data }) => data.listed).map((skill) => skill.data.title);
+
+const transferable = limit ? skills.slice(0, limit) : skills;
+---
+
+<OnePagerModule {...props}>
+	{!!transferable.length && <p class="text-[0.78rem]/[1.42] text-ink-2">{transferable.join(" · ")}</p>}
+</OnePagerModule>

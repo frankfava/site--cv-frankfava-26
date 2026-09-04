@@ -51,9 +51,10 @@ interface Window {
 declare namespace App {
 	interface Locals {
 		/** The active page's blueprint entry. */
-		blueprint?: import("@/lib/blueprints").BlueprintEntry;
+		blueprint?: import("@/lib/blueprints").BlueprintEntry | import("@/lib/roles").Role;
 		/** Anchor ids of the current page's visible sections, so a link can tell an in-page target from an off-page one. */
 		roleAnchorIds?: string[];
+		roleBranding?: import("@/lib/brands").BrandChromeKeyed;
 	}
 }
 
