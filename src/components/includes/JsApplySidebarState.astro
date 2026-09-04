@@ -1,11 +1,20 @@
 ---
 import { SIDEBAR } from "site:config";
 import { BREAKPOINTS } from "@/assets/js/_theme.generated";
+
+// The page's own default, where its blueprint states one. A visitor who has
+// toggled the bay has a stored choice, and that still wins.
+const bay = Astro.locals.blueprint?.config?.layout?.bay;
+const openByDefault = bay ? bay === "open" : SIDEBAR.onLoad === "open";
 ---
 
-<script is:inline define:vars={{ SIDEBAR, BREAKPOINTS }}>
+<script is:inline define:vars={{ SIDEBAR, BREAKPOINTS, openByDefault }}>
 	try {
-		const open = SIDEBAR.storageKey in localStorage ? localStorage.getItem(SIDEBAR.storageKey) === "true" : SIDEBAR.onLoad === "open";
+		// Left where the rest of the sidebar wiring can read it, so a first visit
+		// answers "open or closed?" the same way before and after hydration.
+		document.documentElement.dataset.bayDefault = openByDefault ? "open" : "closed";
+
+		const open = SIDEBAR.storageKey in localStorage ? localStorage.getItem(SIDEBAR.storageKey) === "true" : openByDefault;
 		const autoHideAt = BREAKPOINTS[SIDEBAR.autoHideAt] ?? BREAKPOINTS["2xl"];
 
 		// Apply the open class if the sidebar is open and the viewport is smaller than the auto hide at breakpoint, on html so it happens before paint

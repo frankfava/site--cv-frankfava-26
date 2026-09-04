@@ -98,7 +98,11 @@ function initSidebar() {
 		toggleClass: (open) => {
 			document.documentElement.classList.toggle(sidebar.sidebarShowClass, open);
 		},
-		preference: () => readStored(sidebar.storageKey) !== "false",
+		// A stored choice, or the page's own default until the visitor makes one.
+		preference: () => {
+			const stored = readStored(sidebar.storageKey);
+			return stored === null ? document.documentElement.dataset.bayDefault !== "closed" : stored !== "false";
+		},
 		// Mark the sidebar bay as inert when it is closed, so it doesn't interfere with the tab order.
 		syncInert: () => {
 			const bay = document.querySelector("[data-sidebar-bay]");
