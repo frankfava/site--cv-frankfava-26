@@ -14,20 +14,22 @@ const { class: className } = Astro.props;
 <div class={cn("text-left", className)} x-data="capabilityPanel">
 	<div class="grid grid-cols-1 items-start gap-3.5 lg:grid-cols-[minmax(0,1fr)_minmax(0,352px)]">
 		<div class="order-2 overflow-hidden rounded-lg border border-line bg-surface shadow-(--c-shadow) lg:order-1">
-			<div class="flex items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3">
+			<div class="items-center gap-3 border-b border-line-2 bg-sunk px-4.5 py-3 lg:flex">
 				<span class="eyebrow text-ink-3">What your role needs</span>
-				<button
-					type="button"
-					class="ml-auto cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase transition-colors hover:border-accent hover:text-accent aria-pressed:border-accent aria-pressed:bg-accent-soft aria-pressed:text-accent"
-					aria-pressed="false"
-					x-bind:aria-pressed="unison"
-					x-on:click="toggleUnison">Move together</button
-				>
-				<button
-					type="button"
-					class="cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase hover:border-accent hover:text-accent"
-					x-on:click="reset">Reset</button
-				>
+				<div class="flex flex-wrap gap-2 lg:ml-auto">
+					<button
+						type="button"
+						class="cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase transition-colors hover:border-accent hover:text-accent aria-pressed:border-accent aria-pressed:bg-accent-soft aria-pressed:text-accent"
+						aria-pressed="false"
+						x-bind:aria-pressed="unison"
+						x-on:click="toggleUnison">Move together</button
+					>
+					<button
+						type="button"
+						class="cursor-pointer rounded border border-line px-2.5 py-1.5 font-mono text-xs tracking-wider text-ink-2 uppercase hover:border-accent hover:text-accent"
+						x-on:click="reset">Reset</button
+					>
+				</div>
 			</div>
 
 			<div class="px-4.5 pt-1 pb-4">
