@@ -270,6 +270,7 @@ export namespace Socials {
 		text: string;
 		href: string;
 		suffixIcon?: string;
+		displayable?: boolean;
 	};
 
 	export type Links = Record<string, Link>;
