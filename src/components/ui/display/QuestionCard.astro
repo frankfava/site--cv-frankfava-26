@@ -12,7 +12,7 @@ export interface Props {
 const { icon, subtitle = "You may be wondering...", title, class: className, iconClass } = Astro.props;
 ---
 
-<div class="flex rounded border border-gray-200 bg-gray-50 p-5" class:list={className}>
+<div class="flex rounded border border-line bg-surface p-5" class:list={className}>
 	{icon && <Icon name={icon} class="me-2 mt-1 inline-block max-h-7 min-h-7 max-w-7 min-w-7" class:list={iconClass} />}
 	<div class="grow">
 		<div class="italic">{subtitle}</div>
