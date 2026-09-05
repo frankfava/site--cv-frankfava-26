@@ -85,10 +85,10 @@ export const about = buildBlueprintEntry({
 	description: "Who I am, how I behave under pressure, what I'm still learning, and what the personality tests make of me.",
 	blueprint: {
 		quickIntro: sections.quickIntro,
+		transferableSkills: sections.transferableSkills,
 		self: sections.self,
 		learning: sections.learning,
 		personalityTests: sections.personalityTests,
-		transferableSkills: sections.transferableSkills,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {

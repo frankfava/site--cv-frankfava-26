@@ -1,6 +1,6 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
-import Button from "@/components/ui/input/Button.astro";
+import { Icon } from "astro-icon/components";
 
 export interface Props extends _ModuleWrapper {}
 
@@ -13,62 +13,65 @@ const header: _ModuleHeader = {
 
 const CRYSTAL = "https://www.crystalknows.com/p/6729bd52-0db8-4401-8dfe-d48702818b3f";
 const PERSONALITY_MAX = "https://personalitymax.com/report/?pt=68-32-63-68&mi=57-83-60-80-20-73-87-73&ls=74-38-79&bh=55&name_key=d124266ec2";
+
+/** Each reading, with the place it came from. The link is the evidence, not the headline. */
+const readings = [
+	{ label: "MBTI", value: "ENTJ", note: "the Visionary, or the Chief", href: "https://hubspot.crystalknows.com/personality-type/entj/strengths" },
+	{ label: "DISC", value: "D", note: "the Captain", href: "https://www.crystalknows.com/disc/d-personality-type" },
+	{ label: "Enneagram", value: "Type 3", note: "the Performer", href: "https://www.crystalknows.com/enneagram/type-3" },
+	{ label: "Intelligences", value: "Intrapersonal, logical", note: "the top two of eight", href: `${PERSONALITY_MAX}#your-multiple-intelligences` },
+	{ label: "Learning style", value: "Kinesthetic", note: "I learn by doing it", href: `${PERSONALITY_MAX}#your-learning-styles` },
+	{ label: "Brain hemispheres", value: "55 / 45", note: "logical against abstract", href: `${PERSONALITY_MAX}#your-brain-hemispheres` },
+];
+
+const reports = [
+	{ name: "Crystal Knows", href: CRYSTAL },
+	{ name: "Personality Max", href: PERSONALITY_MAX },
+];
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<p>Two external profiles, for a more quantitative view.</p>
-
-	<p>
-		If you know the <a href="https://www.crystalknows.com/myers-briggs-test" target="_blank" rel="noopener">Myers-Briggs Type Indicator</a>, <a
-			href="https://www.crystalknows.com/disc-personality-test"
-			target="_blank"
-			rel="noopener">DISC</a
-		> or the <a href="https://www.crystalknows.com/enneagram-test" target="_blank" rel="noopener">Enneagram</a>, these will mean more to you. Either way they are somebody else's read on my
-		strengths and weaknesses, rather than mine.
-	</p>
-
-	<div class="my-10 grid gap-8 lg:grid-cols-2 lg:gap-3">
-		<div>
-			<h3 class="mb-2 text-lg"><strong>Test 1:</strong> Crystal Knows</h3>
-			<Button {...{ href: CRYSTAL, target: "_blank", text: "See my results at crystalknows.com", variant: "primary", icon: "ph:arrow-square-out-duotone", class: "mb-5 px-3 py-2" }} />
-			<p>
-				Detail on my <strong>MBTI</strong> (<a href="https://hubspot.crystalknows.com/personality-type/entj/strengths" target="_blank" rel="noopener">ENTJ, the Visionary</a>), <strong
-					>DISC</strong
-				>
-				(<a href="https://www.crystalknows.com/disc/d-personality-type" target="_blank" rel="noopener">D, the Captain</a>) and <strong>Enneagram</strong> (<a
-					href="https://www.crystalknows.com/enneagram/type-3"
-					target="_blank"
-					rel="noopener">Type 3, the Performer</a
-				>).
-			</p>
+	<div class="space-y-4">
+		<div id="how-to-get-best-from-me" class="mt-6 scroll-mt-[150px] rounded border border-line bg-sunk p-5">
+			<h3 class="mb-3 text-lg">How you get the best from me</h3>
+			<ul class="ml-6 list-outside list-disc space-y-2">
+				<li>Give me the goal and let me run at it. I need something to aim for.</li>
+				<li>Put me on a team, so I can help the people around me hit theirs.</li>
+				<li>Be direct with me. I would rather hear it than work it out.</li>
+				<li>Say when something lands. I keep score, and I would rather do it honestly.</li>
+			</ul>
 		</div>
-
-		<div>
-			<h3 class="mb-2 text-lg"><strong>Test 2:</strong> Personality Max</h3>
-			<Button {...{ href: PERSONALITY_MAX, target: "_blank", text: "See my results at personalitymax.com", variant: "primary", icon: "ph:arrow-square-out-duotone", class: "mb-5 px-3 py-2" }} />
-			<p>
-				Detail on my <strong>MBTI</strong> (<a href={`${PERSONALITY_MAX}#your-personality-type`} target="_blank" rel="noopener">ENTJ, the Chief</a>), <strong>Multiple Intelligences</strong> (<a
-					href={`${PERSONALITY_MAX}#your-multiple-intelligences`}
-					target="_blank"
-					rel="noopener">top two: intrapersonal and logical</a
-				>), <strong>Learning Styles</strong> (<a href={`${PERSONALITY_MAX}#your-learning-styles`} target="_blank" rel="noopener">primarily kinesthetic, by doing</a>) and
-				<strong>Left vs Right Brain</strong> (<a href={`${PERSONALITY_MAX}#your-brain-hemispheres`} target="_blank" rel="noopener">55% logical, 45% abstract</a>).
-			</p>
+		<div class="mt-8 space-y-4">
+			<h3 class="mb-2 text-lg">What the tests say</h3>
+			<dl class="grid gap-2 sm:grid-cols-2">
+				{
+					readings.map(({ label, value, note, href }) => (
+						<div class="rounded-md border border-line bg-surface px-4 py-3">
+							<dt class="font-mono text-xs tracking-wider text-ink-3 uppercase">{label}</dt>
+							<dd class="m-0">
+								<a href={href} target="_blank" rel="noopener" class="font-semibold">
+									{value}
+								</a>
+								<span class="text-ink-3"> · {note}</span>
+							</dd>
+						</div>
+					))
+				}
+			</dl>
 		</div>
-	</div>
-
-	<hr class="mb-6 border-line" />
-
-	<p class="text-lg">So what does all that actually mean?</p>
-
-	<div id="how-to-get-best-from-me" class="scroll-mt-[150px] rounded border border-line bg-sunk p-5">
-		<h3 class="mb-3 text-lg">How I work best, and how you get the best from me</h3>
-		<ul class="ml-6 list-outside list-disc space-y-2">
-			<li>I work best in a results-driven environment. I need a goal to work towards.</li>
-			<li>Give me the goal and let me run with it.</li>
-			<li>Some healthy competition drives my performance.</li>
-			<li>Put me on a team, so I can help the people around me hit their goals.</li>
-			<li>Recognition and reward for what gets accomplished matter.</li>
-		</ul>
+		<p class="text-sm text-ink-3">
+			Full reports:{" "}
+			{
+				reports.map(({ name, href }, index) => (
+					<>
+						{index > 0 && <span> · </span>}
+						<a href={href} target="_blank" rel="noopener">
+							{name}
+							<Icon name="ph:arrow-square-out-duotone" class="ml-1 inline-block size-4 align-text-bottom" />
+						</a>
+					</>
+				))
+			}
+		</p>
 	</div>
 </ModuleWrapper>

@@ -159,7 +159,7 @@ export const personalityTests: BlueprintComponent = {
 	eyebrow: "An outside read",
 	title: "Personality tests",
 	icon: "ph:test-tube-duotone",
-	description: "MBTI, DISC and Enneagram, with what each one means for anyone who has not met them before.",
+	description: "Psychometric tests on how I work, and what to do with it.",
 	content: async () => import("@/components/blueprints/shared/PersonalityTests.astro"),
 };
 
