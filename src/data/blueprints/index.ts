@@ -55,7 +55,7 @@ export const work = buildBlueprintEntry({
 export const ai = buildBlueprintEntry({
 	slug: "ai",
 	title: "AI practice",
-	description: "The agentic tooling I run daily, the tools I have published, and what I actually use them for.",
+	description: "The agentic system I run daily, the tools I have published, and what I use them for.",
 	blueprint: {
 		practice: sections.practice,
 		fullRecord: sections.fullRecord,

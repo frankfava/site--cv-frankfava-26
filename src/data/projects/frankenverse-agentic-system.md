@@ -4,7 +4,7 @@ featured: true
 order: 35
 title: "Frankenverse: A Self-Hosted Agentic System"
 type: 'Personal Project'
-summary: "A production agentic system I built and run every day - a self-hosted MCP server plus a library of custom Claude Code agents that read, reason over, and act on a live knowledge base autonomously."
+summary: "A production agentic system I built and run every day. My own knowledge base wired to Claude through a self-hosted MCP server, with custom skills and workflows that do the everyday work and run unattended on a schedule."
 startDate: "Feb 2026"
 duration: null
 highlights: [

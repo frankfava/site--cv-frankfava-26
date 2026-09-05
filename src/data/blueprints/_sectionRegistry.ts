@@ -88,7 +88,7 @@ export const practice: BlueprintComponent = {
 	title: "I build with it daily, and I run what I build",
 	mainMenuLabel: "AI practice",
 	icon: "ph:sparkle-duotone",
-	description: "Where AI sits in the work, the tools I have published, and what I think it does and does not change about the job.",
+	description: "The system I run every day, the tools I have published, and how the job changes.",
 	content: async () => import("@/components/blueprints/shared/AiPractice.astro"),
 };
 
