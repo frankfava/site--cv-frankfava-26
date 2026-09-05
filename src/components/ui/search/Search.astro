@@ -1,15 +1,18 @@
 ---
 import { Icon } from "astro-icon/components";
 import { resolveSearchSettings, type SearchIndexEntry } from "@/lib/search";
+import { cn } from "@/utils/class";
+import type { HTMLAttributes } from "astro/types";
 
 export interface Props {
 	showHint?: boolean;
 	/** The index this page's dialog queries, resolved by the layout from the blueprint. */
 	index: SearchIndexEntry;
 	showOnMobile?: boolean;
+	class?: HTMLAttributes<"div">["class:list"];
 }
 
-const { showHint = true, index, showOnMobile = true } = Astro.props;
+const { showHint = true, index, class: className, showOnMobile = true } = Astro.props;
 
 const indexUrl = `/api/search-index/${index.slug}.json`;
 const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
@@ -18,8 +21,16 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 <>
 	{
 		showHint && (
-			<div id="search-hint" class="fixed bottom-0 z-2 w-full cursor-pointer border-t border-line bg-surface py-1.5 text-center leading-1 text-ink-2 print:hidden" search-toggle>
-				<span class="hidden items-center justify-center gap-x-1.5 sm:flex">
+			<div
+				id="search-hint"
+				class={cn(
+					"fixed bottom-0 z-2 hidden w-full cursor-pointer border-t border-line bg-surface py-1.5 text-center leading-1 text-ink-2 sm:flex print:hidden",
+					showOnMobile && "sm:hidden",
+					className,
+				)}
+				search-toggle
+			>
+				<span class="mx-auto flex items-center gap-x-1.5">
 					Press
 					<kbd data-search-mod-key class="pointer-events-none rounded border border-line bg-sunk px-1.5 text-sm text-ink-3 select-none">
 						{"⌘"}
@@ -31,7 +42,7 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 					to open the search panel.
 				</span>
 				{showOnMobile && (
-					<span class="flex items-center justify-center gap-x-1.5 sm:hidden">
+					<span class="mx-auto flex items-center gap-x-1.5">
 						Press
 						<kbd class="pointer-events-none rounded border border-line bg-sunk px-1.5 text-sm text-ink-3 select-none">here</kbd>
 						to open the search panel.
