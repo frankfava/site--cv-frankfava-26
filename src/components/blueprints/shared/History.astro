@@ -1,9 +1,6 @@
 ---
 import ModuleWrapper, { type _ModuleWrapper, type _ModuleHeader } from "@/components/ui/modules/ModuleWrapper.astro";
 import WorkHistoryList from "./_partials/WorkHistoryList.astro";
-import QuestionCard from "@/components/ui/display/QuestionCard.astro";
-import { yearsIn } from "@/lib/spans";
-import { inWords } from "@/utils/number";
 
 export interface Props extends _ModuleWrapper {}
 
@@ -16,16 +13,5 @@ const header: _ModuleHeader = {
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<p>If you want the whole shape of it, here it is, most recent first. Click any role to expand its responsibilities and skills.</p>
-
 	<WorkHistoryList startOpen={false} />
-
-	<QuestionCard title="You've switched back and forth between working for yourself and employment... why change?" icon="ph:seal-question-duotone" iconClass="text-blue-500" class="mt-10">
-		<p>I'm looking for consistency and more collaboration.</p>
-		<p>
-			I've achieved a massive accomplishment in designing, building, and launching a major project by myself over the last {inWords(yearsIn("nas"))} years, but while working for myself, I find spending
-			so much time at home alone and the inconsistent income to be exhausting, more so now because my wife and I are looking to buy our first home.
-		</p>
-		<p>So I'm looking for a new role that delivers the same fast-paced, sometimes crazy, agile and dynamic environment, allows me to work with a close-knit team on even bigger projects.</p>
-	</QuestionCard>
 </ModuleWrapper>

@@ -19,9 +19,7 @@
 			"leadership": 5
 		},
 		"employers": [],
-		"role": "Building on the side",
-		"company": "Sydney",
-		"note": "Sites and small applications for whoever would pay, while working out whether this was a career."
+		"note": "Between the traineeship and coaching. Coding stayed a hobby."
 	},
 	{
 		"id": "2010",
@@ -54,7 +52,7 @@
 			"leadership": 60
 		},
 		"employers": ["relationships-revealed"],
-		"note": "The software work started taking over. Same instinct: understand what the person actually needs first."
+		"note": "Coaching full time. The same instinct the technical work runs on: understand what the person actually needs first."
 	},
 	{
 		"id": "2013",
@@ -65,8 +63,7 @@
 			"leadership": 55
 		},
 		"employers": ["relationships-revealed"],
-		"role": "Coaching, and building more",
-		"note": "Two careers at once, and the technical one was winning."
+		"note": "Four years in, coaching was the profession and building was still the hobby."
 	},
 	{
 		"id": "2014",
@@ -77,7 +74,7 @@
 			"leadership": 25
 		},
 		"employers": ["flic-sites"],
-		"note": "Started the agency. From day one I was the person who sold the work and the person who then had to build it."
+		"note": "Started the agency and got paid to build for the first time. From day one I was the person who sold the work and the person who then had to build it."
 	},
 	{
 		"id": "2015",
