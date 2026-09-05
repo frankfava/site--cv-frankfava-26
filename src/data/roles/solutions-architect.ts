@@ -2,7 +2,7 @@ import { buildRoleStructure } from "../blueprints/role";
 import { buildBlueprint } from "@/lib/blueprints";
 import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
-import { careerYears, yearsIn } from "@/lib/spans";
+import { codingYears, yearsIn } from "@/lib/spans";
 
 export const blueprint = buildBlueprint(buildRoleStructure("Solutions Architect"));
 
@@ -10,7 +10,7 @@ export const entry: BlueprintEntry = {
 	slug: "solutions-architect",
 	title: "Solutions Architect",
 	description:
-		"Why I'd be a great Solutions Architect - designing and building real AI/agentic solutions, pre-sales partnership with account executives, technical advisor across the adoption journey, architectural ownership, and a multi-stack track record.",
+		"I have been the account exec and the engineer in the same room for 160+ projects. Architecture I owned, agentic systems I built and run, and the pre-sales half most architects have never done.",
 	blueprint,
 	config: {
 		// search: { enabled: false },
@@ -23,43 +23,43 @@ export const definition: RoleDefinition = {
 	slug: entry.slug,
 	featuredSkills: ["LARAVEL", "PHP", "VUEJS", "ASTRO", "TYPESCRIPT", "REACT", "AWS", "DOCKER", "CLAUDE", "API", "POSTGRESQL", "FILAMENTPHP"],
 	featuredCapabilities: ["cust", "arch", "ai", "code"],
-	featuredProjects: ["lovable-output-analyser", "ai-skill-create-mvp", "savr-admin-panels", "lovable-prompt-builder", "savr-delta-system", "nas", "hubspot-fieldsjs"],
+	featuredProjects: ["nas", "hubspot-fieldsjs", "frankenverse-agentic-system", "savr-delta-system", "savr-admin-panels", "ai-skill-create-mvp", "lovable-prompt-builder"],
 	featuredCaseStudies: ["savr-admin-panels", "savr-delta-system", "nas", "hubspot-fieldsjs"],
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],
 	featuredTransferableSkills: ["project-management", "ability-to-lead", "sales-and-business-development", "languages", "team-player"],
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After ${careerYears()} years building - the last few freelance, including ${yearsIn("nas")} years owning the architecture and product roadmap as part-time CTO at <a href="/experience#history">National Auto Service</a> - I'm moving deliberately into Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
+				`${codingYears()} years building, the last few freelance, including ${yearsIn("nas")} years owning the architecture and product roadmap as part-time CTO at <a href="/experience#history">National Auto Service</a>. Solutions Architect work is the part I have been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against the alternatives, and staying with the build until it is a system that survives the renewal.`,
 				`Concretely, that means partnering with an account executive to translate a customer's goals into an architecture they'll commit to - serving as the technical advisor across the whole adoption journey, from discovery and evaluation through to deployment, keeping business objectives and technical implementation pointed at the same target the entire way.`,
 			],
 		},
-		lead: "An SA's job is to translate a customer's messy reality into a system that ships, scales, and survives. That sits at the intersection of three things I've spent my career doing: designing systems, leading the build, and selling the value.",
+		lead: "An SA turns a customer's messy reality into a system that ships and then survives. I have spent my career doing the three parts of that separately: designing the system, leading the build, and selling the value.",
 		pillars: [
 			{
 				icon: "ph:robot-duotone",
-				title: "AI-native, and building it - not just using it",
-				body: "I design and run a production agentic system daily: a self-hosted MCP server and custom Claude Code agents I built, with the orchestration, tool use, guardrails and evals that go with them. I've published AI tooling too - a Claude Code skill that productizes my delivery method, and a Lovable prompt builder. For an Solutions Architect, that's the difference between demoing a product and having built one.",
+				title: "I build the agentic systems, I don't just advise on them",
+				body: "I run one in production every day: a self-hosted MCP server on a box I administer, with skills and workflows that hold state, scoped tools, guardrails and version-controlled definitions. I have published tooling as well, a Claude Code skill that runs my delivery method and a prompt builder for Lovable. That is the difference between demoing a product and having built one.",
 			},
 			{
 				icon: "ph:blueprint-duotone",
 				title: "Architectural ownership, repeatedly",
-				body: `Part-time CTO for ${yearsIn("nas")} years at National Auto Service, spear-headed three admin panels and a delta ingestion rebuild that stopped it rewriting every row on every run at SAVR, and led the integration that put crypto trading into a Stockholm fintech. I've owned the call, not just the diff.`,
+				body: `Part-time CTO for ${yearsIn("nas")} years at National Auto Service, spear-headed three admin panels and a delta ingestion rebuild that stopped it rewriting every row on every run at SAVR, and was the backend engineer on the integration that put crypto trading into a Stockholm fintech. I have owned the call, not only the diff.`,
 			},
 			{
 				icon: "ph:money-wavy-duotone",
 				title: "Pre-sales credibility, partnering with the account team",
-				body: "Ran a digital agency for six years (160+ projects, 1.1M+ SEK billed via Cool Company on a single recent stretch) where I was both the account exec and the engineer in the room. I've defended technical proposals against bigger competitors, talked customers out of bad ideas, and stood by what I shipped - exactly the technical air-cover an AE needs to move a deal.",
+				body: "Ran a digital agency for six years and freelanced after it. 160+ projects across about 40 clients, and 1.6M+ SEK billed freelance since 2022. I was the account exec and the engineer in the same room: I defended proposals against bigger competitors, talked customers out of bad ideas, and then had to build whatever I had promised.",
 			},
 			{
 				icon: "ph:stack-duotone",
-				title: "Multi-stack, not married to one",
-				body: "Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, and the SEO/perf plumbing around them. I co-built a HubSpot dev tool that the core HubSpot team adopted into their own docs - that's the kind of cross-vendor depth a good SA needs.",
+				title: "Multi-stack, by necessity",
+				body: "Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, and the SEO and performance plumbing around them. I co-built a HubSpot developer tool that HubSpot's own core team referenced in their documentation.",
 			},
 			{
 				icon: "ph:chats-duotone",
-				title: "Content for every altitude, engineer to executive",
-				body: "Five years as a professional coach before I was a developer, plus years of agency selling. I can run an architecture deep-dive with the eng team and, an hour later, frame the same solution as business value for a CFO - leaving both pointed at the same target.",
+				title: "The same solution, at any altitude",
+				body: "Five years as a professional coach before I was a developer, then years of agency selling. I can run an architecture deep-dive with the engineering team and an hour later put the same solution to a CFO as a business case, with both ending up pointed at the same thing.",
 			},
 		],
 		whatTranslates: {
@@ -77,12 +77,12 @@ export const definition: RoleDefinition = {
 		{
 			from: { label: "Built + operate a self-hosted MCP server and custom Claude Code agents (Frankenverse)" },
 			to: "Architecting real AI / agentic solutions, not just advising on them",
-			note: "A production agentic system I run daily - MCP server, autonomous agents, orchestration, guardrails and evals - the exact concerns an AI-product engagement raises.",
+			note: "A production agentic system I run daily. MCP server, scheduled unattended runs, scoped tools and guardrails, which are the concerns an AI-product engagement raises.",
 		},
 		{
 			from: { label: "Published a Claude Code skill (Create MVP) + a Lovable prompt builder" },
 			to: "Packaging domain expertise as reusable AI tooling for customers",
-			note: "Turned my own delivery method into an agent skill, and shipped tools that help others build with AI.",
+			note: "Turned my own delivery method into a skill anyone can run, and shipped tools that help others build with AI.",
 		},
 		{
 			from: { label: `Part-time CTO at National Auto Service (${yearsIn("nas")} years)` },
@@ -92,7 +92,7 @@ export const definition: RoleDefinition = {
 		{
 			from: { label: "Spear-headed 3 admin panels + data-ingestion delta system at SAVR" },
 			to: "Designing systems for performance and operability, not just features",
-			note: "Built operability tools for a regulated Stockholm fintech and re-architected ingestion to significantly improve performance.",
+			note: "Built operability tools for a regulated Stockholm fintech, and rebuilt ingestion so it stopped rewriting every row on every run.",
 		},
 		{
 			from: { label: "Co-created HubSpot FieldsJS - adopted by the core HubSpot team" },
@@ -100,39 +100,17 @@ export const definition: RoleDefinition = {
 			note: "Built a developer tool inside another vendor's platform that they ended up referencing in their own docs.",
 		},
 		{
-			from: { label: "Owned a digital agency (FLIC Sites, 160+ projects)" },
-			to: "Pre-sales experience defending architecture to non-technical buyers",
-			note: "Sold technical work to skeptical SMB owners against larger competitors.",
+			from: { label: "Was the account exec and the engineer on 160+ agency deals" },
+			to: "Partnering with account executives through the pre-sales motion",
+			note: "Qualified the real problem, sized the solution, defended it against bigger competitors, and then had to build what I had promised.",
 		},
 		{
-			from: { label: "Production work across Laravel, Vue, React, Astro, FilamentPHP, HubSpot, WordPress" },
-			to: "Solution-shaping that isn't married to a single stack",
-		},
-		{
-			from: { label: "Lead Full-stack Developer at iGoMoon (Stockholm)" },
-			to: "Mentoring, code reviews, and complex-project delivery in an agency context",
-		},
-		{
-			from: { label: "5 years as a professional coach + ongoing freelance customer work" },
+			from: { label: "5 years as a professional coach, then years of selling my own delivery" },
 			to: "Translating between technical and non-technical stakeholders",
 		},
 		{
-			from: { label: "Was the account exec + engineer on 160+ agency deals" },
-			to: "Partnering with account executives through the pre-sales motion",
-			note: "Qualified the real problem, sized the solution, and carried the technical conversation alongside the commercial one.",
-		},
-		{
-			from: { label: "Scoped → built → handed over across discovery to deployment" },
-			to: "Serving as technical advisor across the full adoption journey",
-			note: "Discovery, evaluation, PoC and deployment - owned end-to-end rather than thrown over a wall.",
-		},
-		{
-			from: { label: "Led the crypto-trading integration into a Stockholm fintech's stack" },
+			from: { label: "Backend engineer on the crypto-trading integration at a Stockholm fintech" },
 			to: "Guiding architecture decisions and integration into a customer's existing tech stack",
-		},
-		{
-			from: { label: "Built evaluations and PoCs to prove an approach before commitment" },
-			to: "Helping customers evaluate frameworks against their specific use case",
 		},
 	],
 };
