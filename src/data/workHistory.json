@@ -40,9 +40,9 @@
 		],
 		"achievements": [
 			"Within my first month at SAVR, started the creation of an Admin Panel for the platform's data service - began as a paired exploration with a co-worker and continued across my entire time at the company.",
-			"Spear-headed three production admin panels at SAVR - two FilamentPHP (data service + customer service) plus a Streamlit data-analysis tool for the analyst team.",
+			"Spear-headed three production admin panels at SAVR, two of them FilamentPHP, for the data service, customer service and analyst teams.",
 			"Primary backend developer on the integration that enabled cryptocurrency trading on the SAVR platform.",
-			"Designed and built a delta-based ingestion system at SAVR as the closing project - replaced full-source pulls and significantly improved pipeline performance."
+			"Designed and built a delta-based ingestion system at SAVR as the closing project. It had rewritten every row on every run; it now writes only the rows that changed."
 		]
 	},
 	{

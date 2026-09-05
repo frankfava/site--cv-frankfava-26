@@ -27,12 +27,12 @@ export const definition: RoleDefinition = {
 	featuredCertifications: ["testdome-laravel", "testdome-rest-api", "testdome-leadership", "testdome-logical", "testdome-abstract", "testdome-ai"],
 	featuredTransferableSkills: ["ability-to-lead", "project-management", "team-player", "coaching-skills"],
 	pitch: {
-		lead: `${codingYears()} years building, multi-stack. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion system that significantly improved performance. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.`,
+		lead: `${codingYears()} years building, multi-stack. Most recent: Senior Software Engineer at SAVR (Stockholm fintech) - three production admin panels and a delta ingestion rebuild that stopped it rewriting every row on every run. Comfortable shipping production code in Laravel, Vue, React, Astro - and comfortable owning the architecture call when it matters.`,
 		pillars: [
 			{
 				icon: "ph:hammer-duotone",
 				title: "Senior production engineering",
-				body: "At SAVR I spear-headed three admin panels (FilamentPHP + Streamlit), shipped a delta ingestion system that significantly improved performance, and was the primary backend developer on the crypto-trading integration. Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, and the SEO/perf plumbing around them.",
+				body: "At SAVR I spear-headed three admin panels, shipped a delta ingestion rebuild that stopped it rewriting every row on every run, and was the primary backend developer on the crypto-trading integration. Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, and the SEO/perf plumbing around them.",
 			},
 			{
 				icon: "ph:package-duotone",

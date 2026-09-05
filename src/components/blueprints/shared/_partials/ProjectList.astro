@@ -17,6 +17,7 @@ export interface Props {
 	showSearchBar?: boolean;
 	showLinks?: boolean;
 	allowFullscreen?: boolean;
+	pills?: boolean;
 	class?: HTMLAttributes<"div">["class:list"];
 }
 
@@ -28,6 +29,7 @@ const {
 	showCount = true,
 	showSearchBar = true,
 	allowFullscreen = false,
+	pills = true,
 	class: className,
 } = Astro.props;
 
@@ -166,22 +168,17 @@ const skillData = skills.map(({ id, label }) => ({ id, label }));
 				{
 					projects.map(({ id, title: name, type, showLink, summary, demoUrl, repoUrl, startDate, duration, skills: used, highlights }) => (
 						<ProjectCard
-							{...{ id, title: name, summary, type, startDate, duration, demoUrl, repoUrl, highlights, showLink, skills: used }}
+							{...{ id, title: name, summary, type, startDate, duration, demoUrl, repoUrl, highlights, showLink, skills: used, pills }}
 							x-data="projectRow"
 							data-id={id}
 							x-show="shown"
-							skill={(entry) => (
-								<li
-									x-data="projectSkill"
-									data-id={entry.id}
-									data-label={entry.label}
-									{...{ "@click": "toggle", "x-bind:class": "chipClass" }}
-									class="inline-flex cursor-pointer items-center gap-1 rounded border px-2 py-1"
-								>
-									<Icon name={entry.icon} class="size-5" />
-									<span>{entry.label}</span>
-								</li>
-							)}
+							skillItemAttr={(entry) => ({
+								"x-data": "projectSkill",
+								"data-id": entry.id,
+								"data-label": entry.label,
+								"@click": "toggle",
+								"x-bind:class": `active ? 'border-accent/40 text-accent! ${pills ? "bg-accent-soft" : ""}' : 'border-line ${pills ? "bg-sunk" : ""}'`,
+							})}
 						/>
 					))
 				}

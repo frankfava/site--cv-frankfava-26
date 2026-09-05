@@ -78,7 +78,7 @@ export const definition: RoleDefinition = {
 		{
 			from: { label: "Senior Software Engineer at SAVR (Stockholm fintech)" },
 			to: "Production engineering credibility",
-			note: "Spear-headed three admin panels (FilamentPHP + Streamlit) and a high-performance ingestion delta system.",
+			note: "Spear-headed three admin panels and a delta ingestion rebuild that stopped it rewriting every row on every run.",
 		},
 		{
 			from: { label: "Workshops, seminars and webinars (Relationships Revealed + iGoMoon)" },

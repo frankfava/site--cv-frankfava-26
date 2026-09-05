@@ -26,9 +26,9 @@ stillRunning:
     ownership: mine
     live: true
     status: "Live · daily"
-    figure: "12+"
-    figureNote: "agents"
-    body: "Self-hosted MCP server on a box I administer. Claude Code agents with tool scoping, guardrails and version-controlled definitions, running unattended on a schedule."
+    figure: "Unattended"
+    figureNote: "runs on a schedule"
+    body: "My own knowledge base wired to Claude through a self-hosted MCP server on a box I administer. Skills and workflows with tool scoping, guardrails and version-controlled definitions."
     rank: 2
     title: "Frankenverse agentic system"
 ---

@@ -62,29 +62,32 @@ const panels = [
 	</div>
 
 	<div class="flex flex-col items-center gap-2 xl:flex-row xl:gap-6">
-		<div class="flex w-full items-center gap-2 text-xl xl:w-1/4">
-			<button
-				type="button"
-				@click="clearFilters"
-				x-show="isFiltered"
-				style="display: none"
-				class="h-auto rounded-md bg-bad px-3 text-base text-white transition-colors hover:opacity-90 dark:text-ground"
-			>
-				Clear
-			</button>
-			<span x-text="totalSkillsLabel"></span>
-			<span class="text-sm" x-text="filteredSkillsLabel"></span>
-
-			<button
-				type="button"
-				@click="toggleMobileFilters"
-				x-bind:aria-expanded="mobileFiltersOpen"
-				class="ml-auto flex items-center gap-2 rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-white xl:hidden dark:text-ground print:hidden"
-			>
-				<Icon name="ph:funnel-duotone" class="size-4" />
-				<span x-text="mobileFiltersLabel"></span>
-				<span x-show="isFiltered" style="display: none" class="rounded bg-white px-1.5 text-xs font-bold text-accent dark:bg-ground">!</span>
-			</button>
+		<div class="flex w-full flex-col justify-between gap-2 text-xl sm:flex-row sm:items-center xl:w-1/4">
+			<div class="flex items-center gap-2">
+				<span x-text="totalSkillsLabel"></span>
+				<span class="text-sm" x-text="filteredSkillsLabel"></span>
+			</div>
+			<div class="flex items-center gap-2">
+				<button
+					type="button"
+					@click="clearFilters"
+					x-show="isFiltered"
+					style="display: none"
+					class="rounded-md bg-bad px-3 py-1.5 text-sm text-white transition-colors hover:opacity-90 dark:text-ground"
+				>
+					Clear
+				</button>
+				<button
+					type="button"
+					@click="toggleMobileFilters"
+					x-bind:aria-expanded="mobileFiltersOpen"
+					class="flex items-center gap-2 rounded-md bg-accent px-3 py-1.5 text-sm font-semibold text-white xl:hidden dark:text-ground print:hidden"
+				>
+					<Icon name="ph:funnel-duotone" class="size-3" />
+					<span x-text="mobileFiltersLabel"></span>
+					<span x-show="isFiltered" style="display: none" class="rounded bg-white px-1.5 text-xs font-bold text-accent dark:bg-ground">!</span>
+				</button>
+			</div>
 
 			{
 				allowFullscreen && (
@@ -223,7 +226,7 @@ const panels = [
 		</div>
 
 		<div id="skill-display" class="@container/skills w-full xl:w-3/4" x-bind:class="scrollClass">
-			<div class="grid auto-rows-min gap-3 lg:grid-cols-2 lg:pr-4 lg:pb-6 @min-[1475px]/skills:grid-cols-3">
+			<div class="grid auto-rows-min gap-3 md:grid-cols-2 lg:pr-4 lg:pb-6 @min-[1475px]/skills:grid-cols-3">
 				{
 					skills.map(({ id, label, icon, proficiency, yrsExperience, relevance: tags, note, keywords, usedForCv }) => (
 						<div x-data="skillCard" data-id={id} x-show="shown" class="rounded-md border border-line bg-surface p-4 shadow-md lg:p-6">

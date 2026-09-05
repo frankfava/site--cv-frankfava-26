@@ -44,7 +44,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:blueprint-duotone",
 				title: "Architectural ownership, repeatedly",
-				body: `Part-time CTO for ${yearsIn("nas")} years at National Auto Service, spear-headed three admin panels and a high-throughput data-ingestion delta system at SAVR, and led the integration that put crypto trading into a Stockholm fintech. I've owned the call, not just the diff.`,
+				body: `Part-time CTO for ${yearsIn("nas")} years at National Auto Service, spear-headed three admin panels and a delta ingestion rebuild that stopped it rewriting every row on every run at SAVR, and led the integration that put crypto trading into a Stockholm fintech. I've owned the call, not just the diff.`,
 			},
 			{
 				icon: "ph:money-wavy-duotone",
@@ -54,7 +54,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:stack-duotone",
 				title: "Multi-stack, not married to one",
-				body: "Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, Streamlit, and the SEO/perf plumbing around them. I co-built a HubSpot dev tool that the core HubSpot team adopted into their own docs - that's the kind of cross-vendor depth a good SA needs.",
+				body: "Production work across Laravel, Vue, React, Astro, HubSpot CMS, WordPress, FilamentPHP, and the SEO/perf plumbing around them. I co-built a HubSpot dev tool that the core HubSpot team adopted into their own docs - that's the kind of cross-vendor depth a good SA needs.",
 			},
 			{
 				icon: "ph:chats-duotone",

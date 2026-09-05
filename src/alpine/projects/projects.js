@@ -104,8 +104,5 @@ export function projectSkill() {
 		get shown() {
 			return this.$store[PROJECTS_STORE].isOptionShown(this.label);
 		},
-		get chipClass() {
-			return this.active ? "border-accent/40 bg-accent-soft text-accent" : "border-line bg-sunk text-ink-3";
-		},
 	};
 }

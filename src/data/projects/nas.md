@@ -11,7 +11,7 @@ caseStudy:
     problem: Asset management workflows ran on paper and spreadsheets, forcing manual coordination between the internal team, contractors, and customers - and slowing cashflow.
     solution: A purpose-built internal platform with customer + contractor interaction layers, replacing the legacy workflow.
     build: Designed, built, and operated the system as part-time CTO since 2022 - full ownership of architecture, security, sprint delivery, and product strategy. Brought in a small temporary dev team for larger features.
-    outcome: Now used across ~90% of Australia. Cashflow workflow significantly improved. Customer relationship maintained over the full engagement.
+    outcome: Cashflow improved, in the CEO's words. Customer relationship maintained over the full engagement.
 startDate: "Jun 2022"
 duration : null
 highlights : [
@@ -71,8 +71,8 @@ stillRunning:
     ownership: mine
     live: true
     status: "Live · since 2022"
-    figure: "~90%"
-    figureNote: "of Australia"
+    figure: "3"
+    figureNote: "surfaces, one domain model"
     body: "One domain model, three surfaces: internal operations, a customer portal, a contractor portal. I own architecture, security, roadmap and delivery as their only technical voice."
     rank: 1
 ---

@@ -17,13 +17,33 @@ export interface Props extends Pick<Project["data"], "title" | "summary" | "type
 	showLink?: boolean;
 	/** Resolved, so not the schema's `reference("skills")` array. */
 	skills?: ProjectCardSkill[];
-	/** Overrides one chip, for callers that wire it to filtering this component knows nothing about. */
-	skill?: (skill: ProjectCardSkill) => AstroVNode;
+	showSkillIcon?: boolean;
+	skillItem?: (skill: ProjectCardSkill) => AstroVNode;
+	skillItemAttr?: (skill: ProjectCardSkill) => Record<string, unknown>;
+	pills?: boolean;
 	class?: HTMLAttributes<"div">["class:list"];
 	[key: string]: unknown;
 }
 
-const { id, title, summary, type, startDate, duration, demoUrl, repoUrl, highlights = [], showLink = false, skills = [], skill, class: className, ...rest } = Astro.props;
+const {
+	id,
+	title,
+	summary,
+	type,
+	startDate,
+	duration,
+	demoUrl,
+	repoUrl,
+	highlights = [],
+	showLink = false,
+	skills = [],
+	showSkillIcon = true,
+	skillItem,
+	skillItemAttr,
+	pills = true,
+	class: className,
+	...rest
+} = Astro.props;
 
 const formatDate = dateFormatter().monthAndYear();
 ---
@@ -89,18 +109,27 @@ const formatDate = dateFormatter().monthAndYear();
 
 	{
 		!!skills.length && (
-			<ul class="mt-2 flex flex-wrap gap-2 text-sm">
-				{skills.map((entry) =>
-					skill ? (
-						skill(entry)
-					) : (
-						<li class="inline-flex items-center gap-1 rounded border px-2 py-1">
-							<Icon name={entry.icon} class="size-5" />
-							<span>{entry.label}</span>
-						</li>
-					),
-				)}
-			</ul>
+			<div class="mt-2">
+				{!pills && <div class="mb-1 font-semibold">Skills</div>}
+				<ul class="flex flex-wrap gap-2 text-sm">
+					{skills.map((entry) =>
+						skillItem ? (
+							skillItem(entry)
+						) : (
+							<li
+								class={cn(
+									"inline-flex cursor-pointer items-center rounded text-ink-3",
+									pills ? "gap-1 border border-line bg-sunk px-2 py-1" : "gap-2 font-semibold not-first:before:content-['·'] hover:text-accent",
+								)}
+								{...(skillItemAttr?.(entry) ?? {})}
+							>
+								{showSkillIcon && <Icon name={entry.icon} class="size-4" />}
+								<span>{entry.label}</span>
+							</li>
+						),
+					)}
+				</ul>
+			</div>
 		)
 	}
 </div>

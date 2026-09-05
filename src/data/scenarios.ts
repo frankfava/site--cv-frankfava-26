@@ -94,7 +94,7 @@ export const SCENARIOS: Scenario[] = [
 		body: "Every run pulled the whole source and then overwrote the whole database, so every row was rewritten whether anything about it had changed or not. The run took about three hours. I kept the pull, cached it and compared it against what was already stored, which left only the writes that were a real change.",
 		proof: [
 			{ figure: "Delta writes", note: "instead of rewriting everything" },
-			{ figure: "4", note: "systems still running there" },
+			{ figure: "3", note: "admin panels still in use" },
 		],
 	},
 ];

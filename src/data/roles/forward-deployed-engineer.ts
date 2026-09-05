@@ -76,7 +76,7 @@ export const definition: RoleDefinition = {
 			note: "Owned architecture, security and delivery for a platform now used across ~90% of Australia - and stayed to operate it.",
 		},
 		{
-			from: { label: "Shipped FilamentPHP + Streamlit tooling inside SAVR's stack" },
+			from: { label: "Shipped FilamentPHP tooling inside SAVR's stack" },
 			to: "Delivering technical artifacts that meet customer requirements",
 			note: "Built production operability tools the data and customer-service teams use daily inside a regulated fintech.",
 		},

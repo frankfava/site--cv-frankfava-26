@@ -43,9 +43,8 @@ export const work = buildBlueprintEntry({
 	description: "Every project with the technologies, the constraints and what it produced.",
 	blueprint: {
 		projects: sections.projects,
-		stillRunning: sections.stillRunning,
-		skills: sections.skills,
 		references: sections.references,
+		skills: sections.skills,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {

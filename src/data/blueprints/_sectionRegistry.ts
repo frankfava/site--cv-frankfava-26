@@ -169,7 +169,7 @@ export const references: BlueprintComponent = {
 	title: "What people who worked with me say",
 	mainMenuLabel: "References",
 	icon: "ph:chat-centered-dots-duotone",
-	description: "There is only so much weight my own account can carry.",
+	description: "These are Facebook reviews from customers of my agency, FLIC Sites. Their words, not mine.",
 	content: async () => import("@/components/blueprints/shared/References.astro"),
 };
 
@@ -186,10 +186,10 @@ export const transferableSkills: BlueprintComponent = {
 export const projects: BlueprintComponent = {
 	id: "projects",
 	eyebrow: "Portfolio",
-	title: "Every project, with the constraint it actually had",
+	title: "Every project, and what it had to work around",
 	mainMenuLabel: "Projects",
 	icon: "ph:desktop",
-	description: "Filter by the technology you care about. Each entry carries the context, what it had to work around, and what it produced.",
+	description: "Filter by the technology you care about. Each entry carries the context and what it produced.",
 	content: async () => import("@/components/blueprints/shared/Projects.astro"),
 };
 
@@ -199,7 +199,7 @@ export const skills: BlueprintComponent = {
 	title: "The technologies behind the work",
 	mainMenuLabel: "Technical skills",
 	icon: "ph:brackets-curly",
-	description: "Searchable and filterable by proficiency, because a list this long is only useful if you can cut it down to what your role needs.",
+	description: "Search it, or filter by proficiency.",
 	content: async () => import("@/components/blueprints/shared/TechnicalSkills.astro"),
 };
 
