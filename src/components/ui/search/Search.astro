@@ -181,6 +181,14 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 			shouldOpen ? openDialog() : closeDialog();
 		});
 
+		// Escape closes a dialog natively, without the reset, which would leave the
+		// last query behind for the next open. Taken over so every way out resets.
+		searchDialog.addEventListener("keydown", (e) => {
+			if (e.key !== "Escape") return;
+			e.preventDefault();
+			closeDialog();
+		});
+
 		searchInput.addEventListener("input", () => renderResults(searchInput.value.trim()));
 
 		// Delegated on the container, so rows rendered later are covered without
