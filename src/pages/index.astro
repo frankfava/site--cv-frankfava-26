@@ -29,7 +29,11 @@ const metadata = {
 			<Orb />
 		</Fragment>
 		<Fragment slot="eyebrow">
-			{[ABOUT.location?.city, ABOUT.focuses.slice(0, 4).join(" · ")].filter(Boolean).join(" | ")}
+			<div class="flex flex-col gap-1 lg:flex-row">
+				<span>{ABOUT.location?.city}</span>
+				<span class="mx-1 hidden lg:inline">|</span>
+				<span>{ABOUT.focuses.slice(0, 4).join(" · ")}</span>
+			</div>
 		</Fragment>
 		<Fragment slot="heading">
 			I'm the person between your customer's problem and <b>the system that fixes it.</b>

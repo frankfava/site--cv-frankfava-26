@@ -57,7 +57,7 @@ const _actions = await Astro.slots.render("actions");
 			_headingWrapper?.trim() ? (
 				<Fragment set:html={_headingWrapper} />
 			) : (
-				<h1 class="heading-display max-w-[20ch] text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold text-white! print:text-ink! [&_b]:bg-[linear-gradient(96deg,#67e8f9,#c4b5fd_60%,#f0abfc)] [&_b]:bg-clip-text [&_b]:text-transparent print:[&_b]:bg-none print:[&_b]:text-ink">
+				<h1 class="heading-display max-w-[25ch] text-[clamp(2.1rem,4.6vw,3.5rem)] font-bold text-white! print:text-ink! [&_b]:bg-[linear-gradient(96deg,#67e8f9,#c4b5fd_60%,#f0abfc)] [&_b]:bg-clip-text [&_b]:text-transparent print:[&_b]:bg-none print:[&_b]:text-ink">
 					{_heading?.trim() ? <Fragment set:html={_heading} /> : title}
 				</h1>
 			)
@@ -68,7 +68,7 @@ const _actions = await Astro.slots.render("actions");
 				<Fragment set:html={_leadWrapper} />
 			) : (
 				(_lead?.trim() || description) && (
-					<p class="mt-5 max-w-[58ch] text-[1.08rem] text-[#a8a8bd] print:text-ink-2 [&_b]:font-semibold [&_b]:text-white print:[&_b]:text-ink">
+					<p class="mt-5 max-w-[68ch] text-[1.08rem] text-[#a8a8bd] print:text-ink-2 [&_b]:font-semibold [&_b]:text-white print:[&_b]:text-ink">
 						{_lead?.trim() ? <Fragment set:html={_lead} /> : description}
 					</p>
 				)
