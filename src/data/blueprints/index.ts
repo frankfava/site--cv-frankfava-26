@@ -101,9 +101,9 @@ export const credentials = buildBlueprintEntry({
 	title: "Credentials",
 	description: "What I have, what I don't, and every credential linked back to the issuer.",
 	blueprint: {
+		languages: sections.languages,
 		education: sections.education,
 		certifications: sections.certifications,
-		languages: sections.languages,
 		fullRecord: sections.fullRecord,
 	} as const satisfies BlueprintComponentSchema,
 	config: {

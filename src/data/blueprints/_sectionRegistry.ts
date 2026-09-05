@@ -98,8 +98,7 @@ export const education: BlueprintComponent = {
 	title: "Formal education",
 	mainMenuLabel: "Education",
 	icon: "ph:graduation-cap-duotone",
-	description:
-		"Nobody who has hired me has needed a fromal degree, including a regulated fintech and a part-time CTO seat. If it is a hard requirement, that is a real filter and it is better found now.",
+	description: "Nobody who has hired me has needed a formal degree, but a degree and an education are not the same thing.",
 	content: async () => import("@/components/blueprints/shared/Education.astro"),
 };
 
@@ -108,7 +107,7 @@ export const certifications: BlueprintComponent = {
 	eyebrow: "Issued and verifiable",
 	title: "Certifications",
 	icon: "ph:ladder-duotone",
-	description: "Certifications and Licenses from External Sources.",
+	description: "Every one issued by somebody else, with a link back to them.",
 	content: async () => import("@/components/blueprints/shared/Certifications.astro"),
 };
 
