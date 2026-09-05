@@ -46,6 +46,13 @@ export function applyConfigDefaults(config: Config.Initial | Record<string, unkn
 		ui: {
 			theme: "system",
 			layout: "narrow",
+			search: {
+				enabled: true,
+				hotkey: "K",
+				placeholder: "Search...",
+				emptyMessage: "No results found",
+				showSocials: true,
+			},
 			colors: {
 				primary: "#434E5E",
 				secondary: "#479FC8",

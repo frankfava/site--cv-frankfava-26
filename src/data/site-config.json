@@ -30,6 +30,13 @@
 	"ui": {
 		"theme": "system",
 		"layout": "narrow",
+		"search": {
+			"enabled": true,
+			"hotkey": "K",
+			"placeholder": "Search...",
+			"emptyMessage": "No results found",
+			"showSocials": true
+		},
 		"light": {
 			"colors": {
 				"primary": "#434E5E",

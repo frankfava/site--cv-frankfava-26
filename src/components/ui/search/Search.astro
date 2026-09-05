@@ -1,20 +1,17 @@
 ---
 import { Icon } from "astro-icon/components";
-import type { SearchIndexEntry } from "@/lib/search";
+import { resolveSearchSettings, type SearchIndexEntry } from "@/lib/search";
 
 export interface Props {
 	showHint?: boolean;
 	/** The index this page's dialog queries, resolved by the layout from the blueprint. */
 	index: SearchIndexEntry;
-	/** The letter the modifier is held with. Global, so the combo is the same on every page. */
-	hotkey?: string;
 }
 
-const { showHint = true, index, hotkey = "K" } = Astro.props;
+const { showHint = true, index } = Astro.props;
 
 const indexUrl = `/api/search-index/${index.slug}.json`;
-const placeholder = index.placeholder ?? "Search…";
-const emptyMessage = index.emptyMessage ?? "No results found";
+const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 ---
 
 <>
@@ -139,7 +136,7 @@ const emptyMessage = index.emptyMessage ?? "No results found";
 		searchInput = document.getElementById("search-input") as HTMLInputElement;
 
 		const modifierKey = getModifierKey();
-		const activationLetter = searchDialog.dataset.hotkey ?? "K";
+		const activationLetter = searchDialog.dataset.hotkey!;
 
 		document.querySelectorAll("[search-toggle]").forEach((el) =>
 			el?.addEventListener("click", (e) => {
@@ -328,7 +325,7 @@ const emptyMessage = index.emptyMessage ?? "No results found";
 
 		if (!query) {
 			const socials = items?.filter((item) => item.kind === "social") ?? [];
-			socials.length ? renderRows(container, socials) : setMessage(searchDialog?.dataset.emptyMessage ?? "");
+			socials.length ? renderRows(container, socials) : setMessage(searchDialog.dataset.emptyMessage!);
 			return;
 		}
 		if (!fuse) {

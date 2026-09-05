@@ -9,3 +9,5 @@
 export type { AtomicBuilder, AtomicKind, AtomicTarget, IconRenderer, RowContext, RowDescription, SearchIndexEntry, SearchItem, SearchItemKind } from "./types";
 export { blueprintsInIndex, searchIndexFor } from "./registry";
 export { buildRows } from "./rows";
+export { resolveSearchSettings } from "./settings";
+export type { SearchSettings } from "./settings";

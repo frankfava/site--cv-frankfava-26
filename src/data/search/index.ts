@@ -29,7 +29,6 @@ export const site: SearchIndexEntry = {
 	},
 	placeholder: "Search skills, projects, roles…",
 	emptyMessage: "Start typing to search.",
-	showSocials: true,
 };
 
 export const searchIndicies: Record<string, SearchIndexEntry> = { site };

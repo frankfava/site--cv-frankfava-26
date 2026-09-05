@@ -155,6 +155,34 @@
 					"type": "string",
 					"enum": ["narrow", "wide"]
 				},
+				"search": {
+					"type": "object",
+					"description": "Defaults for every search dialog. A search index in src/data/search may override all but hotkey.",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"default": true
+						},
+						"hotkey": {
+							"type": "string",
+							"default": "K",
+							"description": "Held with the platform modifier to open the dialog. Not overridable per index."
+						},
+						"placeholder": {
+							"type": "string",
+							"default": "Search..."
+						},
+						"emptyMessage": {
+							"type": "string",
+							"default": "No results found"
+						},
+						"showSocials": {
+							"type": "boolean",
+							"default": true
+						}
+					},
+					"additionalProperties": false
+				},
 				"light": {
 					"type": "object",
 					"description": "One colour mode. Every colour here is ramped 50-900; light lands on :root and dark on .dark, so one class retints the site. Both modes should declare the same keys.",

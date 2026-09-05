@@ -165,7 +165,12 @@ export function addUtils(config: Config.Complete) {
 	const display: Config.Final["display"] = config.display;
 
 	// Features
-	const features: Config.Final["features"] = {};
+	const features: Config.Final["features"] = {
+		search: {
+			...config.ui.search,
+			hotkey: (config.ui.search?.hotkey || "K").toUpperCase(),
+		} as Config.Final["features"]["search"],
+	};
 
 	// Socials
 	const socials: Config.Final["socials"] = createSocialsManager(config.socials);

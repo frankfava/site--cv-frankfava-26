@@ -7,6 +7,7 @@
  */
 
 import type { BlueprintEntry } from "@/lib/blueprints";
+import { resolveSearchSettings } from "./settings";
 import type { SearchIndexEntry } from "./types";
 
 /** Check the given blueprint queries a valid index, and that search is enabled. */
@@ -16,7 +17,8 @@ export function searchIndexFor(indicies: Record<string, SearchIndexEntry>, entry
 
 	const index = indicies[search.index];
 	if (!index) throw new Error(`[search] blueprint "${entry?.slug}" names index "${search.index}", which is not registered`);
-	return index;
+
+	return resolveSearchSettings(index).enabled ? index : undefined;
 }
 
 /** Get every blueprint an index covers, in catalog order. */

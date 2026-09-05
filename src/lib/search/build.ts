@@ -14,6 +14,7 @@ import { experimental_AstroContainer } from "astro/container";
 import { Icon } from "astro-icon/components";
 
 import type { AssembledBlueprint, AssembledSection, BlueprintEntry } from "@/lib/blueprints";
+import { resolveSearchSettings } from "./settings";
 import type { AtomicBuilder, AtomicKind, IconRenderer, SearchIndexEntry, SearchItem } from "./types";
 
 /** A section paired with the blueprint it was found on. */
@@ -217,7 +218,7 @@ export async function buildSearchIndex(index: SearchIndexEntry, blueprints: Blue
 
 	const atomicRows = Object.entries(index.atomics ?? {}).map(([kind, anchor]) => sources.atomics[kind as AtomicKind](renderIcon, resolveAnchor(index.slug, kind as AtomicKind, anchor, placed)));
 
-	if (index.showSocials) atomicRows.push(sources.socials(renderIcon));
+	if (resolveSearchSettings(index).showSocials) atomicRows.push(sources.socials(renderIcon));
 
 	return [...sectionRows, ...(await Promise.all(atomicRows)).flat()];
 }

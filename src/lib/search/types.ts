@@ -56,6 +56,11 @@ export interface SearchIndexEntry {
 	 * a single match.
 	 */
 	atomics?: Partial<Record<AtomicKind, string>>;
+	/**
+	 * Overrides of `FEATURES.search` for the dialogs querying this index. Anything
+	 * left out falls back to the site config; `hotkey` is not overridable.
+	 */
+	enabled?: boolean;
 	placeholder?: string;
 	emptyMessage?: string;
 	/** Whether the social links are indexed, and shown while the query is empty. */

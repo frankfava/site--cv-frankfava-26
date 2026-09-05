@@ -58,7 +58,9 @@ export namespace Config {
 			};
 		};
 		display: Display.Base;
-		features: {};
+		features: {
+			search: FullyDefined<NonNullable<App.UIConfig["search"]>>;
+		};
 		socials: SocialsManager & Record<Socials.LinkKey, Socials.Link> & ReturnType<SocialsManager["get"]>;
 	};
 }
@@ -180,6 +182,17 @@ export namespace App {
 	export type UIConfig = {
 		theme: "system" | "light" | "dark" | "light:only" | "dark:only";
 		layout: "narrow" | "wide";
+		/**
+		 * Defaults for every search dialog on the site. A search index may override
+		 * all but `hotkey` in `src/data/search`; the combo stays the same everywhere.
+		 */
+		search?: {
+			enabled?: boolean;
+			hotkey?: string;
+			placeholder?: string;
+			emptyMessage?: string;
+			showSocials?: boolean;
+		};
 		light?: ModeConfig;
 		dark?: ModeConfig;
 		fonts?: {
