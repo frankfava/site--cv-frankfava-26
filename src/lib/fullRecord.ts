@@ -26,7 +26,7 @@ export async function destinations(): Promise<Destination[]> {
 			eyebrow: "Built and operated",
 			title: "AI practice",
 			titleIcon: "ph:sparkle-duotone",
-			body: "The agentic tooling I run daily, the three published tools, and what I actually use them for.",
+			body: "The agentic tooling I run daily, published tools I've authored, and what I actually use them for.",
 			link: {
 				href: "/ai",
 			},
@@ -62,7 +62,7 @@ export async function destinations(): Promise<Destination[]> {
 			eyebrow: "Printable",
 			title: "One-pager",
 			titleIcon: "ph:file-duotone",
-			body: "The scannable version, for a fast skim or an ATS upload.",
+			body: "The scannable printable version, for a fast skim.",
 			link: {
 				href: "/one-pager",
 			},

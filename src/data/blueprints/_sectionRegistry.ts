@@ -8,13 +8,13 @@ export const capability: BlueprintComponent = {
 	mainMenuLabel: "Capability check",
 	eyebrow: "Capability",
 	icon: "ph:sliders-horizontal-duotone",
-	description: "Every role calls this job something different, so rather than make you pick a title, set what you actually need. The dial on the left keeps your reading as you scroll.",
+	description: "Every role calls for something different, so rather than make you pick a title, set what you actually need.",
 	content: async () => import("@/components/blueprints/shared/Capability.astro"),
 };
 
 export const trackRecord: BlueprintComponent = {
 	id: "track-record",
-	title: "I'm usually both the person the customer talks to and the person who builds it",
+	title: "I owned the decisions, built the thing, and led the people doing the rest",
 	mainMenuLabel: "Track record",
 	eyebrow: "Track record",
 	icon: "ph:chart-line-up-duotone",
@@ -35,28 +35,28 @@ export const stillRunning: BlueprintComponent = {
 export const yourProblem: BlueprintComponent = {
 	id: "your-problem",
 	eyebrow: "What landed on my desk",
-	title: "Which of these sounds like your week",
+	title: "Pick the one closest to your week",
 	mainMenuLabel: "Problems I've been handed",
 	icon: "ph:crosshair-duotone",
-	description: "Every one of these landed on my desk. Pick the closest and I will show you how it went.",
+	description: "Each is a real engagement, with the decision I made and what came of it.",
 	content: async () => import("@/components/blueprints/shared/Scenarios.astro"),
 };
 
 export const beforeWeTalk: BlueprintComponent = {
 	id: "before-we-talk",
 	eyebrow: "Before we talk",
-	title: "If it ends it, it's here. Everything else has an answer.",
+	title: "What could end this, and what only looks like it could",
 	mainMenuLabel: "Before we talk",
 	icon: "ph:warning-diamond-duotone",
-	description: "I would rather a real constraint ended this now than in week three.",
+	description: "The constraints, up front rather than in week three.",
 	content: async () => import("@/components/blueprints/shared/Signals.astro"),
 };
 
 export const roleDossiers: BlueprintComponent = {
 	id: "role-dossiers",
 	eyebrow: "Forward this",
-	title: "Each role gets the same evidence in a different order",
-	description: "Same evidence, reordered for the role it is aimed at, each with a one-page version you can forward.",
+	title: "Hiring for a specific role?",
+	description: "Each page show evidence for the role, and each has a one-page version you can forward.",
 	mainMenuLabel: "Role pages",
 	icon: "ph:paper-plane-tilt-duotone",
 	content: async () => import("@/components/blueprints/shared/RoleDossiers.astro"),

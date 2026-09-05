@@ -4,13 +4,13 @@ import type { BlueprintEntry } from "@/lib/blueprints";
 import type { RoleDefinition } from "@/lib/roles";
 import { careerYears, yearsIn } from "@/lib/spans";
 
-export const blueprint = buildBlueprint(buildRoleStructure("AI Solutions Architect"));
+export const blueprint = buildBlueprint(buildRoleStructure("Solutions Architect"));
 
 export const entry: BlueprintEntry = {
 	slug: "solutions-architect",
-	title: "AI Solutions Architect",
+	title: "Solutions Architect",
 	description:
-		"Why I'd be a great AI Solutions Architect - designing and building real AI/agentic solutions, pre-sales partnership with account executives, technical advisor across the adoption journey, architectural ownership, and a multi-stack track record.",
+		"Why I'd be a great Solutions Architect - designing and building real AI/agentic solutions, pre-sales partnership with account executives, technical advisor across the adoption journey, architectural ownership, and a multi-stack track record.",
 	blueprint,
 	config: {
 		// search: { enabled: false },
@@ -30,7 +30,7 @@ export const definition: RoleDefinition = {
 	pitch: {
 		whyNow: {
 			paragraphs: [
-				`After ${careerYears()} years building - the last few freelance, including ${yearsIn("nas")} years owning the architecture and product roadmap as part-time CTO at <a href="/experience#history">National Auto Service</a> - I'm moving deliberately into AI Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
+				`After ${careerYears()} years building - the last few freelance, including ${yearsIn("nas")} years owning the architecture and product roadmap as part-time CTO at <a href="/experience#history">National Auto Service</a> - I'm moving deliberately into Solutions Architect work. The pull isn't away from engineering; it's toward the part of the work I've been doing in fragments my whole career: scoping a customer's actual problem, defending the proposal against alternatives, and shepherding the build through to a system that survives the renewal.`,
 				`Concretely, that means partnering with an account executive to translate a customer's goals into an architecture they'll commit to - serving as the technical advisor across the whole adoption journey, from discovery and evaluation through to deployment, keeping business objectives and technical implementation pointed at the same target the entire way.`,
 			],
 		},
@@ -39,7 +39,7 @@ export const definition: RoleDefinition = {
 			{
 				icon: "ph:robot-duotone",
 				title: "AI-native, and building it - not just using it",
-				body: "I design and run a production agentic system daily: a self-hosted MCP server and custom Claude Code agents I built, with the orchestration, tool use, guardrails and evals that go with them. I've published AI tooling too - a Claude Code skill that productizes my delivery method, and a Lovable prompt builder. For an AI Solutions Architect, that's the difference between demoing a product and having built one.",
+				body: "I design and run a production agentic system daily: a self-hosted MCP server and custom Claude Code agents I built, with the orchestration, tool use, guardrails and evals that go with them. I've published AI tooling too - a Claude Code skill that productizes my delivery method, and a Lovable prompt builder. For an Solutions Architect, that's the difference between demoing a product and having built one.",
 			},
 			{
 				icon: "ph:blueprint-duotone",

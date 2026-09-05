@@ -16,7 +16,7 @@
 			"index": true
 		},
 		"author": "Frank Fava",
-		"description": "Frank Fava - Senior full-stack engineer and AI/agentic builder. %career_years+ years building software, now building and deploying LLM and agent systems - including a self-hosted MCP server and custom Claude Code agents I run in production - with a track record of selling technical solutions. Targeting AI Solutions Architect, Forward Deployed Engineer and roles where the same person owns the architecture and the team.",
+		"description": "Frank Fava - Engineering leader and hands-on builder. %coding_years years winning the work, designing it and building it, with %customer_years years of a customer in front of me and leading the people who build the rest since 2020. Now building and running LLM and agent systems in production, including a self-hosted MCP server I administer. Targeting Engineering Manager, Solutions Architect and Forward Deployed Engineer roles where the same person owns the architecture and the team.",
 		"openGraph": {
 			"images": [
 				{
@@ -92,7 +92,7 @@
 	},
 	"about": {
 		"name": "Frank Fava",
-		"focuses": ["AI", "Solutions Architecture", "Full-Stack Engineering", "Team Leadership"],
+		"focuses": ["Team Leadership", "Solutions Architecture", "AI", "Full-Stack Engineering"],
 		"availability": {
 			"noticeRequired": "Minimal",
 			"status": "available",
@@ -140,13 +140,13 @@
 		]
 	},
 	"display": {
-		"tagline": "The bridge between the customer and the system",
+		"tagline": "The bridge between the problem and the system that fixes it",
 		"showTagline": true,
 		"showAvailability": true,
 		"showAvatar": true,
 		"footer": {
 			"lead": {
-				"title": "Tell me what your customer is stuck on.",
+				"title": "Tell me what your team is stuck on.",
 				"description": "Better use of thirty minutes than walking through my CV, and it's the part I'm best at."
 			}
 		}

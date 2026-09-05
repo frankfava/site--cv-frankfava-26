@@ -47,6 +47,11 @@ export function careerYears(): number {
 /** The first role paid for writing code. The career starts earlier, in coaching. */
 const CODING_START_ID: WorkHistoryId = "flic-sites";
 
+/** Where the coding starts, as a hobby, nine years before anyone paid for it. */
+export function hobbyCodingStart(): Date {
+	return new Date("2005-01-01T00:00:00.000Z");
+}
+
 /** Where the paid software work starts, for copy that names the year. */
 export function codingStart(): Date {
 	return new Date(startDates.get(CODING_START_ID) ?? careerStart());
@@ -55,6 +60,14 @@ export function codingStart(): Date {
 /** The paid software work. Inside the career and shorter than it. */
 export function codingYears(): number {
 	return fullYearsBetween(codingStart());
+}
+
+/** The first role with a customer in front of me. Coaching, four years before the software work. */
+const CUSTOMER_FACING_START_ID: WorkHistoryId = "relationships-revealed";
+
+/** Unbroken years with a customer in front of me. Starts before the paid software work. */
+export function customerFacingYears(): number {
+	return fullYearsBetween(startDates.get(CUSTOMER_FACING_START_ID) ?? careerStart());
 }
 
 /** Whole years since a role began. Only meaningful while the role is still running. */

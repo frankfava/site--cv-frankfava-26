@@ -31,7 +31,9 @@ export function fitDial() {
 
 			const { gaps } = this.store;
 			if (!gaps.length) return "Everything you've asked for, I can evidence on this site.";
-			return `One thing to talk about: ${gaps.join(", ")}. I'd rather that came up now than in week three.`;
+
+			if (gaps.length === 1) return `One thing to talk about: ${gaps[0]}.`;
+			return `${gaps.length} things to talk about: ${gaps.join(", ")}.`;
 		},
 
 		get noteLead() {
@@ -40,7 +42,7 @@ export function fitDial() {
 
 		get noteBody() {
 			const { over } = this.store;
-			return over.length ? `${over.join(", ")}.` : "this is my own read of my evidence, and every line above links to the work behind it.";
+			return over.length ? `${over.join(", ")}.` : "this is my own read of my evidence, and the work behind every line is on this site.";
 		},
 
 		get arcClass() {

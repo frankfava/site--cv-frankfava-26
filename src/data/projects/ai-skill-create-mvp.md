@@ -9,7 +9,7 @@ summary: "Productized my consulting methodology as a Claude Code skill - discove
 startDate: "Jan 2026"
 duration : "PT6H"
 highlights : [
-	"Encodes the discovery → planning → implementation workflow I've used across 160+ client projects.",
+	"Encodes a discovery → planning → implementation workflow as a skill anyone can run.",
 	"State persistence lets engagements resume across multiple Claude Code sessions instead of one-shot prompting.",
 	"Demonstrates how senior practitioners can package domain expertise as reusable AI tooling.",
 ]

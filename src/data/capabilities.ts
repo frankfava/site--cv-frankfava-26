@@ -1,5 +1,5 @@
 /** The capabilities the check compares. */
-import { codingStart, yearsIn } from "@/lib/spans";
+import { codingStart, hobbyCodingStart, yearsIn } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 export interface Capability {
 	id: string;
@@ -29,7 +29,7 @@ export const CAPABILITIES = [
 		short: "Architecture",
 		sits: 90,
 		defaultNeed: 85,
-		evidence: `${inWords(yearsIn("nas"), "Sentence")} years as the only technical voice at an asset-management company. One domain model, three surfaces.`,
+		evidence: `${inWords(yearsIn("nas"), "Sentence")} years as the only technical voice at an asset-management company. One domain model, multiple services.`,
 	},
 	{
 		id: "scale",
@@ -45,7 +45,7 @@ export const CAPABILITIES = [
 		short: "Agentic AI",
 		sits: 85,
 		defaultNeed: 85,
-		evidence: "Self-hosted MCP server, 12+ agents, unattended scheduled runs. I'm the on-call.",
+		evidence: 'A self-hosted "second brain" built using Claude, running scheduled agents, and supporting ongoing personal and work-related tasks.',
 	},
 	{
 		id: "code",
@@ -53,7 +53,7 @@ export const CAPABILITIES = [
 		short: "Hands-on",
 		sits: 88,
 		defaultNeed: 85,
-		evidence: `Paid to write code since ${codingStart().getFullYear()}. Most recently a crypto trading integration in a regulated fintech.`,
+		evidence: `${new Date().getFullYear() - hobbyCodingStart().getFullYear()} years of coding experience. Paid to write code since ${codingStart().getFullYear()}. `,
 	},
 	{
 		id: "lead",
@@ -61,7 +61,7 @@ export const CAPABILITIES = [
 		short: "Leading",
 		sits: 78,
 		defaultNeed: 85,
-		evidence: "Lead developer within six months, training the juniors. I wrote the task we screened candidates with.",
+		evidence: "Lead developer within six months, training juniors. I wrote the task we screened candidates with.",
 	},
 ] as const satisfies readonly Capability[];
 

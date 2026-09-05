@@ -3,7 +3,8 @@ import { CAPABILITY_STORE } from "./store.js";
 import { radarPath } from "./radar";
 
 const VERDICT_TEXT = {
-	covered: "Covered, with room to spare.",
+	generous: "More than you need here.",
+	covered: "Covered.",
 	tight: "Close. I'd be learning on the job.",
 	gap: "This is a real gap. Worth asking me about.",
 	none: "Not needed here.",

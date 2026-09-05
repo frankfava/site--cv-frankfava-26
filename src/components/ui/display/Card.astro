@@ -23,7 +23,7 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 
 <Tag
 	href={href}
-	class={cn("card block bg-surface text-left text-ink", className, {
+	class={cn("card flex flex-col bg-surface text-left text-ink", className, {
 		"rounded-l-none border-l-3": borderHighlight,
 		"border-l-good": borderHighlight && accent === "good",
 		"border-l-bad": borderHighlight && accent === "bad",
@@ -48,14 +48,14 @@ const href = Tag === "a" ? card.link?.href?.toString() : undefined;
 		{card.titleIcon && <Icon name={card.titleIcon} class="mb-0.5 size-5" />}
 		<span>{card.title}</span>
 	</h4>
-	{card.body && <p class="card--body text-sm text-ink-2">{card.body}</p>}
+	{card.body && <p class={cn("card--body text-sm text-ink-2", { "mb-4": !card.turn })}>{card.body}</p>}
 	{
 		card.turn && (
-			<p class="card--turn mt-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
+			<p class="card--turn my-2 border-t border-dashed border-line-2 pt-2 text-sm text-ink-2">
 				{card.turnLead && <span class="font-semibold">{card.turnLead}</span>}
 				<span class="ml-1">{card.turn}</span>
 			</p>
 		)
 	}
-	{linkText && <span class="card--link mt-3 block font-mono text-xs text-accent">{linkText}</span>}
+	{linkText && <span class="card--link mt-auto block font-mono text-xs text-accent">{linkText}</span>}
 </Tag>

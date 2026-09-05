@@ -49,6 +49,7 @@ export function capabilityStore() {
 			if (need === 0) return "none";
 
 			const headroom = this.find(id).sits - need;
+			if (headroom >= GENEROUS_BY) return "generous";
 			if (headroom >= 0) return "covered";
 			return -headroom <= TIGHT_WITHIN ? "tight" : "gap";
 		},
@@ -76,7 +77,7 @@ export function capabilityStore() {
 		},
 
 		get over() {
-			return this.capabilities.filter((c) => c.sits - this.needOf(c.id) >= GENEROUS_BY).map((c) => c.label);
+			return this.capabilities.filter((c) => this.verdictOf(c.id) === "generous").map((c) => c.label);
 		},
 	};
 }

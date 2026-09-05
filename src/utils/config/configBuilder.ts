@@ -3,7 +3,7 @@
  */
 import type { Config } from "@/types/config";
 import { createSocialsManager } from "@/lib/socials";
-import { careerYears } from "@/lib/spans";
+import { codingYears, customerFacingYears } from "@/lib/spans";
 
 /** Modify config to add utility */
 export function addUtils(config: Config.Complete) {
@@ -24,7 +24,7 @@ export function addUtils(config: Config.Complete) {
 	// Metadata
 	const metadata: Config.Final["metadata"] = {
 		...config.metadata,
-		description: config.metadata?.description?.replace("%career_years", String(careerYears())),
+		description: config.metadata?.description?.replace("%coding_years", String(codingYears())).replace("%customer_years", String(customerFacingYears())),
 		title: {
 			default: config.metadata?.title?.default.replace("%site_name", site.name) || site.name,
 			template: config.metadata?.title?.template?.replace("%site_name", site.name) || `%s | ${site.name}`,

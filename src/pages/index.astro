@@ -5,7 +5,7 @@ import { blueprints } from "@/data/blueprints";
 import { METADATA, ABOUT } from "site:config";
 import ParticleField from "@/components/shared/backgrounds/ParticleField.astro";
 import Orb from "@/components/shared/backgrounds/Orb.astro";
-import { careerYears, yearsIn } from "@/lib/spans";
+import { codingYears, customerFacingYears, startYearOf, yearsIn } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 
 const metadata = {
@@ -19,7 +19,7 @@ const metadata = {
 		slot="hero"
 		class="dark"
 		facts={[
-			{ value: "10 yrs", label: "customer-facing technical" },
+			{ value: `${customerFacingYears()} yrs`, label: "with a customer in front of me" },
 			{ value: "160+", label: "projects sold and delivered" },
 			{ value: "EU / EEA", label: "work rights" },
 		]}
@@ -36,12 +36,12 @@ const metadata = {
 			</div>
 		</Fragment>
 		<Fragment slot="heading">
-			I'm the person between your customer's problem and <b>the system that fixes it.</b>
+			I'm the person between the problem and <b>the system that fixes it.</b>
 		</Fragment>
 		<Fragment slot="lead">
-			{inWords(careerYears(), "Sentence")} years of winning the work, designing it, building it, leading the people who build the rest of it, and <b
-				>still being the call when it breaks {inWords(yearsIn("nas"))} years later</b
-			>. Ten of those years customer-facing. These days the systems are agentic, and I run mine in production every day.
+			{inWords(codingYears(), "Sentence")} years winning the work, designing it and building it. {inWords(customerFacingYears(), "Sentence")} years with a customer in front of me, and leading the
+			people who build the rest since {startYearOf("igomoon")}. {inWords(yearsIn("nas"), "Sentence")} years as one company's only technical voice, and <b>still the call when it breaks</b>. These
+			days the systems are agentic, and I run mine in production every day.
 		</Fragment>
 	</Hero>
 </IndexedLayout>

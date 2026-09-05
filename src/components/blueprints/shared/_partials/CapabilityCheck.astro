@@ -60,7 +60,10 @@ const { class: className } = Astro.props;
 									x-bind:value="need"
 									x-on:input="setNeed"
 								/>
-								<div class="mt-2 flex items-center gap-2 text-sm text-ink-3 [&.is-covered]:text-good [&.is-gap]:text-bad [&.is-tight]:text-warn" x-bind:class="verdictClass">
+								<div
+									class="mt-2 flex items-center gap-2 text-sm text-ink-3 [&.is-covered]:text-good [&.is-gap]:text-bad [&.is-generous]:text-good [&.is-tight]:text-warn"
+									x-bind:class="verdictClass"
+								>
 									<i class="size-2 flex-none rounded-full bg-current" />
 									<span x-text="verdictText">Covered, with room to spare.</span>
 								</div>

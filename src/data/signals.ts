@@ -1,6 +1,6 @@
 /** What ends a conversation, and what has an answer. */
 import type { _Card } from "@/types";
-import { careerYears, roleCount, yearsIn } from "@/lib/spans";
+import { careerYears, codingStart, roleCount, startYearOf, yearsIn } from "@/lib/spans";
 import { inWords } from "@/utils/number";
 
 export interface Signal extends _Card {
@@ -26,8 +26,8 @@ export async function signals(): Promise<Signal[]> {
 			ends: false,
 			title: "I'm in Australia for weeks at a time, most years",
 			body: "My family is in Sydney and I go back for extended stretches, most often around Christmas.",
-			turnLead: "I work remotely while I'm there.",
-			turn: "I both enjoy and need that flexibility. The rest of the year I want the office - the environment, the collaborating, being amongst colleagues.",
+			turnLead: "I can work remotely while I'm there.",
+			turn: "The rest of the year I want the office - the environment, the collaborating, being amongst colleagues.",
 		},
 		{
 			ends: false,
@@ -46,14 +46,14 @@ export async function signals(): Promise<Signal[]> {
 		{
 			ends: false,
 			title: "I started out as a coach, not an engineer",
-			body: "Five years as a professional coach before I wrote software for a living.",
-			turnLead: "It's the discovery skill, not a detour.",
+			body: `Coaching was my profession from ${startYearOf("relationships-revealed")}. I didn't write software for money until ${codingStart().getFullYear()}, and the two overlapped while I wound the coaching down.`,
+			turnLead: "It's the discovery skill.",
 			turn: "Coaching is getting someone with a messy situation to a decision they'll act on. It's why an architecture review and a nervous CFO are the same conversation to me.",
 		},
 		{
 			ends: false,
 			title: "My CTO title is part-time, at a small company",
-			body: "Sixty hours a month, not a full-time seat at scale.",
+			body: "It runs on a retainer, not a full-time seat at scale.",
 			turnLead: `${inWords(yearsIn("nas"), "Sentence")} years, sole technical voice, still the call when it breaks.`,
 			turn: "Accountability and duration are the proof here, not headcount.",
 		},

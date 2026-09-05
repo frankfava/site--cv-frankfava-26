@@ -18,8 +18,8 @@ const header: _ModuleHeader = {
 
 <ModuleWrapper
 	{...{
-		forceLayout: "stacked",
 		...props,
+		forceLayout: "stacked",
 		header,
 	}}
 >
@@ -28,6 +28,7 @@ const header: _ModuleHeader = {
 	<Cards
 		{...{
 			cards: visible,
+			columnCount: 3,
 			accentColor: (signal: Signal) => (signal.ends ? "bad" : "good"),
 			borderHighlight: true,
 			highlightEyebrow: true,
