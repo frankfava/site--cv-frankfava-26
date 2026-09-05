@@ -126,7 +126,7 @@ const _rail = await Astro.slots.render("rail");
 		<div class="scrim" aria-hidden="true" data-sidebar-scrim></div>
 		{useRail && (_rail?.trim() ? <Fragment set:html={_rail} /> : <IndexRail links={contentLinks} />)}
 		<slot name="afterFooter" />
-		{searchIndex && <Search index={searchIndex} />}
+		{searchIndex && <Search index={searchIndex} showOnMobile={false} />}
 		<PersonJsonLd />
 	</Fragment>
 </PageLayout>

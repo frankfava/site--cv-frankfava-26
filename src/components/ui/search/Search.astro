@@ -6,9 +6,10 @@ export interface Props {
 	showHint?: boolean;
 	/** The index this page's dialog queries, resolved by the layout from the blueprint. */
 	index: SearchIndexEntry;
+	showOnMobile?: boolean;
 }
 
-const { showHint = true, index } = Astro.props;
+const { showHint = true, index, showOnMobile = true } = Astro.props;
 
 const indexUrl = `/api/search-index/${index.slug}.json`;
 const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
@@ -17,7 +18,7 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 <>
 	{
 		showHint && (
-			<div id="search-hint" search-toggle class="fixed bottom-0 z-2 w-full cursor-pointer border-t border-line bg-surface py-1.5 text-center leading-1 text-ink-2 print:hidden">
+			<div id="search-hint" class="fixed bottom-0 z-2 w-full cursor-pointer border-t border-line bg-surface py-1.5 text-center leading-1 text-ink-2 print:hidden" search-toggle>
 				<span class="hidden items-center justify-center gap-x-1.5 sm:flex">
 					Press
 					<kbd data-search-mod-key class="pointer-events-none rounded border border-line bg-sunk px-1.5 text-sm text-ink-3 select-none">
@@ -29,11 +30,13 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 					</kbd>
 					to open the search panel.
 				</span>
-				<span class="flex items-center justify-center gap-x-1.5 sm:hidden">
-					Press
-					<kbd class="pointer-events-none rounded border border-line bg-sunk px-1.5 text-sm text-ink-3 select-none">here</kbd>
-					to open the search panel.
-				</span>
+				{showOnMobile && (
+					<span class="flex items-center justify-center gap-x-1.5 sm:hidden">
+						Press
+						<kbd class="pointer-events-none rounded border border-line bg-sunk px-1.5 text-sm text-ink-3 select-none">here</kbd>
+						to open the search panel.
+					</span>
+				)}
 			</div>
 		)
 	}
@@ -43,7 +46,7 @@ const { hotkey, placeholder, emptyMessage } = resolveSearchSettings(index);
 		data-empty-message={emptyMessage}
 		data-hotkey={hotkey}
 		transition:persist
-		class="fixed inset-0 z-200 m-0 size-full max-h-full max-w-full bg-transparent p-0 backdrop:bg-black/50"
+		class="fixed inset-0 z-200 m-0 size-full max-h-full max-w-full bg-transparent p-2 backdrop:bg-black/50"
 	>
 		<div class="relative mx-auto mt-[5vh] max-w-lg overflow-hidden rounded-md border border-line bg-surface shadow-2xl md:mt-[10vh]">
 			<div class="flex items-center gap-3 border-b border-line px-4 py-3">
