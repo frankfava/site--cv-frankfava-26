@@ -1,18 +1,18 @@
 /**
- * Turning things into rows.
+ * Builds the rows of one atomic kind.
  *
- * A row has two halves. What it *is* comes from the thing itself and is
- * described per kind in `@/data/search`. Where it *goes* comes from the target,
- * and is the same for every row of that kind. This is where the two are joined.
+ * A row is two parts. What it contains comes from the item, and is described per
+ * kind in `src/data/search/builders.ts`. Where it links comes from the target,
+ * and is the same for every row of that kind.
  */
 
 import type { RowContext, RowDescription, SearchItem } from "./types";
 
 /**
- * Turn a list into rows of one kind, every one landing on the same target.
+ * Turn a list into rows of one kind, each landing on the same target.
  *
- * `describe` is the only part that differs between kinds, which is why it is
- * the only part authored as data.
+ * `describe` is the only part that differs between kinds, which is why it is the
+ * only part authored as data.
  */
 export async function buildRows<T>({ kind, fallbackIcon, target, renderIcon }: RowContext, list: T[], describe: (item: T) => RowDescription): Promise<SearchItem[]> {
 	return Promise.all(

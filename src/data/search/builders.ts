@@ -1,18 +1,20 @@
 /**
- * What each kind of thing says about itself in a result row.
+ * Define the atomic builders that build the rows of a search index.
  *
  * A builder answers one question: given the collection, what does a reader need
- * to see and what should a query match on? It never says where the row points -
- * that is the target, resolved once per build from the anchor the index landed
- * this kind on, and identical for every row the builder returns.
+ * to see, and what should a query match on? It never says where the row links.
+ * That is the target, resolved once per build from the anchor the index landed
+ * this kind on in `src/data/search/index.ts`, and the same for every row the
+ * builder returns.
  *
- * Each builder reads the population its landing section actually renders, so a
- * hit always has something waiting for it when the page arrives.
+ * Define a builder below by calling `buildRows` with a `RowContext`, the list to
+ * build from, and a function describing one item. Read the population the
+ * landing section actually renders, so a hit always has a row waiting for it
+ * when the page arrives.
  *
- * Adding a kind:
- *   1. name it in `AtomicKind` and give it a glyph in `FALLBACK_ICON`
- *   2. describe it here, and register it in `ATOMIC_BUILDERS`
- *   3. land it on a section in the index's `atomics`
+ * To add a kind: name it in `AtomicKind`, give it a glyph in `FALLBACK_ICON`,
+ * describe it here and register it in `ATOMIC_BUILDERS`, then land it on a
+ * section in that index's `atomics`.
  *
  * Every builder reaches `astro:content`, so nothing here may be imported by
  * anything the client loads.

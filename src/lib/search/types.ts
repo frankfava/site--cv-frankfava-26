@@ -1,56 +1,59 @@
 /**
- * The shapes a search index is stated in.
+ * Every shape the search system is stated in.
  *
- * They reference nothing, so the dialog script can import a row's shape without
- * pulling in anything that reads a collection.
+ * These types import nothing, so the client-side dialog can use `SearchItem`
+ * without pulling in anything that reads a collection.
+ *
+ * The engine that builds an index from them is in `src/lib/search/build.ts`.
+ * The indexes themselves are defined in `src/data/search/index.ts`.
  */
 
-/** Every row kind an index can hold. */
+/** Every kind of row an index can hold. */
 export type SearchItemKind = "section" | "skill" | "project" | "role" | "certification" | "language" | "transferable" | "social";
 
 /**
  * The kinds sourced from a collection and landed on a section anchor.
  *
- * `section` is not one of them - those come from walking the blueprints
- * themselves. Neither is `social`, which navigates off-site and so has no
- * anchor to land on.
+ * `section` is excluded because those rows come from walking the blueprints.
+ * `social` is excluded because those rows link off-site and have no anchor.
  */
 export type AtomicKind = Exclude<SearchItemKind, "section" | "social">;
 
-/** One row of a built index. */
+/** One row of a built index, as the dialog receives it. */
 export interface SearchItem {
-	/** Unique within the index: `kind:id` for an atomic, `page:section` for a section. */
+	/** Unique within the index. Written as `kind:id`. */
 	id: string;
-	/** Where the row goes: a page path with an anchor, or an off-site href. */
+	/** Where the row navigates: a page path with an anchor, or an off-site href. */
 	url: string;
 	title: string;
 	description: string;
-	/** Pre-rendered markup, or "" where the row has no icon. */
+	/** Pre-rendered SVG markup, or "" where no icon resolved. */
 	iconHtml: string;
-	/** The title of the section the row sits under. */
+	/** Title of the section the row sits in. Empty for a top-level section. */
 	module: string;
-	/** The title of the page the row is on. An index spans pages, so a row names its own. */
+	/** Title of the page the row is on. An index spans pages, so each row names its own. */
 	page: string;
-	/** What a query is matched against. */
+	/** The text a query is matched against. */
 	body: string;
 	kind: SearchItemKind;
-	/** A section that wraps others, so the dialog can mark it a landing rather than a leaf. */
+	/** True for a section that wraps other sections. The dialog italicises these. */
 	isGroup: boolean;
 }
 
 /**
- * A search index: a scope, not a page.
+ * One search index.
  *
- * It names the anchors its atomic rows land on and the copy its dialog shows.
- * The pages it covers are the blueprints that name it in their own
- * `config.search`, so membership is stated once, on the page it applies to.
+ * An index is a scope, not a page. Define one in `src/data/search/index.ts`,
+ * then apply it to a page by naming its slug in that page's blueprint
+ * `config.search.index`.
  */
 export interface SearchIndexEntry {
 	slug: string;
 	/**
-	 * Kind → the id of the section it lands on. An atomic kind left out is not
-	 * indexed. The anchor names no page: the build resolves it against the pages
-	 * this index covers and fails on anything but a single match.
+	 * The atomics this index holds, keyed by kind with the anchor as the value.
+	 * A kind left out is not indexed. The anchor names no page: the build
+	 * resolves it against the pages this index covers and fails on anything but
+	 * a single match.
 	 */
 	atomics?: Partial<Record<AtomicKind, string>>;
 	placeholder?: string;
@@ -59,23 +62,22 @@ export interface SearchIndexEntry {
 	showSocials?: boolean;
 }
 
-/** Resolves an icon name to markup, or "" for a name that will not draw or costs too much. */
+/** Render an icon name to SVG markup. Returns "" if the name will not resolve, or exceeds the size budget. */
 export type IconRenderer = (name: string) => Promise<string>;
 
 /**
- * Where every row of one kind lands.
+ * Where every row of one kind lands, resolved once per build.
  *
- * Resolved once per build, and identical for every row of that kind. The index
- * names a section id and nothing else; the build finds the single page it
- * covers that renders that section, and this is the answer:
+ * The index names only a section id. The build finds the single page it covers
+ * that renders that section, and produces this:
  *
  *   atomics: { role: "history" }  →  { url: "/experience#history",
  *                                      module: "The timeline",
  *                                      page: "Experience" }
  *
- * `module` and `page` are what a row reads beneath its title, which is how two
- * things of different kinds with the same name are told apart - the "Laravel"
- * skill on Work against the "Laravel" certification on Credentials.
+ * `module` and `page` are shown beneath a row's title, which is how two rows of
+ * different kinds with the same name are told apart: the "Laravel" skill on
+ * Work against the "Laravel" certification on Credentials.
  */
 export interface AtomicTarget {
 	/** The page's path and the section's anchor, together. */
@@ -87,31 +89,40 @@ export interface AtomicTarget {
 }
 
 /**
- * What a builder says about one thing.
+ * What a builder returns for one item.
  *
- * Only what the thing knows about itself. Where it goes, what kind it is and
- * what it falls back to for an icon are all known already.
+ * Only what the item knows about itself. Its kind, its icon fallback and where
+ * it links are supplied separately, in `RowContext`.
  */
 export interface RowDescription {
-	/** Unique within the kind. The kind is prefixed on the way out. */
+	/** Unique within the kind. The kind is prefixed when the row is built. */
 	id: string;
 	title: string;
-	/** The tail of the line beneath the title, after the breadcrumb. */
+	/** Shown beneath the title, after the page and section. */
 	description?: string;
-	/** An iconify name. The kind's glyph stands in when it is absent or too costly to ship. */
+	/** An iconify name. `RowContext.fallbackIcon` is used when this is absent or will not resolve. */
 	icon?: string;
-	/** Everything a query should match on. Empty parts are dropped. */
+	/** Everything a query should match on. Empty entries are dropped. */
 	body: (string | undefined)[];
 }
 
-/** Everything every row of one kind shares: what it is, what it falls back to, and where it goes. */
+/**
+ * What every row of one kind shares.
+ *
+ * Passed to `buildRows` alongside the list and the describe function.
+ */
 export interface RowContext {
 	kind: SearchItemKind;
-	/** Drawn where the thing offers no icon of its own, or one too costly to ship. */
+	/** Used where an item has no icon of its own, or one that will not resolve. */
 	fallbackIcon: string;
 	target: AtomicTarget;
 	renderIcon: IconRenderer;
 }
 
-/** Sources every row of one atomic kind, all landing on the same target. */
+/**
+ * Build every row of one atomic kind.
+ *
+ * Define one per kind in `src/data/search/builders.ts` and register it in
+ * `ATOMIC_BUILDERS`.
+ */
 export type AtomicBuilder = (renderIcon: IconRenderer, target: AtomicTarget) => Promise<SearchItem[]>;

@@ -1,10 +1,11 @@
 /**
- * One home for search: the shapes an index is stated in, and the reading of it.
+ * Everything the search engine exposes: the shapes, the catalog lookups and the
+ * row builder.
  *
- * What the rows are made of is authored in `@/data/search` and handed to
- * `buildSearchIndex`, so nothing here reaches a collection.
+ * What a row contains is authored in `src/data/search/builders.ts` and handed to
+ * `buildSearchIndex`, so nothing here reads a collection.
  */
 
 export type { AtomicBuilder, AtomicKind, AtomicTarget, IconRenderer, RowContext, RowDescription, SearchIndexEntry, SearchItem, SearchItemKind } from "./types";
-export { pagesInIndex, searchIndexFor } from "./registry";
+export { blueprintsInIndex, searchIndexFor } from "./registry";
 export { buildRows } from "./rows";

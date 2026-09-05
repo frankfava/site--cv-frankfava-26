@@ -1,11 +1,12 @@
 /**
- * Building one index.
+ * Builds one search index.
  *
- * Two layers meet here. Sections come from walking every page the index covers,
- * so a row already knows its page. Atomics come from the collections, and are
- * placed by resolving the index's anchor against those same pages - which is
- * what lets an anchor be stated once, without naming a page, and still land
- * somewhere real.
+ * Two layers. Section rows come from walking every page the index covers, so a
+ * row already knows its page. Atomic rows come from the collections, via the
+ * builders in `src/data/search/builders.ts`, and are placed by resolving the
+ * index's anchor against those same pages.
+ *
+ * Called by `src/pages/api/search-index/[indexSlug].json.ts`.
  */
 
 import type { AstroInstance, MarkdownInstance } from "astro";
@@ -15,29 +16,28 @@ import { Icon } from "astro-icon/components";
 import type { AssembledBlueprint, AssembledSection, BlueprintEntry } from "@/lib/blueprints";
 import type { AtomicBuilder, AtomicKind, IconRenderer, SearchIndexEntry, SearchItem } from "./types";
 
-/** A section as the index needs it: what it is called, and where it is. */
+/** A section paired with the blueprint it was found on. */
 interface Placed {
 	section: AssembledSection;
-	/** The page the section is on. */
+	/** The blueprint the section is on. */
 	entry: BlueprintEntry;
-	/** The enclosing section, or undefined at the top of a page. */
+	/** The enclosing section, or undefined at the top of a blueprint. */
 	parent?: AssembledSection;
 }
 
 /**
- * What one row's icon may cost.
+ * What one row's icon may cost, in bytes.
  *
- * Every icon is inlined, so the index carries the whole set. A handful of brand
- * logos are drawn at a detail no result row shows - the largest is two hundred
- * times the median - and paying for them here buys a glyph five millimetres
- * wide. Anything over budget falls back to the plain glyph for its kind.
+ * Every icon is inlined, so the index carries the whole set. A few brand logos
+ * are drawn at a detail no result row shows, the largest being two hundred times
+ * the median. Anything over budget falls back to the plain glyph for its kind.
  */
 const ICON_BUDGET_BYTES = 4096;
 
 /**
- * Render an icon name to markup, caching by name so a build renders each one
- * once however many rows carry it. A name that will not render, or renders past
- * the budget, leaves the slot empty for the caller to fall back on.
+ * Render an icon name to markup, cached by name so a build renders each one once
+ * however many rows carry it. Returns "" if the name will not render, or renders
+ * past `ICON_BUDGET_BYTES`, for the caller to fall back on.
  */
 function makeIconRenderer(container: experimental_AstroContainer): IconRenderer {
 	const cache = new Map<string, string>();
@@ -57,7 +57,7 @@ function makeIconRenderer(container: experimental_AstroContainer): IconRenderer 
 	};
 }
 
-/** Decode the entities the renderer emits, so the corpus holds the text a reader sees. */
+/** Decode the entities the renderer emits, so the index holds the text a reader sees. */
 function decodeEntities(html: string): string {
 	return html
 		.replace(/&nbsp;/g, " ")
@@ -75,7 +75,7 @@ function decodeEntities(html: string): string {
  *
  * The state machine tracks quotes because a `/<[^>]+>/` pass stops at the first
  * `>` inside an attribute value, which spills Alpine's `x-data` JSON into the
- * corpus. Styles, scripts, icons and comments go first, whole.
+ * index. Styles, scripts, icons and comments are stripped whole, first.
  */
 function htmlToText(html: string): string {
 	const stripped = html
@@ -106,7 +106,7 @@ function htmlToText(html: string): string {
 	return decodeEntities(text).replace(/\s+/g, " ").trim();
 }
 
-/** A leaf section's own copy, as text. A section that will not render contributes nothing. */
+/** Render a leaf section's own copy to text. Returns "" if the section will not render. */
 async function sectionBody(container: experimental_AstroContainer, section: AssembledSection): Promise<string> {
 	const { content } = section;
 	if (typeof content === "string") return htmlToText(content);
@@ -129,7 +129,7 @@ async function sectionBody(container: experimental_AstroContainer, section: Asse
 	}
 }
 
-/** A parent's children, named, so a term that only appears in one still reaches the parent. */
+/** List a parent section's children by name, so a term appearing only in a child still matches the parent. */
 function childrenSummary(section: AssembledSection): string {
 	return (section.sections ?? [])
 		.filter((child) => !child.hidden)
@@ -138,12 +138,12 @@ function childrenSummary(section: AssembledSection): string {
 }
 
 /**
- * Every section the index covers, flattened and carrying its page.
+ * Flatten every section the index covers, carrying the page each was found on.
  *
- * Two ways for a section to stay out, and they differ in what happens to its
- * children. `hidden` does not render at all, so it is transparent: its children
- * inherit its parent. `showInSearch: false` does render, so it stays the parent
- * its children are found under - it is only the row that is not worth having.
+ * Two ways for a section to stay out, differing in what happens to its children.
+ * `hidden` does not render at all, so it is transparent and its children inherit
+ * its parent. `showInSearch: false` does render, so it stays the parent its
+ * children are found under; only its own row is dropped.
  */
 function placeSections(entry: BlueprintEntry, sections: AssembledBlueprint, parent: AssembledSection | undefined, into: Placed[]): Placed[] {
 	for (const section of sections) {
@@ -153,43 +153,48 @@ function placeSections(entry: BlueprintEntry, sections: AssembledBlueprint, pare
 	return into;
 }
 
-/** Every page an index covers, flattened into its sections. */
-function placeAllSections(pages: BlueprintEntry[]): Placed[] {
-	return pages.flatMap((entry) => placeSections(entry, entry.blueprint.assemble(), undefined, []));
+/** Flatten every blueprint an index covers into its sections. */
+function placeAllSections(blueprints: BlueprintEntry[]): Placed[] {
+	return blueprints.flatMap((entry) => placeSections(entry, entry.blueprint.assemble(), undefined, []));
 }
 
 /**
- * Where one atomic kind lands.
+ * Resolve where one atomic kind lands.
  *
- * The anchor names a section, not a page, so exactly one page in the index has
- * to carry it. Nothing means the section was renamed or dropped; more than one
- * means the anchor no longer says which page it meant. Both ship links that go
- * to the wrong place, so both stop the build.
+ * The anchor names a section, not a page, so exactly one page the index covers
+ * has to carry it. No match means the section was renamed or dropped; more than
+ * one means the anchor no longer says which page it meant. Both would ship links
+ * that go to the wrong place, so both stop the build.
  */
 function resolveAnchor(indexSlug: string, kind: AtomicKind, anchor: string, placed: Placed[]) {
 	const matches = placed.filter(({ section }) => section.id === anchor);
 
-	if (!matches.length) throw new Error(`[search] index "${indexSlug}" lands ${kind} on "#${anchor}", which no page it covers renders`);
+	if (!matches.length) throw new Error(`[search] index "${indexSlug}" lands ${kind} on "#${anchor}", which no blueprint it covers renders`);
 	if (matches.length > 1) {
-		const pages = matches.map(({ entry }) => entry.slug).join(", ");
-		throw new Error(`[search] index "${indexSlug}" lands ${kind} on "#${anchor}", which is rendered by more than one page it covers: ${pages}`);
+		const covering = matches.map(({ entry }) => entry.slug).join(", ");
+		throw new Error(`[search] index "${indexSlug}" lands ${kind} on "#${anchor}", which is rendered by more than one blueprint it covers: ${covering}`);
 	}
 
 	const { section, entry } = matches[0];
 	return { url: `${entry.path}#${section.id}`, module: section.mainMenuLabel || (section.header?.title ?? ""), page: entry.title };
 }
 
-/** What sources the rows: a builder per atomic kind, and the off-site links. */
+/**
+ * What sources the rows: a builder per atomic kind, and the off-site links.
+ *
+ * Supplied by the caller rather than imported, so this module reads no
+ * collection. Both are defined in `src/data/search/builders.ts`.
+ */
 export interface SearchSources {
 	atomics: Record<AtomicKind, AtomicBuilder>;
 	socials: (renderIcon: IconRenderer) => Promise<SearchItem[]>;
 }
 
-/** Every row of one index. */
-export async function buildSearchIndex(index: SearchIndexEntry, pages: BlueprintEntry[], sources: SearchSources): Promise<SearchItem[]> {
+/** Build every row of one index. */
+export async function buildSearchIndex(index: SearchIndexEntry, blueprints: BlueprintEntry[], sources: SearchSources): Promise<SearchItem[]> {
 	const container = await experimental_AstroContainer.create();
 	const renderIcon = makeIconRenderer(container);
-	const placed = placeAllSections(pages);
+	const placed = placeAllSections(blueprints);
 
 	const sectionRows = await Promise.all(
 		placed.map(async ({ section, entry, parent }): Promise<SearchItem> => {
