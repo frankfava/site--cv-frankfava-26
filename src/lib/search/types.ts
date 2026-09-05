@@ -66,18 +66,22 @@ export interface SearchIndexEntry {
 export type IconRenderer = (name: string) => Promise<string>;
 
 /**
- * Where every row of one kind lands, resolved once per build.
+ * Where every row of one atomic kind lands.
  *
- * The index names only a section id. The build finds the single page it covers
- * that renders that section, and produces this:
+ * You never define a target. `resolveAnchor` in `src/lib/search/build.ts` builds
+ * one per kind at build time, from the anchor you set in the index's `atomics`
+ * and the section it matches, then hands it to that kind's `AtomicBuilder`.
  *
- *   atomics: { role: "history" }  →  { url: "/experience#history",
- *                                      module: "The timeline",
- *                                      page: "Experience" }
+ * For `atomics: { role: "history" }` the section `history` is found on the
+ * `experience` blueprint, which gives:
  *
- * `module` and `page` are shown beneath a row's title, which is how two rows of
- * different kinds with the same name are told apart: the "Laravel" skill on
- * Work against the "Laravel" certification on Credentials.
+ *   url     "/experience#history"   the blueprint's `path` and the section's id
+ *   module  "The timeline"          the section's `mainMenuLabel`
+ *   page    "Experience"            the blueprint's `title`
+ *
+ * Every row of that kind carries those same three values. `module` and `page`
+ * are the line the dialog shows under a row's title, which is how two rows of
+ * different kinds with the same name are told apart.
  */
 export interface AtomicTarget {
 	/** The page's path and the section's anchor, together. */
@@ -123,6 +127,7 @@ export interface RowContext {
  * Build every row of one atomic kind.
  *
  * Define one per kind in `src/data/search/builders.ts` and register it in
- * `ATOMIC_BUILDERS`.
+ * `ATOMIC_BUILDERS`. Both arguments come from `buildSearchIndex` - you take the
+ * target and pass it through, you never build one.
  */
 export type AtomicBuilder = (renderIcon: IconRenderer, target: AtomicTarget) => Promise<SearchItem[]>;

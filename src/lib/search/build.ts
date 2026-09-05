@@ -138,7 +138,7 @@ function childrenSummary(section: AssembledSection): string {
 }
 
 /**
- * Flatten every section the index covers, carrying the page each was found on.
+ * Flatten every section the index covers, carrying the page/blueprint each was found on.
  *
  * Two ways for a section to stay out, differing in what happens to its children.
  * `hidden` does not render at all, so it is transparent and its children inherit
