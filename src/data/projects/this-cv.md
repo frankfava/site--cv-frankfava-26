@@ -3,16 +3,15 @@ draft: false
 title: "Frank Fava CV"
 type : 'Personal Project'
 summary: "A comprehensive static online CV using Astro, AlpineJS and TailwindCSS"
-startDate: "Nov 2024"
-duration : 2
+startDate: "Aug 2026"
+duration : 0.5
 highlights : [
 	"Focus on Performance and ease of use.",
 	"Add reactive components using Alpine.js",
 	"Structure content so it's easy to find information.",
-	"96/100 Average Score on Google Lighthouse when optimised.",
 ]
 demoUrl : '/'
-repoUrl : 'https://github.com/frankfava/site--cv-frankfava-25'
+repoUrl : 'https://github.com/frankfava/site--cv-frankfava-26'
 skills : [
     "HTML",
     "CSS",
