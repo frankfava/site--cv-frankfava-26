@@ -32,7 +32,7 @@ const metadata = {
 	<OnePagerSheet
 		{...{
 			eyebrow: ABOUT.focuses.slice(0, 4).join(" · "),
-			subtitle: ABOUT.location?.city,
+			subtitle: `${ABOUT.location?.city} · ${role.title}`,
 			lead: role.pitch?.lead ?? role.summary,
 			onlinePath: `/roles/${role.slug}`,
 			sheet: buildPartEntry({
