@@ -13,6 +13,7 @@ const header: _ModuleHeader = {
 
 const roles = [
 	{ slug: "engineering-manager", eyebrow: "Closest match" },
+	{ slug: "ai-enablement-lead", eyebrow: "Strong match" },
 	{ slug: "solutions-architect", eyebrow: "Strong match" },
 	{ slug: "forward-deployed-engineer", eyebrow: "Strong match" },
 	{ slug: "senior-engineer", eyebrow: "Proven" },
@@ -20,5 +21,5 @@ const roles = [
 ---
 
 <ModuleWrapper {...{ ...props, header }}>
-	<RoleCards {...{ roles, columnCount: 4, hoverBorder: true, linkText: "Open role page →" }} />
+	<RoleCards {...{ roles, columnCount: 3, hoverBorder: true, linkText: "Open role page →" }} />
 </ModuleWrapper>
